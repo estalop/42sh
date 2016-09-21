@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 10:40:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 13:58:06 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/21 15:41:47 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)
 	free(tmp);
 }
 
-int		ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path)
+int			ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path)
 {
 	int		e;
 

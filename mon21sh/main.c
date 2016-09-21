@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 15:22:45 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/09/21 15:43:40 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 	}
 }
 
-
-static void	ft_process(char *buf, t_prstruct *process, char **path, t_hered *heredoc)
+static void	ft_process(char *buf, t_prstruct *process, char **path, \
+						t_hered *heredoc)
 {
 	char		**tmp;
 
 	signal(2, &ft_sig_stop_ex);
 	process->list = NULL;
-        process->i = 0;
+	process->i = 0;
 	process->heredoc = heredoc;
 	if ((process->npipe = ft_count_pipe(buf)) == -1)
 	{
@@ -103,10 +103,10 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		com = ft_strsplit(tmp, ';');
 		while (cap->hist[j] != NULL)
-		  {
-		    proc->hist[j] = cap->hist[j];
-		      j++;
-		  }
+		{
+			proc->hist[j] = cap->hist[j];
+			j++;
+		}
 		j = 0;
 		while (com != NULL && com[j] != NULL)
 		{
@@ -119,7 +119,7 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 			ft_sync_env(env, 0, 0, 0);
 			proc->env[0] = env[0];
 			proc->env[1] = env[1];
-			proc->env[2] = env[2];  
+			proc->env[2] = env[2];
 		}
 	}
 }
