@@ -70,6 +70,7 @@ typedef struct  s_hered
 
 typedef struct	s_prstruct
 {
+	  char		*hist[500];
 	pid_t		father;
 	pid_t		id;
 	int			i;
@@ -78,6 +79,7 @@ typedef struct	s_prstruct
 	t_idlist	*list;
 	t_plist		*pipe;
 	t_hered		*heredoc;
+  char		**env[3];
 }				t_prstruct;
 
 typedef struct	s_termcaps
@@ -183,7 +185,7 @@ int				*ft_calculate_length(char *str, int i, t_termcaps *cap, \
 void			ft_redirect(t_prstruct *proc, char **buf);
 int				ft_findr(t_prstruct *proc, char **buf, int i);
 void			ft_close_pipe(t_plist *tmp, t_prstruct *proc);
-int				ft_exe_builtin(int i, char *buf, char **env[3], char **path);
+int				ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path);
 int				ft_heredoc(char *str, int i, int j, t_termcaps *cap);
 int				ft_heredoc_file(char *str, t_termcaps *cap);
 

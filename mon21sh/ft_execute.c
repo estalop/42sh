@@ -60,7 +60,7 @@ void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)
 	free(tmp);
 }
 
-int			ft_exe_builtin(int i, char *buf, char **env[3], char **path)
+int		ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path)
 {
 	int		e;
 
@@ -71,13 +71,13 @@ int			ft_exe_builtin(int i, char *buf, char **env[3], char **path)
 		e = ft_exit(&buf[i], 0);
 	}
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
-		e = ft_cd(&buf[i], env[2], 0, NULL);
+		e = ft_cd(&buf[i], proc->env[2], 0, NULL);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
-		e = ft_env(&buf[i], &env[1], path, 1);
+		e = ft_env(&buf[i], &proc->env[1], path, 1);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
-		e = ft_setenv(&buf[i], &env[0], env[0], &env[2]);
+		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
 	else if (buf[i] != '\0' && e == 0 && \
 			ft_strncmp(&buf[i], "unsetenv", 8) == 0)
-		e = ft_unsetenv(&buf[i], &env[2], env[2]);
+		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
 	return (e);
 }

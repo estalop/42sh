@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 13:01:07 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/21 15:22:45 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ char		**ft_get_path(char **environ)
 	return (path);
 }
 
-static void	ft_pipe(t_prstruct *proc, char **buf, char **env[3], char **path)
+static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 {
 	while (proc->i <= proc->npipe)
 	{
 		proc->s = 0;
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
-		if (ft_exe_builtin(proc->s, buf[proc->i], env, path))
+		if (ft_exe_builtin(proc->s, buf[proc->i], proc, path))
 			return ;
 		proc->father = ft_fork(&proc->list);
 		if (proc->father == 0)
-			ft_son(proc, buf, env, path);
+			ft_son(proc, buf, proc->env, path);
 		else if (proc->i > 0)
 			ft_close_pipe(proc->pipe, proc);
 		proc->i++;
@@ -63,30 +63,30 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **env[3], char **path)
 	}
 }
 
-static void	ft_process(char *buf, char **env[3], char **path, t_hered *heredoc)
+
+static void	ft_process(char *buf, t_prstruct *process, char **path, t_hered *heredoc)
 {
-	t_prstruct	process;
 	char		**tmp;
 
 	signal(2, &ft_sig_stop_ex);
-	process.list = NULL;
-	process.i = 0;
-	process.heredoc = heredoc;
-	if ((process.npipe = ft_count_pipe(buf)) == -1)
+	process->list = NULL;
+        process->i = 0;
+	process->heredoc = heredoc;
+	if ((process->npipe = ft_count_pipe(buf)) == -1)
 	{
 		ft_putendl_fd("21sh: parse error", 2);
 		signal(2, &ft_signal_stop);
 		return ;
 	}
-	process.pipe = ft_create_pipe(process.npipe);
+	process->pipe = ft_create_pipe(process->npipe);
 	tmp = ft_strsplit(buf, '|');
-	ft_pipe(&process, tmp, env, path);
+	ft_pipe(process, tmp, path);
 	ft_free_tab(&tmp);
-	ft_free_list(&process.list);
+	ft_free_list(&process->list);
 	signal(2, &ft_signal_stop);
 }
 
-static void	ft_loop(char **env[3], t_termcaps *cap)
+static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 {
 	char	**path;
 	char	**com;
@@ -102,14 +102,25 @@ static void	ft_loop(char **env[3], t_termcaps *cap)
 		ft_reset_term(0);
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		com = ft_strsplit(tmp, ';');
+		while (cap->hist[j] != NULL)
+		  {
+		    proc->hist[j] = cap->hist[j];
+		      j++;
+		  }
+		j = 0;
 		while (com != NULL && com[j] != NULL)
 		{
-			ft_process(com[j], env, path, cap->heredoc);
+			ft_process(com[j], proc, path, cap->heredoc);
 			j++;
 		}
 		ft_main_free(&env[1], cap, &path, &com);
 		if (env[0] != NULL && env[1] != NULL && env[2] != NULL)
+		{
 			ft_sync_env(env, 0, 0, 0);
+			proc->env[0] = env[0];
+			proc->env[1] = env[1];
+			proc->env[2] = env[2];  
+		}
 	}
 }
 
@@ -117,14 +128,20 @@ int			main(void)
 {
 	char			**env[3];
 	t_termcaps		*cap;
+	t_prstruct		process;
 
+	process.list = NULL;
+	process.i = 0;
 	signal(2, &ft_signal_stop);
 	signal(18, SIG_IGN);
 	signal(28, &ft_signal_size);
 	env[0] = ft_create_environ(0);
 	env[2] = ft_tabdup(env[0]);
+	process.env[0] = env[0];
+	process.env[1] = env[1];
+	process.env[2] = env[2];
 	cap = ft_struct_innit(0);
 	ft_init_termcap(cap);
-	ft_loop(env, cap);
+	ft_loop(env, cap, &process);
 	return (0);
 }
