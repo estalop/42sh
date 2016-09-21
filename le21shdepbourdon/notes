@@ -1,0 +1,33 @@
+
+
+
+Probleme sur la gestion de plusieurs lignes + gerer les copies/collages en meme temps (le clear line se fait sur qu'une seule ligne du coup la ligne d'avant reste et c'est degueu)
+
+ft_right() deconne sur le dernier char de la colonne, il faut appuyer deux fois pour passer la ligne la premiere fois
+
+mettre une str, mettre des espaces au milieu, inserer des chars avant les espaces/lettres, elles vont sortirent du screen et ne pas s'afficher sur la ligne en dessous
+
+
+Faut continuer le dev sur termaps
+////////////////////////////////////////////////////////////////////////////////////
+Impossible de faire sfit home sur certains endroits du texte, bizarre
+// Gerer le fait d'envoyer une variable vide via setenv
+// Regler l'impossible modification d'une variable situee a la fin de la liste (auss// i au debut ?)
+Regler les erreurs d'analyse sur list_search (compare pas assez loin, et s'arrete a la premiere occurence complete, bizarre)
+Regler le segfault sur envoi de variables d'environnement vides (env -i ./minishell)
+Empecher le delete vers la gauche sur le premier charactere
+Regler le pbme de double free sur setenv (arrive je sais pas comment quand j'ai trifouille en correction)
+Gerer signaux
+
+Gerer le lancement de plusieurs minishells imbriques les uns dans les autres
+Gerer le double free apparu lorsque lancement de minishell via chemin ~/Minishell/minishell
+Probleme sur home end apres coupe/collage
+Probleme sur home/end avec les tabulations et tout, a voir.
+Probleme sur les tabs qui empeche le padding correct a gauche 
+Kill l'un des minishells au milieu de l'imbrication
+Fixer le probleme de padding, le ft_left empeche d'aller totalement a gauche, regler cela
+le parser deconne sur les tabs
+WD			  AWDDDDDDDDDDDDDDDDDDDDDDDDD
+			AWDAWDDDDDDDDDDDD				DDDDDDDDDDDDDDD
+
+
