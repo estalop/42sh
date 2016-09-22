@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 13:06:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 09:08:42 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct	s_plist
 	struct s_plist	*next;
 }				t_plist;
 
-typedef struct  s_hered
+typedef struct	s_hered
 {
 	char			*str;
 	struct s_hered	*next;
@@ -70,7 +70,7 @@ typedef struct  s_hered
 
 typedef struct	s_prstruct
 {
-	  char		*hist[500];
+	char		*hist[500];
 	pid_t		father;
 	pid_t		id;
 	int			i;
@@ -79,7 +79,7 @@ typedef struct	s_prstruct
 	t_idlist	*list;
 	t_plist		*pipe;
 	t_hered		*heredoc;
-  char		**env[3];
+	char		**env[3];
 }				t_prstruct;
 
 typedef struct	s_termcaps
