@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/22 09:08:42 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:15:21 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_prstruct
 	t_idlist	*list;
 	t_plist		*pipe;
 	t_hered		*heredoc;
+	int			herepipe;
 	char		**env[3];
 }				t_prstruct;
 

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 01:13:21 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 10:35:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:21:28 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,30 @@ static void	ft_write(t_prstruct *proc, char **buf, int new, int i)
 
 static void	ft_read(t_prstruct *proc, char **buf, int new, int i)
 {
-	int	input;
-	int	output;
+	int		input;
+	int		output;
+	int		pipes[2];
+	t_hered	*tmp;
 
 	if (buf[proc->i][i + 1] != '<')
 	{
 		input = (new >> 8) & 255;
 		output = new & 255;
 		dup2(output, input);
+	}
+	else
+	{
+		if (proc->herepipe == -1)
+		{
+			pipe(pipes);
+			dup2(pipes[0], STDIN_FILENO);
+			proc->herepipe = pipes[1];
+		}
+		write(pipes[1], proc->heredoc->str, ft_strlen(proc->heredoc->str));
+		tmp = proc->heredoc;
+		proc->heredoc = proc->heredoc->next;
+		ft_strdel(&tmp->str);
+		free(tmp);
 	}
 }
 

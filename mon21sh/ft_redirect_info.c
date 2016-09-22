@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 04:34:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/20 13:01:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:15:40 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int			ft_findr(t_prstruct *proc, char **buf, int i)
 	}
 	else
 		info = 1 << 16;
+	if (buf[proc->i][i + 1] == '<')
+		return (info);
 	info += ft_input_num(proc, buf, i);
 	info += ft_output_num(proc, buf, i, info);
 	if (info >> 16 == 4)

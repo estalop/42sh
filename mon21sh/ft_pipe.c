@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 10:32:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 12:29:35 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:21:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ void			ft_son(t_prstruct *proc, char **buf, char **env[3], char **path)
 	}
 	if (ft_strchr(buf[proc->i], '>') || ft_strchr(buf[proc->i], '<'))
 		ft_redirect(proc, buf);
+	if (proc->herepipe != -1)
+	{
+		close(proc->herepipe);
+		proc->herepipe = -1;
+	}
 	if (buf[proc->i][proc->s] != '\0' && \
 		buf[proc->i] != NULL && buf[proc->i][0] != '\0')
 		ft_execute(path, buf[proc->i], env[2]);

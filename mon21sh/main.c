@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 15:43:40 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 13:22:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int			main(void)
 
 	process.list = NULL;
 	process.i = 0;
+	process.herepipe = -1;
 	signal(2, &ft_signal_stop);
 	signal(18, SIG_IGN);
 	signal(28, &ft_signal_size);
