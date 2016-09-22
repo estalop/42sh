@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 08:33:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 10:27:31 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/22 15:08:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int		ft_check_end(t_termcaps *cap)
 		i--;
 	if (i > 0)
 		i++;
-	if (ft_strcmp(&cap->str[i], cap->stop) == 0)
+	if (cap->str && ft_strcmp(&cap->str[i], cap->stop) == 0)
 	{
 		new = ft_strsub(cap->str, 0, i);
 		ft_strdel(&cap->str);
