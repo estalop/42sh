@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/26 09:18:38 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/26 10:37:51 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,15 @@ void	printexec(t_exec *exec)
 ** Cree un arbre binaire contenant tous les executables
 */
 
-t_exec	*create_tree(t_env *env)
+t_exec	*create_tree(char **env)
 {
 	char	**files;
-	char	**tab;
-	char	*str;
 	t_exec	*tree;
 
-	str = "l";
-	if (!(files = get_pathes(env)))
+	if (!(files = ft_get_path(env)))
 		return (NULL);
 	tree = files_sort(files);
-	tab = complete_me(str, tree);
-	ft_deltab(files);
-	texec_del(&tree);
+	ft_free_tab(&files);
+//	texec_del(&tree);
 	return (tree);
 }
