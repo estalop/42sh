@@ -6,7 +6,7 @@
 #    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 14:52:20 by jbobin            #+#    #+#              #
-#    Updated: 2016/04/27 14:58:43 by jbobin           ###   ########.fr        #
+#    Updated: 2016/09/26 09:44:43 by tbayet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = ft_isalnum.c ft_itoa.c ft_memcpy.c ft_putchar_fd.c ft_putstr.c\
 	ft_strncpy.c ft_strsplit.c ft_toupper.c ft_lstnew.c ft_lstdelone.c \
 	ft_lstdel.c ft_lstadd.c	ft_lstiter.c ft_lstmap.c ft_printbits.c \
 	ft_lstnewnext.c get_next_line.c	ft_strcnt.c ft_split.c ft_tabdup.c \
-	ft_tabdup_plusone.c ft_tablen.c	ft_print_tab.c ft_free_tab.c
+	ft_tabdup_plusone.c ft_tablen.c	ft_print_tab.c ft_free_tab.c \
+	ft_deltab.c
 
 SRC_o = $(SRC:.c=.o)
 

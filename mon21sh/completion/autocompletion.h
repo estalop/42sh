@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 18:17:57 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/21 17:52:42 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/26 09:44:54 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <dirent.h>
-# include "libft/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct		s_env
 {
