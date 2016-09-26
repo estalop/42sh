@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 10:41:44 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:02:50 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 	while (42 && !(j = 0))
 	{
 		path = ft_get_path(env[0]);
-		env[1] = ft_tabdup(env[2]);
+		proc->env[1] = ft_tabdup(env[2]);
 		if (ft_read_termcap(cap) == 1)
 			exit(0);
 		ft_reset_term(0);
@@ -113,8 +113,8 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 			ft_process(com[j], proc, path, cap->heredoc);
 			j++;
 		}
-		ft_main_free(&env[1], cap, &path, &com);
-		if (env[0] != NULL && env[1] != NULL && env[2] != NULL)
+		ft_main_free(&proc->env[1], cap, &path, &com);
+		if (env[0] != NULL && proc->env[1] != NULL && env[2] != NULL)
 		{
 			ft_sync_env(env, 0, 0, 0);
 			proc->env[0] = env[0];
@@ -143,7 +143,7 @@ int			main(void)
 	process.env[1] = env[1];
 	process.env[2] = env[2];
 	cap = ft_struct_innit(0);
-	cap->bin = create_tree(env[0]);
+//	cap->bin = create_tree(process.env[0]);
 	ft_init_termcap(cap);
 	ft_loop(env, cap, &process);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 10:14:49 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:19:07 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <term.h>
 # include <termios.h>
 # include "autocompletion.h"
-
 
 typedef struct	s_structenv
 {

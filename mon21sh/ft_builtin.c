@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/07 17:20:48 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/26 15:17:24 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	ft_env(char *buf, char ***env, char **path, int i)
 	else if (argv[i] != NULL)
 		ft_exec_env(tmp, buf, path, argv[i]);
 	ft_free_tab(&argv);
+	ft_free_tab(&tmp);
 	return (1);
 }
 
