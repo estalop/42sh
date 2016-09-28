@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 10:32:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/22 13:21:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:09:26 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			ft_kill_process(t_idlist **list, pid_t id)
 	}
 }
 
-void			ft_son(t_prstruct *proc, char **buf, char **env[3], char **path)
+void			ft_son(t_prstruct *proc, char **buf, char **env[3])
 {
 	if (proc->i > 0 && proc->npipe != 0)
 	{
@@ -115,5 +115,5 @@ void			ft_son(t_prstruct *proc, char **buf, char **env[3], char **path)
 	}
 	if (buf[proc->i][proc->s] != '\0' && \
 		buf[proc->i] != NULL && buf[proc->i][0] != '\0')
-		ft_execute(path, buf[proc->i], env[2]);
+		ft_execute(buf[proc->i], env[2], proc->bin);
 }
