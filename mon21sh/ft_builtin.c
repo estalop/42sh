@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 15:17:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:03:55 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	return (1);
 }
 
-int	ft_env(char *buf, char ***env, char **path, int i)
+int	ft_env(char *buf, char ***env, int i)
 {
 	char	**argv;
 	char	**tmp;
@@ -113,7 +113,7 @@ int	ft_env(char *buf, char ***env, char **path, int i)
 	if (argv[i] == NULL && tmp != NULL)
 		ft_print_env(tmp);
 	else if (argv[i] != NULL)
-		ft_exec_env(tmp, buf, path, argv[i]);
+		ft_exec_env(tmp, buf, argv[i]);
 	ft_free_tab(&argv);
 	ft_free_tab(&tmp);
 	return (1);

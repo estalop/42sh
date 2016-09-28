@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 15:02:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:03:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,22 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 		proc->s = 0;
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
-		if (ft_exe_builtin(proc->s, buf[proc->i], proc, path))
+		if (ft_exe_builtin(proc->s, buf[proc->i], proc))
 			return ;
-		proc->father = ft_fork(&proc->list);
-		if (proc->father == 0)
-			ft_son(proc, buf, proc->env, path);
+		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
+		{
+			proc->father = ft_fork(&proc->list);
+			if (proc->father == 0)
+				ft_son(proc, buf, proc->env);
+			else if (proc->i > 0)
+				ft_close_pipe(proc->pipe, proc);
+		}
 		else if (proc->i > 0)
 			ft_close_pipe(proc->pipe, proc);
+		ft_strdel(&proc->bin);
 		proc->i++;
 	}
-	while (proc->father != proc->id)
+	while (proc->father && proc->father != proc->id)
 	{
 		proc->id = wait(NULL);
 		ft_kill_process(&proc->list, proc->id);
@@ -133,6 +139,7 @@ int			main(void)
 
 	process.list = NULL;
 	process.i = 0;
+	process.father = 0;
 	process.herepipe = -1;
 	signal(2, &ft_signal_stop);
 	signal(18, SIG_IGN);
@@ -146,5 +153,6 @@ int			main(void)
 //	cap->bin = create_tree(process.env[0]);
 	ft_init_termcap(cap);
 	ft_loop(env, cap, &process);
+//	texec_del(&cap->bin);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 15:19:07 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:01:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_hered
 
 typedef struct	s_prstruct
 {
+	char		*bin;
 	char		*hist[500];
 	pid_t		father;
 	pid_t		id;
@@ -123,11 +124,11 @@ void			ft_free_exit(char ***argv);
 int				ft_cd(char *buf, char **env, int j, char **argv);
 int				ft_opt_home(char **argv, char **env, int i);
 void			ft_error_cd(char *buf);
-int				ft_env(char *buf, char ***env, char **path, int i);
+int				ft_env(char *buf, char ***env, int i);
 void			ft_print_env(char **env);
 char			**ft_get_path(char **environ);
-void			ft_exec_env(char **env, char *buf, char **path, char *argv);
-void			ft_execute(char **path, char *buf, char **env);
+void			ft_exec_env(char **env, char *buf, char *argv);
+void			ft_execute(char *buf, char **env, char *bin);
 int				ft_setenv(char *buf, char ***adenv, char **env, char ***nenv);
 char			**ft_subsetenv(t_structenv t, char **env);
 int				ft_unsetenv(char *buf, char ***adenv, char **env);
@@ -180,8 +181,7 @@ int				ft_count_pipe(const char *buf);
 pid_t			ft_fork(t_idlist **list);
 void			ft_free_list(t_idlist **list);
 void			ft_kill_process(t_idlist **list, pid_t id);
-void			ft_son(t_prstruct *proc, char **buf, char **env[3], \
-						char **path);
+void			ft_son(t_prstruct *proc, char **buf, char **env[3]);
 t_plist			*ft_create_pipe(int num);
 void			ft_newputstr(char const *str, t_termcaps *cap);
 int				*ft_calculate_length(char *str, int i, t_termcaps *cap, \
@@ -189,8 +189,9 @@ int				*ft_calculate_length(char *str, int i, t_termcaps *cap, \
 void			ft_redirect(t_prstruct *proc, char **buf);
 int				ft_findr(t_prstruct *proc, char **buf, int i);
 void			ft_close_pipe(t_plist *tmp, t_prstruct *proc);
-int				ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path);
+int				ft_exe_builtin(int i, char *buf, t_prstruct *proc);
 int				ft_heredoc(char *str, int i, int j, t_termcaps *cap);
 int				ft_heredoc_file(char *str, t_termcaps *cap);
+char			*ft_check_bin(char *buf, char **env, char **path, int i);
 
 #endif

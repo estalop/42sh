@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 10:40:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/21 15:41:47 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/28 14:04:07 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ static void	ft_fork_ex(char *bin, char ***argv, char **env)
 	if (access(bin, X_OK) != -1)
 		if (execve(bin, av, env) == -1)
 			ft_error_path(1, av[0]);
-	exit(1);
+	ft_strdel(&bin);
+	ft_exit("exit 1", 0);
 }
 
-void		ft_execute(char **path, char *buf, char **env)
+char		*ft_check_bin(char *buf, char **env, char **path, int i)
 {
 	char	*bin;
 	char	**argv;
-	int		i;
 
-	i = 0;
 	argv = ft_split(buf);
 	bin = NULL;
 	if (argv[0][0] == '~' || argv[0][0] == '-')
@@ -47,9 +46,22 @@ void		ft_execute(char **path, char *buf, char **env)
 		ft_error_path(0, argv[0]);
 	else if (access(bin, X_OK) == -1)
 		ft_error_path(-1, argv[0]);
+	if (access(bin, F_OK) == -1 || access(bin, X_OK) == -1)
+		ft_strdel(&bin);
+	ft_free_tab(&argv);
+	return (bin);
+}
+
+void		ft_execute(char *buf, char **env, char *bin)
+{
+	char	**argv;
+	int		i;
+
+	i = 0;
+	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
+	ft_strdel(&buf);
 	ft_fork_ex(bin, &argv, env);
-	ft_strdel(&bin);
 }
 
 void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)
@@ -60,7 +72,7 @@ void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)
 	free(tmp);
 }
 
-int			ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path)
+int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 {
 	int		e;
 
@@ -73,7 +85,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc, char **path)
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
 		e = ft_cd(&buf[i], proc->env[2], 0, NULL);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
-		e = ft_env(&buf[i], &proc->env[1], path, 1);
+		e = ft_env(&buf[i], &proc->env[1], 1);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
 		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
 	else if (buf[i] != '\0' && e == 0 && \
