@@ -6,13 +6,13 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/26 09:15:58 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/29 14:11:40 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "autocompletion.h"
 
-static t_exec	*dirtotexec(DIR *dir, t_exec **tree)
+static t_exec	**dirtotexec(DIR *dir, t_exec **tree)
 {
 	struct dirent	*dirent;
 
@@ -24,29 +24,37 @@ static t_exec	*dirtotexec(DIR *dir, t_exec **tree)
 	//		{
 				if (!(texec_check(dirent->d_name, *tree)))
 				{
-					if (!(*tree = texec_add(dirent->d_name, tree)))
-						return (texec_del(tree));
+					if (!(texec_add(dirent->d_name, tree)))
+					{
+						closedir(dir);
+						texec_del(tree);
+						tree = NULL;
+						return (NULL);
+					}
 				}
 	//		}
 		}
 	}
 	closedir(dir);
-	return (*tree);
+	return (tree);
 }
 
 t_exec			*files_sort(char **files)
 {
+	t_exec	**res;
 	t_exec	*tree;
 	char	**ptr;
 	DIR		*dir;
 
-	tree = NULL;
+	if (!(tree = texec_new('\0', NULL)))
+		return (NULL);
+	res = &tree;
 	ptr = files;
 	while (*ptr)
 	{
 		if ((dir = opendir(*ptr)))
 		{
-			if (!(tree = dirtotexec(dir, &tree)))
+			if (!(res = dirtotexec(dir, res)))
 				return (NULL);
 		}
 		else
@@ -56,5 +64,5 @@ t_exec			*files_sort(char **files)
 		}
 		ptr++;
 	}
-	return (tree);
+	return (*res);
 }

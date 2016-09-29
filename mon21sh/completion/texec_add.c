@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/26 10:43:31 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 15:08:14 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_exec	*texec_ifn(t_exec *tmp_tree, char *file, char *ptr)
 	return (tmp_tree);
 }
 
-t_exec			*texec_ifs(t_exec **tree, t_exec *parent, t_exec *tmp_tree,
+t_exec			*texec_ifs(t_exec **tree, t_exec **parent, t_exec *tmp_tree,
 							t_fnorm fnorm)
 {
 	t_exec	*new;
@@ -46,26 +46,24 @@ t_exec			*texec_ifs(t_exec **tree, t_exec *parent, t_exec *tmp_tree,
 	if (!(new = texec_new(*ptr, fnorm.s1)))
 		return (texec_del(tree));
 	if (!(tmp_tree))
-		*tree = new;
+		(*tree)->next = new;
 	else if (*ptr < tmp_tree->c)
 	{
 		new->change = tmp_tree;
-		if (parent)
-			parent->next = new;
-		else
-			*tree = new;
+		if (*parent)
+			(*parent)->next = new;
 	}
 	else if (*ptr > tmp_tree->c)
 	{
 		if (tmp_tree->change)
-			new->change = tmp_tree->change->change;
+			new->change = tmp_tree->change;
 		tmp_tree->change = new;
 	}
 	tmp_tree = new;
 	return (tmp_tree);
 }
 
-static t_exec	*texec_ifr(t_exec *tmp_tree, t_exec **tree, t_exec *parent,
+static t_exec	*texec_ifr(t_exec *tmp_tree, t_exec **tree, t_exec **parent,
 						t_fnorm fnorm)
 {
 	char	*value;
@@ -86,7 +84,7 @@ static t_exec	*texec_ifr(t_exec *tmp_tree, t_exec **tree, t_exec *parent,
 	return (tmp_tree);
 }
 
-t_exec			*texec_add(char *file, t_exec **tree)
+t_exec			**texec_add(char *file, t_exec **tree)
 {
 	char	*value;
 	t_exec	*tmp_tree;
@@ -94,13 +92,14 @@ t_exec			*texec_add(char *file, t_exec **tree)
 	char	*ptr;
 
 	ptr = file;
-	tmp_tree = *tree;
-	parent = NULL;
+	((*tree)->nbelems)++;
+	tmp_tree = (*tree)->next;
+	parent = *tree;
 	while (*ptr)
 	{
 		value = (ptr[1] == '\0') ? file : NULL;
 		tmp_tree = texec_runover(tmp_tree, ptr, &parent);
-		if (!(tmp_tree = texec_ifr(tmp_tree, tree, parent,
+		if (!(tmp_tree = texec_ifr(tmp_tree, tree, &parent,
 				ft_fucknorme(value, ptr, file))))
 			return (NULL);
 		(tmp_tree->nbelems)++;
@@ -109,7 +108,7 @@ t_exec			*texec_add(char *file, t_exec **tree)
 		if (tmp_tree->next || !(*ptr))
 			tmp_tree = tmp_tree->next;
 		else if (!(tmp_tree = texec_ifn(tmp_tree, file, ptr)))
-			return (texec_del(tree));
+			return (NULL); // (texec_del(tree));
 	}
-	return (*tree);
+	return (tree);
 }

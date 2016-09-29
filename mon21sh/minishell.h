@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/29 09:54:55 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 13:35:54 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_prstruct
 
 typedef struct	s_termcaps
 {
-	t_exec		*bin;
+	t_exec		**bin;
 	char		*str;
 	char		*stop;
 	char		*cmd;

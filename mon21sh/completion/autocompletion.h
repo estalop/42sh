@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 18:17:57 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/26 10:25:48 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 13:51:20 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_exec
 t_exec				*texec_new(char c, char *name);
 char				**complete_me(char *str, t_exec *tree);
 int					texec_check(char *name, t_exec *tree);
-t_exec				*texec_add(char *file, t_exec **tree);
+t_exec				**texec_add(char *file, t_exec **tree);
 t_exec				*files_sort(char **files);
 t_exec				*texec_del(t_exec **tree);
 t_exec				*create_tree(char **env);
