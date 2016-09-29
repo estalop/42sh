@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/28 14:08:00 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 09:54:55 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_prstruct
 	t_hered		*heredoc;
 	int			herepipe;
 	char		**env[3];
+	t_exec		*exec;
 }				t_prstruct;
 
 typedef struct	s_termcaps

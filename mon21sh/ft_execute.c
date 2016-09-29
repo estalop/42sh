@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 10:40:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/28 14:04:07 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 09:54:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 	if (buf[i] != '\0' && ft_strncmp(buf, "exit", 4) == 0)
 	{
 		ft_reset_term(0);
+		texec_del(&proc->exec);
 		e = ft_exit(&buf[i], 0);
 	}
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)

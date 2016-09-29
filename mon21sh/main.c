@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/28 14:03:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/09/29 09:54:17 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,10 @@ int			main(void)
 	process.env[1] = env[1];
 	process.env[2] = env[2];
 	cap = ft_struct_innit(0);
-//	cap->bin = create_tree(process.env[0]);
+	cap->bin = create_tree(process.env[0]);
+	process.exec = cap->bin;
 	ft_init_termcap(cap);
 	ft_loop(env, cap, &process);
-//	texec_del(&cap->bin);
+	texec_del(&cap->bin);
 	return (0);
 }
