@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:51:24 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/21 15:24:13 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/29 17:17:37 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		texec_check(char *name, t_exec *tree)
 	ptr = name;
 	if (!tmp)
 		return (0);
+	tmp = tmp->next;
 	while (*ptr)
 	{
 		while (tmp && (*ptr > tmp->c))
