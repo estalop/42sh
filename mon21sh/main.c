@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/29 14:08:06 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/30 14:58:39 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 	}
 	while (proc->father && proc->father != proc->id)
 	{
-		proc->id = wait(NULL);
+		proc->id = wait(&proc->stat_lock);
 		ft_kill_process(&proc->list, proc->id);
 	}
 }

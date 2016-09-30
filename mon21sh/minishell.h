@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/29 13:35:54 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/09/30 11:36:53 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct	s_hered
 typedef struct	s_prstruct
 {
 	char		*bin;
+	int			stat_lock;
 	char		*hist[500];
 	pid_t		father;
 	pid_t		id;
