@@ -6,7 +6,7 @@
 #    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/09/30 15:55:24 by pbourdon         ###   ########.fr        #
+#    Updated: 2016/10/01 15:58:23 by pbourdon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,7 +21,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	texec_add.c texec_check.c \
 	texec_init.c texec_new.c \
 	ft_init_histo.c\
-	ft_history.c\
+	ft_run_history.c\
 	ft_display_list.c\
 	ft_display_list4.c\
 	dlist_new.c\
@@ -35,6 +35,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_del_ele_list.c\
 	ft_get_history_from_file.c\
 	fuck_the_norm.c\
+	ft_get_home.c\
 
 SRC_O = $(SRC:.c=.o) libft/libft.a
 

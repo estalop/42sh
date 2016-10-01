@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_histo.c                                    :+:      :+:    :+:   */
+/*   ft_get_home.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/30 14:23:22 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 16:24:17 by pbourdon         ###   ########.fr       */
+/*   Created: 2016/10/01 15:52:52 by pbourdon          #+#    #+#             */
+/*   Updated: 2016/10/01 16:24:04 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_histo(t_prstruct *proc)
+char	*ft_get_home(char **env)
 {
-	t_dlist		*histo;
+	int		index;
 
-	histo = NULL;
-	histo = dlist_new(histo);
-	if (ft_get_home(proc->env[2]) != NULL)
-		ft_get_history_from_file(histo, open(ft_strjoin(ft_get_home(
-			proc->env[2]), "/.42sh"), O_RDONLY), 0, 0);
-	else
+	if (env == NULL)
+		return (NULL);
+	index = 0;
+	while (env[index] != NULL && ft_strncmp(env[index], "HOME=", 5) != 0)
+		index++;
+	if (env[index] != NULL && ft_strncmp(env[index], "HOME=", 5) == 0 && ft_strlen(env[index]) > 5)
 	{
-		ft_putstr("The history file is not available. Please set the home");
-		ft_putstr(" env variable\n");
+		return (env[index] + 5);
 	}
-	
-	proc->histo2 = histo;
+	return (NULL);
 }

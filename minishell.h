@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/30 15:52:30 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/01 15:55:28 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,6 @@ char			*ft_get_element_from_list(t_dlist *liste, int pos);
 t_dlist			*ins_avant(t_dlist *list, char *data, t_node *courant, int pos);
 int				ft_display_list3(t_dlist *p_list);
 int				ft_check_options_history(char *arg, char c, int index);
-
+char			*ft_get_home(char **env);
 
 #endif
