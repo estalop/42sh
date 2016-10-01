@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/01 15:55:28 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/01 20:24:39 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_idlist
 typedef struct		s_node
 {
 	char			*data;
+	int				wrote;
 	struct s_node	*p_next;
 	struct s_node	*p_prev;
 }					t_node;
@@ -218,19 +219,27 @@ void			ft_get_history_from_file(t_dlist *histo, int fd, int index,
 				int index2);
 int				ft_display_list(t_dlist *p_list, int i);
 void			ft_init_histo(t_prstruct *proc);
-t_dlist			*ft_add_data(t_dlist *p_list, char *data);
+t_dlist			*ft_add_data(t_dlist *p_list, char *data, int wrote);
 t_dlist			*nik_the_norm2(t_dlist *p_list, t_node *p_new, int i);
 t_dlist			*nik_the_norm3(t_dlist *p_list, t_node *p_new, int i);
-int				ft_run_history(char *arg, char *home, t_dlist *histo);
+int				ft_run_history(char *arg, char *home, t_prstruct *proc);
 t_dlist			*ft_del_ele_list(t_dlist *list, size_t p, t_node *p_temp,
 				size_t i);
 int				ft_display_list4(t_dlist *p_list, int limit);
 int				ft_write_history_file(t_dlist *histo, int index, int fd, int p);
+int				ft_write_history_file2(t_dlist *host, int fd, int p);
 void			ft_get_check_file(t_dlist *histo, int fd, int index, int indx2);
 char			*ft_get_element_from_list(t_dlist *liste, int pos);
 t_dlist			*ins_avant(t_dlist *list, char *data, t_node *courant, int pos);
 int				ft_display_list3(t_dlist *p_list);
 int				ft_check_options_history(char *arg, char c, int index);
 char			*ft_get_home(char **env);
+void			ft_delete_list(t_dlist *p_list);
+int				ft_check_wrote_from_list(t_dlist *list, int pos);
+int				ft_run_history2(char *arg, t_dlist *histo, int index);
+int				ft_run_history3(char *arg, t_dlist *histo, int index);
+int				ft_run_history4(char *home, t_dlist *histo);
+int				ft_run_history5(char *arg, char *home, t_dlist *histo, int
+				index);
 
 #endif

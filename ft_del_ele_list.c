@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/13 01:06:27 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/09/30 14:56:01 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/01 20:51:55 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ t_node		*ft_fuck_norm3(t_node *p_temp)
 	return (p_temp);
 }
 
+void		ft_free(t_node *p_temp, t_dlist *list)
+{
+	free(p_temp->data);
+	free(p_temp);
+	list->length = list->length - 1;
+	list->pos = list->pos - 1;
+}
+
 t_dlist		*ft_del_ele_list(t_dlist *list, size_t p, t_node *p_temp, size_t i)
 {
 	if (list != NULL)
@@ -48,12 +56,7 @@ t_dlist		*ft_del_ele_list(t_dlist *list, size_t p, t_node *p_temp, size_t i)
 				else if (p_temp->p_prev != NULL && p_temp->p_next != NULL)
 					p_temp = ft_fuck_norm3(p_temp);
 				if (p_temp->data != NULL && p_temp != NULL && list->length > 0)
-				{
-					free(p_temp->data);
-					free(p_temp);
-					list->length = list->length - 1;
-					list->pos = list->pos - 1;
-				}
+					ft_free(p_temp, list);
 			}
 			else
 			{

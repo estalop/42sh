@@ -6,7 +6,7 @@
 #    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/01 15:58:23 by pbourdon         ###   ########.fr        #
+#    Updated: 2016/10/01 20:24:51 by pbourdon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,6 +36,9 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_get_history_from_file.c\
 	fuck_the_norm.c\
 	ft_get_home.c\
+	ft_delete_list.c\
+	ft_run_history2.c\
+
 
 SRC_O = $(SRC:.c=.o) libft/libft.a
 
