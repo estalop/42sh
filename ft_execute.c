@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 10:40:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/01 16:18:05 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/03 09:29:18 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	ft_fork_ex(char *bin, char ***argv, char **env)
 	if (access(bin, X_OK) != -1)
 		if (execve(bin, av, env) == -1)
 			ft_error_path(1, av[0]);
-	ft_strdel(&bin);
 	ft_exit("exit 1", 0);
 }
 
@@ -60,7 +59,6 @@ void		ft_execute(char *buf, char **env, char *bin)
 	i = 0;
 	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
-	ft_strdel(&buf);
 	ft_fork_ex(bin, &argv, env);
 }
 

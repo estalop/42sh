@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/01 16:13:49 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/03 11:14:33 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 	signal(2, &ft_signal_stop);
 }
 
-static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
+static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 {
 	char	**path;
 	char	**com;
@@ -102,8 +102,8 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 	ft_init_histo(proc);
 	while (42 && !(j = 0))
 	{
-		path = ft_get_path(env[0]);
-		proc->env[1] = ft_tabdup(env[2]);
+		path = ft_get_path(proc->env[0]);
+		proc->env[1] = ft_tabdup(proc->env[2]);
 		if (ft_read_termcap(cap) == 1)
 			exit(0);
 		ft_reset_term(0);
@@ -116,12 +116,10 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 			j++;
 		}
 		ft_main_free(&proc->env[1], cap, &path, &com);
-		if (env[0] != NULL && proc->env[1] != NULL && env[2] != NULL)
+		if (proc->env[0] != NULL && proc->env[1] != NULL && proc->env[2] != NULL)
 		{
-			ft_sync_env(env, 0, 0, 0);
-			proc->env[0] = env[0];
-			proc->env[1] = env[1];
-			proc->env[2] = env[2];
+			ft_putendl("ok");
+			ft_sync_env(proc->env, 0, 0, 0);
 //			cap->bin = c(path);
 		}
 	}
@@ -129,7 +127,6 @@ static void	ft_loop(char **env[3], t_termcaps *cap, t_prstruct *proc)
 
 int			main(void)
 {
-	char			**env[3];
 	t_termcaps		*cap;
 	t_prstruct		process;
 	t_exec			*ptr;
@@ -141,11 +138,8 @@ int			main(void)
 	signal(2, &ft_signal_stop);
 	signal(18, SIG_IGN);
 	signal(28, &ft_signal_size);
-	env[0] = ft_create_environ(0);
-	env[2] = ft_tabdup(env[0]);
-	process.env[0] = env[0];
-	process.env[1] = env[1];
-	process.env[2] = env[2];
+	process.env[0] = ft_create_environ(0);
+	process.env[2] = ft_tabdup(process.env[0]);
 	cap = ft_struct_innit(0);
 
 	ptr = create_tree(process.env[0]);
@@ -156,6 +150,6 @@ int			main(void)
 	//process.exec = cap->bin;
 
 	ft_init_termcap(cap);
-	ft_loop(env, cap, &process);
+	ft_loop(cap, &process);
 	return (0);
 }
