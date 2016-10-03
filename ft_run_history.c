@@ -6,61 +6,55 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 16:10:19 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/01 20:56:35 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_run_history2(char *arg, t_dlist *histo, int index)
+int			ft_run_history_beta(t_prstruct *proc)
 {
-	int		number;
+	t_dlist		*histo2;
 
-	number = ft_atoi(arg + index);
-	ft_display_list4(histo, number);
+	ft_delete_list(proc->histo2);
+	histo2 = NULL;
+	histo2 = dlist_new(proc->histo2);
+	proc->histo2 = histo2;
 	return (1);
 }
 
-int		ft_run_history3(char *arg, t_dlist *histo, int index)
+int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
+	int index)
 {
-	int		number;
+	char	*str;
 
-	index++;
-	number = ft_atoi(arg + index);
-	ft_del_ele_list(histo, number, histo->p_head, 0);
+	if (ft_check_options_history(arg, 'a', index) == 1)
+		return (ft_run_history4(home, proc->histo2));
+	if (ft_check_options_history(arg, 'n', index) == 1)
+		return (ft_run_history5(arg, home, proc->histo2, index));
+	if (ft_check_options_history(arg, 'r', index) == 1)
+		return (ft_run_history5(arg, home, proc->histo2, index));
+	if (ft_check_options_history(arg, 'w', index) == 1)
+	{
+		str = ft_strjoin(home, "/.42sh");
+		ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
+		| O_CREAT, S_IRUSR | S_IWUSR), 1);
+		free(str);
+		return (1);
+	}
+	if (ft_check_options_history(arg, 's', index) == 1)
+		ft_add_data(proc->histo2, arg + index + 2, 0);
 	return (1);
 }
 
-int		ft_run_history4(char *home, t_dlist *histo)
+int			ft_run_history(char *arg, char *home, t_prstruct *proc)
 {
-	// a modifier, faudrait mettre un int new = 1 pour les commandes de ce bash actuel
-	ft_write_history_file(histo, 2, open(ft_strjoin(home,
-	"/.42sh"), O_RDWR | O_TRUNC | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR), 1);
-	// on mets tout dans la liste, quand on ferme on doit rajouter dans le fichier
-	// quand cette option est lance, il maj le fichier comme si on sortait maintenant du shell
-	return (1);
-}
-
-int		ft_run_history5(char *arg, char *home, t_dlist *histo, int index)
-{
-	ft_get_check_file(histo, open(ft_strjoin(home, "/.42sh"), O_RDONLY), 0, 0);
-	while (arg[index] == ' ' || arg[index] == '\t' || arg[index] == '\r' ||
-			arg[index] == '\n')
-		index++;
-	if (arg[index] == '-')
-		index++;
-		// on recupere les lignes d'historique du fichier, et on ajoute celles non lues
-		// cad celles ajoutees au fichier depuis l'ouverture du 42sh.
-	return (1);
-}
-
-int			ft_run_history(char *arg, char *home, t_dlist *histo)
-{
-	int		index;
+	int			index;
 
 	if (home == NULL)
 	{
-		ft_putstr(" Please set the home variable of env to execute history command \n");
+		ft_putstr(" Please set the home variable of env to execute history");
+		ft_putstr(" command \n");
 		return (1);
 	}
 	index = 0;
@@ -68,33 +62,14 @@ int			ft_run_history(char *arg, char *home, t_dlist *histo)
 			arg[index] == '\n')
 		index++;
 	if (arg[index] >= '0' && arg[index] <= '9')
-		return (ft_run_history2(arg, histo, index));
+		return (ft_run_history2(arg, proc->histo2, index));
 	else if (arg[index] == '\0')
-	{
-		return (ft_display_list3(histo));
-	}
+		return (ft_display_list3(proc->histo2));
 	if (arg[index] == '-')
 		index++;
 	if (ft_check_options_history(arg, 'c', index) == 1)
-	{
-		// need to delete list, but need to check his code before 
-		// ft_delete_list3(&histo);
-		return (1);
-	}
+		return (ft_run_history_beta(proc));
 	if (ft_check_options_history(arg, 'd', index) == 1)
-		return (ft_run_history3(arg, histo, index));
-	if (ft_check_options_history(arg, 'a', index) == 1)
-		return (ft_run_history4(home, histo));
-	if (ft_check_options_history(arg, 'n', index) == 1)
-		return (ft_run_history5(arg, home, histo, index));
-	if (ft_check_options_history(arg, 'r', index) == 1)
-	{
-		// need to delete and then use ft_get_history_from_file
-	}
-	if (ft_check_options_history(arg, 'w', index) == 1)
-		return (ft_write_history_file(histo, 2, open(ft_strjoin(home,
-	"/.42sh"), O_RDWR | O_TRUNC | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR), 1));
-	if (ft_check_options_history(arg, 's', index) == 1)
-		ft_add_data(histo, arg + index + 2);
-	return (1);
+		return (ft_run_history3(arg, proc->histo2, index));
+	return (ft_run_history_part2(arg, home, proc, index));
 }

@@ -1,0 +1,37 @@
+Tests unitaires a faire dans history.c pour tout re-tester apres implemantation dans son code
+
+Empecher l'enregistrement dans l'historique de trucs genre !! // !-1 etc =>>>  boucle infinie
+(notamment via les fonctions de l'historique qui permettent de rajouter des trucs dans le fichier historique ou dans la liste historique)
+
+Gerer les doubles commandes comprenant !!  ou tout autre commande du genre
+genre : echo "alpha" ; !!
+
+A VERIFIER JUSTE AVANT PASSAGE DANS LE MIXER
+A chaque passage dans le mixer (ft_choose), check qu'il ne comprends pas de !. 
+Si la ligne en comprends un, le remplacer avec un ft_get_elemet_from_list 
+
+SAUF SI C'EST !#, auquel cas faut lui envoyer la ligne entiere via ft_exclamation_diez.c
+
+revoir toutes les options de tous les builtins qu'on croit avoir fais, genre env -u / env -i
+
+voir la valeur de retour sur exit et sur tous les autres builtins
+
+Voir comment stocker les variables sous export et les fonctions
+
+Rajouter dans l'historique une fois que la fonction est faite
+
+Empecher les functions de s'afficher dans l'env jusqu'a ce qu'elles soient exportees
+pareil pour export -p // export
+
+
+
+Verifier qu'a tout moment le ft_home ne renvoit pas NULL
+
+
+HISTORY -p
+verifier les valeurs de retour sur ft_histo
+
+Verifier si on me fait de la merde sur le fichier d'historique avant et pendant l'utilisation
+SEGFAULT
+make re && env -i && setenv HOME=/nfs/2015/p/pbourdon
+pareil pour home nfs (a la place de = tu mets un space)
