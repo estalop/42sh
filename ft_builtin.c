@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 12:37:04 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/03 13:03:41 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 			ft_strlen(t.tmp2)) == 0) || env[t.k] == NULL) && (i++))
 		{
 			ft_strdel(&t.tmp2);
+			ft_free_tab(adenv);
 			*adenv = ft_subunsetenv(t, &env);
 			t.k = -1;
 		}

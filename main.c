@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 12:45:03 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/03 12:58:10 by jbobin           ###   ########.fr       */
 /*   Updated: 2016/10/01 19:00:23 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -121,7 +121,6 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		{
 			ft_putendl("ok");
 			ft_sync_env(proc->env, 0, 0, 0);
-//			cap->bin = c(path);
 		}
 	}
 }

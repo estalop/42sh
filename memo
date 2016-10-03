@@ -33,5 +33,5 @@ verifier les valeurs de retour sur ft_histo
 
 Verifier si on me fait de la merde sur le fichier d'historique avant et pendant l'utilisation
 SEGFAULT
-make re && env -i && setenv HOME=/nfs/2015/p/pbourdon
+make re && env -i && setenv HOME=/nfs/2015/p/pbourdon (plus de segfault)
 pareil pour home nfs (a la place de = tu mets un space)
