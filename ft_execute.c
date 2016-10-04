@@ -6,14 +6,14 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 10:40:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 14:51:54 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:12:25 by pbourdon         ###   ########.fr       */
 /*   Updated: 2016/10/01 16:45:22 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_fork_ex(char *bin, char ***argv, char **env)
+static void	ft_fork_ex(char *bin, char ***argv, char **env, t_prstruct *proc)
 {
 	char	**av;
 
@@ -21,7 +21,7 @@ static void	ft_fork_ex(char *bin, char ***argv, char **env)
 	if (access(bin, X_OK) != -1)
 		if (execve(bin, av, env) == -1)
 			ft_error_path(1, av[0]);
-	ft_exit("exit 1", 0);
+	ft_exit("exit 1", 0, proc);
 }
 
 char		*ft_check_bin(char *buf, char **env, char **path, int i)
@@ -52,7 +52,7 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	return (bin);
 }
 
-void		ft_execute(char *buf, char **env, char *bin)
+void		ft_execute(char *buf, char **env, char *bin, t_prstruct *proc)
 {
 	char	**argv;
 	int		i;
@@ -60,7 +60,7 @@ void		ft_execute(char *buf, char **env, char *bin)
 	i = 0;
 	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
-	ft_fork_ex(bin, &argv, env);
+	ft_fork_ex(bin, &argv, env, proc);
 }
 
 void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)
@@ -80,18 +80,18 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 	{
 		ft_reset_term(0);
 		texec_del(&proc->exec);
-		e = ft_exit(&buf[i], 0);
+		e = ft_exit(&buf[i], 0, proc);
 	}
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
 		e = ft_cd(&buf[i], proc->env[2], 0, NULL);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
-		e = ft_env(&buf[i], &proc->env[1], 1);
+		e = ft_env(&buf[i], &proc->env[1], 1, proc);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
 		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
 	else if (buf[i] != '\0' && e == 0 && \
 			ft_strncmp(&buf[i], "unsetenv", 8) == 0)
 		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "history", 7) == 0)
-		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc);
+		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
 	return (e);
 }

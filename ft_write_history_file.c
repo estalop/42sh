@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 15:57:57 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 20:56:49 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:04:30 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_write_history_file(t_dlist *histo, int index, int fd, int pos)
 	return (1);
 }
 
-int		ft_write_history_file2(t_dlist *histo, int fd, int pos)
+int		ft_write_history_file2(t_dlist *histo, int fd, int pos, int exit)
 {
 	t_node		*courant;
 
@@ -69,7 +69,8 @@ int		ft_write_history_file2(t_dlist *histo, int fd, int pos)
 		ft_putstr(" home env variable");
 		return (1);
 	}
-	ft_putstr_fd("history -w\n", fd);
+	if (exit != 1)
+		ft_putstr_fd("history -w\n", fd);
 	close(fd);
 	return (1);
 }

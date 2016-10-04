@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 20:56:35 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:04:09 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,25 @@ int			ft_run_history_beta(t_prstruct *proc)
 int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 	int index)
 {
-	char	*str;
-
+	if (ft_check_options_history(arg, 'c', index) == 1)
+		return (ft_run_history_beta(proc));
+	if (ft_check_options_history(arg, 'd', index) == 1)
+		return (ft_run_history3(arg, proc->histo2, index));
 	if (ft_check_options_history(arg, 'a', index) == 1)
 		return (ft_run_history4(home, proc->histo2));
 	if (ft_check_options_history(arg, 'n', index) == 1)
 		return (ft_run_history5(arg, home, proc->histo2, index));
 	if (ft_check_options_history(arg, 'r', index) == 1)
 		return (ft_run_history5(arg, home, proc->histo2, index));
-	if (ft_check_options_history(arg, 'w', index) == 1)
-	{
-		str = ft_strjoin(home, "/.42sh");
-		ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
-		| O_CREAT, S_IRUSR | S_IWUSR), 1);
-		free(str);
-		return (1);
-	}
 	if (ft_check_options_history(arg, 's', index) == 1)
 		ft_add_data(proc->histo2, arg + index + 2, 0);
 	return (1);
 }
 
-int			ft_run_history(char *arg, char *home, t_prstruct *proc)
+int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 {
 	int			index;
+	char		*str;
 
 	if (home == NULL)
 	{
@@ -67,9 +62,13 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc)
 		return (ft_display_list3(proc->histo2));
 	if (arg[index] == '-')
 		index++;
-	if (ft_check_options_history(arg, 'c', index) == 1)
-		return (ft_run_history_beta(proc));
-	if (ft_check_options_history(arg, 'd', index) == 1)
-		return (ft_run_history3(arg, proc->histo2, index));
+	if (ft_check_options_history(arg, 'w', index) == 1)
+	{
+		str = ft_strjoin(home, "/.42sh");
+		ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
+		| O_CREAT, S_IRUSR | S_IWUSR), 1, exit);
+		free(str);
+		return (1);
+	}
 	return (ft_run_history_part2(arg, home, proc, index));
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 14:43:53 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:15:19 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	return (1);
 }
 
-int	ft_env(char *buf, char ***env, int i)
+int	ft_env(char *buf, char ***env, int i, t_prstruct *proc)
 {
 	char	**argv;
 	char	**tmp;
@@ -115,18 +115,21 @@ int	ft_env(char *buf, char ***env, int i)
 	if (argv[i] == NULL && tmp != NULL)
 		ft_print_env(tmp);
 	else if (argv[i] != NULL)
-		ft_exec_env(tmp, buf, argv[i]);
+		ft_exec_env(tmp, buf, argv[i], proc);
 	ft_free_tab(&argv);
 	ft_free_tab(&tmp);
 	return (1);
 }
 
-int	ft_exit(char *buf, int i)
+int	ft_exit(char *buf, int i, t_prstruct *proc)
 {
 	char	**argv;
 
 	if (buf[4] == '\0')
+	{
+		ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
 		exit(0);
+	}
 	else if (buf[4] == ' ' || buf[4] == '\t')
 	{
 		if ((argv = ft_split(buf)) != NULL && argv[2] == NULL)
@@ -134,9 +137,15 @@ int	ft_exit(char *buf, int i)
 			while (ft_isdigit(argv[1][i]) == 1)
 				i++;
 			if (i == 0)
+			{
+				ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
 				exit(0);
+			}
 			if (argv[1][i] == '\0')
+			{
+				ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
 				exit(ft_atoi(argv[1]));
+			}
 			else
 				ft_putendl_fd("exit: invalid argument", 2);
 		}

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/20 08:36:52 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/04 15:48:31 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,70 +24,68 @@ void		ft_arrow_side(char *tmp, char buf[4], t_termcaps *cap, int strlen)
 	ft_put_cursor(cap, tmp);
 }
 
-char		*ft_arrow_up(t_termcaps *cap, char *tmp, int strl)
+char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 {
 	char	*new;
 
-	if (cap->hist[cap->y] != NULL && cap->y < 500)
+	if (cap->hist[cap->y] != NULL && cap->y < 500) // verifier que y'a un prochain historique
 	{
-		ft_reset(cap, tmp);
-		strl = (ft_strlen(cap->hist[cap->y - 1]) + cap->prompt);
-		ft_putstr(cap->prom);
-		ft_putstr(cap->hist[cap->y]);
-		cap->x = ft_strlen(cap->hist[cap->y]) + cap->prompt;
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
-		ft_strdel(&tmp);
+		ft_reset(cap, tmp); // efface tout sur la ligne actuelle
+		ft_putstr(cap->prom); // affiche le prompt
+		ft_putstr(cap->hist[cap->y]); // affiche la commande au dessus dans l'historique
+		cap->x = ft_strlen(cap->hist[cap->y]) + cap->prompt; // cap->x = pos du curseur, calcule a partir de len de prompt + commande
+		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg)); // LAISSER COMME SA 
+		ft_strdel(&tmp); // LAISSER comme sa
 		if (new != NULL)
-			tmp = ft_strjoin(new, cap->hist[cap->y]);
+			tmp = ft_strjoin(new, cap->hist[cap->y]); // ne pas toucher, remplacer cap->hist[cap->y] par le str de la nouvelle commande // laisser le new trkle
 		else
-			tmp = ft_strdup(cap->hist[cap->y]);
-		ft_strdel(&new);
-		cap->y++;
+			tmp = ft_strdup(cap->hist[cap->y]); // remplacer pareil histp[cap->y] par le string de l'historique
+		ft_strdel(&new); // laisser
+		cap->y++; // on s'en fout (remplacer par ma pos dans l'historique)
 		cap->oldlen = ft_calculate_height(tmp, \
-		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap);
+		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap); // remplacer cap->hist[cap->y] par la string 
+
 	}
 	else
-		tputs(cap->bl, 0, ft_output);
+		tputs(cap->bl, 0, ft_output); // laisser comme sa
 	return (tmp);
 }
 
-static int	ft_sub_arrow_down(t_termcaps *cap, int strl, char *tmp)
+static void		ft_sub_arrow_down(t_termcaps *cap, char *tmp)
 {
-	cap->y--;
-	ft_reset(cap, tmp);
-	ft_putstr(cap->prom);
-	if (cap->y != 0)
+	cap->y--; // tu descends la pos actuelle dans l'histo
+	ft_reset(cap, tmp); // tu vires l'actuel ecriture 
+	ft_putstr(cap->prom);// tu affiches le prompt
+	if (cap->y != 0) // tu verifies encore que c'est bon pour la pos
 	{
-		strl = (ft_strlen(cap->hist[cap->y - 1]) + cap->prompt);
-		ft_putstr(cap->hist[cap->y - 1]);
-		cap->x = ft_strlen(cap->hist[cap->y - 1]) + cap->prompt;
+		ft_putstr(cap->hist[cap->y - 1]); // t'affiches la prochaine commande 
+		cap->x = ft_strlen(cap->hist[cap->y - 1]) + cap->prompt; // remplacer par mon historique
 		cap->oldlen = ft_calculate_height(tmp, \
-		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap);
+		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap); // pareil mais avec l'anciene commande (strlen de la commande juste avant)
 	}
 	else
 	{
 		cap->oldlen = 0;
 		cap->x = cap->prompt;
 	}
-	return (strl);
 }
 
-char		*ft_arrow_down(t_termcaps *cap, char *tmp, int strl)
+char		*ft_arrow_down(t_termcaps *cap, char *tmp)
 {
 	char	*new;
 
-	if (cap->y > 0)
+	if (cap->y > 0) // verifier que c'est pas deja la premiere entree (que y'en a une precedente)
 	{
-		strl = ft_sub_arrow_down(cap, strl, tmp);
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
-		ft_strdel(&tmp);
-		if (cap->y != 0)
+		ft_sub_arrow_down(cap, tmp); // POUR LA NORME : voir au dessus
+		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg)); // je laisse
+		ft_strdel(&tmp); // je laisse
+		if (cap->y != 0) // verifie que c'est pas le premier 
 		{
 			if (new == NULL)
-				tmp = ft_strdup(cap->hist[cap->y - 1]);
+				tmp = ft_strdup(cap->hist[cap->y - 1]); // remplacer par mon histo
 			else
-				tmp = ft_strjoin(new, cap->hist[cap->y - 1]);
-			ft_strdel(&new);
+				tmp = ft_strjoin(new, cap->hist[cap->y - 1]); // remplacer par mon histo
+			ft_strdel(&new); // tout laisser apres
 		}
 		else if (new != NULL)
 			tmp = new;

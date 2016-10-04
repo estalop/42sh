@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/03 19:44:59 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:04:11 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ char	*ft_exclamation2(char *arg, t_dlist *histo)
 	return (str);
 }
 
-char	*ft_exclamation3(char *arg, t_dlist *histo, int i)
+char	*ft_exclamation3(char *arg, t_dlist *histo)
 {
 	char	*str;
 	int		index;
 
 	index = 0;
-	str = ft_get_element_from_list(histo, histo->length + ft_atoi(arg) - i);
+	str = ft_get_element_from_list(histo, histo->length + ft_atoi(arg));
 	if (str == NULL)
 	{
 		ft_putstr("Event not found");
@@ -62,12 +62,11 @@ char	*ft_exclamation3(char *arg, t_dlist *histo, int i)
 		}
 		index++;
 	}
-	if (i != 0)
-		ft_putendl(str);
+
 	return (str);
 }
 
-char	*ft_exclamation5(char *arg, t_dlist *histo, int i, int index)
+char	*ft_exclamation5(char *arg, t_dlist *histo, int index)
 {
 	int		pos;
 
@@ -77,27 +76,24 @@ char	*ft_exclamation5(char *arg, t_dlist *histo, int i, int index)
 		if (ft_strstr(ft_get_element_from_list(histo, pos), arg + index + 1) != NULL &&
 			ft_strstr(ft_get_element_from_list(histo, pos), "!?") == NULL)
 		{
-			if (i != 0)
-			{
+
 				ft_putstr(ft_get_element_from_list(histo, pos));
 				ft_putchar('\n');
-			}
+
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
 		if (pos == 0)
 		{
-			if (i != 0)
-				ft_putstr("Event not found\n");
+
 			return (arg);
 		}
 	}
-	if (i != 0)
-		ft_putstr("Event not found\n");
+
 	return (arg);
 }
 
-char	*ft_exclamation6(char *arg, t_dlist *histo, int index, int i)
+char	*ft_exclamation6(char *arg, t_dlist *histo, int index)
 {
 	int		pos;
 
@@ -107,27 +103,22 @@ char	*ft_exclamation6(char *arg, t_dlist *histo, int index, int i)
 		if (ft_strncmp(ft_get_element_from_list(histo, pos), arg + index,
 			ft_strlen(arg + index)) == 0)
 		{
-			if (i != 0)
-			{
+
 				ft_putstr(ft_get_element_from_list(histo, pos));
 				ft_putchar('\n');
-			}
+
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
 		if (pos == 0)
 		{
-			if (i != 0)
-				ft_putstr("Event not found\n");
 			return (arg);
 		}
 	}
-	if (i != 0)
-		ft_putstr("Event not found\n");
 	return (arg);
 }
 
-char	*ft_check_excla(char *arg, t_prstruct *proc, int i)
+char	*ft_check_excla(char *arg, t_prstruct *proc)
 {
 	int		index;
 
@@ -144,10 +135,10 @@ char	*ft_check_excla(char *arg, t_prstruct *proc, int i)
 	if (arg[index] >= '0' && arg[index] <= '9')
 		return (ft_exclamation2(arg + index, proc->histo2));
 	if (arg[index] == '-' && arg[index + 1] >= '0' && arg[index + 1] <= '9')
-		return (ft_exclamation3(arg + index, proc->histo2, i));
+		return (ft_exclamation3(arg + index, proc->histo2));
 	if (arg[index] == '!')
-		return (ft_exclamation3("-1", proc->histo2, i));
+		return (ft_exclamation3("-1", proc->histo2));
 	if (arg[index] == '?')
-		return (ft_exclamation5(arg, proc->histo2, i, index));
-	return (ft_exclamation6(arg, proc->histo2, index, i));
+		return (ft_exclamation5(arg, proc->histo2, index));
+	return (ft_exclamation6(arg, proc->histo2, index));
 }

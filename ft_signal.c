@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/28 14:04:03 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/04 16:00:12 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		ft_signal_fork(int sig)
 		cap->x = cap->prompt;
 		cap->i = 0;
 		cap->oldlen = 0;
-		ft_putstr(cap->prom);
+		ft_putstr(cap->prom); 
 		exit(0);
 	}
 }

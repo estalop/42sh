@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 19:10:41 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:04:17 by pbourdon         ###   ########.fr       */
 /*   Updated: 2016/10/01 19:00:23 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -106,15 +106,19 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		path = ft_get_path(proc->env[0]);
 		proc->env[1] = ft_tabdup(proc->env[2]);
 		if (ft_read_termcap(cap) == 1)
-			exit(0);
+			break ;
 		ft_reset_term(0);
 		tmp = cap->cmd ? cap->cmd : cap->str;
+		if (tmp != NULL)
+		{
+			tmp = ft_replace_excla(tmp, proc);
+			ft_add_data(proc->histo2, tmp, 0);
+		}
 		com = ft_strsplit(tmp, ';');
 		j = 0;
 		while (com != NULL && com[j] != NULL)
 		{
-			ft_add_data(proc->histo2, ft_replace_excla(com[j], proc, -1), 0);
-			ft_process(ft_replace_excla(com[j], proc, 0), proc, path, cap->heredoc);
+			ft_process(com[j], proc, path, cap->heredoc);
 			j++;
 		}
 		ft_main_free(&proc->env[1], cap, &path, &com);
@@ -152,5 +156,6 @@ int			main(void)
 
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
+	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
 	return (0);
 }

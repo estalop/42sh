@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 15:00:22 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:04:27 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static char	*ft_arrow(t_termcaps *cap, int strlen, char buf[4], char *tmp)
 	if (tmp != NULL && (buf[2] == 'C' || buf[2] == 'D'))
 		ft_arrow_side(tmp, buf, cap, strlen);
 	else if (buf[2] == 'A')
-		tmp = ft_arrow_up(cap, tmp, strlen);
+		tmp = ft_arrow_up(cap, tmp);
 	else if (buf[2] == 'B')
-		tmp = ft_arrow_down(cap, tmp, strlen);
+		tmp = ft_arrow_down(cap, tmp);
 	else if (buf[2] == 'H')
 		ft_thome(cap, tmp);
 	else if (buf[2] == 'F')
@@ -130,6 +130,6 @@ int			ft_read_termcap(t_termcaps *cap)
 		cap->str = ft_return(cap->str);
 		return (ft_read_termcap(cap));
 	}
-	ft_create_history(cap, tmp);
+	ft_create_history(cap, tmp); // delete
 	return (0);
 }

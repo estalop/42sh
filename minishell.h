@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 19:23:20 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:11:47 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,16 +139,16 @@ typedef struct	s_termcaps
 }				t_termcaps;
 
 void			ft_error_path(int i, char *path);
-int				ft_exit(char *buf, int i);
+int				ft_exit(char *buf, int i, t_prstruct *proc);
 void			ft_free_exit(char ***argv);
 int				ft_cd(char *buf, char **env, int j, char **argv);
 int				ft_opt_home(char **argv, char **env, int i);
 void			ft_error_cd(char *buf);
-int				ft_env(char *buf, char ***env, int i);
+int				ft_env(char *buf, char ***env, int i, t_prstruct *proc);
 void			ft_print_env(char **env);
 char			**ft_get_path(char **environ);
-void			ft_exec_env(char **env, char *buf, char *argv);
-void			ft_execute(char *buf, char **env, char *bin);
+void			ft_exec_env(char **env, char *buf, char *argv, t_prstruct *proc);
+void			ft_execute(char *buf, char **env, char *bin, t_prstruct *proc);
 int				ft_setenv(char *buf, char ***adenv, char **env, char ***nenv);
 char			**ft_subsetenv(t_structenv t, char **env);
 int				ft_unsetenv(char *buf, char ***adenv, char **env);
@@ -174,8 +174,8 @@ int				ft_output(int c);
 void			ft_reset(t_termcaps *cap, char *str);
 void			ft_put_cursor(t_termcaps *cap, char *str);
 t_termcaps		*ft_struct_innit(int mode);
-char			*ft_arrow_up(t_termcaps *cap, char *tmp, int strl);
-char			*ft_arrow_down(t_termcaps *cap, char *tmp, int strl);
+char			*ft_arrow_up(t_termcaps *cap, char *tmp);
+char			*ft_arrow_down(t_termcaps *cap, char *tmp);
 void			ft_signal_fork(int sig);
 char			*ft_del_char(t_termcaps *cap, char *str, int i);
 char			*ft_multiple_char(t_termcaps *cap, char *str, char buf[4]);
@@ -222,12 +222,12 @@ void			ft_init_histo(t_prstruct *proc);
 t_dlist			*ft_add_data(t_dlist *p_list, char *data, int wrote);
 t_dlist			*nik_the_norm2(t_dlist *p_list, t_node *p_new, int i);
 t_dlist			*nik_the_norm3(t_dlist *p_list, t_node *p_new, int i);
-int				ft_run_history(char *arg, char *home, t_prstruct *proc);
+int				ft_run_history(char *arg, char *home, t_prstruct *proc, int exit);
 t_dlist			*ft_del_ele_list(t_dlist *list, size_t p, t_node *p_temp,
 				size_t i);
 int				ft_display_list4(t_dlist *p_list, int limit);
 int				ft_write_history_file(t_dlist *histo, int index, int fd, int p);
-int				ft_write_history_file2(t_dlist *host, int fd, int p);
+int				ft_write_history_file2(t_dlist *host, int fd, int p, int exit);
 void			ft_get_check_file(t_dlist *histo, int fd, int index, int indx2);
 char			*ft_get_element_from_list(t_dlist *liste, int pos);
 t_dlist			*ins_avant(t_dlist *list, char *data, t_node *courant, int pos);
@@ -241,7 +241,7 @@ int				ft_run_history3(char *arg, t_dlist *histo, int index);
 int				ft_run_history4(char *home, t_dlist *histo);
 int				ft_run_history5(char *arg, char *home, t_dlist *histo, int
 				index);
-char			*ft_check_excla(char *arg, t_prstruct *proc, int i);
-char			*ft_replace_excla(char *arg, t_prstruct *proc, int i);
+char			*ft_check_excla(char *arg, t_prstruct *proc);
+char			*ft_replace_excla(char *arg, t_prstruct *proc);
 
 #endif

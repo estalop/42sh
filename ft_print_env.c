@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 09:17:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/03 10:50:41 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/04 16:10:55 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ char	**ft_sub_env(char ***env, char **argv, int k, int i)
 	return (tmp);
 }
 
-void	ft_exec_env(char **env, char *buf, char *argv)
+void	ft_exec_env(char **env, char *buf, char *argv, t_prstruct *proc)
 {
 	int		i;
 
 	i = 0;
 	while (ft_strncmp(&buf[i], argv, ft_strlen(argv)) != 0)
 		i++;
-	ft_execute(&buf[i], env, argv);
+	ft_execute(&buf[i], env, argv, proc);
 }
 
 char	**ft_subunsetenv(t_structenv t, char ***env)
