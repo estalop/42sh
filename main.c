@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 16:04:17 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/05 16:05:19 by pbourdon         ###   ########.fr       */
 /*   Updated: 2016/10/01 19:00:23 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 	char	*tmp;
 	int		j;
 
-	ft_init_histo(proc);
+	ft_init_histo(proc, cap);
 	while (42 && !(j = 0))
 	{
 		path = ft_get_path(proc->env[0]);
@@ -112,7 +112,8 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		if (tmp != NULL)
 		{
 			tmp = ft_replace_excla(tmp, proc);
-			ft_add_data(proc->histo2, tmp, 0);
+			if (ft_strlen(tmp) > 0)
+				ft_add_data(proc->histo2, tmp, 0);
 		}
 		com = ft_strsplit(tmp, ';');
 		j = 0;
@@ -127,6 +128,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 			ft_putendl("ok");
 			ft_sync_env(proc->env, 0, 0, 0);
 		}
+		cap->histo2 = proc->histo2;
 	}
 }
 

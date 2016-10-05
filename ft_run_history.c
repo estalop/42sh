@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/04 16:04:09 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/05 16:00:11 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			ft_run_history_beta(t_prstruct *proc)
 	histo2 = NULL;
 	histo2 = dlist_new(proc->histo2);
 	proc->histo2 = histo2;
+
 	return (1);
 }
 

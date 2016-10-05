@@ -6,13 +6,13 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:23:22 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 20:54:30 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/05 12:56:32 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_histo(t_prstruct *proc)
+void	ft_init_histo(t_prstruct *proc, t_termcaps *cap)
 {
 	t_dlist		*histo;
 	char		*str;
@@ -31,4 +31,5 @@ void	ft_init_histo(t_prstruct *proc)
 		ft_putstr(" env variable\n");
 	}
 	proc->histo2 = histo;
+	cap->histo2 = histo;
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 16:11:47 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/05 12:55:00 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct	s_termcaps
 	char		*stop;
 	char		*cmd;
 	t_hered		*heredoc;
+	t_dlist		*histo2;
 	char		buf[2048];
 	int			height;
 	int			whidth;
@@ -218,7 +219,7 @@ t_dlist			*dlist_new(t_dlist *p_new);
 void			ft_get_history_from_file(t_dlist *histo, int fd, int index,
 				int index2);
 int				ft_display_list(t_dlist *p_list, int i);
-void			ft_init_histo(t_prstruct *proc);
+void			ft_init_histo(t_prstruct *proc, t_termcaps *cap);
 t_dlist			*ft_add_data(t_dlist *p_list, char *data, int wrote);
 t_dlist			*nik_the_norm2(t_dlist *p_list, t_node *p_new, int i);
 t_dlist			*nik_the_norm3(t_dlist *p_list, t_node *p_new, int i);

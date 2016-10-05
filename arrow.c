@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 15:48:31 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/05 16:20:31 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,70 +27,51 @@ void		ft_arrow_side(char *tmp, char buf[4], t_termcaps *cap, int strlen)
 char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 {
 	char	*new;
+	char	*str;
 
-	if (cap->hist[cap->y] != NULL && cap->y < 500) // verifier que y'a un prochain historique
+	if (cap->histo2->pos > 1)
 	{
-		ft_reset(cap, tmp); // efface tout sur la ligne actuelle
-		ft_putstr(cap->prom); // affiche le prompt
-		ft_putstr(cap->hist[cap->y]); // affiche la commande au dessus dans l'historique
-		cap->x = ft_strlen(cap->hist[cap->y]) + cap->prompt; // cap->x = pos du curseur, calcule a partir de len de prompt + commande
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg)); // LAISSER COMME SA 
-		ft_strdel(&tmp); // LAISSER comme sa
-		if (new != NULL)
-			tmp = ft_strjoin(new, cap->hist[cap->y]); // ne pas toucher, remplacer cap->hist[cap->y] par le str de la nouvelle commande // laisser le new trkle
+		ft_reset(cap, tmp);
+		ft_putstr(cap->prom);
+		cap->histo2->pos--;
+		str = ft_strdup(ft_get_element_from_list(cap->histo2, cap->histo2->pos));
+		ft_putstr(str);
+		cap->x = ft_strlen(str) + cap->prompt;
+		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
+		ft_strdel(&tmp);
+		if (new != NULL && str != NULL)
+			tmp = ft_strjoin(new, str);
 		else
-			tmp = ft_strdup(cap->hist[cap->y]); // remplacer pareil histp[cap->y] par le string de l'historique
-		ft_strdel(&new); // laisser
-		cap->y++; // on s'en fout (remplacer par ma pos dans l'historique)
-		cap->oldlen = ft_calculate_height(tmp, \
-		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap); // remplacer cap->hist[cap->y] par la string 
-
+			tmp = str;
+		ft_strdel(&new);
+		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt, cap);
 	}
 	else
-		tputs(cap->bl, 0, ft_output); // laisser comme sa
+		tputs(cap->bl, 0, ft_output);
 	return (tmp);
-}
-
-static void		ft_sub_arrow_down(t_termcaps *cap, char *tmp)
-{
-	cap->y--; // tu descends la pos actuelle dans l'histo
-	ft_reset(cap, tmp); // tu vires l'actuel ecriture 
-	ft_putstr(cap->prom);// tu affiches le prompt
-	if (cap->y != 0) // tu verifies encore que c'est bon pour la pos
-	{
-		ft_putstr(cap->hist[cap->y - 1]); // t'affiches la prochaine commande 
-		cap->x = ft_strlen(cap->hist[cap->y - 1]) + cap->prompt; // remplacer par mon historique
-		cap->oldlen = ft_calculate_height(tmp, \
-		ft_strlen(cap->hist[cap->y]) + cap->prompt, cap); // pareil mais avec l'anciene commande (strlen de la commande juste avant)
-	}
-	else
-	{
-		cap->oldlen = 0;
-		cap->x = cap->prompt;
-	}
 }
 
 char		*ft_arrow_down(t_termcaps *cap, char *tmp)
 {
 	char	*new;
+	char	*str;
 
-	if (cap->y > 0) // verifier que c'est pas deja la premiere entree (que y'en a une precedente)
+	if (cap->histo2->pos <= cap->histo2->length)
 	{
-		ft_sub_arrow_down(cap, tmp); // POUR LA NORME : voir au dessus
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg)); // je laisse
-		ft_strdel(&tmp); // je laisse
-		if (cap->y != 0) // verifie que c'est pas le premier 
-		{
-			if (new == NULL)
-				tmp = ft_strdup(cap->hist[cap->y - 1]); // remplacer par mon histo
-			else
-				tmp = ft_strjoin(new, cap->hist[cap->y - 1]); // remplacer par mon histo
-			ft_strdel(&new); // tout laisser apres
-		}
-		else if (new != NULL)
-			tmp = new;
+		ft_reset(cap, tmp);
+		ft_putstr(cap->prom);
+		cap->histo2->pos++;
+		str = ft_strdup(ft_get_element_from_list(cap->histo2, cap->histo2->pos));
+		ft_putstr(str);
+		cap->x = ft_strlen(str) + cap->prompt;
+		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
+		ft_strdel(&tmp);
+		if (new != NULL && str != NULL)
+			tmp = ft_strjoin(new, str);
 		else
-			tmp = NULL;
+			tmp = str;
+		ft_strdel(&new);
+		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt, cap);
 	}
 	else
 		tputs(cap->bl, 0, ft_output);
