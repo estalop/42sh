@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 15:40:32 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/06 16:22:41 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,54 +79,6 @@ static t_files	*tfiles_create(char *path, char *name)
 	return (lst);
 }
 
-int		tfiles_count(t_files *lst)
-{
-	int	i;
-
-	if (lst)
-	{
-		i = 1;
-		if (lst->prev)
-			i += tfiles_count(lst->prev);
-		if (lst->next)
-			i += tfiles_count(lst->next);
-	}
-	else
-		return (0);
-	return (i);
-}
-
-int		tfiles_totabfill(t_files **lst, char **tab, int i)
-{
-	if (*lst)
-	{
-		if ((*lst)->prev)
-			i = tfiles_totabfill(&((*lst)->prev), tab, i);
-		tab[i] = (*lst)->name;
-		i++;
-		if ((*lst)->next)
-			i = tfiles_totabfill(&((*lst)->next), tab, i);
-		free(*lst);
-		*lst = NULL;
-	}
-	else
-		return (0);
-	return (i);
-}
-
-char	**tfiles_totab(t_files **lst)
-{
-	int			len;
-	char		**tab;
-
-	len = tfiles_count(*lst);
-	if (!(tab = (char**)malloc(sizeof(char*) * (len + 1))))
-		return (NULL);
-	tab[len] = NULL;
-	tfiles_totabfill(lst, tab, 0);
-	return (tab);
-}
-
 char			**tfiles_getlst(char *pwd, char *str)
 {
 	int		i;
@@ -164,5 +116,3 @@ char			**tfiles_getlst(char *pwd, char *str)
 	free(name);
 	return (res);
 }
-
-

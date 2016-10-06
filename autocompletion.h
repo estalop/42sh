@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 18:17:57 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/05 20:06:22 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/06 19:21:54 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct		s_exec
 	struct s_exec	*change;
 }					t_exec;
 
+typedef struct		s_dim
+{
+	int				x;
+	int				y;
+}					t_dim;
+
+char				**tfiles_totab(t_files **lst);
 char				**tfiles_getlst(char *pwd, char *str);
 t_files				*tfiles_del(t_files **lst);
 t_exec				*texec_new(char c, char *name);

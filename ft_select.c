@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texec_new                                          :+:      :+:    :+:   */
+/*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 16:25:29 by tbayet           ###   ########.fr       */
+/*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
+/*   Updated: 2016/10/06 20:32:01 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "autocompletion.h"
 
-t_exec	*texec_new(char c, char *name)
-{
-	t_exec	*new;
+static	t_dim	dimensions;
 
-	if (!(new = (t_exec*)malloc(sizeof(t_exec))))
-		return (NULL);
-	if (name)
-		new->name = name;
-	else
-		new->name = NULL;
-	new->nbelems = 0;
-	new->c = c;
-	new->next = NULL;
-	new->change = NULL;
-	return (new);
+static void		sighandler_resize(int sig)
+{
+	dimensions.x = ;
+	dimensions.y = ;
+}
+
+void			ft_select(char **list, int nbelems, t_termcaps *tc)
+{
+	signal(SIGWINCH, sighandler_resize);
+	if (tc && nbelems)
+	{
+		if (nbelems > MAX_NB_AFF)
+		{
+			ft_putstr_fd(tgoto);
+			ft_putstr_fd("Afficher");
+			ft_putstr_fd(nbelems);
+			ft_putstr_fd("elements ?")
+				Y or NO ?;
+	}
 }
