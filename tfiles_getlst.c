@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/05 19:11:47 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/06 15:40:32 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int		tfiles_totabfill(t_files **lst, char **tab, int i)
 
 char	**tfiles_totab(t_files **lst)
 {
-	t_files		*tmp;
 	int			len;
 	char		**tab;
 
