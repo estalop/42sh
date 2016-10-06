@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/05 12:53:28 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:14:03 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,6 @@ static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 	return (str);
 }
 
-static void	ft_create_history(t_termcaps *cap, char *str)
-{
-	cap->y = 0;
-	while (cap->y < 500 && cap->hist[cap->y] != NULL)
-		cap->y++;
-	if (cap->y == 500)
-		ft_strdel(&cap->hist[--cap->y]);
-	while (cap->y > 0)
-	{
-		cap->hist[cap->y] = cap->hist[cap->y - 1];
-		cap->y--;
-	}
-	cap->hist[cap->y] = ft_strdup(str);
-	cap->y = 0;
-}
-
 int			ft_read_termcap(t_termcaps *cap)
 {
 	char	buf[4];
@@ -130,6 +114,5 @@ int			ft_read_termcap(t_termcaps *cap)
 		cap->str = ft_return(cap->str);
 		return (ft_read_termcap(cap));
 	}
-	ft_create_history(cap, tmp); // delete
 	return (0);
 }

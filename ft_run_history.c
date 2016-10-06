@@ -6,11 +6,22 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/05 16:00:11 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:17:14 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
+{
+	char	*str;
+
+	str = ft_strjoin(home, "/.42sh");
+	ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
+	| O_CREAT, S_IRUSR | S_IWUSR), 1, exit);
+	ft_strdel(&str);
+	return (1);
+}
 
 int			ft_run_history_beta(t_prstruct *proc)
 {
@@ -20,7 +31,6 @@ int			ft_run_history_beta(t_prstruct *proc)
 	histo2 = NULL;
 	histo2 = dlist_new(proc->histo2);
 	proc->histo2 = histo2;
-
 	return (1);
 }
 
@@ -45,7 +55,6 @@ int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 {
 	int			index;
-	char		*str;
 
 	if (home == NULL)
 	{
@@ -64,12 +73,6 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 	if (arg[index] == '-')
 		index++;
 	if (ft_check_options_history(arg, 'w', index) == 1)
-	{
-		str = ft_strjoin(home, "/.42sh");
-		ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
-		| O_CREAT, S_IRUSR | S_IWUSR), 1, exit);
-		free(str);
-		return (1);
-	}
+		return (ft_run_history_beta2(home, proc, exit));
 	return (ft_run_history_part2(arg, home, proc, index));
 }

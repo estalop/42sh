@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/05 12:55:00 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 14:19:01 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ int				ft_run_history4(char *home, t_dlist *histo);
 int				ft_run_history5(char *arg, char *home, t_dlist *histo, int
 				index);
 char			*ft_check_excla(char *arg, t_prstruct *proc);
-char			*ft_replace_excla(char *arg, t_prstruct *proc);
+char			*ft_replace_excla(char *arg, t_prstruct *proc, int id, int id2);
+int				ft_check_tmp(char *arg);
 
 #endif

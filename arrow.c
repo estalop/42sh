@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/05 16:20:31 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:07:50 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 		ft_reset(cap, tmp);
 		ft_putstr(cap->prom);
 		cap->histo2->pos--;
-		str = ft_strdup(ft_get_element_from_list(cap->histo2, cap->histo2->pos));
+		str = ft_strdup(ft_get_element_from_list(cap->histo2,
+			cap->histo2->pos));
 		ft_putstr(str);
 		cap->x = ft_strlen(str) + cap->prompt;
 		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
@@ -44,7 +45,8 @@ char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 		else
 			tmp = str;
 		ft_strdel(&new);
-		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt, cap);
+		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt,
+			cap);
 	}
 	else
 		tputs(cap->bl, 0, ft_output);
@@ -61,7 +63,8 @@ char		*ft_arrow_down(t_termcaps *cap, char *tmp)
 		ft_reset(cap, tmp);
 		ft_putstr(cap->prom);
 		cap->histo2->pos++;
-		str = ft_strdup(ft_get_element_from_list(cap->histo2, cap->histo2->pos));
+		str = ft_strdup(ft_get_element_from_list(cap->histo2,
+					cap->histo2->pos));
 		ft_putstr(str);
 		cap->x = ft_strlen(str) + cap->prompt;
 		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
@@ -71,7 +74,8 @@ char		*ft_arrow_down(t_termcaps *cap, char *tmp)
 		else
 			tmp = str;
 		ft_strdel(&new);
-		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt, cap);
+		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt,
+				cap);
 	}
 	else
 		tputs(cap->bl, 0, ft_output);

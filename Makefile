@@ -6,7 +6,7 @@
 #    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/03 19:23:16 by pbourdon         ###   ########.fr        #
+#    Updated: 2016/10/06 14:07:06 by pbourdon         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -40,6 +40,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_run_history2.c\
 	ft_deal_exclamation.c\
 	ft_replace_excla.c\
+	ft_check_tmp.c\
 
 
 SRC_O = $(SRC:.c=.o) libft/libft.a

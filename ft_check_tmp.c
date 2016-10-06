@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_display_list.c                                  :+:      :+:    :+:   */
+/*   ft_check_tmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 15:13:06 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 14:28:55 by pbourdon         ###   ########.fr       */
+/*   Created: 2016/10/06 14:05:42 by pbourdon          #+#    #+#             */
+/*   Updated: 2016/10/06 14:09:08 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_display_list3(t_dlist *p_list)
+int		ft_check_tmp(char *arg)
 {
-	t_node		*p_temp;
-	int			index;
+	int		index;
 
 	index = 0;
-	p_temp = p_list->p_head;
-	if (p_list != NULL)
+	while (arg[index] != '\0')
 	{
-		while (p_temp != NULL)
-		{
-			if (p_temp->data != NULL)
-			{
-				ft_putnbr(index);
-				ft_putchar(' ');
-				ft_putstr(p_temp->data);
-				ft_putchar('\n');
-				index++;
-			}
-			p_temp = p_temp->p_next;
-		}
+		if (arg[index] != ' ' && arg[index] != '\t' && arg[index] != '\n' &&
+			arg[index] != '\r')
+			return (1);
+		index++;
 	}
-	return (1);
+	return (0);
 }

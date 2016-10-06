@@ -6,13 +6,13 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/05 13:03:13 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:16:46 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_exclamation2(char *arg, t_dlist *histo)
+char		*ft_exclamation2(char *arg, t_dlist *histo)
 {
 	char	*str;
 	int		index;
@@ -39,7 +39,7 @@ char	*ft_exclamation2(char *arg, t_dlist *histo)
 	return (str);
 }
 
-char	*ft_exclamation3(char *arg, t_dlist *histo)
+char		*ft_exclamation3(char *arg, t_dlist *histo)
 {
 	char	*str;
 	int		index;
@@ -62,38 +62,33 @@ char	*ft_exclamation3(char *arg, t_dlist *histo)
 		}
 		index++;
 	}
-
 	return (str);
 }
 
-char	*ft_exclamation5(char *arg, t_dlist *histo, int index)
+char		*ft_exclamation5(char *arg, t_dlist *histo, int index)
 {
 	int		pos;
 
 	pos = histo->length;
 	while (pos > 0)
 	{
-		if (ft_strstr(ft_get_element_from_list(histo, pos), arg + index + 1) != NULL &&
-			ft_strstr(ft_get_element_from_list(histo, pos), "!?") == NULL)
+		if (ft_strstr(ft_get_element_from_list(histo, pos), arg + index + 1)
+	!= NULL && ft_strstr(ft_get_element_from_list(histo, pos), "!?") == NULL)
 		{
-
-				ft_putstr(ft_get_element_from_list(histo, pos));
-				ft_putchar('\n');
-
+			ft_putstr(ft_get_element_from_list(histo, pos));
+			ft_putchar('\n');
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
 		if (pos == 0)
 		{
-
 			return (arg);
 		}
 	}
-
 	return (arg);
 }
 
-char	*ft_exclamation6(char *arg, t_dlist *histo, int index)
+char		*ft_exclamation6(char *arg, t_dlist *histo, int index)
 {
 	int		pos;
 
@@ -103,10 +98,8 @@ char	*ft_exclamation6(char *arg, t_dlist *histo, int index)
 		if (ft_strncmp(ft_get_element_from_list(histo, pos), arg + index,
 			ft_strlen(arg + index)) == 0)
 		{
-
-				ft_putstr(ft_get_element_from_list(histo, pos));
-				ft_putchar('\n');
-
+			ft_putstr(ft_get_element_from_list(histo, pos));
+			ft_putchar('\n');
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
@@ -118,7 +111,7 @@ char	*ft_exclamation6(char *arg, t_dlist *histo, int index)
 	return (arg);
 }
 
-char	*ft_check_excla(char *arg, t_prstruct *proc)
+char		*ft_check_excla(char *arg, t_prstruct *proc)
 {
 	int		index;
 
@@ -129,7 +122,7 @@ char	*ft_check_excla(char *arg, t_prstruct *proc)
 		index++;
 	if (arg[index] == '\0')
 	{
-		// dont understand what do I need to do
+		// DONT KNOW WHAT TO DO
 		return (arg);
 	}
 	if (arg[index] >= '0' && arg[index] <= '9')
