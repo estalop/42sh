@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/05 16:05:19 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 13:50:12 by jbobin           ###   ########.fr       */
 /*   Updated: 2016/10/01 19:00:23 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -130,6 +130,8 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		}
 		cap->histo2 = proc->histo2;
 	}
+	ft_free_tab(&path);
+	ft_free_tab(&proc->env[1]);
 }
 
 int			main(void)
@@ -159,5 +161,7 @@ int			main(void)
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
+	ft_free_tab(&process.env[2]);
+	ft_free_tab(&process.env[0]);
 	return (0);
 }
