@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/26 09:18:28 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/05 20:07:38 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,42 @@ char			**complete_me(char *str, t_exec *tree)
 		return (res);
 	complete_fill(tmp, res, 0, 1);
 	return (res);
+}
+
+static int		is_spec_separator(char c)
+{
+	
+		if ( c == ';' || c == '&' || c == '|' || c == '>' || c == '<') //etc
+			return (1);
+		else
+			return (0);
+}
+
+void			autocompletion(char	*pwd, char	*line, t_exec *tree)
+{
+	int		i;
+	int		j;
+	char	**tab;
+	int		nbelems;
+
+	if (line)
+	{
+		i = 0;
+		while (line[i])
+			i++;
+		i--;
+		while (i >= 0 && line[i] != ' ' && line[i] != '\t' && line[i] != '\v'
+				&& !is_spec_separator(line[i]))
+			i--;
+		i++;
+		j = i;
+		while (j > 0 && ( line[j] == ' ' || line[j] == '\t' || line[j] == '\v'))
+			j--;
+		if (i == 0 || is_spec_separator(line[j]))
+			tab = complete_me(line + i, tree);
+		else
+			tab = tfiles_getlst(pwd, line + i);
+		nbelems = ft_tablen(tab);
+		//ft_select(tab, nbelems, t_termcaps *tc);
+	}
 }
