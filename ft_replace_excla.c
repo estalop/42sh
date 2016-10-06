@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 15:16:12 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/06 15:37:12 by pbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int		ft_count_malloc(char *arg, t_prstruct *proc)
 	compteur = ft_strlen(arg);
 	while (arg[index] != '\0')
 	{
+		if (arg[index] == '!' && arg[index + 1] == '#')
+			compteur += ft_strlen(arg);
 		if (arg[index] == '!')
 		{
 			compteur += ft_strlen(ft_check_excla(arg + index, proc));
@@ -58,6 +60,22 @@ static char		*ft_replace_excla3(char *str, int *index2, char *str2)
 	return (str);
 }
 
+static char		*ft_replace_excla_diez(char *str, char *arg, int *index,
+		int *index2)
+{
+	int		index3;
+
+	index3 = 0;
+	while (index3 < *index)
+	{
+		str[*index2] = arg[index3];
+		index3++;
+		*index2 = *index2 + 1;
+	}
+	*index = *index + 2;
+	return (str);
+}
+
 char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 	int index2)
 {
@@ -67,7 +85,9 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 	str = malloc(sizeof(char) * (ft_count_malloc(arg, proc) + 10));
 	while (arg[index] != '\0')
 	{
-		if (arg[index] == '!')
+		if (arg[index] == '!' && arg[index + 1] == '#')
+			str = ft_replace_excla_diez(str, arg, &index, &index2);
+		else if (arg[index] == '!')
 		{
 			str2 = ft_check_excla(arg + index, proc);
 			if (str2 != arg + index)
