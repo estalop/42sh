@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 19:22:57 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/07 10:46:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ static int		is_spec_separator(char c)
 		return (0);
 }
 
-void			autocompletion(t_termcaps *tc, char *line, t_exec *tree)
+void			autocompletion(char *line, t_exec *tree)
 {
 	int		i;
 	int		j;
 	char	**table;
 	int		nbelems;
 
+	table = NULL;
 	if (line)
 	{
 		i = 0;
