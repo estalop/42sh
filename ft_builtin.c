@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 16:15:19 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/11 14:55:43 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,50 @@
 
 int	ft_cd(char *buf, char **env, int j, char **argv)
 {
+	char	**tmp;
+
 	if (buf[2] != '\0' && buf[2] != ' ' && buf[2] != '\t')
 		return (0);
-	if ((argv = ft_split(buf)) != NULL && argv[1] != NULL && argv[1][0] != '~' \
-		&& ft_strcmp(argv[1], "-") != 0 && (j = 1))
+	if ((argv = ft_split(buf)) != NULL)
 	{
+		if (argv[1] == NULL)
+		{
+			tmp = ft_tabdup_plusone(argv, NULL);
+			ft_free_tab(&argv);
+			argv = tmp;
+		}
+		argv[1] = ft_opt_home(argv[1], env, 0);
+		if (argv[1][0] != '/' && ft_strncmp(argv[1], "./", 2) && \
+			ft_strncmp(argv[1], "../", 3))
+			argv[1] = ft_cdpath(argv[1], env);
 		if (ft_strlen(argv[1]) > 255)
 		{
 			ft_putstr_fd("cd: file name too long: ", 2);
 			ft_putendl_fd(argv[1], 2);
 		}
-		if (env != NULL && argv[1] == NULL)
-			ft_opt_home(argv, env, 0);
-		else if (chdir(argv[1]) == -1)
-			ft_error_cd(argv[1]);
-		else if (env != NULL)
-			ft_pwd_up(env);
+		ft_pwd_up(env);
+		if (access(argv[1], F_OK) == 0)
+		{
+			if (access(argv[1], X_OK) == 0)
+			{
+				if (chdir(argv[1]) == -1)
+				{
+					ft_putstr_fd("cd: not a directory: ", 2);
+					ft_putendl_fd(argv[1], 2);
+				}
+			}
+			else
+			{
+				ft_putstr_fd("cd: permission denied: ", 2);
+				ft_putendl_fd(argv[1], 2);
+			}
+		}
+		else
+		{
+			ft_putstr_fd("cd: no such file or directory: " , 2);
+			ft_putendl_fd(argv[1], 2);
+		}
 	}
-	else if (env != NULL && (buf[2] == '\0' || buf[2] == ' ' || buf[2] == '\t'))
-		j = ft_opt_home(argv, env, 0);
 	ft_free_tab(&argv);
 	return (j);
 }

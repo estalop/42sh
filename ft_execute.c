@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 15:09:42 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/11 09:00:31 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 		e = ft_exit(&buf[i], 0, proc);
 	}
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
-		e = ft_cd(&buf[i], proc->env[2], 0, NULL);
+		e = ft_cd(&buf[i], proc->env[2], 1, NULL);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
 		e = ft_env(&buf[i], &proc->env[1], 1, proc);
 	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)

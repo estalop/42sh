@@ -6,38 +6,79 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/04/04 10:42:46 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/11 14:36:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int					ft_opt_home(char **argv, char **env, int i)
+char				*ft_opt_home(char *argv, char **env, int i)
 {
 	int		k;
+	char	*tmp;
 
-	k = argv[1] == NULL ? 0 : 1;
-	if (k == 1 && argv[1][0] == '~')
+	if (env == NULL || (argv && (argv[i] != '-' || argv[i] != '~')))
+		return (argv);
+	k = argv == NULL ? 0 : 1;
+	if (k == 1 && argv[0] == '~')
 		k = 2;
-	while (env != NULL && \
-	env[i] && (k == 0 || k == 2) && ft_strncmp(env[i], "HOME=", 5) != 0)
+	while (env[i] && (k == 0 || k == 2) && ft_strncmp(env[i], "HOME=", 5))
 		i++;
-	while (env != NULL && \
-	env[i] && k == 1 && ft_strncmp(env[i], "OLDPWD=", 7) != 0)
+	while (env[i] && k == 1 && ft_strncmp(env[i], "OLDPWD=", 7))
 		i++;
-	if (env != NULL && \
-	argv[1] == NULL && (chdir(&env[i][5]) != -1 || env[i] == NULL))
-		return (ft_pwd_up(env));
-	if (chdir(&env[i][5]) == -1 && chdir(&env[i][7]) == -1)
-		ft_putendl_fd("cd: no home set", 2);
-	else if (env != NULL)
-		ft_pwd_up(env);
-	if (k == 0)
-		return (1);
-	else if (argv[1][1] == '/' && chdir(&argv[1][2]) == -1 && \
-			ft_pwd_up(env) != 1)
-		ft_error_cd(argv[1]);
-	return (1);
+	k = 0;
+	while (env[i][k] != '=')
+		k++;
+	if (env != NULL && env[i] != NULL && argv != NULL)
+	{
+		tmp = ft_strjoin(&env[i][k + 1], &argv[1]);
+		ft_strdel(&(argv));
+		argv = tmp;
+	}
+	else if (env != NULL && env[i] != NULL)
+	{
+		ft_strdel(&argv);
+		argv = ft_strdup(&env[i][k + 1]);
+	}
+	return (argv);
+}
+
+char				*ft_cdpath(char *argv, char **env)
+{
+	int		i;
+	char	**tmp;
+	char	*new;
+
+	if (!env)
+		return (argv);
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "CDPATH=", 7))
+		i++;
+	if (env[i])
+		tmp = ft_strsplit(&env[i][7], ':');
+	else
+		return (argv);
+	i = 0;
+	while (tmp && tmp[i])
+	{
+		if (tmp[i][ft_strlen(tmp[i]) - 1] != '/')
+		{
+			new = ft_strjoin(tmp[i], "/");
+			free(tmp[i]);
+			tmp[i] = new;
+		}
+		new = ft_strjoin(tmp[i], argv);
+		if (access(new, F_OK) == 0)
+		{
+			ft_free_tab(&tmp);
+			ft_strdel(&argv);
+			return (new);
+		}
+		ft_strdel(&new);
+		i++;
+	}
+	ft_free_tab(&tmp);
+	return (argv);
 }
 
 t_structpwd			ft_init_struct(char **env)

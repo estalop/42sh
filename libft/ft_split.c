@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 08:37:01 by jbobin            #+#    #+#             */
-/*   Updated: 2016/03/14 08:44:47 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/11 13:50:55 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			**ft_split(char const *s)
 	l = 0;
 	i = 0;
 	j = ft_count(s);
-	if ((t = (char**)malloc(sizeof(char*) * (j + 1))) == NULL || j < 0)
+	if (j < 0 || (t = (char**)malloc(sizeof(char*) * (j + 1))) == NULL)
 		return (NULL);
 	while (l < j)
 	{

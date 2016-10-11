@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/06 20:07:30 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/11 09:41:21 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void			ft_error_path(int i, char *path);
 int				ft_exit(char *buf, int i, t_prstruct *proc);
 void			ft_free_exit(char ***argv);
 int				ft_cd(char *buf, char **env, int j, char **argv);
-int				ft_opt_home(char **argv, char **env, int i);
+char			*ft_opt_home(char *argv, char **env, int i);
+char			*ft_cdpath(char *argv, char **env);
 void			ft_error_cd(char *buf);
 int				ft_env(char *buf, char ***env, int i, t_prstruct *proc);
 void			ft_print_env(char **env);
