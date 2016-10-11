@@ -6,13 +6,16 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 16:21:35 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/11 16:49:55 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
-
+# define TRUE				1
+# define FALSE				0
+# define MAXV(a, b)			((a) > (b) ? (a) : (b))
+# define MINV(a, b)			((a) < (b) ? (a) : (b))
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include <string.h>
@@ -24,6 +27,18 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_wcscbytes(int binsize);
+void				ft_putstr_until(const char *format, char *c);
+int					ft_putstr_unless(const char *format, char *c);
+char				*ft_llitob(long long int n);
+char				*ft_ullitoa(unsigned long long int n);
+char				*ft_ullitoa_base(unsigned long long int v, char *base);
+int					ft_binsize(long long int i);
+char				*ft_llitoa(long long int n);
+size_t				ft_wcslen(const int *wcs);
+char				*ft_wcstombs(const int *wcs, long int len);
+void				ft_wctomb(char *s, int wc, int l);
+void				ft_putxchar(char c, int l);
 char				*ft_strndup(const char *s1, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

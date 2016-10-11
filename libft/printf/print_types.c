@@ -6,12 +6,13 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 17:50:56 by tviviand          #+#    #+#             */
-/*   Updated: 2016/04/21 18:22:18 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/11 16:49:31 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+#include "ft_printf.h"
 
 static void		calculate_chars(t_argf *arg, t_print_i *d, char *s)
 {
