@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 14:52:20 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/06 15:27:39 by tbayet           ###   ########.fr        #
+#    Updated: 2016/10/11 16:24:20 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,25 @@ SRC = ft_isalnum.c ft_itoa.c ft_memcpy.c ft_putchar_fd.c ft_putstr.c\
 	ft_tabdup_plusone.c ft_tablen.c	ft_print_tab.c ft_free_tab.c \
 	ft_deltab.c ft_strndup.c
 
+SRCPRINTF = printf/args_par.c printf/cast.c printf/colors.c \
+			printf/ft_printf.c printf/notype.c printf/print_types.c \
+			printf/types.c
+
 SRC_o = $(SRC:.c=.o)
+
+PRINTF_o = args_par.o cast.o colors.o \
+			ft_printf.o notype.o print_types.o \
+			types.o
 
 all: $(NAME)
 
 $(NAME):
-	@gcc -Wall -Wextra -Werror -g -I includes/ -c $(SRC)
-	@ar rc $(NAME) $(SRC_o)
+	@gcc -Wall -Wextra -Werror -g -I includes/ -c $(SRC) $(SRCPRINTF)
+	@ar rc $(NAME) $(SRC_o) $(PRINTF_o)
 	@ranlib $(NAME)
 
 clean:
-	@rm -f $(SRC_o)
+	@rm -f $(SRC_o) $(PRINTF_o)
 
 fclean: clean
 	@rm -f $(NAME)
