@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 14:36:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/11 17:29:10 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,20 @@ t_structpwd			ft_init_struct(char **env)
 	return (up);
 }
 
-int					ft_pwd_up(char **env)
+int					ft_pwd_up(char **env, char *argv)
 {
 	t_structpwd	up;
-	char		buf[256];
+//	char		buf[256];
 
 	up = ft_init_struct(env);
-	if (up.tmpold == NULL || env == NULL || getcwd(buf, 255) == NULL)
+	if (up.tmpold == NULL || env == NULL || /*getcwd(buf, 255) == NULL ||*/ !argv)
 		return (1);
 	if (env[up.pwd] != NULL)
 	{
 		ft_strdel(&env[up.pwd]);
-		env[up.pwd] = ft_strjoin("PWD=", buf);
+		env[up.pwd] = ft_strjoin("PWD=", argv);
 	}
-	if (env[up.old] != NULL && ft_strcmp(buf, up.tmpold) != 0)
+	if (env[up.old] != NULL && ft_strcmp(argv, up.tmpold) != 0)
 	{
 		ft_strdel(&env[up.old]);
 		env[up.old] = ft_strjoin("OLDPWD=", up.tmpold);

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 09:41:21 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/11 17:26:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char			**ft_subsetenv(t_structenv t, char **env);
 int				ft_unsetenv(char *buf, char ***adenv, char **env);
 char			**ft_subunsetenv(t_structenv t, char ***env);
 char			*ft_home(char **env, char argv);
-int				ft_pwd_up(char **env);
+int				ft_pwd_up(char **env, char *argv);
 char			*ft_cd_buf(char *argv);
 void			ft_sync_env(char **env[3], int pwd, int pwd1, int old);
 char			**ft_sub_env(char ***env, char **argv, int k, int i);
