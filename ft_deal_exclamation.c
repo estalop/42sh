@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_deal_exclamation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 15:27:38 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/13 17:22:05 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ char		*ft_exclamation5(char *arg, t_dlist *histo, int index)
 		if (ft_strstr(ft_get_element_from_list(histo, pos), arg + index + 1)
 	!= NULL && ft_strstr(ft_get_element_from_list(histo, pos), "!?") == NULL)
 		{
-			ft_putstr(ft_get_element_from_list(histo, pos));
-			ft_putchar('\n');
+			ft_printf("%s\n", ft_get_element_from_list(histo, pos));
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
@@ -98,8 +97,7 @@ char		*ft_exclamation6(char *arg, t_dlist *histo, int index)
 		if (ft_strncmp(ft_get_element_from_list(histo, pos), arg + index,
 			ft_strlen(arg + index)) == 0)
 		{
-			ft_putstr(ft_get_element_from_list(histo, pos));
-			ft_putchar('\n');
+			ft_printf("%s\n", ft_get_element_from_list(histo, pos));
 			return (ft_get_element_from_list(histo, pos));
 		}
 		pos--;
