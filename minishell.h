@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 17:26:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/12 14:11:08 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # include <term.h>
 # include <termios.h>
 # include "autocompletion.h"
+
+typedef struct	s_cdstruct
+{
+	char		*argv;
+	char		*curpath;
+}				t_cdstruct;
 
 typedef struct	s_structenv
 {
@@ -142,7 +148,7 @@ typedef struct	s_termcaps
 void			ft_error_path(int i, char *path);
 int				ft_exit(char *buf, int i, t_prstruct *proc);
 void			ft_free_exit(char ***argv);
-int				ft_cd(char *buf, char **env, int j, char **argv);
+int				ft_cd(char *buf, char **env, int j, t_cdstruct *argv);
 char			*ft_opt_home(char *argv, char **env, int i);
 char			*ft_cdpath(char *argv, char **env);
 void			ft_error_cd(char *buf);
@@ -246,5 +252,7 @@ int				ft_run_history5(char *arg, char *home, t_dlist *histo, int
 char			*ft_check_excla(char *arg, t_prstruct *proc);
 char			*ft_replace_excla(char *arg, t_prstruct *proc, int id, int id2);
 int				ft_check_tmp(char *arg);
+void			ft_print_cd(char *argv, char *buf);
+t_cdstruct		*ft_get_cdinfo(char *buf, char **env);
 
 #endif
