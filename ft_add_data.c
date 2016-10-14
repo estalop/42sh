@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 18:46:12 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/05 13:05:16 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:28:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_dlist		*dlist_prepend(t_dlist *p_list, char *data)
 
 	if (p_list != NULL)
 	{
-		p_new = malloc(sizeof(*p_new));
+		p_new = malloc(sizeof(t_node));
 		if (p_new != NULL)
 		{
 			p_new->data = ft_strdup(data);
@@ -55,7 +55,7 @@ t_dlist		*dlist_append(t_dlist *p_list, char *data, int wrote)
 
 	if (p_list != NULL)
 	{
-		p_new = malloc(sizeof(*p_new));
+		p_new = malloc(sizeof(t_node));
 		if (p_new != NULL)
 		{
 			p_new->data = ft_strdup(data);

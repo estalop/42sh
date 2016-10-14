@@ -5,16 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2016/10/14 15:39:27 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/14 15:39:29 by tviviand         ###   ########.fr       */
-=======
-/*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/14 14:47:02 by jbobin           ###   ########.fr       */
-/*   Updated: 2016/10/12 14:11:08 by jbobin           ###   ########.fr       */
->>>>>>> aedb52d54881d4ba77770e5889f172843b27ca05
+/*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
+/*   Updated: 2016/10/14 15:55:17 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef FT_MINISHELL_H
 # define FT_MINISHELL_H

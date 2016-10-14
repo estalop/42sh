@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complete_me.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/14 15:51:17 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/14 16:25:06 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 		nbelems = ft_tablen(table);
 		return (table);
 	}
+	return (NULL);
 }

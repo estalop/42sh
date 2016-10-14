@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ins_avant.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 01:03:44 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 16:59:33 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/14 16:33:50 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node		*fuck42(t_node *courant, char *data)
 {
 	t_node		*n;
 
-	n = malloc(sizeof(*n));
+	n = malloc(sizeof(t_node));
 	if (n != NULL)
 	{
 		n->data = ft_strdup(data);
@@ -39,7 +39,7 @@ t_dlist		*ins_avant(t_dlist *liste, char *data, t_node *courant, int pos)
 	courant = liste->p_head;
 	while (i++ < pos)
 		courant = courant->p_next;
-	n = malloc(sizeof(*n));
+	n = malloc(sizeof(t_node));
 	if (n != NULL)
 	{
 		n->data = ft_strdup(data);
