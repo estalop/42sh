@@ -1,0 +1,4 @@
+#This file allow to don't push some files
+*.o
+*.a
+42sh
