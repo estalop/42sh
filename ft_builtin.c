@@ -6,59 +6,29 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 17:28:42 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:29:01 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(char *buf, char **env, int j, char **argv)
+int	ft_cd(char *buf, char **env, int j, t_cdstruct *argv)
 {
-	char	**tmp;
-
 	if (buf[2] != '\0' && buf[2] != ' ' && buf[2] != '\t')
 		return (0);
-	if ((argv = ft_split(buf)) != NULL)
+	if ((argv = ft_get_cdinfo(buf, env)) != NULL)
 	{
-		if (argv[1] == NULL)
-		{
-			tmp = ft_tabdup_plusone(argv, NULL);
-			ft_free_tab(&argv);
-			argv = tmp;
-		}
-		argv[1] = ft_opt_home(argv[1], env, 0);
-		if (argv[1][0] != '/' && ft_strncmp(argv[1], "./", 2) && \
-			ft_strncmp(argv[1], "../", 3))
-			argv[1] = ft_cdpath(argv[1], env);
-		if (ft_strlen(argv[1]) > 255)
+		if (ft_strlen(argv->argv) > 255)
 		{
 			ft_putstr_fd("cd: file name too long: ", 2);
-			ft_putendl_fd(argv[1], 2);
+			ft_putendl_fd(argv->argv, 2);
 		}
-		if (access(argv[1], F_OK) == 0)
-		{
-			if (access(argv[1], X_OK) == 0)
-			{
-				if (chdir(argv[1]) == -1)
-				{
-					ft_putstr_fd("cd: not a directory: ", 2);
-					ft_putendl_fd(argv[1], 2);
-				}
-			}
-			else
-			{
-				ft_putstr_fd("cd: permission denied: ", 2);
-				ft_putendl_fd(argv[1], 2);
-			}
-		}
-		else
-		{
-			ft_putstr_fd("cd: no such file or directory: " , 2);
-			ft_putendl_fd(argv[1], 2);
-		}
+		ft_print_cd(argv->argv, argv->curpath);
+		ft_pwd_up(env, argv->argv);
+		ft_strdel(&argv->argv);
+		ft_strdel(&argv->curpath);
+		free(argv);
 	}
-	ft_pwd_up(env, argv[1]);
-	ft_free_tab(&argv);
 	return (j);
 }
 

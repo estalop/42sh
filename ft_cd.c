@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 17:29:10 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 11:32:52 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char				*ft_opt_home(char *argv, char **env, int i)
 	char	*tmp;
 
 	if (env == NULL || (argv && (argv[i] != '-' || argv[i] != '~')))
-		return (argv);
+		return (ft_strdup(argv));
 	k = argv == NULL ? 0 : 1;
 	if (k == 1 && argv[0] == '~')
 		k = 2;
@@ -40,7 +40,7 @@ char				*ft_opt_home(char *argv, char **env, int i)
 		ft_strdel(&argv);
 		argv = ft_strdup(&env[i][k + 1]);
 	}
-	return (argv);
+	return (ft_strdup(argv));
 }
 
 char				*ft_cdpath(char *argv, char **env)
