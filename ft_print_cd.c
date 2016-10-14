@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 10:07:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/14 14:29:44 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 15:30:47 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,18 @@ static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 	if (!(new = (t_cdstruct*)malloc(sizeof(t_cdstruct))))
 		return (NULL);
 	new->argv = argv;
-	if (argv[0] != '/' && ft_strncmp(argv, "./", 2) && \
-		ft_strncmp(argv, "../", 3))
+	if (new->argv[0] != '/' && ft_strncmp(new->argv, "./", 2) && \
+		ft_strncmp(new->argv, "../", 3))
 		new->argv = ft_cdpath(argv, env);
-	else if (argv[0] != '/')
+	if (new->argv[0] != '/')
 	{
 		while (env[i] && ft_strncmp(env[i], "PWD=", 4))
 			i++;
 		new->curpath = (env[i] && opt != 1) ? ft_strjoin(&env[i][4], new->argv)\
 		 : ft_strjoin(getcwd(buf, 255), new->argv);
 	}
+	else
+		new->curpath = ft_strdup(new->argv);
 	if (opt == 1)
 		return (new);
 	return (ft_clean_curpath(new));
@@ -115,7 +117,7 @@ t_cdstruct			*ft_get_cdinfo(char *buf, char **env)
 		return (NULL);
 	i = 1;
 	opt = 0;
-	while (tmp[i][0] != '-')
+	while (tmp[i] && tmp[i][0] == '-')
 	{
 		if (tmp[i][1] == 'L')
 			opt = 0;
