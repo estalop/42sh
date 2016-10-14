@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 08:31:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 17:26:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:17:12 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ typedef struct	s_termcaps
 	char		*cv;
 	char		*dc;
 	char		*cl;
+	char		*cd;
+	char		*mr;
+	char		*me;
 	t_exec		*tree;
 	char		*hist[500];
 	int			prompt;

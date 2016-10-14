@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 18:17:57 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 19:21:54 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/07 18:18:34 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <dirent.h>
 # include "libft/includes/libft.h"
+
+# define MAX_NB_AFF 120
 
 typedef struct		s_files
 {

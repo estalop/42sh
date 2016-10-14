@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:20:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/07/15 08:58:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:19:01 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ void	ft_init_termcap(t_termcaps *cap)
 			ft_putendl_fd("21sh: data not found", 2);
 	if ((cap->height = tgetnum("li")) == 0 \
 		|| (cap->whidth = tgetnum("co")) == 0 \
-		|| !(cap->im = tgetstr("im", NULL))	  \
-		|| !(cap->bl = tgetstr("bl", NULL))	\
+		|| !(cap->im = tgetstr("im", NULL)) \
+		|| !(cap->bl = tgetstr("bl", NULL)) \
 		|| !(cap->sf = tgetstr("sf", NULL)) \
 		|| !(cap->sr = tgetstr("sr", NULL)) \
-		|| !(cap->cr = tgetstr("cr", NULL))	\
+		|| !(cap->cr = tgetstr("cr", NULL)) \
 		|| !(cap->cv = tgetstr("ch", NULL)) \
 		|| !(cap->dc = tgetstr("dl", NULL)) \
+		|| !(cap->cd = tgetstr("cd", NULL)) \
+		|| !(cap->mr = tgetstr("mr", NULL)) \
+		|| !(cap->me = tgetstr("me", NULL)) \
 		|| !(cap->cl = tgetstr("cl", NULL)))
 		ft_putendl_fd("21sh: can not use termcaps", 2);
 	cap->mi = tgetflag("mi");
