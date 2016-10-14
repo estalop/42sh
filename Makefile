@@ -6,7 +6,7 @@
 #    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/12 10:08:09 by jbobin           ###   ########.fr        #
+#    Updated: 2016/10/14 15:40:01 by tbayet           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,6 +20,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	create_tree.c del_memory.c ft_fucknorme.c \
 	texec_add.c texec_check.c \
 	texec_init.c texec_new.c tfiles_getlst.c tfiles_getlst2.c \
+	ft_select.c ft_select_moves.c ft_select_printlist.c \
 	ft_init_histo.c\
 	ft_run_history.c\
 	ft_display_list.c\

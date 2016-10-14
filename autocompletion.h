@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 18:17:57 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/07 18:18:34 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/14 15:48:28 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char				**tfiles_totab(t_files **lst);
 char				**tfiles_getlst(char *pwd, char *str);
 t_files				*tfiles_del(t_files **lst);
 t_exec				*texec_new(char c, char *name);
-char				**complete_me(char *str, t_exec *tree);
+char				**autocompletion(char *line, int i, t_exec *tree, char *pwd);
 int					texec_check(char *name, t_exec *tree);
 t_exec				**texec_add(char *file, t_exec **tree);
 t_exec				*files_sort(char **files);
