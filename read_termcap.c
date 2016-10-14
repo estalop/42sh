@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/06 15:14:03 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/14 15:39:35 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ int			ft_read_termcap(t_termcaps *cap)
 	char	*tmp;
 
 	ft_set_prompt(cap);
+	tmp = NULL;
+	cap->cmd = NULL;
+	cap->str = NULL;
 	while (42)
 	{
 		ft_bzero(buf, 4);
