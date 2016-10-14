@@ -6,12 +6,13 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/07 10:46:30 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:47:52 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "autocompletion.h"
 #include "minishell.h"
+#include "ft_select.h"
 
 static t_exec	*texec_get(char *str, t_exec *tree)
 {
@@ -51,7 +52,7 @@ static int		complete_fill(t_exec *tree, char **res, int i, int stop)
 	return (i);
 }
 
-char			**complete_me(char *str, t_exec *tree)
+static char		**complete_me(char *str, t_exec *tree)
 {
 	char	**res;
 	t_exec	*tmp;
@@ -78,7 +79,7 @@ static int		is_spec_separator(char c)
 		return (0);
 }
 
-void			autocompletion(char *line, t_exec *tree)
+char			**autocompletion(char *line, t_exec *tree, t_termcaps *tc, char *pwd)
 {
 	int		i;
 	int		j;
@@ -101,9 +102,10 @@ void			autocompletion(char *line, t_exec *tree)
 			j--;
 		if (i == 0 || is_spec_separator(line[j]))
 			table = complete_me(line + i, tree);
-		else;
-			//table = tfiles_getlst(get_pwd(tc), line + i);
+		else
+			table = tfiles_getlst(pwd, line + i);
 		nbelems = ft_tablen(table);
-		//ft_select(table, nbelems, tc);
+		ft_select(table, nbelems, tc);
+		return (table);
 	}
 }

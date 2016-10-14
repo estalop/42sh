@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:09:58 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/14 14:29:40 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/14 14:43:39 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_ldim
 }				t_ldim;
 
 
+char			*ft_select(char **list, int nbelems, t_termcaps *tc);
 void			ft_select_cancel(char **list, t_termcaps *tc);
 char			*ft_select_get(char **list, t_termcaps *tc);
 void			ft_select_move(char **list, char dir, t_termcaps *tc);
