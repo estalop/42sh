@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/17 14:20:43 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/17 16:04:19 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static	t_exec	**addbuiltins(t_exec **tree)
 	char	**builtins;
 	int		i;
 
-	if (!(builtins = (char**)malloc(sizeof(char*) * 5)))
+	if (!(builtins = (char**)malloc(sizeof(char*) * 6)))
 		return (NULL);
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 		builtins[i++] = NULL;
 	if (!(builtins[0] = ft_strdup("cd"))
 		|| !(builtins[1] = ft_strdup("env"))
-		|| !(builtins[1] = ft_strdup("setenv"))
-		|| !(builtins[1] = ft_strdup("unsetenv"))
-		|| !(builtins[1] = ft_strdup("history")))
+		|| !(builtins[2] = ft_strdup("setenv"))
+		|| !(builtins[3] = ft_strdup("unsetenv"))
+		|| !(builtins[4] = ft_strdup("history")))
 	{
 		ft_deltab(builtins);
 		return (NULL);
