@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/14 15:55:17 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/17 09:53:16 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_cdstruct
 {
 	char		*argv;
 	char		*curpath;
+	int			opt;
 }				t_cdstruct;
 
 typedef struct	s_structenv
@@ -256,7 +257,7 @@ int				ft_run_history5(char *arg, char *home, t_dlist *histo, int
 char			*ft_check_excla(char *arg, t_prstruct *proc);
 char			*ft_replace_excla(char *arg, t_prstruct *proc, int id, int id2);
 int				ft_check_tmp(char *arg);
-void			ft_print_cd(char *argv, char *buf);
+int				ft_print_cd(char *argv, char *buf);
 t_cdstruct		*ft_get_cdinfo(char *buf, char **env);
 
 #endif

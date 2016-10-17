@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/14 14:29:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 10:22:21 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_cd(char *buf, char **env, int j, t_cdstruct *argv)
 			ft_putstr_fd("cd: file name too long: ", 2);
 			ft_putendl_fd(argv->argv, 2);
 		}
-		ft_print_cd(argv->argv, argv->curpath);
-		ft_pwd_up(env, argv->argv);
+		if (ft_print_cd(argv->argv, argv->curpath) == 0)
+			ft_pwd_up(env, argv->curpath);
 		ft_strdel(&argv->argv);
 		ft_strdel(&argv->curpath);
 		free(argv);

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/14 11:32:52 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 10:31:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ char				*ft_opt_home(char *argv, char **env, int i)
 	int		k;
 	char	*tmp;
 
-	if (env == NULL || (argv && (argv[i] != '-' || argv[i] != '~')))
+	if (env == NULL || (argv && argv[i] != '-' && argv[i] != '~'))
 		return (ft_strdup(argv));
+	tmp = NULL;
 	k = argv == NULL ? 0 : 1;
 	if (k == 1 && argv[0] == '~')
 		k = 2;
@@ -30,17 +31,10 @@ char				*ft_opt_home(char *argv, char **env, int i)
 	while (env[i][k] != '=')
 		k++;
 	if (env != NULL && env[i] != NULL && argv != NULL)
-	{
 		tmp = ft_strjoin(&env[i][k + 1], &argv[1]);
-		ft_strdel(&(argv));
-		argv = tmp;
-	}
 	else if (env != NULL && env[i] != NULL)
-	{
-		ft_strdel(&argv);
-		argv = ft_strdup(&env[i][k + 1]);
-	}
-	return (ft_strdup(argv));
+		tmp = ft_strdup(&env[i][k + 1]);
+	return (tmp);
 }
 
 char				*ft_cdpath(char *argv, char **env)
@@ -104,13 +98,12 @@ t_structpwd			ft_init_struct(char **env)
 	return (up);
 }
 
-int					ft_pwd_up(char **env, char *argv)
+int					ft_pwd_up(char **env, char *argv, int opt)
 {
 	t_structpwd	up;
-//	char		buf[256];
 
 	up = ft_init_struct(env);
-	if (up.tmpold == NULL || env == NULL || /*getcwd(buf, 255) == NULL ||*/ !argv)
+	if (up.tmpold == NULL || env == NULL || !argv)
 		return (1);
 	if (env[up.pwd] != NULL)
 	{
