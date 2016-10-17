@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 16:49:55 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:24:53 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*ft_strjoind(char *s1, char *s2, int dela, int delb);
 int					ft_wcscbytes(int binsize);
 void				ft_putstr_until(const char *format, char *c);
 int					ft_putstr_unless(const char *format, char *c);
