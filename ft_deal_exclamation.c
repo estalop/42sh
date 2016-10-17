@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/13 17:22:05 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:45:29 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_exclamation2(char *arg, t_dlist *histo)
 			ft_putstr("This command is not available : you can\'t launch a");
 			ft_putstr(" command containing \"!\" throught the current command");
 			ft_putchar('\n');
-			free(str);
+			ft_strdel(&str);
 			return (arg);
 		}
 		index++;

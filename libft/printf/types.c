@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 17:51:02 by tviviand          #+#    #+#             */
-/*   Updated: 2016/04/21 18:20:09 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:46:48 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				types_d(t_argf *arg, va_list ap)
 	if (*s == '0' && arg->precision == 0)
 		*s = 0;
 	n = print_integer(arg, s);
-	free(s);
+	ft_strdel(&s);
 	return (n);
 }
 
@@ -70,7 +70,7 @@ int				types_x(t_argf *arg, va_list ap)
 	arg->flag[FL_MORE] = FALSE;
 	arg->flag[FL_SPCE] = FALSE;
 	sl = print_integer(arg, s);
-	free(s);
+	ft_strdel(&s);
 	return (sl);
 }
 
@@ -91,7 +91,7 @@ int				types_s(t_argf *arg, va_list ap)
 	arg->width = arg->width > n ? arg->width - n : 0;
 	n = print_string(ss, arg, FALSE);
 	if ((arg->type == 'S' || arg->length == L_T) && ss)
-		free(ss);
+		ft_strdel(&ss);
 	return (n);
 }
 
@@ -115,7 +115,7 @@ int				types_c(t_argf *arg, va_list ap)
 	arg->precision = -1;
 	arg->width = arg->width > n ? arg->width - n : 0;
 	n = print_string(ss, arg, !*s);
-	free(ss);
+	ft_strdel(&ss);
 	return (n);
 }
 
@@ -134,6 +134,6 @@ int				types_p(t_argf *arg, va_list ap)
 	arg->flag[FL_MORE] = FALSE;
 	arg->flag[FL_SPCE] = FALSE;
 	n = print_integer(arg, s);
-	free(s);
+	ft_strdel(&s);
 	return (n);
 }

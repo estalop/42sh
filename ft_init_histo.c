@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_histo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:23:22 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/05 12:56:32 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:44:44 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_init_histo(t_prstruct *proc, t_termcaps *cap)
 	{
 		str = ft_strjoin(ft_get_home(proc->env[2]), "/.42sh");
 		ft_get_history_from_file(histo, open(str, O_RDONLY), 0, 0);
-		free(str);
+		ft_strdel(&str);
 	}
 	else
 	{

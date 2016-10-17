@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 13:38:03 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 17:10:29 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		if (tmp != NULL)
 		{
 			tmp = ft_replace_excla(tmp, proc, 0, 0);
-			if (ft_strlen(tmp) > 0  && ft_check_tmp(tmp) == 1)
+			if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
 				ft_add_data(proc->histo2, tmp, 0);
 			com = ft_strsplit(tmp, ';');
 			ft_strdel(&tmp);

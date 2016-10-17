@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_run_history2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 20:22:38 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 20:58:50 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:45:02 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_run_history4(char *home, t_dlist *histo)
 	str = ft_strjoin(home, "./42sh");
 	ft_write_history_file(histo, 0, open(str, O_RDWR | O_CREAT | O_APPEND,
 	S_IRUSR | S_IWUSR), 1);
-	free(str);
+	ft_strdel(&str);
 	return (1);
 }
 
@@ -56,6 +56,6 @@ int		ft_run_history5(char *arg, char *home, t_dlist *histo, int index)
 		index++;
 	if (arg[index] == '-')
 		index++;
-	free(str);
+	ft_strdel(&str);
 	return (1);
 }

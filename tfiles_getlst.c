@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tfiles_getlst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 16:22:41 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/17 16:49:00 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ char			**tfiles_getlst(char *pwd, char *str)
 	char	*path;
 	char	**res;
 
-	i = ft_strlen(str);
-	i--;
+	i = ft_strlen(str) - 1;
 	while (str[i] && str[i] != '/')
 		i--;
 	path = (str[i] == '/') ? ft_strndup(str, i + 1) : ft_strdup(pwd);
@@ -96,23 +95,23 @@ char			**tfiles_getlst(char *pwd, char *str)
 		return (NULL);
 	if (!(name = ft_strdup(str + i + 1)))
 	{
-		free(path);
+		ft_strdel(&path);
 		return (NULL);
 	}
 	if (!(lst = tfiles_create(path, name)))
 	{
-		free(path);
-		free(name);
+		ft_strdel(&path);
+		ft_strdel(&name);
 		return (NULL);
 	}
 	if (!(res = tfiles_totab(&lst)))
 	{
-		free(path);
-		free(name);
+		ft_strdel(&path);
+		ft_strdel(&name);
 		tfiles_del(&lst);
 		return (NULL);
 	}
-	free(path);
-	free(name);
+	ft_strdel(&path);
+	ft_strdel(&name);
 	return (res);
 }

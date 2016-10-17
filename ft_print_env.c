@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 09:17:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 16:10:55 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/17 16:53:08 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ char	**ft_subunsetenv(t_structenv t, char ***env)
 	while (tmpenv[i + 1] != NULL)
 	{
 		t.tmpenv[i] = tmpenv[i + 1];
+		i++;
+	}
+	i = 0;
+	while (tmpenv[i])
+	{
+		ft_strdel(&tmpenv[i]);
 		i++;
 	}
 	free(tmpenv);

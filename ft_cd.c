@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 13:31:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 16:50:18 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char				*ft_cdpath(char *argv, char **env)
 		if (tmp[i][ft_strlen(tmp[i]) - 1] != '/')
 		{
 			new = ft_strjoin(tmp[i], "/");
-			free(tmp[i]);
+			ft_strdel(&tmp[i]);
 			tmp[i] = new;
 		}
 		new = ft_strjoin(tmp[i], argv);
