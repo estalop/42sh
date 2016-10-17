@@ -6,11 +6,46 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/29 14:11:40 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/17 14:20:43 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "autocompletion.h"
+
+static	t_exec	**addbuiltins(t_exec **tree)
+{
+	char	**builtins;
+	int		i;
+
+	if (!(builtins = (char**)malloc(sizeof(char*) * 5)))
+		return (NULL);
+	i = 0;
+	while (i < 5)
+		builtins[i++] = NULL;
+	if (!(builtins[0] = ft_strdup("cd"))
+		|| !(builtins[1] = ft_strdup("env"))
+		|| !(builtins[1] = ft_strdup("setenv"))
+		|| !(builtins[1] = ft_strdup("unsetenv"))
+		|| !(builtins[1] = ft_strdup("history")))
+	{
+		ft_deltab(builtins);
+		return (NULL);
+	}
+	i = 0;
+	while (i < 5)
+	{
+		if (!(texec_check(builtins[i], *tree)) && !(texec_add(builtins[i], tree)))
+		{
+			texec_del(tree);
+			tree = NULL;
+			free(builtins);
+			return (NULL);
+		}
+		i++;
+	}
+	free(builtins);
+	return (tree);
+}
 
 static t_exec	**dirtotexec(DIR *dir, t_exec **tree)
 {
@@ -64,5 +99,5 @@ t_exec			*files_sort(char **files)
 		}
 		ptr++;
 	}
-	return (*res);
+	return ((res = addbuiltins(res)) ? *res : NULL);
 }
