@@ -3,5 +3,7 @@
 *.a
 42sh
 21sh
-.help
+*.help
 memo
+21sh.dSYM/*
+21sh.dSYM
