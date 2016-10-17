@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 10:22:21 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 13:34:17 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_cd(char *buf, char **env, int j, t_cdstruct *argv)
 			ft_putendl_fd(argv->argv, 2);
 		}
 		if (ft_print_cd(argv->argv, argv->curpath) == 0)
-			ft_pwd_up(env, argv->curpath);
+			ft_pwd_up(env, argv->curpath, argv->opt);
 		ft_strdel(&argv->argv);
 		ft_strdel(&argv->curpath);
 		free(argv);

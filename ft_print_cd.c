@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 10:07:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 10:29:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 13:56:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,18 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 		tmp2 = NULL;
 		if (new->curpath[i] == '.')
 		{
-			if (new->curpath[i + 1] == '.' && new->curpath[i + 2] == '/')
+			if (new->curpath[i + 1] == '.' && (new->curpath[i + 2] == '/' \
+												|| new->curpath[i + 2] == '\0'))
 			{
 				j = i;
 				while (j > 0 && new->curpath[j] != '/')
 					j--;
-				if (j > 0 && new->curpath[j] == '/')
-					tmp2 = ft_strsub(new->curpath, 0, j);
+				if (new->curpath[j] == '/')
+					tmp2 = ft_strsub(new->curpath, 0, j ? j : 1);
 				if (tmp2)
 					tmp = ft_strjoin(tmp2, &new->curpath[i + 3]);
 			}
-			else if (new->curpath[i + 1] == '/')
+			else if (new->curpath[i + 1] == '/' || new->curpath[i + 1] == '\0')
 			{
 				tmp2 = ft_strsub(new->curpath, 0, i);
 				tmp = ft_strjoin(tmp2, &new->curpath[i + 2]);
@@ -102,6 +103,7 @@ static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 	}
 	else
 		new->curpath = ft_strdup(new->argv);
+	ft_putendl(new->argv);
 	if (opt == 1)
 		return (new);
 	return (ft_clean_curpath(new));

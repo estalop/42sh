@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/17 09:53:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 13:32:42 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char			**ft_subsetenv(t_structenv t, char **env);
 int				ft_unsetenv(char *buf, char ***adenv, char **env);
 char			**ft_subunsetenv(t_structenv t, char ***env);
 char			*ft_home(char **env, char argv);
-int				ft_pwd_up(char **env, char *argv);
+int				ft_pwd_up(char **env, char *argv, int opt);
 char			*ft_cd_buf(char *argv);
 void			ft_sync_env(char **env[3], int pwd, int pwd1, int old);
 char			**ft_sub_env(char ***env, char **argv, int k, int i);

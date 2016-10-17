@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 10:31:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/17 13:31:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_structpwd			ft_init_struct(char **env)
 int					ft_pwd_up(char **env, char *argv, int opt)
 {
 	t_structpwd	up;
+	char		buf[255];
 
 	up = ft_init_struct(env);
 	if (up.tmpold == NULL || env == NULL || !argv)
@@ -108,7 +109,7 @@ int					ft_pwd_up(char **env, char *argv, int opt)
 	if (env[up.pwd] != NULL)
 	{
 		ft_strdel(&env[up.pwd]);
-		env[up.pwd] = ft_strjoin("PWD=", argv);
+		env[up.pwd] = ft_strjoin("PWD=", opt == 1 ? getcwd(buf, 255) : argv);
 	}
 	if (env[up.old] != NULL && ft_strcmp(argv, up.tmpold) != 0)
 	{
