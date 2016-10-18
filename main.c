@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 17:10:29 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/18 14:11:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,9 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 			tmp = ft_replace_excla(tmp, proc, 0, 0);
 			if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
 				ft_add_data(proc->histo2, tmp, 0);
-			com = ft_strsplit(tmp, ';');
-			ft_strdel(&tmp);
 		}
-		else
-			com = ft_strsplit(tmp, ';');
+		com = ft_strsplit(tmp, ';');
+		ft_strdel(&tmp);
 		j = 0;
 		while (com != NULL && com[j] != NULL)
 		{
@@ -130,10 +128,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		}
 		ft_main_free(&proc->env[1], cap, &path, &com);
 		if (proc->env[0] != NULL && proc->env[1] != NULL && proc->env[2] != NULL)
-		{
-			ft_putendl("ok");
 			ft_sync_env(proc->env, 0, 0, 0);
-		}
 		cap->histo2 = proc->histo2;
 	}
 	ft_free_tab(&path);

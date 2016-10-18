@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/18 13:48:14 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/18 14:08:33 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 		ft_strncmp(new->argv, "../", 3))
 		new->argv = ft_cdpath(argv, env);
 	new->curpath = ft_complete_curpath(argv, env, opt);
-	ft_putendl(new->argv);
 	if (opt == 1)
 		return (new);
 	return (ft_clean_curpath(new));

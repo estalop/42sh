@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 10:07:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/18 12:55:54 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/18 14:11:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int					ft_print_cd(char *argv, char *buf)
 {
-	ft_putendl(buf);
 	if (access(buf, F_OK) == 0)
 		if (access(buf, X_OK) == 0)
 			if (chdir(buf) == -1)
