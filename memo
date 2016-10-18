@@ -7,8 +7,8 @@ Gerer les doubles commandes comprenant !!  ou tout autre commande du genre
 genre : echo "alpha" ; !!
 
 A VERIFIER JUSTE AVANT PASSAGE DANS LE MIXER
-A chaque passage dans le mixer (ft_choose), check qu'il ne comprends pas de !. 
-Si la ligne en comprends un, le remplacer avec un ft_get_elemet_from_list 
+A chaque passage dans le mixer (ft_choose), check qu'il ne comprends pas de !.
+Si la ligne en comprends un, le remplacer avec un ft_get_elemet_from_list
 
 SAUF SI C'EST !#, auquel cas faut lui envoyer la ligne entiere via ft_exclamation_diez.c
 
@@ -35,3 +35,6 @@ Verifier si on me fait de la merde sur le fichier d'historique avant et pendant 
 SEGFAULT
 make re && env -i && setenv HOME=/nfs/2015/p/pbourdon (plus de segfault)
 pareil pour home nfs (a la place de = tu mets un space)
+
+
+TERMCAPS cree un probleme

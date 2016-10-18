@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_replace_excla.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 15:37:12 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/18 16:34:59 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 	char	*str;
 	char	*str2;
 
-	str = malloc(sizeof(char) * (ft_count_malloc(arg, proc) + 10));
+	str = ft_strnew(sizeof(char) * (ft_count_malloc(arg, proc)));
+	// str = malloc(sizeof(char) * (ft_count_malloc(arg, proc) + 10));
 	while (arg[index] != '\0')
 	{
 		if (arg[index] == '!' && arg[index + 1] == '#')

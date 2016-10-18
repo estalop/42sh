@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/04 16:00:12 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/10/17 17:18:30 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		ft_signal_fork(int sig)
 		cap->x = cap->prompt;
 		cap->i = 0;
 		cap->oldlen = 0;
-		ft_putstr(cap->prom); 
+		ft_putstr(cap->prom);
 		exit(0);
 	}
 }

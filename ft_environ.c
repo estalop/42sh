@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_environ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 18:11:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/05/20 11:19:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/18 16:38:04 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ char	**ft_create_environ(int i)
 		while (env[i] != NULL && ft_strncmp(env[i], "SHLVL=", 6) != 0)
 			i = i + 1;
 		if (env[i] != NULL)
-			tmp = ft_itoa(ft_atoi(&env[i][6]) + 1);
-		ft_strdel(&env[i]);
-		env[i] = ft_strjoin("SHLVL=", tmp);
+		{
+			if ((tmp = ft_itoa(ft_atoi(&env[i][6]) + 1)))
+			{
+				ft_strdel(&env[i]);
+				env[i] = ft_strjoin("SHLVL=", tmp);
+			}
+		}
 		ft_strdel(&tmp);
 		return (env);
 	}
