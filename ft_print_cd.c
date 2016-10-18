@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 10:07:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 13:56:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/18 11:02:02 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int					ft_print_cd(char *argv, char *buf)
 {
 	ft_putendl(buf);
-    if (access(buf, F_OK) == 0)
+	if (access(buf, F_OK) == 0)
 		if (access(buf, X_OK) == 0)
 			if (chdir(buf) == -1)
 			{
@@ -31,7 +31,7 @@ int					ft_print_cd(char *argv, char *buf)
 		}
 	else
 	{
-		ft_putstr_fd("cd: no such file or directory: " , 2);
+		ft_putstr_fd("cd: no such file or directory: ", 2);
 		ft_putendl_fd(argv, 2);
 	}
 	return (-1);
@@ -54,7 +54,7 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 			if (new->curpath[i + 1] == '.' && (new->curpath[i + 2] == '/' \
 												|| new->curpath[i + 2] == '\0'))
 			{
-				j = i;
+				j = i - 2;
 				while (j > 0 && new->curpath[j] != '/')
 					j--;
 				if (new->curpath[j] == '/')
@@ -80,13 +80,36 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 	return (new);
 }
 
+static char			*ft_complete_curpath(char *argv, char **env, int opt)
+{
+	char	*curpath;
+	int		i;
+	char	buf[255];
+	char	*tmp;
+
+	i = 0;
+	ft_bzero(&buf, 255);
+	if (argv[0] != '/')
+	{
+		while (env[i] && ft_strncmp(env[i], "PWD=", 4))
+			i++;
+		if (opt == 1 || (env && env[i][ft_strlen(env[i]) - 1] != '/'))
+			tmp = ft_strjoin((env[i] && opt != 1) ? &env[i][4] \
+				: getcwd(buf, 255), "/");
+		else
+			tmp = ft_strdup(&env[i][4]);
+		curpath = ft_strjoin(tmp, argv);
+		ft_strdel(&tmp);
+	}
+	else
+		curpath = ft_strdup(argv);
+	return (curpath);
+}
+
 static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 {
 	t_cdstruct	*new;
-	char		buf[255];
-	int			i;
 
-	i = 0;
 	if (!(new = (t_cdstruct*)malloc(sizeof(t_cdstruct))))
 		return (NULL);
 	new->argv = argv;
@@ -94,15 +117,7 @@ static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 	if (new->argv[0] != '/' && ft_strncmp(new->argv, "./", 2) && \
 		ft_strncmp(new->argv, "../", 3))
 		new->argv = ft_cdpath(argv, env);
-	if (new->argv[0] != '/')
-	{
-		while (env[i] && ft_strncmp(env[i], "PWD=", 4))
-			i++;
-		new->curpath = (env[i] && opt != 1) ? ft_strjoin(&env[i][4], new->argv)\
-		 : ft_strjoin(getcwd(buf, 255), new->argv);
-	}
-	else
-		new->curpath = ft_strdup(new->argv);
+	new->curpath = ft_complete_curpath(argv, env, opt);
 	ft_putendl(new->argv);
 	if (opt == 1)
 		return (new);
