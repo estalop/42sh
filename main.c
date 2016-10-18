@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/18 14:11:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/18 15:51:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 	ft_init_histo(proc, cap);
 	while (42 && !(j = 0))
 	{
-		tmp = NULL;
-		cap->cmd = NULL;
-		cap->str = NULL;
 		path = ft_get_path(proc->env[0]);
 		proc->env[1] = ft_tabdup(proc->env[2]);
 		if (ft_read_termcap(cap) == 1)
