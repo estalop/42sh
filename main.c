@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/20 14:23:18 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:53:46 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		**ft_get_path(char **environ)
 		}
 		i++;
 	}
+	ft_free_tab(&path);
 	return (path);
 }
 
