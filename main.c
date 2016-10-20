@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/20 18:53:46 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/20 19:03:06 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char		**ft_get_path(char **environ)
 		}
 		i++;
 	}
-	ft_free_tab(&path);
+	// ft_free_tab(&path);
 	return (path);
 }
 
@@ -153,7 +153,7 @@ int			main(void)
 	texec_del(cap->bin);
 	texec_del(&ptr);
 	cap->bin = NULL;
-	//process.exec = cap->bin;
+	// process.exec = cap->bin;
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
