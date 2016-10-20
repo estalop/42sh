@@ -6,14 +6,13 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/17 13:32:42 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/20 15:09:10 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FT_MINISHELL_H
 # define FT_MINISHELL_H
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <sys/stat.h>
 # include <dirent.h>
@@ -27,6 +26,7 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
+# include <stdio.h>
 # include "autocompletion.h"
 
 typedef struct	s_cdstruct

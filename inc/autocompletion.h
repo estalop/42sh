@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:24:12 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/14 16:24:13 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:08:43 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <dirent.h>
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 # define MAX_NB_AFF 120
 

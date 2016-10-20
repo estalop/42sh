@@ -1,16 +1,18 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbobin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/18 12:56:15 by jbobin           ###   ########.fr        #
+#    Updated: 2016/10/20 15:28:16 by tviviand         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
-NAME = 21sh
+NAME = 42sh
+
+SRCFOL = src/
 
 SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_opt.c ft_split_env.c ft_environ.c ft_execute.c ft_signal.c \
@@ -24,14 +26,12 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_init_histo.c\
 	ft_run_history.c\
 	ft_display_list.c\
-	ft_display_list4.c\
 	dlist_new.c\
 	ft_write_history_file.c\
 	ft_check_options_history.c\
 	ft_get_check_file.c\
 	ft_get_element_from_list.c\
 	ft_ins_avant.c\
-	ft_display_list3.c\
 	ft_add_data.c\
 	ft_del_ele_list.c\
 	ft_get_history_from_file.c\
@@ -49,7 +49,7 @@ SRC_O = $(SRC:.c=.o) libft/libft.a
 
 FLAGS = -Wall -Wextra -Werror -g
 
-HEADERS = -I ./ -I libft/includes/ -I completion
+HEADERS = -I ./inc/ -I libft/includes/ -I completion
 
 all: $(NAME)
 

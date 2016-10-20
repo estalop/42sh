@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texec_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/17 16:04:19 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/20 14:06:18 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static	t_exec	**addbuiltins(t_exec **tree)
 	i = 0;
 	while (i < 5)
 	{
-		if (!(texec_check(builtins[i], *tree)) && !(texec_add(builtins[i], tree)))
+		if (!(texec_check(builtins[i], *tree)) &&
+		!(texec_add(builtins[i], tree)))
 		{
 			texec_del(tree);
 			tree = NULL;

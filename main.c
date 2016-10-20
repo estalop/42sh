@@ -6,11 +6,9 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/18 17:11:42 by jbobin           ###   ########.fr       */
-/*   Updated: 2016/10/18 17:00:31 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:23:18 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -125,7 +123,8 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 			j++;
 		}
 		ft_main_free(&proc->env[1], cap, &path, &com);
-		if (proc->env[0] != NULL && proc->env[1] != NULL && proc->env[2] != NULL)
+		if (proc->env[0] != NULL &&
+			proc->env[1] != NULL && proc->env[2] != NULL)
 			ft_sync_env(proc->env, 0, 0, 0);
 		cap->histo2 = proc->histo2;
 	}
@@ -139,27 +138,21 @@ int			main(void)
 	t_prstruct		process;
 	t_exec			*ptr;
 
-	cap = NULL;
+	cap = ft_struct_innit(0);
 	ptr = NULL;
 	ft_bzero(&process, sizeof(t_prstruct));
-	process.list = NULL;
-	process.i = 0;
-	process.father = 0;
 	process.herepipe = -1;
 	signal(2, &ft_signal_stop);
 	signal(18, SIG_IGN);
 	signal(28, &ft_signal_size);
 	process.env[0] = ft_create_environ(0);
 	process.env[2] = ft_tabdup(process.env[0]);
-	cap = ft_struct_innit(0);
-
 	ptr = create_tree(process.env[0]);
 	cap->bin = &ptr;
 	texec_del(cap->bin);
 	texec_del(&ptr);
 	cap->bin = NULL;
 	//process.exec = cap->bin;
-
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
