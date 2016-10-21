@@ -14,7 +14,7 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ====================================================================
 
 - Mettre les .c dans le dossier inc et faire le lien dans le Makefile
-- Corriger le leak dans create_tree
+- Corriger le leak dans create_tree (Tout du moins cela viens du path)
 - Faire un parseur (En discuter avec Chris tout ca)
 - Voir si on prend le 21sh de Chris ou pas
 

@@ -6,13 +6,17 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/20 15:28:16 by tviviand         ###   ########.fr        #
+#    Updated: 2016/10/21 15:36:14 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 42sh
 
-SRCFOL = src/
+SRC_DIR = src
+
+OBJ_DIR = obj
+
+INC_DIR = inc
 
 SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_opt.c ft_split_env.c ft_environ.c ft_execute.c ft_signal.c \
@@ -43,29 +47,36 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_replace_excla.c\
 	ft_check_tmp.c\
 	ft_print_cd.c\
-	ft_curpath_cd.c\
+	ft_curpath_cd.c
 
 SRC_O = $(SRC:.c=.o) libft/libft.a
 
-FLAGS = -Wall -Wextra -Werror -g
+DSRC = $(addprefix $(SRC_DIR)/,$(SRC))
 
-HEADERS = -I ./inc/ -I libft/includes/ -I completion
+DOBJ = $(addprefix $(OBJ_DIR)/,$(OBJ))
+
+FLAGS = -Wall -Wextra -Werror
+
+HEADERS = -I ./$(INC_DIR) -I libft/includes/ -I completion
 
 all: $(NAME)
 
-$(NAME):
-	@gcc $(FLAGS) -c $(SRC) $(HEADERS)
-	@make -C libft
-	@gcc $(FLAGS) -ltermcap -o $(NAME) $(SRC_O) $(HEADERS)
-	@echo make
+$(NAME): $(DOBJ)
+	make -C libft/ fclean && make -C libft/
+	gcc $(FLAGS) $(DSRC) -I./$(INC_DIR) -L./libft -lft -o $(NAME)
+
+obj/%.o: src/%.c
+	@mkdir -p $(OBJ_DIR)
+	gcc $(FLAGS) -I./libft -I./$(INC_DIR) -c $< -o $@
+
 clean:
-	@rm -f $(SRC_O)
-	@make clean -C libft
-	@echo clean
+	make -C libft/ clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@rm -f $(NAME)
-	@make fclean -C libft
-	@echo fclean
+	make -C libft/ fclean
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all, $(NAME), clean, fclean, re

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:09:58 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/14 14:43:39 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/21 15:22:45 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT
-# define FT_SELECT
+#ifndef FT_SELECT_H
+# define FT_SELECT_H
 
 # include "minishell.h"
+# include "autocompletion.h"
 # define MAX_SELECT_LINES 8
 
 typedef struct	s_ldim
@@ -26,12 +27,12 @@ typedef struct	s_ldim
 	int			maxlen;
 }				t_ldim;
 
-
 char			*ft_select(char **list, int nbelems, t_termcaps *tc);
 void			ft_select_cancel(char **list, t_termcaps *tc);
 char			*ft_select_get(char **list, t_termcaps *tc);
 void			ft_select_move(char **list, char dir, t_termcaps *tc);
-t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *dims);
+t_ldim			*ft_select_printlist(char **list, int nbelems,
+	t_termcaps *tc, t_ldim *dims);
 void			ft_select_move_up(t_ldim *dims);
 void			ft_select_move_down(t_ldim *dims);
 void			ft_select_move_left(t_ldim *dims);
