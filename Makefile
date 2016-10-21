@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/21 15:36:14 by tviviand         ###   ########.fr        #
+#    Updated: 2016/10/21 15:54:29 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ all: $(NAME)
 
 $(NAME): $(DOBJ)
 	make -C libft/ fclean && make -C libft/
-	gcc $(FLAGS) $(DSRC) -I./$(INC_DIR) -L./libft -lft -o $(NAME)
+	gcc $(FLAGS) $(DSRC) -I./$(INC_DIR) -L./libft -lft -ltermcap -o $(NAME) 
 
 obj/%.o: src/%.c
 	@mkdir -p $(OBJ_DIR)
