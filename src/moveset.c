@@ -6,12 +6,11 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 10:48:54 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/21 15:23:24 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/24 09:51:20 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "ft_select.h"
 
 void		ft_reset(t_termcaps *cap, char *str)
 {
