@@ -39,4 +39,19 @@ Retours :
 - Leak dans la fonction create_tree (create_tree.c)
 
 ====================================================================
-(ajout a la suite des votres...)
+=====================
+=     Changelog     =
+====================================================================
+24 octobre 9h30 - jean-yves
+
+fait :
+
+- Makefile modifier et corriger, c'etait du grand n'importe quoi
+
+ps :
+
+- thomas, tu fait plus JAMAIS un changement pareil sans en parler
+au autres (surtout si je doit tout refaire deriere), ceci vaut 
+aussi pour les autre. le prochaint qui fera une maj majeure
+dans son coin degage sans sommation
+====================================================================
