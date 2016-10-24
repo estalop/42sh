@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "autocompletion.h"
 #include "ft_select.h"
 
 static t_ldim	*dims = NULL;

@@ -65,8 +65,8 @@ int		ft_write_history_file2(t_dlist *histo, int fd, int pos, int exit)
 	}
 	else
 	{
-		ft_putstr("An error just happened. Check your rights and your");
-		ft_putstr(" home env variable");
+		ft_printf("An error just happened, Check your rights and your \
+		home env variable");
 		return (1);
 	}
 	if (exit != 1)

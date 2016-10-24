@@ -26,6 +26,27 @@ Genre pour ce commit ce serrais :
 =====================
 =     Changelog     =
 ====================================================================
+24 octobre 1430h - ThomasV
+
+Fait :
+
+- Del des headers useless
+
+ps :
+
+- Tout compilais et était beau, Si tu peux m'expliqué ou était le souci ?
+(hormis le -g car ouais c'était débile de le viré)
+====================================================================
+24 octobre 9h30 - Jean-yves
+
+Fait :
+
+- Makefile modifier et corriger, c'etait du grand n'importe quoi
+
+ps :
+
+- Faire des grosses modifs sans dire c'est mal, Sorry,
+====================================================================
 20 octobre 16h15 - ThomasV
 
 Fait :
@@ -37,21 +58,4 @@ Fait :
 Retours :
 
 - Leak dans la fonction create_tree (create_tree.c)
-
-====================================================================
-=====================
-=     Changelog     =
-====================================================================
-24 octobre 9h30 - jean-yves
-
-fait :
-
-- Makefile modifier et corriger, c'etait du grand n'importe quoi
-
-ps :
-
-- thomas, tu fait plus JAMAIS un changement pareil sans en parler
-au autres (surtout si je doit tout refaire deriere), ceci vaut 
-aussi pour les autre. le prochaint qui fera une maj majeure
-dans son coin degage sans sommation
 ====================================================================

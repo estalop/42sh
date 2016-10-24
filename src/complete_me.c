@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "autocompletion.h"
 #include "minishell.h"
-#include "ft_select.h"
 
 static t_exec	*texec_get(char *str, t_exec *tree)
 {
