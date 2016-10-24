@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/24 12:54:54 by jbobin           ###   ########.fr        #
+#    Updated: 2016/10/24 16:40:12 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_replace_excla.c\
 	ft_check_tmp.c\
 	ft_print_cd.c\
-	ft_curpath_cd.c
+	ft_curpath_cd.c\
+	ft_echo.c
 
 SRC_O = $(SRC:.c=.o)
 
