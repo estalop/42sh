@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/21 15:54:29 by tviviand         ###   ########.fr        #
+#    Updated: 2016/10/24 09:27:09 by jbobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,11 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_print_cd.c\
 	ft_curpath_cd.c
 
-SRC_O = $(SRC:.c=.o) libft/libft.a
+SRC_O = $(SRC:.c=.o)
 
 DSRC = $(addprefix $(SRC_DIR)/,$(SRC))
 
-DOBJ = $(addprefix $(OBJ_DIR)/,$(OBJ))
+DOBJ = $(addprefix $(OBJ_DIR)/,$(SRC_O))
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -61,13 +61,12 @@ HEADERS = -I ./$(INC_DIR) -I libft/includes/ -I completion
 
 all: $(NAME)
 
-$(NAME): $(DOBJ)
-	make -C libft/ fclean && make -C libft/
-	gcc $(FLAGS) $(DSRC) -I./$(INC_DIR) -L./libft -lft -ltermcap -o $(NAME) 
-
-obj/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
-	gcc $(FLAGS) -I./libft -I./$(INC_DIR) -c $< -o $@
+$(NAME):
+	make -C libft/
+	mkdir -p $(OBJ_DIR)
+	gcc $(FLAGS) -I./libft -I./$(INC_DIR) -c $(DSRC)
+	mv $(SRC_O) $(OBJ_DIR)
+	gcc $(FLAGS) libft/libft.a -I./$(INC_DIR) -L./libft -lft -ltermcap -o $(NAME) $(DOBJ)
 
 clean:
 	make -C libft/ clean
