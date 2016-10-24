@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/18 16:09:46 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:57:02 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,15 @@ char		*ft_check_excla(char *arg, t_prstruct *proc)
 		index++;
 	if (arg[index] == '!')
 		index++;
-	if (arg[index] == '\0')
-	{
-		// DONT KNOW WHAT TO DO
-		return (arg);
-	}
-	if (arg[index] >= '0' && arg[index] <= '9')
+	else if (arg[index] == '\0')
+		return (NULL);
+	else if (arg[index] >= '0' && arg[index] <= '9')
 		return (ft_exclamation2(arg + index, proc->histo2));
-	if (arg[index] == '-' && arg[index + 1] >= '0' && arg[index + 1] <= '9')
+	else if (arg[index] == '-' && arg[index + 1] >= '0' && arg[index + 1] <= '9')
 		return (ft_exclamation3(arg + index, proc->histo2));
-	if (arg[index] == '!')
+	else if (arg[index] == '!')
 		return (ft_exclamation3("-1", proc->histo2));
-	if (arg[index] == '?')
+	else if (arg[index] == '?')
 		return (ft_exclamation5(arg, proc->histo2, index));
 	return (ft_exclamation6(arg, proc->histo2, index));
 }

@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/24 09:27:09 by jbobin           ###   ########.fr        #
+#    Updated: 2016/10/24 12:54:54 by jbobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ DSRC = $(addprefix $(SRC_DIR)/,$(SRC))
 
 DOBJ = $(addprefix $(OBJ_DIR)/,$(SRC_O))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 HEADERS = -I ./$(INC_DIR) -I libft/includes/ -I completion
 
