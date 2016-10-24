@@ -45,7 +45,11 @@ Fait :
 
 ps :
 
-- Faire des grosses modifs sans dire c'est mal, Sorry,
+- AU GROS BOULET QUI FAIT DES MODIF SANS EN PARLER, tu fait plus
+JAMAIS un changement pareil sans en parler + au autres 
+(surtout si je doit tout refaire deriere), ceci vaut 
++aussi pour les autre. le prochaint qui fera une maj majeure
++dans son coin degage sans sommation
 ====================================================================
 20 octobre 16h15 - ThomasV
 
