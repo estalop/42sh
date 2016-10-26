@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/24 15:30:40 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/26 14:26:15 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 	char	*str2;
 
 	str = ft_strnew(sizeof(char) * (ft_count_malloc(arg, proc)));
-	// str = malloc(sizeof(char) * (ft_count_malloc(arg, proc) + 10));
 	while (arg[index] != '\0')
 	{
 		if (arg[index] == '!' && arg[index + 1] == '#')
@@ -91,7 +90,7 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 		else if (arg[index] == '!')
 		{
 			str2 = ft_check_excla(arg + index, proc);
-			if (str2 != arg + index)
+			if (str2 && str2 != arg + index)
 			{
 				str = ft_replace_excla3(str, &index2, str2);
 				ft_replace_excla2(&str, &index2, arg, &index);

@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:57:02 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/26 15:12:18 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char		*ft_check_excla(char *arg, t_prstruct *proc)
 		index++;
 	if (arg[index] == '!')
 		index++;
-	else if (arg[index] == '\0')
+	if (arg[index] == '\0')
 		return (NULL);
 	else if (arg[index] >= '0' && arg[index] <= '9')
 		return (ft_exclamation2(arg + index, proc->histo2));

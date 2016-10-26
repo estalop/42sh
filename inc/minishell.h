@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/24 16:27:38 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/26 16:19:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,8 +232,7 @@ int					ft_heredoc_file(char *str, t_termcaps *cap);
 char				*ft_check_bin(char *buf, char **env, char **path, int i);
 
 t_dlist				*dlist_new(t_dlist *p_new);
-void				ft_get_history_from_file(t_dlist *histo, int fd, int index,
-				int index2);
+void				ft_get_history_from_file(t_dlist *histo, int fd);
 int					ft_display_list(t_dlist *p_list, int i);
 void				ft_init_histo(t_prstruct *proc, t_termcaps *cap);
 t_dlist				*ft_add_data(t_dlist *p_list, char *data, int wrote);

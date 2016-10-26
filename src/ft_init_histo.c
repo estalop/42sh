@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:23:22 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/17 16:44:44 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/26 16:19:08 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_init_histo(t_prstruct *proc, t_termcaps *cap)
 	if (ft_get_home(proc->env[2]) != NULL)
 	{
 		str = ft_strjoin(ft_get_home(proc->env[2]), "/.42sh");
-		ft_get_history_from_file(histo, open(str, O_RDONLY), 0, 0);
+		ft_get_history_from_file(histo, open(str, O_RDONLY));
 		ft_strdel(&str);
 	}
 	else
