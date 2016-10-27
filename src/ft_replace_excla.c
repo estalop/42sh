@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/26 14:26:15 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/27 13:33:25 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int		ft_count_malloc(char *arg, t_prstruct *proc)
 {
 	int		index;
 	int		compteur;
+	char	*tmp;
 
 	index = 0;
 	compteur = ft_strlen(arg);
@@ -25,7 +26,9 @@ static int		ft_count_malloc(char *arg, t_prstruct *proc)
 			compteur += ft_strlen(arg);
 		if (arg[index] == '!')
 		{
-			compteur += ft_strlen(ft_check_excla(arg + index, proc));
+			tmp = ft_check_excla(arg + index, proc);
+			compteur += ft_strlen(tmp);
+			ft_strdel(&tmp);
 		}
 		index++;
 	}
