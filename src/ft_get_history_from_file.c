@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 15:00:47 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/26 16:18:32 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/31 12:55:27 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void		ft_get_history_from_file(t_dlist *histo, int fd)
 	if (fd == -1)
 		return ;
 	while (get_next_line(fd, &total))
+	{
 		ft_add_data(histo, total, 1);
+		ft_strdel(&total);
+	}
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/27 13:33:25 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/10/31 12:57:36 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int		ft_count_malloc(char *arg, t_prstruct *proc)
 		{
 			tmp = ft_check_excla(arg + index, proc);
 			compteur += ft_strlen(tmp);
-			ft_strdel(&tmp);
 		}
 		index++;
 	}
@@ -59,7 +58,6 @@ static char		*ft_replace_excla3(char *str, int *index2, char *str2)
 		*index2 = *index2 + 1;
 		index3++;
 	}
-	free(str2);
 	return (str);
 }
 
@@ -85,7 +83,7 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 	char	*str;
 	char	*str2;
 
-	str = ft_strnew(sizeof(char) * (ft_count_malloc(arg, proc)));
+	str = ft_strnew(sizeof(char) * ft_count_malloc(arg, proc));
 	while (arg[index] != '\0')
 	{
 		if (arg[index] == '!' && arg[index + 1] == '#')
