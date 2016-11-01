@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/06 16:25:29 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/10/31 16:11:02 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ t_exec	*texec_new(char c, char *name)
 	if (!(new = (t_exec*)malloc(sizeof(t_exec))))
 		return (NULL);
 	if (name)
-		new->name = name;
+	{
+		if (!(new->name = ft_strdup(name)))
+		{
+			free(new);
+			return (NULL);
+		}
+	}
 	else
 		new->name = NULL;
 	new->nbelems = 0;

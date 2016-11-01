@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/20 14:06:18 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/10/31 16:09:24 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,16 @@
 
 static	t_exec	**addbuiltins(t_exec **tree)
 {
-	char	**builtins;
-	int		i;
-
-	if (!(builtins = (char**)malloc(sizeof(char*) * 6)))
-		return (NULL);
-	i = 0;
-	while (i < 6)
-		builtins[i++] = NULL;
-	if (!(builtins[0] = ft_strdup("cd"))
-		|| !(builtins[1] = ft_strdup("env"))
-		|| !(builtins[2] = ft_strdup("setenv"))
-		|| !(builtins[3] = ft_strdup("unsetenv"))
-		|| !(builtins[4] = ft_strdup("history")))
+	if (!(texec_add("cd", tree))
+		|| !(texec_add("env", tree))
+		|| !(texec_add("setenv", tree))
+		|| !(texec_add("unsetenv", tree))
+		|| !(texec_add("history", tree)))
 	{
-		ft_deltab(builtins);
+		texec_del(tree);
+		tree = NULL;
 		return (NULL);
 	}
-	i = 0;
-	while (i < 5)
-	{
-		if (!(texec_check(builtins[i], *tree)) &&
-		!(texec_add(builtins[i], tree)))
-		{
-			texec_del(tree);
-			tree = NULL;
-			free(builtins);
-			return (NULL);
-		}
-		i++;
-	}
-	free(builtins);
 	return (tree);
 }
 
@@ -85,6 +64,8 @@ t_exec			*files_sort(char **files)
 	if (!(tree = texec_new('\0', NULL)))
 		return (NULL);
 	res = &tree;
+	if (!addbuiltins(res))
+		return (NULL);
 	ptr = files;
 	while (*ptr)
 	{
@@ -100,5 +81,5 @@ t_exec			*files_sort(char **files)
 		}
 		ptr++;
 	}
-	return ((res = addbuiltins(res)) ? *res : NULL);
+	return (tree);
 }
