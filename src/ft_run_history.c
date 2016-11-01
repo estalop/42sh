@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/06 15:17:14 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/11/01 11:24:51 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 
 	if (home == NULL)
 	{
-		ft_putstr(" Please set the home variable of env to execute history");
-		ft_putstr(" command \n");
+		ft_putendl(" Please set the home variable of \
+env to execute history command");
 		return (1);
 	}
 	index = 0;
