@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/26 16:19:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/01 15:00:41 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ typedef struct		s_prstruct
 
 typedef struct		s_termcaps
 {
-	t_exec			**bin;
+	t_exec			*bin;
+	char			**autotab;
+	int				exec;
 	char			*str;
 	char			*stop;
 	char			*cmd;
@@ -141,7 +143,6 @@ typedef struct		s_termcaps
 	char			*cd;
 	char			*mr;
 	char			*me;
-	t_exec			*tree;
 	char			*hist[500];
 	int				prompt;
 	char			*prom;
@@ -210,7 +211,7 @@ int					ft_start_of_str(char *str, t_termcaps *cap);
 int					ft_calculate_whidth(char *str, int i, t_termcaps *cap);
 void				ft_arrow_side(char *tmp, char buf[4], t_termcaps *cap, \
 							int strlen);
-void				ft_out(t_termcaps *cap, char buf[4], char *tmp);
+char				*ft_out(t_termcaps *cap, char buf[4], char *tmp);
 void				ft_set_prompt(t_termcaps *cap);
 void				ft_set_term(void);
 void				ft_sig_stop_ex(int sig);
@@ -268,5 +269,6 @@ char				*ft_replace_excla(char *arg, t_prstruct *proc, \
 int					ft_check_tmp(char *arg);
 int					ft_print_cd(char *argv, char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
+char				*ft_autocomp(t_termcaps *cap, char *str);
 
 #endif

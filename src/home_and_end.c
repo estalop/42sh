@@ -6,11 +6,12 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/17 09:33:25 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/01 14:58:26 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "ft_select.h"
 
 void	ft_thome(t_termcaps *cap, char *str)
 {
@@ -43,16 +44,30 @@ void	ft_sig_stop_ex(int sig)
 		ft_putchar('\n');
 }
 
-void	ft_out(t_termcaps *cap, char buf[4], char *tmp)
+char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 {
-	if (buf[0] == 12)
-		ft_putstr(cap->prom);
-	if (buf[0] == 10)
+	if (cap->exec == 1)
 	{
-		ft_end(cap, tmp, ft_strlen(tmp) + cap->neg);
-		tputs(cap->sf, 0, ft_output);
-		tputs(cap->cr, 0, ft_output);
+		ft_select_cancel(cap->autotab, cap);
+		cap->exec = 0;
 	}
+	else if (cap->exec == 2)
+	{
+		tmp = ft_select_get(cap->autotab, cap);
+		cap->exec = 0;
+	} 
+	else
+	{
+		if (buf[0] == 12)
+			ft_putstr(cap->prom);
+		if (buf[0] == 10)
+		{
+			ft_end(cap, tmp, ft_strlen(tmp) + cap->neg);
+			tputs(cap->sf, 0, ft_output);
+			tputs(cap->cr, 0, ft_output);
+		}
+	}
+	return (tmp);
 }
 
 void	ft_set_prompt(t_termcaps *cap)

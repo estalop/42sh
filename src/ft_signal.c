@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/21 15:52:22 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/01 14:25:07 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_termcaps	*ft_struct_innit(int mode)
 	i = 0;
 	if (mode == 0)
 	{
+		cap.exec = 0;
 		cap.str = NULL;
 		cap.cmd = NULL;
 		cap.stop = NULL;

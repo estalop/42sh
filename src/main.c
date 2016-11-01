@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/31 14:56:00 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/01 14:55:51 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,8 @@ int			main(void)
 {
 	t_termcaps		*cap;
 	t_prstruct		process;
-	t_exec			*ptr;
 
 	cap = ft_struct_innit(0);
-	ptr = NULL;
 	ft_bzero(&process, sizeof(t_prstruct));
 	process.herepipe = -1;
 	signal(2, &ft_signal_stop);
@@ -147,16 +145,13 @@ int			main(void)
 	signal(28, &ft_signal_size);
 	process.env[0] = ft_create_environ(0);
 	process.env[2] = ft_tabdup(process.env[0]);
-	ptr = create_tree(process.env[0]);
-	cap->bin = &ptr;
-	texec_del(&ptr);
-	texec_del(cap->bin);
-	cap->bin = NULL;
-	// process.exec = cap->bin;
+	cap->bin = create_tree(process.env[0]);
+	process.exec = cap->bin;
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
 	ft_free_tab(&process.env[2]);
 	ft_free_tab(&process.env[0]);
+	texec_del(&cap->bin);
 	return (0);
 }

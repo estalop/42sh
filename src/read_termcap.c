@@ -6,15 +6,18 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/14 15:39:35 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/01 15:00:53 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "ft_select.h"
 
 static char	*ft_arrow(t_termcaps *cap, int strlen, char buf[4], char *tmp)
 {
-	if (tmp != NULL && (buf[2] == 'C' || buf[2] == 'D'))
+	if (cap->exec == 2)
+		ft_select_move(cap->autotab, buf[2], cap);
+	else if (tmp != NULL && (buf[2] == 'C' || buf[2] == 'D'))
 		ft_arrow_side(tmp, buf, cap, strlen);
 	else if (buf[2] == 'A')
 		tmp = ft_arrow_up(cap, tmp);
@@ -78,6 +81,8 @@ static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 	}
 	else if (buf[0] != 27 && buf[1] != 0)
 		str = ft_multiple_char(cap, str, buf);
+	else if (buf[0] == '\t' && buf[1] == 0)
+		str = ft_autocomp(cap, str);
 	else if (str == NULL && buf[0] != 27)
 	{
 		str = ft_strnew(1);
@@ -107,7 +112,7 @@ int			ft_read_termcap(t_termcaps *cap)
 		cap->str = ft_tselect(cap, cap->str, buf);
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		if (buf[0] == 12 || buf[0] == 10)
-			ft_out(cap, buf, cap->str);
+			tmp = ft_out(cap, buf, tmp);
 		if (buf[0] == 10)
 			break ;
 	}

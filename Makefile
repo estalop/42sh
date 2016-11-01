@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/10/24 16:40:12 by tviviand         ###   ########.fr        #
+#    Updated: 2016/11/01 14:59:23 by jbobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,28 +27,29 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	texec_add.c texec_check.c \
 	texec_init.c texec_new.c tfiles_getlst.c tfiles_getlst2.c \
 	ft_select.c ft_select_moves.c ft_select_printlist.c \
-	ft_init_histo.c\
-	ft_run_history.c\
-	ft_display_list.c\
-	dlist_new.c\
-	ft_write_history_file.c\
-	ft_check_options_history.c\
-	ft_get_check_file.c\
-	ft_get_element_from_list.c\
-	ft_ins_avant.c\
-	ft_add_data.c\
-	ft_del_ele_list.c\
-	ft_get_history_from_file.c\
-	fuck_the_norm.c\
-	ft_get_home.c\
-	ft_delete_list.c\
-	ft_run_history2.c\
-	ft_deal_exclamation.c\
-	ft_replace_excla.c\
-	ft_check_tmp.c\
-	ft_print_cd.c\
-	ft_curpath_cd.c\
-	ft_echo.c
+	ft_init_histo.c \
+	ft_run_history.c \
+	ft_display_list.c \
+	dlist_new.c \
+	ft_write_history_file.c \
+	ft_check_options_history.c \
+	ft_get_check_file.c \
+	ft_get_element_from_list.c \
+	ft_ins_avant.c \
+	ft_add_data.c \
+	ft_del_ele_list.c \
+	ft_get_history_from_file.c \
+	fuck_the_norm.c \
+	ft_get_home.c \
+	ft_delete_list.c \
+	ft_run_history2.c \
+	ft_deal_exclamation.c \
+	ft_replace_excla.c \
+	ft_check_tmp.c \
+	ft_print_cd.c \
+	ft_curpath_cd.c \
+	ft_echo.c \
+	ft_autocompletion.c
 
 SRC_O = $(SRC:.c=.o)
 
