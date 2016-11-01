@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/14 14:38:39 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/01 16:47:06 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *
 	if (!dims)
 		dims = getdims(list, nbelems, tc->whidth);
 	y = 0;
+	ft_putstr_fd(tc->sf, 1);
+	ft_putstr_fd(tc->cd, 1);
+	ft_putstr_fd(tc->sr, 1);
 	while (y < dims->y && y < MAX_SELECT_LINES)
 	{
 		x = 0;
-		ft_putstr_fd(tc->sr, 1);
+		ft_putstr_fd(tc->sf, 1);
 		while (x < dims->x && x < dims->size)
 		{
 			ft_putstr_fd(tgoto(tc->cv, 0, x * (dims->maxlen + 2)), 1);
@@ -83,7 +86,7 @@ t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *
 	}
 	while (y)
 	{
-		ft_putstr_fd(tc->sf, 1);
+		ft_putstr_fd(tc->sr, 1);
 		y--;
 	}
 	return (dims);

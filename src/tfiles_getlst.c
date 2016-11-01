@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/17 16:49:00 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/01 17:44:41 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ static t_files	*tfiles_new(char *str)
 
 	if (!(new = (t_files*)malloc(sizeof(t_files))))
 		return (NULL);
+	if (!(new->name = ft_strdup(str)))
+	{
+		free(new);
+		return (NULL);
+	}
 	new->prev = NULL;
 	new->next = NULL;
-	new->name = str;
 	return (new);
 }
 
@@ -48,6 +52,8 @@ static t_files	*tfiles_add(t_files *new, t_files **lst)
 				tmp->next = new;
 		}
 	}
+	else
+		*lst = new;
 	return (*lst);
 }
 
@@ -88,12 +94,12 @@ char			**tfiles_getlst(char *pwd, char *str)
 	char	**res;
 
 	i = ft_strlen(str) - 1;
-	while (str[i] && str[i] != '/')
+	while (i > 0 && str[i] != '/')
 		i--;
 	path = (str[i] == '/') ? ft_strndup(str, i + 1) : ft_strdup(pwd);
 	if (!path)
 		return (NULL);
-	if (!(name = ft_strdup(str + i + 1)))
+	if (!(name = ft_strdup(str + i)))
 	{
 		ft_strdel(&path);
 		return (NULL);

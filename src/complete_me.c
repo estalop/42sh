@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/14 16:25:06 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/01 17:44:40 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static t_exec	*texec_get(char *str, t_exec *tree)
 	ptr = str;
 	if (!tmp)
 		return (NULL);
+	if (!(*ptr))
+		return (tmp);
+	tmp = tmp->next;
 	while (*ptr)
 	{
 		while (tmp && (*ptr > tmp->c))
@@ -86,6 +89,7 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 	table = NULL;
 	if (line)
 	{
+		i--;
 		while (i >= 0 && line[i] != ' ' && line[i] != '\t' && line[i] != '\v'
 				&& !is_spec_separator(line[i]))
 			i--;

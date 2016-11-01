@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/01 15:02:02 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/01 16:43:52 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_ldim	*ft_select_print(char **list, int nbelems, t_termcaps *tc)
 	{
 		if (nbelems > MAX_NB_AFF)
 		{
-			ft_putstr_fd(tc->sr, 1);
+			ft_putstr_fd(tc->sf, 1);
 			ft_putstr_fd("42sh: do you wish to see all ", 1);
 			ft_putnbr_fd(nbelems, 1);
 			ft_putstr_fd(" possibilities ?", 1);
@@ -31,7 +31,7 @@ static t_ldim	*ft_select_print(char **list, int nbelems, t_termcaps *tc)
 			while (read(0, buf, 3) == 0);
 			ft_putstr_fd(tgoto(tc->cv, 0, 0), 1);
 			ft_putstr_fd(tc->cd, 1);
-			ft_putstr_fd(tc->sf, 1);
+			ft_putstr_fd(tc->sr, 1);
 		//	if (!ft_strcmp(buf, "yes") && !ft_strcmp(catch, "tab"))
 		//		return (1);
 		}
@@ -48,9 +48,9 @@ void			ft_select_cancel(char **list, t_termcaps *tc)
 	if (list)
 		free(list);
 	list = NULL;
-	ft_putstr_fd(tc->sr, 1);
-	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sf, 1);
+	ft_putstr_fd(tc->cd, 1);
+	ft_putstr_fd(tc->sr, 1);
 }
 
 char			*ft_select_get(char **list, t_termcaps *tc)
@@ -77,8 +77,8 @@ void			ft_select_move(char **list, char dir, t_termcaps *tc)
 			ft_select_move_left(dims);
 		else if (dir == 'D')
 			ft_select_move_right(dims);
+		ft_select_printlist(list, dims->size, tc, dims);
 	}
-	ft_select_printlist(list, dims->size, tc, dims);
 }
 
 char			*ft_select(char **list, int nbelems, t_termcaps *tc)
