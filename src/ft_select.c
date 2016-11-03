@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/03 11:05:55 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/03 18:25:15 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,29 @@ void			ft_select_cancel(char **list, t_termcaps *tc)
 	ft_putstr_fd(tc->sr, 1);
 }
 
-char			*ft_select_get(char **list, t_termcaps *tc)
+char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 {
 	char	*res;
+	char	*newwline;
+	char	*ptr;
+	int		i;
 
 	if (!dims || !list)
 		return (NULL);
+	i = tc->x - 11;
+	i--;
+	while ((*line)[i] != ' ' && (*line)[i] != '	')
+		i--;
+	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - 11 - i))))
+		return (NULL);
+	newwline = ft_strncpy(*line, newwline, i);
 	res = list[dims->pos];
+	ptr = newwline + i;
+	ptr = ft_strcpy(res, ptr);
+	ptr = newwline + i + ft_strlen(res);
+	ptr = ft_strcpy((*line) + (tc->x - 11), ptr);
 	ft_select_cancel(list, tc);
+	//WTF MAN
 	return (res);
 }
 

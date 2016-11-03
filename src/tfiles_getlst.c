@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/03 11:27:33 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/03 14:46:12 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ char			**tfiles_getlst(char *pwd, char *str)
 	char	*path;
 	char	**res;
 
-	i = ft_strlen(str) - 1;
+	if ((i = ft_strlen(str) - 1) == -1)
+		i = 0;
 	while (i > 0 && str[i] != '/')
 		i--;
 	path = (str[i] == '/') ? ft_strndup(str, i + 1) : ft_strdup(pwd);

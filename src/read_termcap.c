@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/01 15:00:53 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/03 14:51:44 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 static char	*ft_arrow(t_termcaps *cap, int strlen, char buf[4], char *tmp)
 {
+	if (cap->exec == 1)
+	{
+		ft_select_cancel(cap->autotab, cap);
+		cap->exec = 0;
+	}
 	if (cap->exec == 2)
 		ft_select_move(cap->autotab, buf[2], cap);
 	else if (tmp != NULL && (buf[2] == 'C' || buf[2] == 'D'))
