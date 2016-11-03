@@ -20,6 +20,16 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 ====================================================================
 
+
+====================
+=     ERROR404     =
+===================================================================
+
+- Quand on fait Echo "KESKECE" ca affiche deux fois "KESKECE" au lieu d'une.
+
+
+====================================================================
+
 L ideal aussi sera a chaque commit de dire en gros ce qu on a fait.
 Genre pour ce commit ce serrais :
 

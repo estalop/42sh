@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/01 16:47:06 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/03 11:46:58 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 	if ((dims->x = width / (dims->maxlen + 2) - 2) < 0)
 		dims->x = 0;
 	dims->y = (dims->x) ? nbelems / dims->x: 0;
-	if (dims->y && (nbelems % dims->x) > 0)
+	if (nbelems % dims->x > 0)
 		dims->y++;
 	dims->pos = -1;
 	dims->size = nbelems;

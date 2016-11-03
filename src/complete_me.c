@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/01 17:44:40 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/03 11:30:12 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 {
 	int		j;
 	char	**table;
-	int		nbelems;
 
 	table = NULL;
 	if (line)
@@ -101,7 +100,6 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 			table = complete_me(line + i, tree);
 		else
 			table = tfiles_getlst(pwd, line + i);
-		nbelems = ft_tablen(table);
 		return (table);
 	}
 	return (NULL);

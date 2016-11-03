@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/01 16:43:52 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/03 11:05:55 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void			ft_select_move(char **list, char dir, t_termcaps *tc)
 			ft_select_move_up(dims);
 		else if (dir == 'B')
 			ft_select_move_down(dims);
-		else if (dir == 'C')
-			ft_select_move_left(dims);
 		else if (dir == 'D')
+			ft_select_move_left(dims);
+		else if (dir == 'C')
 			ft_select_move_right(dims);
 		ft_select_printlist(list, dims->size, tc, dims);
 	}
