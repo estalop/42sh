@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/03 18:25:15 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/04 16:23:07 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 		return (NULL);
 	i = tc->x - 11;
 	i--;
-	while ((*line)[i] != ' ' && (*line)[i] != '	')
+	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && !is_spec_separator((*line)[i]))
 		i--;
-	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - 11 - i))))
-		return (NULL);
-	newwline = ft_strncpy(*line, newwline, i);
+	i = (i) ? i + 1: 0;
 	res = list[dims->pos];
+	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - 11 - i) + ft_strlen(res))))
+		return (NULL);
+	newwline = ft_strncpy(newwline, *line, i);
 	ptr = newwline + i;
-	ptr = ft_strcpy(res, ptr);
+	ptr = ft_strcpy(ptr, res);
 	ptr = newwline + i + ft_strlen(res);
-	ptr = ft_strcpy((*line) + (tc->x - 11), ptr);
+	ptr = ft_strcpy(ptr, (*line) + (tc->x - 11));
+	tc->x = i + ft_strlen(res) - 1;
 	ft_select_cancel(list, tc);
-	//WTF MAN
-	return (res);
+	return (newwline);
 }
 
-//dir = U (up) | D (Down | L (left) | R (right)
 void			ft_select_move(char **list, char dir, t_termcaps *tc)
 {
 	if (dims)

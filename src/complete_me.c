@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/03 14:20:44 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/04 16:22:55 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char		**complete_me(char *str, t_exec *tree)
 	return (res);
 }
 
-static int		is_spec_separator(char c)
+int		is_spec_separator(char c)
 {
 	if ( c == ';' || c == '&' || c == '|' || c == '>' || c == '<') //etc
 		return (1);
