@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 08:37:01 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/11 13:50:55 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/07 15:36:39 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,9 @@ static int		ft_count(char const *s)
 			&& (s[i - 1] != ' ' && s[i - 1] != '\t'))
 			j++;
 	}
-	if (i != 0)
+	if (s[i - 1] != ' ' && s[i - 1] != '\t')
 		j++;
 	return (j);
-}
-
-static int		ft_counts(char const *s, int i)
-{
-	int j;
-
-	j = 0;
-	while (s[i] != ' ' && s[i] != '\t' && s[i] != '\0')
-	{
-		i++;
-		j++;
-	}
-	return (j + 1);
-}
-
-static char		*ft_fill(char const *s, int i)
-{
-	char	*t;
-	int		k;
-
-	k = 0;
-	t = (char*)malloc(sizeof(char) * ft_counts(s, i));
-	if (t == NULL)
-		return (NULL);
-	while (s[i] != '\0' && s[i] != ' ' && s[i] != '\t')
-	{
-		t[k] = s[i];
-		i++;
-		k++;
-	}
-	t[k] = '\0';
-	return (t);
 }
 
 char			**ft_split(char const *s)
@@ -78,19 +46,17 @@ char			**ft_split(char const *s)
 	j = ft_count(s);
 	if (j < 0 || (t = (char**)malloc(sizeof(char*) * (j + 1))) == NULL)
 		return (NULL);
-	while (l < j)
+	while (l < ft_count(s))
 	{
 		while (s[i] == ' ' || s[i] == '\t')
 			i++;
-		if ((t[l] = ft_fill(s, i)) == NULL)
-			return (NULL);
+		j = i;
 		while (s[i] != '\0' && s[i] != ' ' && s[i] != '\t')
 			i++;
+		if ((t[l] = ft_strsub(s, j, i - j)) == NULL)
+			return (NULL);
 		l++;
 	}
-	if (s[i - 1] == ' ' || s[i - 1] == '\t')
-		t[l - 1] = NULL;
-	else
-		t[l] = NULL;
+	t[l] = NULL;
 	return (t);
 }
