@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/03 14:51:44 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/07 15:06:49 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,36 @@ static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 {
 	if (buf[0] == 27 && buf[1] == 91)
 		str = ft_arrow(cap, (ft_strlen(str) + cap->neg), buf, str);
-	else if (buf[0] == 10)
-		return (str);
-	else if (buf[0] == 127)
-		str = ft_del_char(cap, str, 0);
-	else if (buf[0] == 12)
-	{
-		tputs(cap->cl, 1, ft_output);
-		ft_strdel(&str);
-	}
-	else if (buf[0] != 27 && buf[1] != 0)
-		str = ft_multiple_char(cap, str, buf);
 	else if (buf[0] == '\t' && buf[1] == 0)
 		str = ft_autocomp(cap, str);
-	else if (str == NULL && buf[0] != 27)
+	else
 	{
-		str = ft_strnew(1);
-		str[0] = buf[0];
-		ft_putstr(str);
-		cap->x++;
+		if (buf[0] != 10 && cap->exec)
+		{
+			ft_select_cancel(cap->autotab, cap);
+			cap->exec = 0;
+		}
+		if (buf[0] == 10)
+			return (str);
+		else if (buf[0] == 127)
+			str = ft_del_char(cap, str, 0);
+		else if (buf[0] == 12)
+		{
+			tputs(cap->cl, 1, ft_output);
+			ft_strdel(&str);
+		}
+		else if (buf[0] != 27 && buf[1] != 0)
+			str = ft_multiple_char(cap, str, buf);
+		else if (str == NULL && buf[0] != 27)
+		{
+			str = ft_strnew(1);
+			str[0] = buf[0];
+			ft_putstr(str);
+			cap->x++;
+		}
+		else if (buf[0] != 27)
+			str = ft_print_char(cap, str, buf[0]);
 	}
-	else if (buf[0] != 27)
-		str = ft_print_char(cap, str, buf[0]);
 	return (str);
 }
 

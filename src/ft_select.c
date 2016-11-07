@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/04 16:23:07 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/07 17:00:41 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			ft_select_cancel(char **list, t_termcaps *tc)
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sr, 1);
+	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
 }
 
 char			*ft_select_get(char **list, t_termcaps *tc, char **line)
@@ -62,20 +63,20 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 
 	if (!dims || !list)
 		return (NULL);
-	i = tc->x - 11;
+	i = tc->x - tc->prompt;
 	i--;
 	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && !is_spec_separator((*line)[i]))
 		i--;
 	i = (i) ? i + 1: 0;
 	res = list[dims->pos];
-	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - 11 - i) + ft_strlen(res))))
+	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - tc->prompt - i) + ft_strlen(res))))
 		return (NULL);
 	newwline = ft_strncpy(newwline, *line, i);
 	ptr = newwline + i;
 	ptr = ft_strcpy(ptr, res);
 	ptr = newwline + i + ft_strlen(res);
-	ptr = ft_strcpy(ptr, (*line) + (tc->x - 11));
-	tc->x = i + ft_strlen(res) - 1;
+	ptr = ft_strcpy(ptr, (*line) + (tc->x - tc->prompt));
+	tc->x = i + ft_strlen(res)  + tc->prompt;
 	ft_select_cancel(list, tc);
 	return (newwline);
 }

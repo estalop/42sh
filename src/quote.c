@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 10:18:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/04 16:18:37 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/07 15:05:05 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int			ft_quote_not_finished(char *str, int i, t_termcaps *cap)
 	int	k;
 	int	l;
 
-	printf("---->%s\n", str);
 	k = 0;
 	l = 0;
 	if (str == NULL)

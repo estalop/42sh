@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/04 14:57:15 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/07 16:38:30 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *
 
 	if (!dims)
 		dims = getdims(list, nbelems, tc->whidth);
-//	printf("== {%d} {%d} [%d] (%d)\n", tc->whidth, dims->maxlen, dims->size, dims->x);
 	y = 0;
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
@@ -94,5 +93,6 @@ t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *
 		ft_putstr_fd(tc->sr, 1);
 		y--;
 	}
+	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
 	return (dims);
 }

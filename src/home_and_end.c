@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/07 12:43:53 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/07 17:00:43 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,20 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 	{
 		tmp = ft_select_get(cap->autotab, cap, &tmp);
 		if (cap->cmd)
+		{
+			free(cap->cmd);
 			cap->cmd = tmp;
+		}
 		else
+		{
+			free(cap->str);
 			cap->str = tmp;
+		}
 		cap->exec = 0;
 		buf[0] = 0;
+		tputs(tgoto(cap->cv, 0, cap->prompt), 1, ft_output);
+		tputs(cap->cd, 1, ft_output);
+		ft_newputstr(tmp, cap);
 	} 
 	else
 	{
