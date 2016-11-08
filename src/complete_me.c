@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/04 16:22:55 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:40:32 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,23 @@ static t_exec	*texec_get(char *str, t_exec *tree)
 static int		complete_fill(t_exec *tree, char **res, int i, int stop)
 {
 	if (tree->name)
-		res[i++] = tree->name;
+	{
+		if (!(res[i++] = ft_strdup(tree->name)))
+		{
+			ft_deltab(res);
+			return (-1);
+		}
+	}
 	if (tree->next)
-		i = complete_fill(tree->next, res, i, 0);
+	{
+		if ((i = complete_fill(tree->next, res, i, 0)) == -1)
+			return (-1);
+	}
 	if (!stop && tree->change)
-		i = complete_fill(tree->change, res, i, 0);
+	{
+		if ((i = complete_fill(tree->change, res, i, 0)) == -1)
+			return (-1);
+	}
 	return (i);
 }
 
@@ -58,6 +70,7 @@ static char		**complete_me(char *str, t_exec *tree)
 	char	**res;
 	t_exec	*tmp;
 	int		len;
+	int		i;
 
 	if (!(tmp = texec_get(str, tree)))
 		len = 0;
@@ -65,10 +78,13 @@ static char		**complete_me(char *str, t_exec *tree)
 		len = tmp->nbelems;
 	if (!(res = (char**)malloc(sizeof(char*) * (len + 1))))
 		return (NULL);
-	res[len] = NULL;
+	i = 0;
+	while (i <= len)
+		res[i++] = NULL;
 	if (!len)
 		return (res);
-	complete_fill(tmp, res, 0, 1);
+	if (complete_fill(tmp, res, 0, 1) == -1)
+		return (NULL);
 	return (res);
 }
 
@@ -83,11 +99,16 @@ int		is_spec_separator(char c)
 char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 {
 	int		j;
+	int		len;
 	char	**table;
+	char	*value;
 
 	table = NULL;
-	if (line)
+	if (!line)
+		table = complete_me("", tree);
+	else
 	{
+		len = i;
 		i--;
 		while (i >= 0 && line[i] != ' ' && line[i] != '\t' && line[i] != '\v'
 				&& !is_spec_separator(line[i]))
@@ -96,11 +117,13 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 		i++;
 		while (j >= 0 && ( line[j] == ' ' || line[j] == '\t' || line[j] == '\v'))
 			j--;
+		if (!(value = ft_strndup(line + i, len - i)))
+			return (NULL);
 		if (j == -1 || is_spec_separator(line[j]))
-			table = complete_me(line + i, tree);
+			table = complete_me(value, tree);
 		else
-			table = tfiles_getlst(pwd, line + i);
-		return (table);
+			table = tfiles_getlst(pwd, value);
+		free(value);
 	}
-	return (NULL);
+	return (table);
 }

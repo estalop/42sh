@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/07 17:00:41 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:02:57 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			ft_select_cancel(char **list, t_termcaps *tc)
 		free(dims);
 	dims = NULL;
 	if (list)
-		free(list);
+		ft_deltab(list);
 	list = NULL;
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
@@ -63,8 +63,15 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 
 	if (!dims || !list)
 		return (NULL);
+	if (!(*line))
+	{
+		tc->x = ft_strlen(list[dims->pos]) + tc->prompt;
+		ft_select_cancel(list, tc);
+		return (ft_strdup(list[dims->pos]));
+	}
 	i = tc->x - tc->prompt;
-	i--;
+	if ((--i) < 0)
+		i = 0;
 	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && !is_spec_separator((*line)[i]))
 		i--;
 	i = (i) ? i + 1: 0;

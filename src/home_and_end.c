@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/07 17:00:43 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:46:01 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 		}
 		else
 		{
-			free(cap->str);
+			if (cap->str)
+				free(cap->str);
 			cap->str = tmp;
 		}
 		cap->exec = 0;
@@ -69,7 +70,8 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 		tputs(tgoto(cap->cv, 0, cap->prompt), 1, ft_output);
 		tputs(cap->cd, 1, ft_output);
 		ft_newputstr(tmp, cap);
-	} 
+		tputs(tgoto(cap->cv, 0, cap->x), 1, ft_output);
+	}
 	else
 	{
 		if (buf[0] == 12)
