@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/08 16:02:57 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/08 16:54:39 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	if (!(*line))
 	{
 		tc->x = ft_strlen(list[dims->pos]) + tc->prompt;
+		res = ft_strdup(list[dims->pos]);
 		ft_select_cancel(list, tc);
-		return (ft_strdup(list[dims->pos]));
+		return (res);
 	}
 	i = tc->x - tc->prompt;
 	if ((--i) < 0)
