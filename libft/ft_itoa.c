@@ -6,103 +6,53 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 18:08:27 by jbobin            #+#    #+#             */
-/*   Updated: 2015/11/29 14:00:28 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/08 10:53:22 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int	ft_countstrsize(int n)
+static char	*ft_fill(char *str, int i, int k)
 {
-	int		i;
-	int		j;
-
-	i = 1;
-	j = 0;
-	if (n == -2147483648 || n == 2147483647)
-		return (10);
-	if (n <= 0)
+	while (i >= 10)
 	{
-		i = -i;
-		while (i >= n)
-		{
-			i = i * 10;
-			j++;
-		}
+		str[k] = (i % 10) + '0';
+		i = i / 10;
+		k--;
 	}
-	else
-	{
-		while (i <= n && n != 2147483647)
-		{
-			i = i * 10;
-			j++;
-		}
-	}
-	return (j);
+	str[k] = i + '0';
+	return (str);
 }
 
-static int	ft_isn(int n, int i)
+static int	ft_count(unsigned int i, int n)
 {
 	int	j;
 
-	j = i;
-	if (n < 0)
+	j = n == 1 ? 2 : 1;
+	while (i >= 10)
+	{
+		i = i / 10;
 		j++;
+	}
 	return (j);
-}
-
-static char	*ft_fill(int n, int i, int j)
-{
-	char	*str;
-
-	str = (char*)malloc(sizeof(char) * i);
-	if (str == NULL)
-		return (NULL);
-	str[j] = '\0';
-	if (j > i)
-	{
-		if (n == -2147483648)
-		{
-			n = n / 10;
-			j--;
-			str[j] = '8';
-			i--;
-		}
-		n = -n;
-	}
-	while (i > 0)
-	{
-		i--;
-		j--;
-		str[j] = n % 10 + 48;
-		n = n / 10;
-	}
-	return (str);
 }
 
 char		*ft_itoa(int n)
 {
-	char	*str;
-	int		i;
-	int		j;
-	int		k;
+	char			*str;
+	unsigned int	i;
+	int				j;
+	int				k;
 
-	k = 0;
-	i = ft_countstrsize(n);
-	j = ft_isn(n, i);
-	str = (char*)malloc(sizeof(char) * i);
-	if (str == NULL)
+	i = (unsigned int)(n >= 0 ? n : -n);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	j = n >= 0 ? 0 : 1;
+	if (!(str = ft_strnew((k = ft_count(i, j)))))
 		return (NULL);
-	if (n == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
-		return (str);
-	}
-	free(str);
-	str = ft_fill(n, i, j);
-	if (n < 0)
+	str = ft_fill(str, i, --k);
+	if (j == 1)
 		str[0] = '-';
 	return (str);
 }
