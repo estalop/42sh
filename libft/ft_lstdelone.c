@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 09:55:08 by jbobin            #+#    #+#             */
-/*   Updated: 2015/11/28 10:22:40 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/08 11:01:37 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 
 	tmp = *alst;
 	if (*alst)
+	{
 		del(tmp->content, tmp->content_size);
-	free(*alst);
+		free(*alst);
+	}
 	*alst = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 11:12:43 by jbobin            #+#    #+#             */
-/*   Updated: 2015/12/03 13:57:35 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/08 11:03:27 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 	{
 		lst = lst->next;
 		lstc->next = f(ft_lstnew(lst->content, lst->content_size));
-		if (lstc == NULL)
+		if (lstc->next == NULL)
 			return (NULL);
 		lstc = lstc->next;
 	}
