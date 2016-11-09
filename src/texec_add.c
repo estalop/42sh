@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/17 14:34:34 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 18:09:31 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static t_exec	*texec_ifr(t_exec *tmp_tree, t_exec **tree, t_exec **parent,
 	if (tmp_tree && *ptr == tmp_tree->c)
 	{
 		if ((value)
-		&& (!(tmp_tree->name) && !(tmp_tree->name = ft_strdup(file))))
+		&& (!(tmp_tree->name) && !(tmp_tree->name = ft_strjoin(file, " "))))
 			return (texec_del(tree));
 	}
 	else if (!(tmp_tree = texec_ifs(tree, parent, tmp_tree, fnorm)))
