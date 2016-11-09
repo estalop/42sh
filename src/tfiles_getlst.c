@@ -6,19 +6,23 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/03 14:46:12 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 14:58:09 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "autocompletion.h"
 
-static t_files	*tfiles_new(char *str)
+static t_files	*tfiles_new(struct dirent *dirent)
 {
 	t_files	*new;
 
 	if (!(new = (t_files*)malloc(sizeof(t_files))))
 		return (NULL);
-	if (!(new->name = ft_strdup(str)))
+	if (dirent->d_type == DT_DIR)
+		new->name = ft_strjoin(dirent->d_name, "/");
+	else
+		new->name = ft_strjoin(dirent->d_name, " ");
+	if (!(new->name))
 	{
 		free(new);
 		return (NULL);
@@ -72,7 +76,7 @@ static t_files	*tfiles_create(char *path, char *name)
 		{
 			if (ft_strncmp(name, dirent->d_name, len) == 0)
 			{
-				if (!(tfiles_add(tfiles_new(dirent->d_name), &lst)))
+				if (!(tfiles_add(tfiles_new(dirent), &lst)))
 				{
 					tfiles_del(&lst);
 					closedir(dir);
@@ -97,7 +101,7 @@ char			**tfiles_getlst(char *pwd, char *str)
 		i = 0;
 	while (i > 0 && str[i] != '/')
 		i--;
-	path = (str[i] == '/') ? ft_strndup(str, i + 1) : ft_strdup(pwd);
+	path = (str[i] == '/') ? ft_strndup(str, ++i) : ft_strdup(pwd);
 	if (!path)
 		return (NULL);
 	if (!(name = ft_strdup(str + i)))

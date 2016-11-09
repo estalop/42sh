@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/31 16:11:02 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 14:59:39 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_exec	*texec_new(char c, char *name)
 		return (NULL);
 	if (name)
 	{
-		if (!(new->name = ft_strdup(name)))
+		if (!(new->name = ft_strjoin(name, " ")))
 		{
 			free(new);
 			return (NULL);

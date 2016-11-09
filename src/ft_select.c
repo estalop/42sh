@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/08 16:54:39 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 13:47:52 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	i = tc->x - tc->prompt;
 	if ((--i) < 0)
 		i = 0;
-	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && !is_spec_separator((*line)[i]))
+	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && (*line)[i] != '/' && !is_spec_separator((*line)[i]))
 		i--;
 	i = (i) ? i + 1: 0;
 	res = list[dims->pos];
