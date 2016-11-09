@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/08 16:40:32 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 15:22:53 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char		**complete_me(char *str, t_exec *tree)
 	int		i;
 
 	if (!(tmp = texec_get(str, tree)))
-		len = 0;
+		return (NULL);
 	else
 		len = tmp->nbelems;
 	if (!(res = (char**)malloc(sizeof(char*) * (len + 1))))
