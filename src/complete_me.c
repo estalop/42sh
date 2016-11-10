@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/08 16:40:32 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/09 18:02:12 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char		**complete_me(char *str, t_exec *tree)
 	int		i;
 
 	if (!(tmp = texec_get(str, tree)))
-		len = 0;
+		return (NULL);
 	else
 		len = tmp->nbelems;
 	if (!(res = (char**)malloc(sizeof(char*) * (len + 1))))
@@ -120,7 +120,10 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 		if (!(value = ft_strndup(line + i, len - i)))
 			return (NULL);
 		if (j == -1 || is_spec_separator(line[j]))
-			table = complete_me(value, tree);
+		{
+			if (!(table = complete_me(value, tree)))
+				table = tfiles_getlst(pwd, value);
+		}
 		else
 			table = tfiles_getlst(pwd, value);
 		free(value);
