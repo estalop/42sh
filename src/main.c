@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/10 11:35:10 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/10 15:16:24 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 	ft_pipe(process, tmp, path);
 	ft_free_tab(&tmp);
 	ft_free_list(&process->list);
+	process->stat_lock = ft_returnofprocess(process->stat_lock);
 	signal(2, &ft_signal_stop);
 }
 

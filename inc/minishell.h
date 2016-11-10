@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/07 16:37:04 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/10 15:16:33 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,5 +270,6 @@ int					ft_check_tmp(char *arg);
 int					ft_print_cd(char *argv, char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
 char				*ft_autocomp(t_termcaps *cap, char *str);
+int					ft_returnofprocess(int stat_lock);
 
 #endif
