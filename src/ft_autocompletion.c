@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 14:05:55 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/03 15:56:35 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/10 13:37:29 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_autocomp(t_termcaps *cap, char *str)
 {
 	if (cap->exec == 0)
 	{
-		if ((cap->autotab = autocompletion(str, cap->x - 11, cap->bin, "./")))
+		if ((cap->autotab = autocompletion(str, cap->x - cap->prompt, cap->bin, "./")))
 		{
 			ft_select(cap->autotab, ft_tablen(cap->autotab), cap);
 			cap->exec = 1;
