@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/01 14:55:51 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/10 11:35:10 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 {
 	char		**tmp;
 
+	process->i = 0;
+	while (buf[process->i] == ' ' || buf[process->i] == '\t')
+		process->i++;
+	if (buf[process->i] == '\0')
+		return ;
 	signal(2, &ft_sig_stop_ex);
 	process->list = NULL;
 	process->i = 0;
