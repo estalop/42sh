@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/09 16:37:28 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:10:44 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,17 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 	return (dims);
 }
 
-t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *dims)
+t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *line)
 {
 	int	x;
 	int	y;
+	int	save;
 
 	if (!dims)
-		dims = getdims(list, nbelems, tc->whidth);
+		dims = getdims(list, ft_tablen(list), tc->whidth);
 	y = 0;
+	save = tc->x;
+	ft_end(tc, line, ft_strlen(line));
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sr, 1);
@@ -93,6 +96,9 @@ t_ldim			*ft_select_printlist(char **list, int nbelems, t_termcaps *tc, t_ldim *
 		ft_putstr_fd(tc->sr, 1);
 		y--;
 	}
+	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
+	ft_thome(tc, line);
+	tc->x = save;
 	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
 	return (dims);
 }
