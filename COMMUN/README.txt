@@ -36,7 +36,11 @@ Genre pour ce commit ce serrais :
 =====================
 =     Changelog     =
 ====================================================================
-24 octobre 1430h - ThomasV
+12 novembre 15h53 - ThomasV
+
+- Le texte 21sh et minishell -> 42sh
+
+24 octobre 14h30 - ThomasV
 
 Fait :
 
@@ -56,8 +60,8 @@ Fait :
 ps :
 
 - AU GROS BOULET QUI FAIT DES MODIF SANS EN PARLER, tu fait plus
-JAMAIS un changement pareil sans en parler + au autres 
-(surtout si je doit tout refaire deriere), ceci vaut 
+JAMAIS un changement pareil sans en parler + au autres
+(surtout si je doit tout refaire deriere), ceci vaut
 +aussi pour les autre. le prochaint qui fera une maj majeure
 +dans son coin degage sans sommation
 ====================================================================

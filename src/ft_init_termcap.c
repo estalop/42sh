@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_termcap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:20:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/07 16:37:14 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/12 15:59:32 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_termcap(t_termcaps *cap)
 	termtype = getenv("TERM");
 	if (tgetent(cap->buf, "xterm-256color") < 0)
 		if (tgetent(cap->buf, termtype) < 0)
-			ft_putendl_fd("21sh: data not found", 2);
+			ft_putendl_fd("42sh: data not found", 2);
 	if ((cap->height = tgetnum("li")) == 0 \
 		|| (cap->whidth = tgetnum("co")) == 0 \
 		|| !(cap->im = tgetstr("im", NULL)) \
@@ -39,7 +39,7 @@ void	ft_init_termcap(t_termcaps *cap)
 		|| !(cap->mr = tgetstr("mr", NULL)) \
 		|| !(cap->me = tgetstr("me", NULL)) \
 		|| !(cap->cl = tgetstr("cl", NULL)))
-		ft_putendl_fd("21sh: can not use termcaps", 2);
+		ft_putendl_fd("42sh: can not use termcaps", 2);
 	cap->mi = tgetflag("mi");
 	termtype = tgetstr("pc", NULL);
 	cap->pc = termtype ? *termtype : '\0';
@@ -66,7 +66,7 @@ void	ft_set_term(void)
 
 	if (tcgetattr(0, &term) == -1)
 	{
-		ft_putendl_fd("21sh: mode error", 2);
+		ft_putendl_fd("42sh: mode error", 2);
 		exit(1);
 	}
 	term.c_lflag &= ~(ICANON);

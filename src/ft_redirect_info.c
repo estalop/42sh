@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 04:34:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/22 13:15:40 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/12 15:59:53 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_file_descriptor(t_prstruct *proc, char **buf, int i, int j)
 		return (4 << 16);
 	else if (!ft_isdigit(buf[proc->i][j]))
 	{
-		ft_putendl_fd("21sh: file number expected", 2);
+		ft_putendl_fd("42sh: file number expected", 2);
 		exit(1);
 	}
 	i = j;
@@ -50,7 +50,7 @@ static int	ft_file_descriptor(t_prstruct *proc, char **buf, int i, int j)
 		j++;
 	if (buf[proc->i][j] != ' ' && buf[proc->i][j] != '\0')
 	{
-		ft_putendl_fd("21sh: file number expected", 2);
+		ft_putendl_fd("42sh: file number expected", 2);
 		exit(1);
 	}
 	num = ft_strsub(buf[proc->i], i, j - i);
@@ -71,7 +71,7 @@ static int	ft_open_file(char *num, int info)
 			close(j);
 		else
 		{
-			ft_putstr_fd("21sh: error, cannot create file ", 2);
+			ft_putstr_fd("42sh: error, cannot create file ", 2);
 			ft_putendl_fd(num, 2);
 		}
 	}
@@ -99,7 +99,7 @@ static int	ft_output_num(t_prstruct *proc, char **buf, int i, int info)
 	i = j;
 	if (buf[proc->i][j] == '\0')
 	{
-		ft_putendl_fd("21sh: parse error near `\\n'", 2);
+		ft_putendl_fd("42sh: parse error near `\\n'", 2);
 		exit(1);
 	}
 	while (buf[proc->i][j] != '\0' && buf[proc->i][j] != ' ')
@@ -107,7 +107,7 @@ static int	ft_output_num(t_prstruct *proc, char **buf, int i, int info)
 	num = ft_strsub(buf[proc->i], i, j - i);
 	if ((j = ft_open_file(num, info >> 16)) == -1)
 	{
-		ft_putstr_fd("21sh: no such file or directory: ", 2);
+		ft_putstr_fd("42sh: no such file or directory: ", 2);
 		ft_putendl_fd(num, 2);
 		exit(1);
 	}

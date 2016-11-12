@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 13:34:17 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/12 15:52:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 	t.k = 0;
 	if (env == NULL)
 	{
-		ft_putendl_fd("minishell: no env set", 2);
+		ft_putendl_fd("42sh: no env set", 2);
 		return (1);
 	}
 	if (buf[6] != ' ' && buf[6] != '\t' && buf[6] != '\0')

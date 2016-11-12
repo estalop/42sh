@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/10 15:16:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/12 16:00:00 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 	process->heredoc = heredoc;
 	if ((process->npipe = ft_count_pipe(buf)) == -1)
 	{
-		ft_putendl_fd("21sh: parse error", 2);
+		ft_putendl_fd("42sh: parse error", 2);
 		signal(2, &ft_signal_stop);
 		return ;
 	}

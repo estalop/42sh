@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:08:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/10/24 16:35:26 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/12 17:51:12 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ int	ft_echo(char *line)
 	int		i;
 	char	**txt;
 
-	//Get l env et voir ce qui est necessaire
 	i = 1;
+	txt = NULL;
 	txt = ft_strsplit(line, ' ');
-	//Voir le vrai code retour erreur
+	//Voir le code de retour (ERR)
 	if (!txt)
 		return (1);
 	while (txt[i])
 	{
-		ft_printf(txt[i]);
-		ft_putchar(' ');
+		ft_printf("%s", txt[i]);
+		if (txt[i + 1])
+			ft_putchar(' ');
+		else
+			break ;
 		i++;
 	}
 	ft_putchar('\n');

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 16:56:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/20 13:18:05 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/12 15:53:14 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_prompt(int i)
 		return ("subsh> ");
 	else if (i == 5 || i == 6)
 		return ("> ");
-	return ("minishell> ");
+	return ("42sh> ");
 }
 
 int		ft_start_of_str(char *str, t_termcaps *cap)
