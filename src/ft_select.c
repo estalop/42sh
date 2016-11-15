@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/11 15:32:11 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/15 18:16:29 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,17 @@ void			ft_select_cancel(char **list, t_termcaps *tc, char *line)
 	if (list)
 		ft_deltab(list);
 	list = NULL;
-	save = tc->x;
-	ft_end(tc, line, ft_strlen(line));
+	save = ft_end(tc, line, ft_strlen(line) + tc->neg);
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sr, 1);
-	ft_thome(tc, line);
-	tc->x = save;
-	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
+	while (save > 0)
+	{
+		ft_putstr_fd(tc->sr, 1);
+		save--;
+	}
+	save = ft_calculate_whidth(line, tc->x, tc);
+	ft_putstr_fd(tgoto(tc->cv, 0, save), 1);
 }
 
 char			*ft_select_get(char **list, t_termcaps *tc, char **line)

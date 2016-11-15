@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/10 15:16:33 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/15 15:29:18 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ char				*ft_print_char(t_termcaps *cap, char *str, char buf);
 void				ft_shift_arrow(t_termcaps *cap, int strlen, char buf[4], \
 								char *tmp);
 void				ft_thome(t_termcaps *cap, char *str);
-void				ft_end(t_termcaps *cap, char *str, int strlen);
+int					ft_end(t_termcaps *cap, char *str, int strlen);
 void				ft_signal_size(int sig);
 int					ft_quote_not_finished(char *str, int i, t_termcaps *cap);
 char				*ft_return(char *str);

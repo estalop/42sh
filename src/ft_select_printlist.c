@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/11 17:10:44 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/15 18:15:33 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *l
 	if (!dims)
 		dims = getdims(list, ft_tablen(list), tc->whidth);
 	y = 0;
-	save = tc->x;
-	ft_end(tc, line, ft_strlen(line));
+	save = ft_end(tc, line, ft_strlen(line) + tc->neg);
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sr, 1);
@@ -83,7 +82,6 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *l
 			ft_putstr_fd(tgoto(tc->cv, 0, x * (dims->maxlen + 2)), 1);
 			if (dims->pos == y + dims->scroll + (x * dims->y))
 				ft_putstr_fd(tc->mr, 1);
-		//	printf("[%s] [%d] [%d]\n", list[y + dims->scroll + (x * dims->y)], y + dims->scroll + (x * dims->y), x);
 			ft_putspc(list[y + dims->scroll + (x * dims->y)], dims->maxlen, 1);
 			if (dims->pos == y + dims->scroll + (x * dims->y))
 				ft_putstr_fd(tc->me, 1);
@@ -91,14 +89,12 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *l
 		}
 		y++;
 	}
-	while (y)
+	while ((y + save))
 	{
 		ft_putstr_fd(tc->sr, 1);
 		y--;
 	}
-	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
-	ft_thome(tc, line);
-	tc->x = save;
-	ft_putstr_fd(tgoto(tc->cv, 0, tc->x), 1);
+	save = ft_calculate_whidth(line, tc->x, tc);
+	ft_putstr_fd(tgoto(tc->cv, 0, save), 1);
 	return (dims);
 }

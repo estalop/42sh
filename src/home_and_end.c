@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/12 16:00:13 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/15 18:45:17 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,20 @@ void	ft_thome(t_termcaps *cap, char *str)
 	tputs(tgoto(cap->cv, 0, cap->neg), 1, ft_output);
 }
 
-void	ft_end(t_termcaps *cap, char *str, int strlen)
+int		ft_end(t_termcaps *cap, char *str, int strlen)
 {
 	int	i;
+	int	l;
 
 	i = ft_calculate_height(str, strlen, cap) - \
 		ft_calculate_height(str, cap->x, cap);
 	cap->oldlen = ft_calculate_height(str, ft_strlen(str) + cap->neg, cap);
+	l = i;
 	while (i-- > 0)
 		tputs(cap->sf, 1, ft_output);
 	tputs(tgoto(cap->cv, 0, ft_calculate_whidth(str, strlen, cap)), 1, \
 		ft_output);
+	return (l);
 }
 
 void	ft_sig_stop_ex(int sig)
@@ -46,6 +49,9 @@ void	ft_sig_stop_ex(int sig)
 
 char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 {
+	int	save;
+	int	nblines;
+
 	if (cap->exec == 1)
 	{
 		ft_select_cancel(cap->autotab, cap, tmp);
@@ -67,10 +73,21 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 		}
 		cap->exec = 0;
 		buf[0] = 0;
-		tputs(tgoto(cap->cv, 0, cap->prompt), 1, ft_output);
+		save = cap->x;
+		ft_thome(cap, tmp);
 		tputs(cap->cd, 1, ft_output);
 		ft_newputstr(tmp, cap);
-		tputs(tgoto(cap->cv, 0, cap->x), 1, ft_output);
+		cap->x = ft_strlen(tmp);
+		ft_thome(cap, tmp);
+		nblines = ft_calculate_height(tmp, cap->x, cap);
+		cap->x = save;
+		while (nblines > 0)
+		{
+			ft_putstr_fd(cap->sf, 1);
+			nblines--;
+		}
+		save = ft_calculate_whidth(tmp, cap->x, cap);
+		tputs(tgoto(cap->cv, 0, save), 1, ft_output);
 	}
 	else
 	{
