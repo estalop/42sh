@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/16 13:33:00 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 14:18:13 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 	}
 	else if (cap->exec == 2)
 	{
+		if (cap->cmd)
+			tmp = ft_select_get(cap->autotab, cap, &(cap->cmd));
+		else if (cap->str)
+			tmp = ft_select_get(cap->autotab, cap, &(cap->str));
+		else
+		{
+			cap->str = ft_select_get(cap->autotab, cap, NULL);
+			tmp = cap->str;
+		}
+		if (!tmp)
+			return (NULL); // Error ?
+		/*
 		tmp = ft_select_get(cap->autotab, cap, &tmp);
 		if (cap->cmd)
 		{
@@ -71,11 +83,11 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 				free(cap->str);
 			cap->str = tmp;
 		}
+		*/
 		cap->exec = 0;
 		buf[0] = 0;
 		save = cap->x;
 	//	ft_thome(cap, tmp);
-		sleep(2);
 	//	tputs(cap->cd, 1, ft_output);
 	//	ft_newputstr(tmp, cap);
 	//	cap->x = ft_strlen(tmp);

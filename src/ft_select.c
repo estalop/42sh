@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/16 13:39:09 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 15:00:05 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,21 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	char	*res;
 	char	*newwline;
 	char	*ptr;
+	char	*escape;
 	int		i;
 
 	if (!dims || !list)
 		return (NULL);
-	if (!(*line))
+	if (!(line))
 	{
+		if (!(escape = ft_strdup("")))
+			return (NULL);
+		line = &escape;
+	/*	ft_select_cancel(list, tc, NULL);
+		ft_newputstr(newwline, tc);
 		tc->x = ft_strlen(list[dims->pos]) + tc->prompt;
 		res = ft_strdup(list[dims->pos]);
-		*line = res;
-		ft_select_cancel(list, tc, *line);
-		return (res);
+		return (res); */
 	}
 	i = tc->x - tc->prompt;
 	if ((--i) < 0)
@@ -100,8 +104,9 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	ft_thome(tc, *line);
 	tputs(tc->cd, 1, ft_output);
 	ft_newputstr(newwline, tc);
-	tc->x = ft_strlen(newwline);
+	tc->x = tc->prompt + ft_strlen(newwline);
 	ft_thome(tc, newwline);
+	sleep(2);
 	free(*line);
 	*line = newwline;
 	tc->x = i + ft_strlen(res)  + tc->prompt;
