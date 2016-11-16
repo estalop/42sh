@@ -25,7 +25,7 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Quand on fait Echo "KESKECE" ca affiche deux fois "KESKECE" au lieu d'une.
+- Dans 42sh , le lancement d un env -i 42sh puis le couper pour les deux shell
 
 
 ====================================================================
