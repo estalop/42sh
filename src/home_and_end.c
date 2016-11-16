@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/16 14:18:13 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 15:58:51 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,8 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 		}
 		if (!tmp)
 			return (NULL); // Error ?
-		/*
-		tmp = ft_select_get(cap->autotab, cap, &tmp);
-		if (cap->cmd)
-		{
-			free(cap->cmd);
-			cap->cmd = tmp;
-		}
-		else
-		{
-			if (cap->str)
-				free(cap->str);
-			cap->str = tmp;
-		}
-		*/
 		cap->exec = 0;
 		buf[0] = 0;
-		save = cap->x;
-	//	ft_thome(cap, tmp);
-	//	tputs(cap->cd, 1, ft_output);
-	//	ft_newputstr(tmp, cap);
-	//	cap->x = ft_strlen(tmp);
-	//	ft_thome(cap, tmp);
-		cap->x = save;
 		nblines = ft_calculate_height(tmp, cap->x, cap);
 		while (nblines > 0)
 		{

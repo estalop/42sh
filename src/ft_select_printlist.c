@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/15 18:15:33 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 16:05:27 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 	}
 	if ((dims->x = (width - 2) / (dims->maxlen + 2)) < 0)
 		dims->x = 0;
+	if (dims->x == 0)
+	{
+		free(dims);
+		return (NULL);
+	}
 	dims->y = (dims->x) ? nbelems / dims->x: 0;
 	if (nbelems % dims->x > 0)
 		(dims->y)++;
@@ -68,6 +73,8 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *l
 
 	if (!dims)
 		dims = getdims(list, ft_tablen(list), tc->whidth);
+	if (!dims)
+			return (NULL);
 	y = 0;
 	save = ft_end(tc, line, ft_strlen(line) + tc->neg);
 	ft_putstr_fd(tc->sf, 1);
