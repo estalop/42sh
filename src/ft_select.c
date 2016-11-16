@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/15 18:16:29 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 13:39:09 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	{
 		tc->x = ft_strlen(list[dims->pos]) + tc->prompt;
 		res = ft_strdup(list[dims->pos]);
+		*line = res;
 		ft_select_cancel(list, tc, *line);
 		return (res);
 	}
@@ -95,8 +96,15 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	ptr = ft_strcpy(ptr, res);
 	ptr = newwline + i + ft_strlen(res);
 	ptr = ft_strcpy(ptr, (*line) + (tc->x - tc->prompt));
-	tc->x = i + ft_strlen(res)  + tc->prompt;
 	ft_select_cancel(list, tc, *line);
+	ft_thome(tc, *line);
+	tputs(tc->cd, 1, ft_output);
+	ft_newputstr(newwline, tc);
+	tc->x = ft_strlen(newwline);
+	ft_thome(tc, newwline);
+	free(*line);
+	*line = newwline;
+	tc->x = i + ft_strlen(res)  + tc->prompt;
 	return (newwline);
 }
 
