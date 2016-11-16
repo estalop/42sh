@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/08 16:27:34 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/16 15:29:09 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 		cap->histo2->pos--;
 		str = ft_strdup(ft_get_element_from_list(cap->histo2,
 			cap->histo2->pos));
-		ft_putstr(str);
+		ft_newputstr(str, cap);
 		cap->x = ft_strlen(str) + cap->prompt;
 		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
 		ft_strdel(&tmp);
@@ -53,32 +53,31 @@ char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 	return (tmp);
 }
 
-char		*ft_arrow_down(t_termcaps *cap, char *tmp)
+char		*ft_arrow_down(t_termcaps *cp, char *tmp)
 {
 	char	*new;
 	char	*str;
 
-	if (cap->histo2->pos <= cap->histo2->length)
+	if (cp->histo2->pos <= cp->histo2->length)
 	{
-		ft_reset(cap, tmp);
-		ft_putstr(cap->prom);
-		cap->histo2->pos++;
-		str = ft_strdup(ft_get_element_from_list(cap->histo2,
-					cap->histo2->pos));
-		ft_putstr(str);
-		cap->x = ft_strlen(str) + cap->prompt;
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
+		ft_reset(cp, tmp);
+		ft_putstr(cp->prom);
+		cp->histo2->pos++;
+		str = ft_strdup(ft_get_element_from_list(cp->histo2, cp->histo2->pos));
+		if (str)
+			ft_newputstr(str, cp);
+		cp->x = ft_strlen(str) + cp->prompt;
+		new = ft_strsub(tmp, 0, (cp->prompt - cp->neg));
 		ft_strdel(&tmp);
 		if (new != NULL && str != NULL)
 			tmp = ft_strjoin(new, str);
 		else
 			tmp = str;
 		ft_strdel(&new);
-		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt,
-				cap);
+		cp->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cp->prompt, cp);
 	}
 	else
-		tputs(cap->bl, 0, ft_output);
+		tputs(cp->bl, 0, ft_output);
 	return (tmp);
 }
 
