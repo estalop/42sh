@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/10 11:33:34 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/17 11:11:14 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,25 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 	int		e;
 
 	e = 0;
-	if (buf[i] != '\0' && ft_strncmp(buf, "exit", 4) == 0)
+	if (buf[i] == '\0')
+		return (e);
+	if (ft_strncmp(buf, "exit", 4) == 0)
 	{
 		ft_reset_term(0);
 		texec_del(&proc->exec);
 		e = ft_exit(&buf[i], 0, proc);
 	}
-	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
 		e = ft_cd(&buf[i], proc->env[2], 1, NULL);
-	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
 		e = ft_env(&buf[i], &proc->env[1], 1, proc);
-	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
 		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
-	else if (buf[i] != '\0' && e == 0 && \
-			ft_strncmp(&buf[i], "unsetenv", 8) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "unsetenv", 8) == 0)
 		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
-	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "history", 7) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "history", 7) == 0)
 		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
-	else if (buf[i] != '\0' && e == 0 && ft_strncmp(&buf[i], "echo", 4) == 0)
+	else if (e == 0 && ft_strncmp(&buf[i], "echo", 4) == 0)
 		e = ft_echo(&buf[i]);
 	return (e);
 }
