@@ -13,10 +13,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- modif du buildin env pour lancer une application et modif l env de celle-ci a la volee
- (on peux adapter le truc avec le systeme de mon minishell)
-(le probleme ne vien pas de env mais de ma gestion des builtins qu'il 
-faut modifier, ca serait bien d'en parler a un moment ou un autre)
+- Gestion des BuiltIn (MallocGiver sur le coup)
+- Leak avec les Quote
+- Multiline casser avec et apres Quote (il passe toujours dans le parse pour les quote)
+- Apres usage de Quote le 42sh est tres tres lent meme apres un redemarage du 42sh
 
 ====================================================================
 

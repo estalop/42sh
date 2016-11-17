@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_termcap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/11 14:59:43 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/17 19:33:02 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int			ft_read_termcap(t_termcaps *cap)
 		if (read(0, buf, 3) <= 0 || buf[0] == 4)
 			return (1);
 		cap->str = ft_tselect(cap, cap->str, buf);
+		//Probable fuite de memoire avec quote ici
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		if (buf[0] == 12 || buf[0] == 10)
 			tmp = ft_out(cap, buf, tmp);
