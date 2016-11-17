@@ -15,6 +15,8 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 - modif du buildin env pour lancer une application et modif l env de celle-ci a la volee
  (on peux adapter le truc avec le systeme de mon minishell)
+(le probleme ne vien pas de env mais de ma gestion des builtins qu'il 
+faut modifier, ca serait bien d'en parler a un moment ou un autre)
 
 ====================================================================
 
