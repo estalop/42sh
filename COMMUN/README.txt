@@ -13,10 +13,8 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Mettre les .c dans le dossier inc et faire le lien dans le Makefile
-- Corriger le leak dans create_tree (Tout du moins cela viens du path)
-- Faire un parseur (En discuter avec Chris tout ca)
-- Voir si on prend le 21sh de Chris ou pas
+- modif du buildin env pour lancer une application et modif l env de celle-ci a la volee
+ (on peux adapter le truc avec le systeme de mon minishell)
 
 ====================================================================
 
@@ -25,13 +23,8 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Dans 42sh , le lancement d un env -i 42sh puis le couper pour les deux shell
+- Dans 42sh , le lancement d un env -i genre env -i software dois cree une appli
 
-
-====================================================================
-
-L ideal aussi sera a chaque commit de dire en gros ce qu on a fait.
-Genre pour ce commit ce serrais :
 
 =====================
 =     Changelog     =
