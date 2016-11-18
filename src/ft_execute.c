@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/17 11:11:14 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/18 14:31:18 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		ft_execute(char *buf, char **env, char *bin, t_prstruct *proc)
 	int		i;
 
 	i = 0;
+	ft_son_builtin(&buf, &bin, env);//, proc);
 	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
 	ft_fork_ex(bin, &argv, env, proc);
@@ -86,7 +87,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 	else if (e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
 		e = ft_cd(&buf[i], proc->env[2], 1, NULL);
 	else if (e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
-		e = ft_env(&buf[i], &proc->env[1], 1, proc);
+		e = ft_env(&buf[i], &proc->env[1], 1);//, proc);
 	else if (e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
 		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
 	else if (e == 0 && ft_strncmp(&buf[i], "unsetenv", 8) == 0)

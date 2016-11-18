@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/12 15:52:19 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/18 14:27:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,31 +89,24 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	return (1);
 }
 
-int	ft_env(char *buf, char ***env, int i, t_prstruct *proc)
+int	ft_env(char *buf, char ***env, int i)//, t_prstruct *proc)
 {
 	char	**argv;
 	char	**tmp;
 
 	if (buf[3] != ' ' && buf[3] != '\t' && buf[3] != '\0')
-		return (0);
+		return (-1);
 	argv = ft_split(buf);
 	if ((tmp = ft_opt_env(argv, *env)) == NULL)
-		return (1);
-	else if (tmp[0] == NULL)
-		ft_free_tab(&tmp);
+		return (-1);
 	while (argv[i] != NULL && argv[i][0] == '-' && argv[i][1] != '\0' && \
 			ft_strcmp(argv[i], "--") != 0)
 		i++;
 	if (argv[i] != NULL && ft_strcmp(argv[i], "--") == 0)
 		i++;
 	ft_split_env(env, argv, &i, &tmp);
-	if (argv[i] == NULL && tmp != NULL)
-		ft_print_env(tmp);
-	else if (argv[i] != NULL)
-		ft_exec_env(tmp, buf, argv[i], proc);
 	ft_free_tab(&argv);
-	ft_free_tab(&tmp);
-	return (1);
+	return (-1);
 }
 
 int	ft_exit(char *buf, int i, t_prstruct *proc)
@@ -149,5 +142,5 @@ int	ft_exit(char *buf, int i, t_prstruct *proc)
 		ft_free_exit(&argv);
 		return (1);
 	}
-	return (0);
+	return (-1);
 }

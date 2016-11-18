@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/17 14:23:25 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/18 10:30:16 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,19 @@ char		**ft_get_path(char **environ)
 
 static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 {
+	int	e;
+
 	while (proc->i <= proc->npipe)
 	{
 		proc->s = 0;
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
-		ft_exe_builtin(proc->s, buf[proc->i], proc);
+		e = ft_exe_builtin(proc->s, buf[proc->i], proc);
 		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
 		{
 			proc->father = ft_fork(&proc->list);
 			if (proc->father == 0)
-				ft_son(proc, buf, proc->env);
+				ft_son(proc, buf, proc->env, e);
 			else if (proc->i > 0)
 				ft_close_pipe(proc->pipe, proc);
 		}

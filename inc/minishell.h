@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/15 15:29:18 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/18 14:30:45 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,9 @@ int					ft_cd(char *buf, char **env, int j, t_cdstruct *argv);
 char				*ft_opt_home(char *argv, char **env, int i);
 char				*ft_cdpath(char *argv, char **env);
 void				ft_error_cd(char *buf);
-int					ft_env(char *buf, char ***env, int i, t_prstruct *proc);
+int					ft_env(char *buf, char ***env, int i);//, t_prstruct *proc);
 void				ft_print_env(char **env);
 char				**ft_get_path(char **environ);
-void				ft_exec_env(char **env, char *buf, \
-	char *argv, t_prstruct *proc);
 void				ft_execute(char *buf, char **env, char *bin,\
 	t_prstruct *proc);
 int					ft_setenv(char *buf, char ***adenv, char **env,\
@@ -219,7 +217,7 @@ int					ft_count_pipe(const char *buf);
 pid_t				ft_fork(t_idlist **list);
 void				ft_free_list(t_idlist **list);
 void				ft_kill_process(t_idlist **list, pid_t id);
-void				ft_son(t_prstruct *proc, char **buf, char **env[3]);
+void				ft_son(t_prstruct *proc, char **buf, char **env[3], int e);
 t_plist				*ft_create_pipe(int num);
 void				ft_newputstr(char const *str, t_termcaps *cap);
 int					*ft_calculate_length(char *str, int i, t_termcaps *cap, \
@@ -271,5 +269,6 @@ int					ft_print_cd(char *argv, char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
 char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
+void				ft_son_builtin(char **buf, char **bin, char **env);//,	t_prstruct *proc);
 
 #endif
