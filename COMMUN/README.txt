@@ -28,10 +28,9 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =====================
 =     Changelog     =
 ====================================================================
-21 novembre 13h32 - jean-yves
+21 novembre 16h04 - jean-yves
 
-- env de nouveau fonctionnel mais qui provoque des leaks dans
-tselect-
+- env de nouveau fonctionnel -
 
 ====================================================================
 12 novembre 15h53 - ThomasV
