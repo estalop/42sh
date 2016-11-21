@@ -25,12 +25,14 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Souci avec env
+- Souci avec env si pas d'env
 
 42sh(8991,0x7fff76472000) malloc: *** error for object 0x7fed22450960: pointer being freed was not allocated
 *** set a breakpoint in malloc_error_break to debug
 
 Sur ma VM toute propre (install juste pour le projet et meme version de os X)
+
+- Aucun affichage de env si env
 
 =====================
 =     Changelog     =
