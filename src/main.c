@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/21 11:10:38 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/21 17:56:34 by sirdarkdev       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
 		e = ft_exe_builtin(proc->s, buf[proc->i], proc);
-		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
+		//Pas aller vers cette boucle si built-in
+		//Remonter la raison du crash avec le env vide et le segfault avec env
+		if (!isinbuiltin(buf[proc->i]) && (proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
 		{
 			proc->father = ft_fork(&proc->list);
 			if (proc->father == 0)
