@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 14:45:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/26 15:16:04 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/21 13:24:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char		**ft_opt_env(char **argv, char **env)
 		i++;
 	}
 	if (tmp == NULL)
-		return (ft_tabdup(env));
+		tmp = ft_tabdup(env);
+	ft_free_tab(&env);
 	return (tmp);
 }

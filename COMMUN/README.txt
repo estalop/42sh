@@ -25,11 +25,14 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Dans 42sh , le lancement d un env -i genre env -i software dois cree une appli
-
-
 =====================
 =     Changelog     =
+====================================================================
+21 novembre 13h32 - jean-yves
+
+- env de nouveau fonctionnel mais qui provoque des leaks dans
+tselect-
+
 ====================================================================
 12 novembre 15h53 - ThomasV
 
