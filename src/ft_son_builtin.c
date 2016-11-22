@@ -6,13 +6,13 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/18 14:32:06 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/22 11:27:14 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_son_env(char **buf, char **bin, char **env)
+static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 {
 	char	**argv;
 	char	*tmp;
@@ -24,7 +24,7 @@ static void	ft_son_env(char **buf, char **bin, char **env)
 	while (argv[i] != NULL && argv[i][0] == '-' && argv[i][1] != '\0' && \
 			ft_strcmp(argv[i], "--") != 0)
 		i++;
-	if (argv[i] != NULL && ft_strcmp(argv[i], "--") == 0)
+	while (argv[i] && (!ft_strcmp(argv[i], "--") || ft_strchr(argv[i], '=')))
 		i++;
 	if (argv[i] == NULL)
 	{
@@ -36,7 +36,8 @@ static void	ft_son_env(char **buf, char **bin, char **env)
 	{
 		tmp = *buf;
 		ft_strdel(bin);
-		*bin = ft_strdup(argv[i]);
+		if (!(*bin = ft_check_bin(argv[i], proc->env[2], proc->path, 0)))
+			exit(1);
 		i = 0;
 		while (ft_strncmp(&tmp[i], *bin, ft_strlen(*bin) != 0))
 			i++;
@@ -45,9 +46,13 @@ static void	ft_son_env(char **buf, char **bin, char **env)
 	}
 }
 
-void	 	ft_son_builtin(char **buf, char **bin, char **env)//, t_prstruct *proc)
+void	 	ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 {
 	if (ft_strncmp(*bin, "env", 3) == 0)
-		ft_son_env(buf, bin, env);
-
+		ft_son_env(buf, bin, env, proc);
+	else if (ft_strncmp(*bin, "setenv", 6) == 0)
+	{
+		ft_print_env(env);
+		exit(0);
+	}
 }

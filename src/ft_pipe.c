@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 10:32:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/18 11:49:27 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/22 11:07:25 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ void			ft_son(t_prstruct *proc, char **buf, char **env[3], int e)
 		exit(e);
 	if (buf[proc->i][proc->s] != '\0' && \
 		buf[proc->i] != NULL && buf[proc->i][0] != '\0')
-		ft_execute(buf[proc->i], env[2], proc->bin, proc);
+		ft_execute(buf[proc->i], env[1], proc->bin, proc);
 }

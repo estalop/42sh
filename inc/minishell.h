@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/18 14:30:45 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/22 11:49:18 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct		s_hered
 
 typedef struct		s_prstruct
 {
+	char			**path;
 	char			*bin;
 	int				stat_lock;
 	char			*hist[500];
@@ -159,7 +160,7 @@ int					ft_cd(char *buf, char **env, int j, t_cdstruct *argv);
 char				*ft_opt_home(char *argv, char **env, int i);
 char				*ft_cdpath(char *argv, char **env);
 void				ft_error_cd(char *buf);
-int					ft_env(char *buf, char ***env, int i);//, t_prstruct *proc);
+int					ft_env(char *buf, char ***env, int i);
 void				ft_print_env(char **env);
 char				**ft_get_path(char **environ);
 void				ft_execute(char *buf, char **env, char *bin,\
@@ -175,7 +176,7 @@ char				*ft_cd_buf(char *argv);
 void				ft_sync_env(char **env[3], int pwd, int pwd1, int old);
 char				**ft_sub_env(char ***env, char **argv, int k, int i);
 char				**ft_opt_env(char **argv, char **env);
-void				ft_split_env(char ***env, char **argv, int *i, char ***tmp);
+void				ft_split_env(char ***env, char **argv, int i, char ***tmp);
 char				**ft_create_environ(int i);
 t_structpwd			ft_init_struct(char **env);
 void				ft_set_home_in_argv(char **argv, char **env);
@@ -269,6 +270,7 @@ int					ft_print_cd(char *argv, char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
 char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
-void				ft_son_builtin(char **buf, char **bin, char **env);//,	t_prstruct *proc);
+void				ft_son_builtin(char **buf, char **bin, char **env, \
+									t_prstruct *proc);
 
 #endif

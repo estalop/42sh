@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/21 16:01:10 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/22 11:50:09 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 		return (1);
 	}
 	if (buf[6] != ' ' && buf[6] != '\t' && buf[6] != '\0')
-		return (0);
+		return (-1);
 	if ((t.argv = ft_split(buf)) != NULL && t.argv[1] == NULL)
-		ft_print_env(*nenv);
+	{
+		ft_free_tab(&t.argv);
+		return (-1);
+	}
 	else if (t.argv != NULL && (t.argv[2] == NULL || \
 		(t.argv[2] != NULL && t.argv[3] == NULL)))
 	{
@@ -55,7 +58,7 @@ int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 	else if (t.argv != NULL)
 		ft_putendl_fd("setenv: too many arguments", 2);
 	ft_free_tab(&t.argv);
-	return (1);
+	return (0);
 }
 
 int	ft_unsetenv(char *buf, char ***adenv, char **env)
@@ -104,7 +107,7 @@ int	ft_env(char *buf, char ***env, int i)//, t_prstruct *proc)
 		i++;
 	if (argv[i] != NULL && ft_strcmp(argv[i], "--") == 0)
 		i++;
-	ft_split_env(env, argv, &i, &tmp);
+	ft_split_env(env, argv, i, &tmp);
 	ft_free_tab(&argv);
 	*env = tmp;
 	return (-1);
