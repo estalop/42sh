@@ -25,14 +25,26 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
+- Souci avec env si pas d'env
+
+42sh(8991,0x7fff76472000) malloc: *** error for object 0x7fed22450960: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
+
+Sur ma VM toute propre (install juste pour le projet et meme version de os X)
+
+- Aucun affichage de env si env
+
 =====================
 =     Changelog     =
 ====================================================================
+21 novembre 18h15 - ThomasV
+
+- Resolution du double lancement pour les built-in (genre echo lancait celui du sys et le notre)
+
 21 novembre 16h04 - jean-yves
 
 - env de nouveau fonctionnel -
 
-====================================================================
 12 novembre 15h53 - ThomasV
 
 - Le texte 21sh et minishell -> 42sh

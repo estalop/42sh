@@ -6,7 +6,11 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/11/22 11:23:15 by jbobin           ###   ########.fr       */
+=======
+/*   Updated: 2016/11/21 18:22:07 by sirdarkdev       ###   ########.fr       */
+>>>>>>> 6c60b3d5fc2a1b41d88b2dc60829896df7455b57
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +54,7 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
 		e = ft_exe_builtin(proc->s, buf[proc->i], proc);
-		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
+		if (!isinbuiltin(buf[proc->i]) && (proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
 		{
 			proc->father = ft_fork(&proc->list);
 			if (proc->father == 0)

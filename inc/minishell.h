@@ -6,7 +6,11 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/11/22 11:49:18 by jbobin           ###   ########.fr       */
+=======
+/*   Updated: 2016/11/21 17:23:18 by sirdarkdev       ###   ########.fr       */
+>>>>>>> 6c60b3d5fc2a1b41d88b2dc60829896df7455b57
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +156,7 @@ typedef struct		s_termcaps
 	int				oldlen;
 }					t_termcaps;
 
+int					isinbuiltin(char *line);
 int					ft_echo(char *line);
 void				ft_error_path(int i, char *path);
 int					ft_exit(char *buf, int i, t_prstruct *proc);

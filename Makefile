@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/11/18 14:30:00 by jbobin           ###   ########.fr        #
+#    Updated: 2016/11/21 17:25:03 by sirdarkdev       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_echo.c \
 	ft_autocompletion.c \
 	ft_return.c \
-	ft_son_builtin.c
+	ft_son_builtin.c \
+	misc.c
 
 SRC_O = $(SRC:.c=.o)
 
