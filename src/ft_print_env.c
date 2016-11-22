@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 09:17:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/18 10:58:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/22 15:04:38 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ char	**ft_sub_env(char ***env, char **argv, int k, int i)
 		ft_strdel(&tmp[k]);
 		tmp[k] = ft_strdup(argv[i]);
 	}
-	else if (tmp != NULL)
+	else if (tmp != NULL && tmp[0] != NULL)
 	{
 		tmp = ft_tabdup_plusone(*env, argv[i]);
 		ft_free_tab(env);
 	}
 	else
 	{
+		if (tmp)
+			free(tmp);
 		if ((tmp = (char**)malloc(sizeof(char*) * 2)) != NULL)
 		{
 			tmp[0] = ft_strdup(argv[i]);
