@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_son_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/22 11:27:14 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/23 19:24:07 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 	}
 }
 
-void	 	ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
+void		ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 {
 	if (ft_strncmp(*bin, "env", 3) == 0)
 		ft_son_env(buf, bin, env, proc);
@@ -55,4 +55,12 @@ void	 	ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 		ft_print_env(env);
 		exit(0);
 	}
+	else if (ft_strncmp(*bin, "echo", 4) == 0)
+		exit(ft_echo(*bin));
+	// else if (ft_strncmp(*bin, "cd", 2) == 0)
+	// 	ft_cd(*bin, proc->env[2], 1, NULL);
+	// else if (ft_strncmp(*bin, "unsetenv", 8) == 0)
+	// 	ft_unsetenv(*bin, &proc->env[2], proc->env[2]);
+	// else if (ft_strncmp(*bin, "history", 7) == 0)
+	// 	ft_run_history(*bin + 7, ft_get_home(proc->env[2]), proc, 0);
 }
