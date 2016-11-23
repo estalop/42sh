@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/22 14:58:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:26:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	i = 1;
 	if ((buf[8] != ' ' && buf[8] != '\t' && buf[8] != '\0') || env == NULL \
 		|| (t.argv = ft_split(buf)) == NULL)
-		return (0);
+		return (-1);
 	if (t.argv[1] == NULL)
+	{
 		ft_putendl_fd("unsetenv: too fiew arguments", 2);
+		return (1);
+	}
 	t.tmp2 = NULL;
 	while (t.argv[i] != NULL)
 	{
@@ -89,7 +92,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 		t.k++;
 	}
 	ft_free_tab(&t.argv);
-	return (1);
+	return (0);
 }
 
 int	ft_env(char *buf, char ***env, int i)//, t_prstruct *proc)

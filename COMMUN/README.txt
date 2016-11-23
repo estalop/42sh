@@ -37,6 +37,13 @@ Sur ma VM toute propre (install juste pour le projet et meme version de os X)
 =====================
 =     Changelog     =
 ====================================================================
+23 novembre 11h34 - jean-yves
+
+-double lancement pas du tout resolut (je bosse dessus pour le moment)-
+
+ps : deja faut deplacer echo et ensuite ce probleme sera gerer par les valeurs
+de retour demande moi si tu veut t'en occuper.
+
 21 novembre 18h15 - ThomasV
 
 - Resolution du double lancement pour les built-in (genre echo lancait celui du sys et le notre)
