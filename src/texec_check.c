@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:51:24 by tbayet            #+#    #+#             */
-/*   Updated: 2016/09/29 17:17:37 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:17:53 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ int		texec_check(char *name, t_exec *tree)
 				return (0);
 		}
 	}
-	if (ft_strcmp(name, tmp->name) == 0)
-		return (1);
-	return (0);
+	return ((ft_strcmp(name, tmp->name) == 0) ? 1 : 0);
 }

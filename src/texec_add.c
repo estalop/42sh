@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 16:22:01 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/09 18:09:31 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:16:38 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static t_exec	*texec_ifr(t_exec *tmp_tree, t_exec **tree, t_exec **parent,
 	return (tmp_tree);
 }
 
-t_exec			**texec_add(char *file, t_exec **tree)
+t_exec			*texec_add(char *file, t_exec **tree)
 {
 	char	*value;
 	t_exec	*tmp_tree;
@@ -108,7 +108,7 @@ t_exec			**texec_add(char *file, t_exec **tree)
 		if (tmp_tree->next || !(*ptr))
 			tmp_tree = tmp_tree->next;
 		else if (!(tmp_tree = texec_ifn(tmp_tree, file, ptr)))
-			return (NULL); // (texec_del(tree));
+			return (texec_del(tree));
 	}
-	return (tree);
+	return (*tree);
 }

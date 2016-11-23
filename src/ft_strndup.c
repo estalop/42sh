@@ -6,13 +6,13 @@
 /*   By: tbayet <tbayet@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:01:57 by tbayet            #+#    #+#             */
-/*   Updated: 2015/11/29 18:21:31 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:33:49 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
+//WTF
 char	*ft_strndup(const char *s1, size_t n)
 {
 	unsigned int	cpt;

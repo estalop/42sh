@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/31 16:10:03 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:27:56 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,16 @@ t_files	*tfiles_del(t_files **lst)
 		free(*lst);
 		*lst = NULL;
 	}
+	return (NULL);
+}
+
+char	**tfiles_cancel(char **path, char **name, t_files **lst)
+{
+	if (path)
+		ft_strdel(path);
+	if (name)
+		ft_strdel(name);
+	if (lst)
+		tfiles_del(lst);
 	return (NULL);
 }

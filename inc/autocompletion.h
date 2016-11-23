@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:24:12 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/01 14:55:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:31:21 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ typedef struct		s_dim
 char				**tfiles_totab(t_files **lst);
 char				**tfiles_getlst(char *pwd, char *str);
 t_files				*tfiles_del(t_files **lst);
+char				**tfiles_cancel(char **path, char **name, t_files **lst);
 t_exec				*texec_new(char c, char *name);
-char				**autocompletion(char *line, int i, t_exec *tree, char *pwd);
+char				**autocompletion(char *line, int i, t_exec *tree,
+					char *pwd);
 int					texec_check(char *name, t_exec *tree);
-t_exec				**texec_add(char *file, t_exec **tree);
+t_exec				*texec_add(char *file, t_exec **tree);
 t_exec				*files_sort(char **files);
 t_exec				*texec_del(t_exec **tree);
 t_exec				*create_tree(char **env);

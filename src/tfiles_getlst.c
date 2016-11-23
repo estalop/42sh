@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:20:53 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/09 14:58:09 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:30:02 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,24 +105,11 @@ char			**tfiles_getlst(char *pwd, char *str)
 	if (!path)
 		return (NULL);
 	if (!(name = ft_strdup(str + i)))
-	{
-		ft_strdel(&path);
-		return (NULL);
-	}
+		return (tfiles_cancel(&path, NULL, NULL));
 	if (!(lst = tfiles_create(path, name)))
-	{
-		ft_strdel(&path);
-		ft_strdel(&name);
-		return (NULL);
-	}
+		return (tfiles_cancel(&path, &name, NULL));
 	if (!(res = tfiles_totab(&lst)))
-	{
-		ft_strdel(&path);
-		ft_strdel(&name);
-		tfiles_del(&lst);
-		return (NULL);
-	}
-	ft_strdel(&path);
-	ft_strdel(&name);
+		return (tfiles_cancel(&path, &name, &lst));
+	tfiles_cancel(&path, &name, NULL);
 	return (res);
 }
