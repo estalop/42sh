@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/22 11:25:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/23 15:39:26 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 
 	argv = ft_split(buf);
 	bin = NULL;
-	if (ft_strcmp(argv[0], "env") == 0 || ft_strcmp(argv[0], "setenv") == 0)
+	if (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "setenv") || \
+		!ft_strcmp(argv[0], "unsetenv") || !ft_strcmp(argv[0], "history") || \
+		!ft_strcmp(argv[0], "echo"))
 	{
 		bin = ft_strdup(argv[0]);
 		ft_free_tab(&argv);
@@ -81,7 +83,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 {
 	int		e;
 
-	e = 0;
+	e = -1;
 	if (buf[i] == '\0')
 		return (e);
 	if (ft_strncmp(buf, "exit", 4) == 0)
@@ -90,17 +92,17 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 		texec_del(&proc->exec);
 		e = ft_exit(&buf[i], 0, proc);
 	}
-	else if (e == 0 && ft_strncmp(&buf[i], "cd", 2) == 0)
+	else if (ft_strncmp(&buf[i], "cd", 2) == 0)
 		e = ft_cd(&buf[i], proc->env[2], 1, NULL);
-	else if (e == 0 && ft_strncmp(&buf[i], "env", 3) == 0)
+	else if (ft_strncmp(&buf[i], "env", 3) == 0)
 		e = ft_env(&buf[i], &proc->env[1], 1);
-	else if (e == 0 && ft_strncmp(&buf[i], "setenv", 6) == 0)
+	else if (ft_strncmp(&buf[i], "setenv", 6) == 0)
 		e = ft_setenv(&buf[i], &proc->env[0], proc->env[0], &proc->env[2]);
-	else if (e == 0 && ft_strncmp(&buf[i], "unsetenv", 8) == 0)
+	else if (ft_strncmp(&buf[i], "unsetenv", 8) == 0)
 		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
-	else if (e == 0 && ft_strncmp(&buf[i], "history", 7) == 0)
+	else if (ft_strncmp(&buf[i], "history", 7) == 0)
 		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
-	else if (e == 0 && ft_strncmp(&buf[i], "echo", 4) == 0)
+	else if (ft_strncmp(&buf[i], "echo", 4) == 0)
 		e = ft_echo(&buf[i]);
 	return (e);
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 09:17:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/22 15:04:38 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/23 14:56:32 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**ft_subunsetenv(t_structenv t, char ***env)
 	if ((t.tmpenv = (char**)malloc(sizeof(char*) * ft_tablen(tmpenv))) \
 		== NULL)
 		return (tmpenv);
+	ft_putendl("Ok");
 	while (i < t.k)
 	{
 		t.tmpenv[i] = tmpenv[i];
