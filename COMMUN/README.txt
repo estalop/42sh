@@ -32,7 +32,7 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ====================================================================
 24 novembre 14h00 - jean-yves
 
-- unsetenv fonctionnel -
+- unsetenv fonctionnel, echo fonctionnel -
 
 tu a bien un retour, je l'ai stockee dans proc->stat_lock mais ont ne peut pas y acceder du shell.
 

@@ -6,13 +6,13 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:08:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/23 15:08:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/24 16:09:33 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(char *line)
+void	ft_echo(char *line)
 {
 	int		i;
 	char	**txt;
@@ -22,7 +22,7 @@ int	ft_echo(char *line)
 	txt = ft_strsplit(line, ' ');
 	//Voir le code de retour (ERR)
 	if (!txt)
-		return (-1);
+		exit(1);
 	while (txt[i])
 	{
 		ft_printf("%s", txt[i]);
@@ -34,5 +34,5 @@ int	ft_echo(char *line)
 	}
 	ft_putchar('\n');
 	ft_deltab(txt);
-	return (0);
+	exit(0);
 }

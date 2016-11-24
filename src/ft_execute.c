@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/24 13:47:41 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/24 16:05:17 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,5 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
 	else if (ft_strncmp(&buf[i], "history", 7) == 0)
 		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
-	else if (ft_strncmp(&buf[i], "echo", 4) == 0)
-		e = ft_echo(&buf[i]);
 	return (e);
 }

@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/23 19:24:07 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/24 16:09:10 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 		exit(0);
 	}
 	else if (ft_strncmp(*bin, "echo", 4) == 0)
-		exit(ft_echo(*bin));
+		ft_echo(*buf);
 	// else if (ft_strncmp(*bin, "cd", 2) == 0)
 	// 	ft_cd(*bin, proc->env[2], 1, NULL);
 	// else if (ft_strncmp(*bin, "unsetenv", 8) == 0)
