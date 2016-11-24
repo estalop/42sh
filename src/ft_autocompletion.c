@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 14:05:55 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/11 15:00:13 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 16:15:37 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*ft_autocomp(t_termcaps *cap, char *str)
 {
 	if (cap->exec == 0)
 	{
-		if ((cap->autotab = autocompletion(str, cap->x - cap->prompt, cap->bin, "./")))
+		if ((cap->autotab =
+		autocompletion(str, cap->x - cap->prompt, cap->bin, "./")))
 		{
 			ft_select(cap->autotab, cap, str);
 			cap->exec = 1;
@@ -30,4 +31,3 @@ char	*ft_autocomp(t_termcaps *cap, char *str)
 	}
 	return (str);
 }
-

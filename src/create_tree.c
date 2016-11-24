@@ -6,15 +6,11 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/20 13:29:29 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/23 11:25:10 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "autocompletion.h"
-
-/*
-** DEBUG (to delete)
-*/
 
 char	**get_pathes(t_env *env)
 {
@@ -29,26 +25,6 @@ char	**get_pathes(t_env *env)
 	return (pathes);
 }
 
-/*
-** DEBUG (to delete)
-*/
-
-void	printexec(t_exec *exec)
-{
-	if (exec)
-	{
-		printf("%c[%s/%d] \n", exec->c, exec->name, exec->nbelems);
-		write(1, "- ", 2);
-		printexec(exec->next);
-		printf(".\n");
-		printexec(exec->change);
-	}
-}
-
-/*
-** Cree un arbre binaire contenant tous les executables
-*/
-
 t_exec	*create_tree(char **env)
 {
 	char	**files;
@@ -58,6 +34,5 @@ t_exec	*create_tree(char **env)
 		return (NULL);
 	tree = files_sort(files);
 	ft_free_tab(&files);
-//	texec_del(&tree);
 	return (tree);
 }

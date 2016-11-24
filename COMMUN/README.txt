@@ -13,10 +13,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Gestion des BuiltIn (MallocGiver sur le coup)
 - Leak avec les Quote
 - Multiline casser avec et apres Quote (il passe toujours dans le parse pour les quote)
 - Apres usage de Quote le 42sh est tres tres lent meme apres un redemarage du 42sh
+- Enlever l ecriture du output quand on fait genre "commande " puis fleche du haut..
 
 ====================================================================
 
@@ -25,18 +25,20 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Souci avec env si pas d'env
+- Souci avec unsetenv
 
-42sh(8991,0x7fff76472000) malloc: *** error for object 0x7fed22450960: pointer being freed was not allocated
-*** set a breakpoint in malloc_error_break to debug
-
-Sur ma VM toute propre (install juste pour le projet et meme version de os X)
-
-- Aucun affichage de env si env
+- Les elements de ft_son_builtin ne sont pas utilise
 
 =====================
 =     Changelog     =
 ====================================================================
+23 novembre 18h50 - ThomasV
+
+- DeplacEment des built-in (j ai mis seulement echo en dur, le reste est en com)
+
+Pour les deplacement je suis pas certain des valeurs de retour et tout vis-a-vis
+du fait que son-env n'ai pas de retour via exit
+
 23 novembre 11h34 - jean-yves
 
 -double lancement pas du tout resolut (je bosse dessus pour le moment)-

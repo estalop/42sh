@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/09 18:02:12 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 13:39:10 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static t_exec	*texec_get(char *str, t_exec *tree)
 			tmp = tmp->change;
 		if (!tmp || *ptr != tmp->c)
 			return (NULL);
-		ptr++;
-		if (*ptr)
+		if (++ptr && *ptr)
 		{
 			if (tmp && tmp->next)
 				tmp = tmp->next;
@@ -88,9 +87,9 @@ static char		**complete_me(char *str, t_exec *tree)
 	return (res);
 }
 
-int		is_spec_separator(char c)
+int				is_spec_separator(char c)
 {
-	if ( c == ';' || c == '&' || c == '|' || c == '>' || c == '<') //etc
+	if (c == ';' || c == '&' || c == '|')
 		return (1);
 	else
 		return (0);
@@ -103,28 +102,22 @@ char			**autocompletion(char *line, int i, t_exec *tree, char *pwd)
 	char	**table;
 	char	*value;
 
-	table = NULL;
-	if (!line)
-		table = complete_me("", tree);
-	else
+	table = (line) ? NULL : complete_me("", tree);
+	if (line)
 	{
-		len = i;
-		i--;
+		len = i--;
 		while (i >= 0 && line[i] != ' ' && line[i] != '\t' && line[i] != '\v'
 				&& !is_spec_separator(line[i]))
 			i--;
-		j = i;
-		i++;
-		while (j >= 0 && ( line[j] == ' ' || line[j] == '\t' || line[j] == '\v'))
+		j = i++;
+		while (j >= 0 && (line[j] == ' ' || line[j] == '\t' || line[j] == '\v'))
 			j--;
 		if (!(value = ft_strndup(line + i, len - i)))
 			return (NULL);
-		if (j == -1 || is_spec_separator(line[j]))
-		{
-			if (!(table = complete_me(value, tree)))
-				table = tfiles_getlst(pwd, value);
-		}
-		else
+		if ((j == -1 || is_spec_separator(line[j]))
+			&& !(table = complete_me(value, tree)))
+			table = tfiles_getlst(pwd, value);
+		else if (!table)
 			table = tfiles_getlst(pwd, value);
 		free(value);
 	}

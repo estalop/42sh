@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/16 16:05:27 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/23 11:24:20 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims, char *l
 	int	y;
 	int	save;
 
-	if (!dims)
-		dims = getdims(list, ft_tablen(list), tc->whidth);
-	if (!dims)
-			return (NULL);
+	if (!dims && !(dims = getdims(list, ft_tablen(list), tc->whidth)))
+		return (NULL);
 	y = 0;
 	save = ft_end(tc, line, ft_strlen(line) + tc->neg);
 	ft_putstr_fd(tc->sf, 1);
