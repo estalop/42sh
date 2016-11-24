@@ -25,13 +25,17 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Souci avec unsetenv
-
 - Les elements de ft_son_builtin ne sont pas utilise
 
 =====================
 =     Changelog     =
 ====================================================================
+24 novembre 14h00 - jean-yves
+
+- unsetenv fonctionnel -
+
+tu a bien un retour, je l'ai stockee dans proc->stat_lock mais ont ne peut pas y acceder du shell.
+
 23 novembre 18h50 - ThomasV
 
 - DeplacEment des built-in (j ai mis seulement echo en dur, le reste est en com)
