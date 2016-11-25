@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/23 16:15:31 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/25 19:30:56 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		*ft_print_char(t_termcaps *cap, char *str, char buf)
 	tmp[i + 1] = '\0';
 	ft_strdel(&str);
 	ft_reset(cap, tmp);
-	ft_putstr(cap->prom);
+	ft_putstr(cap->prom);;
 	ft_newputstr(&tmp[cap->prompt - cap->neg], cap);
 	cap->x++;
 	ft_put_cursor(cap, tmp);
@@ -123,7 +123,6 @@ int			ft_read_termcap(t_termcaps *cap)
 		if (read(0, buf, 3) <= 0 || buf[0] == 4)
 			return (1);
 		cap->str = ft_tselect(cap, cap->str, buf);
-		//Probable fuite de memoire avec quote ici
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		if (buf[0] == 12 || buf[0] == 10)
 			tmp = ft_out(cap, buf, tmp);
@@ -132,6 +131,7 @@ int			ft_read_termcap(t_termcaps *cap)
 	}
 	if ((cap->i = ft_quote_not_finished(tmp, 0, cap)) != 0)
 	{
+		ft_printf("DEBUG\n");
 		cap->y = 0;
 		cap->str = ft_return(cap->str);
 		return (ft_read_termcap(cap));

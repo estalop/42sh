@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:08:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/24 16:09:33 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/25 18:14:33 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_echo(char *line)
 	i = 1;
 	txt = NULL;
 	txt = ft_strsplit(line, ' ');
-	//Voir le code de retour (ERR)
 	if (!txt)
 		exit(1);
 	while (txt[i])

@@ -14,9 +14,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ====================================================================
 
 - Leak avec les Quote
-- Multiline casser avec et apres Quote (il passe toujours dans le parse pour les quote)
-- Apres usage de Quote le 42sh est tres tres lent meme apres un redemarage du 42sh
-- Enlever l ecriture du output quand on fait genre "commande " puis fleche du haut..
 
 ====================================================================
 
@@ -26,23 +23,36 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ===================================================================
 
 - Les elements de ft_son_builtin ne sont pas utilise
+- les "" et '' ne rentrent jamais dans l'historique
+- La touche entree fait sortir des quote alors que ce devrait pas etre le cas
 
 =====================
 =     Changelog     =
 ====================================================================
+25 novembre 19h42 - ThomasV
+
+- Leaks de l historique des commandes (avec fleches haut-bas) bouché
+
+Note : Après 2h j'ose toujours pas foutre les main dans le truc de Quote, on
+vois ça ensemble MallocGiver ?
+
+Les built-in faut les lancer via l ancien ou le nouveau systeme ?
+=============
 24 novembre 14h00 - jean-yves
 
 - unsetenv fonctionnel, echo fonctionnel -
 
 tu a bien un retour, je l'ai stockee dans proc->stat_lock mais ont ne peut pas y acceder du shell.
 
+=============
 23 novembre 18h50 - ThomasV
 
-- DeplacEment des built-in (j ai mis seulement echo en dur, le reste est en com)
+- Deplacement des built-in (j ai mis seulement echo en dur, le reste est en com)
 
 Pour les deplacement je suis pas certain des valeurs de retour et tout vis-a-vis
 du fait que son-env n'ai pas de retour via exit
 
+=============
 23 novembre 11h34 - jean-yves
 
 -double lancement pas du tout resolut (je bosse dessus pour le moment)-
@@ -50,18 +60,22 @@ du fait que son-env n'ai pas de retour via exit
 ps : deja faut deplacer echo et ensuite ce probleme sera gerer par les valeurs
 de retour demande moi si tu veut t'en occuper.
 
+=============
 21 novembre 18h15 - ThomasV
 
 - Resolution du double lancement pour les built-in (genre echo lancait celui du sys et le notre)
 
+=============
 21 novembre 16h04 - jean-yves
 
 - env de nouveau fonctionnel -
 
+=============
 12 novembre 15h53 - ThomasV
 
 - Le texte 21sh et minishell -> 42sh
 
+=============
 24 octobre 14h30 - ThomasV
 
 Fait :

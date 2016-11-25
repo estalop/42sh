@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arrow.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/16 15:29:09 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/25 18:38:36 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char		*ft_arrow_up(t_termcaps *cap, char *tmp)
 	if (cap->histo2->pos > 1)
 	{
 		ft_reset(cap, tmp);
+		ft_strdel(&tmp);
 		ft_putstr(cap->prom);
 		cap->histo2->pos--;
 		str = ft_strdup(ft_get_element_from_list(cap->histo2,
@@ -61,6 +62,7 @@ char		*ft_arrow_down(t_termcaps *cp, char *tmp)
 	if (cp->histo2->pos <= cp->histo2->length)
 	{
 		ft_reset(cp, tmp);
+		ft_strdel(&tmp);
 		ft_putstr(cp->prom);
 		cp->histo2->pos++;
 		str = ft_strdup(ft_get_element_from_list(cp->histo2, cp->histo2->pos));

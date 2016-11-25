@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 10:48:54 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/24 09:51:20 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/25 18:32:41 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		ft_put_cursor(t_termcaps *cap, char *str)
 static void	ft_put_info(t_termcaps *cap, char *str, char **del)
 {
 	ft_strdel(del);
-	ft_putstr(cap->prom);
+	ft_printf(cap->prom);
 	ft_newputstr(&str[cap->prompt - cap->neg], cap);
 	ft_put_cursor(cap, str);
 }
