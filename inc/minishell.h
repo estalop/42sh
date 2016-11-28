@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/28 13:03:14 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/28 20:19:52 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,15 @@ typedef struct		s_termcaps
 	int				neg;
 	int				oldlen;
 }					t_termcaps;
+
+typedef struct		s_operators
+{
+	char			*l;
+	char			**com;
+	int				j;
+	int				op;
+	int				err;
+}					t_operators;
 
 int					isinbuiltin(char *line);
 void				ft_echo(char *line);

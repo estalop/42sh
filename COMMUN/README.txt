@@ -22,12 +22,21 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
+- L historique ne revient pas en valeur 1 apres une commande entrée
 - les "" et '' ne rentrent jamais dans l'historique
-- La touche entree fait sortir des quote alors que ce devrait pas etre le cas
 
 =====================
 =     Changelog     =
 ====================================================================
+28 novembre 21h14 - ThomasV
+
+- Ajout du systeme d OPERATEURS
+ATTENTION ! Il est bugé mais les erreurs sont toutes connes (je pense)
+J'ai mis un max de commentaires pour bien expliqué comment ça fonctionne
+Plus aucune commande ne peux contre etre entrée
+Utilisez PS puis KILL pour tuer
+
+
 25 novembre 19h42 - ThomasV
 
 - Leaks de l historique des commandes (avec fleches haut-bas) bouché
