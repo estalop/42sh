@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/23 15:08:56 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/28 13:07:15 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,74 +40,13 @@ char		**ft_get_path(char **environ)
 	return (path);
 }
 
-static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
-{
-	int	e;
-
-	while (proc->i <= proc->npipe)
-	{
-		proc->s = 0;
-		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
-			proc->s++;
-		e = ft_exe_builtin(proc->s, buf[proc->i], proc);
-		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
-		{
-			proc->father = ft_fork(&proc->list);
-			if (proc->father == 0)
-				ft_son(proc, buf, proc->env, e);
-			else if (proc->i > 0)
-				ft_close_pipe(proc->pipe, proc);
-		}
-		else if (proc->i > 0)
-			ft_close_pipe(proc->pipe, proc);
-		ft_strdel(&proc->bin);
-		proc->i++;
-	}
-	while (proc->father && proc->father != proc->id)
-	{
-		proc->id = wait(&proc->stat_lock);
-		ft_kill_process(&proc->list, proc->id);
-	}
-}
-
-static void	ft_process(char *buf, t_prstruct *process, char **path, \
-						t_hered *heredoc)
-{
-	char		**tmp;
-
-	process->i = 0;
-	while (buf[process->i] == ' ' || buf[process->i] == '\t')
-		process->i++;
-	if (buf[process->i] == '\0')
-		return ;
-	signal(2, &ft_sig_stop_ex);
-	process->list = NULL;
-	process->i = 0;
-	process->heredoc = heredoc;
-	if ((process->npipe = ft_count_pipe(buf)) == -1)
-	{
-		ft_putendl_fd("42sh: parse error", 2);
-		signal(2, &ft_signal_stop);
-		return ;
-	}
-	process->pipe = ft_create_pipe(process->npipe);
-	tmp = ft_strsplit(buf, '|');
-	ft_pipe(process, tmp, path);
-	ft_free_tab(&tmp);
-	ft_free_list(&process->list);
-	process->stat_lock = ft_returnofprocess(process->stat_lock);
-	signal(2, &ft_signal_stop);
-}
-
 static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 {
 	char	**path;
-	char	**com;
 	char	*tmp;
-	int		j;
 
 	ft_init_histo(proc, cap);
-	while (42 && !(j = 0))
+	while (42)
 	{
 		path = ft_get_path(proc->env[0]);
 		proc->path = path;
@@ -122,15 +61,8 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 			if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
 				ft_add_data(proc->histo2, tmp, 0);
 		}
-		com = ft_strsplit(tmp, ';');
-		ft_strdel(&tmp);
-		j = 0;
-		while (com != NULL && com[j] != NULL)
-		{
-			ft_process(com[j], proc, path, cap->heredoc);
-			j++;
-		}
-		ft_main_free(&proc->env[1], cap, &path, &com);
+		ft_preprocess(&tmp, proc, path, cap->heredoc);
+		ft_main_free(&proc->env[1], cap, &path);
 		if (proc->env[0] != NULL &&
 			proc->env[1] != NULL && proc->env[2] != NULL)
 			ft_sync_env(proc->env, 0, 0, 0);

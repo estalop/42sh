@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/24 16:07:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/28 13:03:14 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,7 @@ char				**ft_create_environ(int i);
 t_structpwd			ft_init_struct(char **env);
 void				ft_set_home_in_argv(char **argv, char **env);
 char				**ft_new_env(t_structenv t, char **env);
-void				ft_main_free(char ***env, t_termcaps *cap, char ***path, \
-							char ***com);
+void				ft_main_free(char ***env, t_termcaps *cap, char ***path);
 void				ft_signal_stop(int sig);
 void				ft_init_termcap(t_termcaps *cap);
 void				ft_reset_term(int signum);
@@ -273,5 +272,6 @@ char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
 void				ft_son_builtin(char **buf, char **bin, char **env, \
 									t_prstruct *proc);
-
+void				ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
+							t_hered *heredoc);
 #endif

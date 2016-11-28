@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 18:08:27 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/08 10:53:22 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/28 13:18:45 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char		*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	j = n >= 0 ? 0 : 1;
-	if (!(str = ft_strnew((k = ft_count(i, j)))))
+	k = ft_count(i, j);
+	if (!(str = ft_strnew(k)))
 		return (NULL);
 	str = ft_fill(str, i, --k);
 	if (j == 1)

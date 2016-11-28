@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:07:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/21 15:56:46 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/28 13:02:29 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_free_exit(char ***argv)
 	*argv = NULL;
 }
 
-void	ft_main_free(char ***env, t_termcaps *cap, char ***path, char ***com)
+void	ft_main_free(char ***env, t_termcaps *cap, char ***path)
 {
 	t_hered	*tmp;
 
@@ -40,7 +40,6 @@ void	ft_main_free(char ***env, t_termcaps *cap, char ***path, char ***com)
 		tmp->next = NULL;
 		free(tmp);
 	}
-	ft_free_tab(com);
 	ft_free_tab(env);
 	ft_strdel(&cap->str);
 	ft_strdel(&cap->cmd);
