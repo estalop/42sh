@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/25 19:30:56 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/28 15:05:32 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ int			ft_read_termcap(t_termcaps *cap)
 
 	ft_set_prompt(cap);
 	tmp = NULL;
-	cap->cmd = NULL;
-	cap->str = NULL;
 	while (42)
 	{
 		ft_bzero(buf, 4);
@@ -131,7 +129,6 @@ int			ft_read_termcap(t_termcaps *cap)
 	}
 	if ((cap->i = ft_quote_not_finished(tmp, 0, cap)) != 0)
 	{
-		ft_printf("DEBUG\n");
 		cap->y = 0;
 		cap->str = ft_return(cap->str);
 		return (ft_read_termcap(cap));

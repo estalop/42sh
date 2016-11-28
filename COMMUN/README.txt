@@ -22,7 +22,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- Les elements de ft_son_builtin ne sont pas utilise
 - les "" et '' ne rentrent jamais dans l'historique
 - La touche entree fait sortir des quote alors que ce devrait pas etre le cas
 
