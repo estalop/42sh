@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 14:59:27 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/23 13:39:10 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/29 14:15:53 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int		complete_fill(t_exec *tree, char **res, int i, int stop)
 	{
 		if (!(res[i++] = ft_strdup(tree->name)))
 		{
-			ft_deltab(res);
+			ft_free_tab(&res);
 			return (-1);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/28 21:14:06 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/29 14:11:37 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ char		**ft_preprocesssplit(char *l, t_operators *t)
 	if (!l)
 		return (NULL);
 	//COMPTE LE NOMBRE DE SPLITS THEORIQUES STOCK DANS I
-	ft_strcnt(l, '&') >= 0 ? i = i + ft_strcnt(l, '&') : i;
-	ft_strcnt(l, '|') >= 0 ? i = i + ft_strcnt(l, '|') : i;
+	i += ft_strcnts(l, "&&");
+	i += ft_strcnts(l, "||");
 	i ? i = i / 2 : i;
-	ft_strcnt(l, ';') >= 0 ? i = i + ft_strcnt(l, ';') : i;
+	i += ft_strcnt(l, ';');
 	//ALLOCATIONS DU TABLEAU COM CONTENANT LES COMMANDES ET OPERATEURS
 	if (!(com = ft_memalloc((sizeof(char **) * i) + 2)))
 		return (NULL);

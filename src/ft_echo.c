@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:08:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/25 18:14:33 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/29 14:17:12 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	ft_echo(char *line)
 		i++;
 	}
 	ft_putchar('\n');
-	ft_deltab(txt);
+	ft_free_tab(&txt);
 	exit(0);
 }

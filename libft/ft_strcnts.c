@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_deltab.c                                        :+:      :+:    :+:   */
+/*   ft_strcnts.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/17 16:51:06 by tbayet            #+#    #+#             */
-/*   Updated: 2016/10/20 13:50:52 by tviviand         ###   ########.fr       */
+/*   Created: 2016/11/29 14:03:09 by jbobin            #+#    #+#             */
+/*   Updated: 2016/11/29 14:08:46 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-void	ft_deltab(char **tab)
+int		ft_strcnts(char const *str, char const *s)
 {
-	int	i;
+	int		i;
+	int		j;
 
-	if (tab)
+	i = 0;
+	j = 0;
+	if (!str || !s)
+		return (0);
+	while (str[i] != '\0')
 	{
-		i = 0;
-		while (tab[i])
-			free(tab[i++]);
-		free(tab);
+		if (ft_strncmp(&str[i], s, ft_strlen(s)) == 0)
+		{
+			++j;
+			i += ft_strlen(s);
+		}
+		++i;
 	}
+	return (j);
 }

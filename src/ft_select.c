@@ -6,7 +6,7 @@
 /*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/23 14:04:53 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/29 14:16:47 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			ft_select_cancel(char **list, t_termcaps *tc, char *line)
 		free(dims);
 	dims = NULL;
 	if (list)
-		ft_deltab(list);
+		ft_free_tab(&list);
 	list = NULL;
 	save = ft_end(tc, line, ft_strlen(line) + tc->neg);
 	ft_putstr_fd(tc->sf, 1);

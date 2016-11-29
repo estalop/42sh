@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 16:24:53 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/29 14:13:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ char				**ft_tabdup_plusone(char **buft, char *buf);
 int					ft_tablen(char **buf);
 void				ft_free_tab(char ***argv);
 void				ft_print_tab(char **tab);
-void				ft_deltab(char	**tab);
+int					ft_strcnts(char const *str, char const *s);
+
 #endif
