@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/25 18:33:41 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/29 16:30:49 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_out(t_termcaps *cap, char buf[4], char *tmp)
 			tmp = cap->str;
 		}
 		if (!tmp)
-			return (NULL); // Error ?
+			return (NULL);
 		cap->exec = 0;
 		buf[0] = 0;
 		nblines = ft_calculate_height(tmp, cap->x, cap);

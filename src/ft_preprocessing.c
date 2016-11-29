@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/29 15:54:04 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/29 16:46:37 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,22 @@ char		**ft_preprocesssplit(char *l, t_operators *t)
 	char	**com;
 	int		i;
 	int		j;
-	char	*c;
+	int		c;
 
 	//DECLARATIONS
 	j = 0;
 	com = NULL;
-	i = 0;
-	c = NULL;
+	i = 1;
+	c = 0;
 	//ANTI CRASH
 	if (!l)
 		return (NULL);
 	//COMPTE LE NOMBRE DE SPLITS THEORIQUES STOCK DANS I
 	i += ft_strcnts(l, "&&");
 	i += ft_strcnts(l, "||");
-	i ? i = i / 2 : i;
 	i += ft_strcnt(l, ';');
 	//ALLOCATIONS DU TABLEAU COM CONTENANT LES COMMANDES ET OPERATEURS
-	if (!(com = ft_memalloc((sizeof(char **) * i) + 2)))
+	if (!(com = ft_memalloc((sizeof(char **) * i) + 1)))
 		return (NULL);
 	//REMISE A ZERO DE I POUR REUTILISATION
 	i = 0;
@@ -100,61 +99,26 @@ char		**ft_preprocesssplit(char *l, t_operators *t)
 	//BOUCLE PRINCIPALE
 	while (l[i])
 	{
-		//ICI CHECK DES ERREURS GENRE &&& OU ||| OU ;; SI OPERATEUR DETECTE
-		if ((l[i] == '&' && l[i + 1] == '&') ||
-		(l[i] == '|' && l[i + 1] == '|') || l[i] == ';')
+		if ((!ft_strncmp(&l[i], "&&", 2) && ft_strncmp(&l[i], "&&&", 3)) || \
+			(!ft_strncmp(&l[i], "||", 2) && ft_strncmp(&l[i], "|||", 3)) || \
+			(!ft_strncmp(&l[i], ";", 1) && ft_strncmp(&l[i], ";;", 2)))
 		{
-			if (l[i] == ';')
-			{
-				l[i + 1] == ';' ? t->err = 1 : i;
-				//NE PAS REDUIRE GENRE OU RISQUE DE CRASH PAR DEPASSEMENT ! (genre juste ecrire ;  ferais crash)
-			}
-			else if (com[j + 2])
-			{
-				if (com[j + 2] == com[j])
-					t->err = 1;
-			}
-			if (t->err)
-			{
-				ft_printf("42sh: parse error near '%c%c'", com[j], com[j]);
-				break ;
-			}
-			//AJOUT DANS LE TABLEAU DE L OPERATEUR
-			j++;
-			l[i] == '&' ? com[j] = ft_strdup("&&") : l;
-			l[i] == '|' ? com[j] = ft_strdup("||") : l;
-			l[i] == ';' ? com[j] = ft_strdup(";") : l;
-			(l[i] == '&' || l[i] == '|') ? i = i + 1 : i;
-			j++;
+			com[c] = ft_strsub(l, j, i - j);
+			c++;
+			j = i + 1;
+			i += 2; 
 		}
-		else
+		else if (!ft_strncmp(&l[i], "&&&", 3) || !ft_strncmp(&l[i], "|||", 3) || \
+				 !ft_strncmp(&l[i], ";;", 2))
 		{
-			//RENTRE SI PAS D OPERATEUR DETECTE
-
-			// SI LA LIGNE DU TABLEAU EST DEJA ALLOUEE
-			// ATTENTION !!! : ICI SERRAIS LE SOUCI D ALLOCATION !
-			// UN CAFE A CELUI QUI RESOUT LE SOUCI !
-			if (com[j] && l[i] != '\t')
-			{
-				if (!(c = ft_strdup(com[j])))
-					return (NULL);
-				ft_strdel(&com[j]);
-				if (!(com[j] = ft_strnew(sizeof(char) * ft_strlen(c) + 2)))
-					return (NULL);
-				com[j] = ft_strcpy(com[j], c);
-				com[j][ft_strlen(c) + 1] = l[i];
-				ft_strdel(&c);
-			}
-			else if (!com[j] && l[i] != '\t')
-			{
-				// SI LA LIGNE DU TABLEAU EST PAS ALLOUEE
-				if (!(com[j] = ft_strnew(sizeof(char) * 2)))
-					return (NULL);
-				com[j][0] = l[i];
-			}
+			ft_printf("42sh: parse error near '%c%c'\n", com[j], com[j]);
+			t->err = 1;
+			break ;
 		}
 		i++;
 	}
+	com[c] = ft_strsub(l, j, i - j);
+	com[c + 1] = NULL;
 	return (com);
 }
 
@@ -166,14 +130,10 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 	//CETTE PARTIE DU CODE N A PAS ETE NI OPTI NI MODIFIEE GRANDEMENT AVANT AJOUT DE LA FONCTION DESSUS!
 
 	//MISE A NULL DE LA STRUCTURE
-	t.l = NULL;
-	t.com = NULL;
-	t.j = 0;
-	t.op = 0;
-	t.com = NULL;
-	t.err = 0;
+	ft_bzero(&t, sizeof(t_operators));
 	//APPEL DE LA FONCTION AU DESSUS
 	t.com = ft_preprocesssplit(*tmp, &t);
+	ft_print_tab(t.com);
 	ft_strdel(tmp);
 	//TANT QUE PAS NULL ET PAS ERREUR
 	while (t.com != NULL && t.com[t.j] != NULL && !t.err)
@@ -206,7 +166,7 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 					(t.op == 2 && proc->stat_lock != 0) || t.op == 0)
 						ft_process(t.l, proc, path, heredoc);
 					t.op = 0;
-					ft_strdel(&t.l);
+				ft_strdel(&t.l);
 				}
 			}
 			// ft_putnbr(proc->stat_lock);
@@ -217,5 +177,5 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 	}
 	//FREE
 	t.l ? ft_strdel(&t.l) : t;
-	ft_free_tab(&t.com);
+//	ft_free_tab(&t.com);
 }
