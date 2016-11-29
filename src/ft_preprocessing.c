@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/29 17:47:09 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/29 18:36:09 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 
 	while (proc->i <= proc->npipe)
 	{
+		proc->err = 1;
 		proc->s = 0;
 		while (buf[proc->i][proc->s] == '\t' || buf[proc->i][proc->s] == ' ')
 			proc->s++;
 		e = ft_exe_builtin(proc->s, buf[proc->i], proc);
 		if ((proc->bin = ft_check_bin(buf[proc->i], proc->env[2], path, 0)))
 		{
+			proc->err = 0;
 			proc->father = ft_fork(&proc->list);
 			if (proc->father == 0)
 				ft_son(proc, buf, proc->env, e);
@@ -67,7 +69,8 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 	ft_pipe(process, tmp, path);
 	ft_free_tab(&tmp);
 	ft_free_list(&process->list);
-	process->stat_lock = ft_returnofprocess(process->stat_lock);
+	process->stat_lock = process->err ? 1 : \
+		ft_returnofprocess(process->stat_lock);
 	signal(2, &ft_signal_stop);
 }
 
@@ -99,10 +102,10 @@ static char	**ft_preprocesssplit(char *l, t_operators *t)
 			com[c] = ft_strsub(l, j, i - j);
 			c++;
 			j = i + 1;
-			i += 2; 
+			i += 2;
 		}
-		else if (!ft_strncmp(&l[i], "&&&", 3) || !ft_strncmp(&l[i], "|||", 3) || \
-				 !ft_strncmp(&l[i], ";;", 2))
+		else if (!ft_strncmp(&l[i], "&&&", 3) || \
+		!ft_strncmp(&l[i], "|||", 3) || !ft_strncmp(&l[i], ";;", 2))
 		{
 			ft_printf("42sh: parse error near '%c%c'\n", com[j], com[j]);
 			t->err = -1;
@@ -137,9 +140,9 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 			if ((t.com[t.j][0] == '&' && proc->stat_lock == 0) || \
 		(t.com[t.j][0] == '|' && proc->stat_lock != 0 && proc->stat_lock < 128))
 				ft_process(&t.com[t.j][1], proc, path, heredoc);
-			else
+			else if (t.com[t.j][0] != '&' && t.com[t.j][0] != '|')
 				ft_process(t.com[t.j], proc, path, heredoc);
-			t.j++;
 		}
+		++t.j;
 	}
 }

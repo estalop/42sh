@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/28 20:19:52 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:21:16 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct		s_prstruct
 	pid_t			id;
 	int				i;
 	int				s;
+	int				err;
 	int				npipe;
 	t_idlist		*list;
 	t_plist			*pipe;
