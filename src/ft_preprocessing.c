@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/30 13:08:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 15:10:05 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static char	**ft_preprocesssplit(char *l, t_operators *t)
 	i = 0;
 	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
 		i++;
-	if (l[i] == '|')
+	if (l[i] == '|' || l[i] == '&')
 	{
 		ft_printf("42sh: parse error near '%c'\n", l[i]);
 		free(com);
