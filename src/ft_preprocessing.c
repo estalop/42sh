@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/29 18:36:09 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 12:57:31 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ static char	**ft_preprocesssplit(char *l, t_operators *t)
 	if (!(com = ft_memalloc((sizeof(char **) * i) + 1)))
 		return (NULL);
 	i = 0;
+	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
+		i++;
+	if (l[i] == '|')
+	{
+		ft_printf("42sh: parse error near '%c'\n", l[i]);
+		return (NULL);
+	}
 	while (l[i])
 	{
 		if ((!ft_strncmp(&l[i], "&&", 2) && ft_strncmp(&l[i], "&&&", 3)) || \
@@ -107,9 +114,11 @@ static char	**ft_preprocesssplit(char *l, t_operators *t)
 		else if (!ft_strncmp(&l[i], "&&&", 3) || \
 		!ft_strncmp(&l[i], "|||", 3) || !ft_strncmp(&l[i], ";;", 2))
 		{
-			ft_printf("42sh: parse error near '%c%c'\n", com[j], com[j]);
+			ft_printf("42sh: parse error near '%c'\n", l[i]);
 			t->err = -1;
-			break ;
+			com[c + 1] = NULL;
+			ft_free_tab(&com);
+			return (NULL);
 		}
 		i++;
 	}
@@ -145,4 +154,5 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 		}
 		++t.j;
 	}
+	ft_free_tab(&t.com);
 }
