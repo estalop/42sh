@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/29 16:32:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 18:54:49 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ static char	*ft_arrow(t_termcaps *cap, int strlen, char buf[4], char *tmp)
 		ft_end(cap, tmp, strlen);
 		cap->x = strlen;
 	}
-	else if (buf[2] == '1')
-	{
-		read(0, buf, 3);
+	else if (buf[2] == '1' && (read(0, buf, 3) > -2))
 		ft_shift_arrow(cap, strlen, buf, tmp);
-	}
 	return (tmp);
 }
 
@@ -64,7 +61,7 @@ char		*ft_print_char(t_termcaps *cap, char *str, char buf)
 	tmp[i + 1] = '\0';
 	ft_strdel(&str);
 	ft_reset(cap, tmp);
-	ft_putstr(cap->prom);;
+	ft_putstr(cap->prom);
 	ft_newputstr(&tmp[cap->prompt - cap->neg], cap);
 	cap->x++;
 	ft_put_cursor(cap, tmp);

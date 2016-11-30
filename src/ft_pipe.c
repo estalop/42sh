@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 10:32:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/23 15:40:02 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 18:13:52 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,33 +89,30 @@ void			ft_kill_process(t_idlist **list, pid_t id)
 	}
 }
 
-void			ft_son(t_prstruct *proc, char **buf, char **env[3], int e)
+void			ft_son(t_prstruct *pr, char **b, char **env[3], int e)
 {
-	if (proc->i > 0 && proc->npipe != 0)
+	if (pr->i > 0 && pr->npipe != 0)
 	{
-		close(proc->pipe->pipe[1]);
-		dup2(proc->pipe->pipe[0], STDIN_FILENO);
-		if (proc->pipe->next != NULL)
+		close(pr->pipe->pipe[1]);
+		dup2(pr->pipe->pipe[0], STDIN_FILENO);
+		if (pr->pipe->next != NULL)
 		{
-			dup2(proc->pipe->next->pipe[1], STDOUT_FILENO);
-			close(proc->pipe->next->pipe[0]);
+			dup2(pr->pipe->next->pipe[1], STDOUT_FILENO);
+			close(pr->pipe->next->pipe[0]);
 		}
 	}
-	else if (proc->npipe != 0)
+	else if (pr->npipe != 0)
 	{
-		dup2(proc->pipe->pipe[1], STDOUT_FILENO);
-		close(proc->pipe->pipe[0]);
+		dup2(pr->pipe->pipe[1], STDOUT_FILENO);
+		close(pr->pipe->pipe[0]);
 	}
-	if (ft_strchr(buf[proc->i], '>') || ft_strchr(buf[proc->i], '<'))
-		ft_redirect(proc, buf);
-	if (proc->herepipe != -1)
-	{
-		close(proc->herepipe);
-		proc->herepipe = -1;
-	}
+	if (ft_strchr(b[pr->i], '>') || ft_strchr(b[pr->i], '<'))
+		ft_redirect(pr, b);
+	if (pr->herepipe != -1)
+		close(pr->herepipe);
+	pr->herepipe = pr->herepipe != -1 ? -1 : pr->herepipe;
 	if (e >= 0)
 		exit(e);
-	if (buf[proc->i][proc->s] != '\0' && \
-		buf[proc->i] != NULL && buf[proc->i][0] != '\0')
-		ft_execute(buf[proc->i], env[1], proc->bin, proc);
+	if (b[pr->i][pr->s] != '\0' && b[pr->i] != NULL && b[pr->i][0] != '\0')
+		ft_execute(b[pr->i], env[1], pr->bin, pr);
 }

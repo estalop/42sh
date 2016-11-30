@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 19:08:46 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/31 12:57:36 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 18:40:35 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,7 @@ char			*ft_replace_excla(char *arg, t_prstruct *proc, int index,
 				index++;
 		}
 		else
-		{
-			str[index2] = arg[index];
-			index2++;
-			index++;
-		}
+			str[index2++] = arg[index++];
 	}
 	return (str);
 }

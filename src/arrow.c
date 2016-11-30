@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/25 18:38:36 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:40:23 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,33 @@ void		ft_arrow_side(char *tmp, char buf[4], t_termcaps *cap, int strlen)
 	ft_put_cursor(cap, tmp);
 }
 
-char		*ft_arrow_up(t_termcaps *cap, char *tmp)
+char		*ft_arrow_up(t_termcaps *cap, char *t)
 {
 	char	*new;
 	char	*str;
 
 	if (cap->histo2->pos > 1)
 	{
-		ft_reset(cap, tmp);
-		ft_strdel(&tmp);
+		ft_reset(cap, t);
+		ft_strdel(&t);
 		ft_putstr(cap->prom);
 		cap->histo2->pos--;
 		str = ft_strdup(ft_get_element_from_list(cap->histo2,
 			cap->histo2->pos));
 		ft_newputstr(str, cap);
 		cap->x = ft_strlen(str) + cap->prompt;
-		new = ft_strsub(tmp, 0, (cap->prompt - cap->neg));
-		ft_strdel(&tmp);
+		new = ft_strsub(t, 0, (cap->prompt - cap->neg));
+		ft_strdel(&t);
 		if (new != NULL && str != NULL)
-			tmp = ft_strjoin(new, str);
+			t = ft_strjoin(new, str);
 		else
-			tmp = str;
+			t = str;
 		ft_strdel(&new);
-		cap->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cap->prompt,
-			cap);
+		cap->oldlen = ft_calculate_height(t, ft_strlen(str) + cap->prompt, cap);
 	}
 	else
 		tputs(cap->bl, 0, ft_output);
-	return (tmp);
+	return (t);
 }
 
 char		*ft_arrow_down(t_termcaps *cp, char *tmp)

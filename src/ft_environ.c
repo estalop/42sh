@@ -6,13 +6,13 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 18:11:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/18 16:38:04 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:49:39 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_set_home_in_argv(char **argv, char **env)
+void		ft_set_home_in_argv(char **argv, char **env)
 {
 	int		i;
 	char	*tmp;
@@ -30,7 +30,16 @@ void	ft_set_home_in_argv(char **argv, char **env)
 	}
 }
 
-char	**ft_create_environ(int i)
+static char	**ft_create_environbis(char **env)
+{
+	env[1] = ft_strdup("SHLVL=1");
+	env[2] = ft_strdup("_=usr/bin/env");
+	env[3] = ft_strdup("TERM=xterm-256color");
+	env[4] = NULL;
+	return (env);
+}
+
+char		**ft_create_environ(int i)
 {
 	char	**env;
 	char	buf[257];
@@ -51,13 +60,9 @@ char	**ft_create_environ(int i)
 		ft_strdel(&tmp);
 		return (env);
 	}
-	if (getcwd(buf, 256) == NULL || (env = (char**)malloc(sizeof(char*) * 5)) \
-		== NULL)
+	if (!getcwd(buf, 256) || !(env = (char**)malloc(sizeof(char*) * 5)))
 		return (NULL);
 	env[0] = ft_strjoin("PWD=", buf);
-	env[1] = ft_strdup("SHLVL=1");
-	env[2] = ft_strdup("_=usr/bin/env");
-	env[3] = ft_strdup("TERM=xterm-256color");
-	env[4] = NULL;
+	env = ft_create_environbis(env);
 	return (env);
 }

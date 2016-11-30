@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 15:03:31 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/28 14:36:59 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 17:54:34 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char		*ft_exclamation2(char *arg, t_dlist *histo)
 	{
 		if (str[index] == '!')
 		{
-			ft_putstr("This command is not available : you can\'t launch a");
-			ft_putendl(" command containing \"!\" throught the current command");
+			ft_putstr("This command is not available : you can\'t launch a ");
+			ft_putendl("command containing \"!\" throught the current command");
 			return (arg);
 		}
 		index++;
@@ -53,8 +53,8 @@ char		*ft_exclamation3(char *arg, t_dlist *histo)
 	{
 		if (str[index] == '!')
 		{
-			ft_putstr("This command is not available : you can\'t launch a");
-			ft_putendl(" command containing \"!\" throught the current command");
+			ft_putstr("This command is not available : you can\'t launch a ");
+			ft_putendl("command containing \"!\" throught the current command");
 			return (arg);
 		}
 		index++;
@@ -119,7 +119,8 @@ char		*ft_check_excla(char *arg, t_prstruct *proc)
 		return ("!");
 	else if (arg[index] >= '0' && arg[index] <= '9')
 		return (ft_exclamation2(arg + index, proc->histo2));
-	else if (arg[index] == '-' && arg[index + 1] >= '0' && arg[index + 1] <= '9')
+	else if (arg[index] == '-' && arg[index + 1] >= '0' &&
+	arg[index + 1] <= '9')
 		return (ft_exclamation3(arg + index, proc->histo2));
 	else if (arg[index] == '!')
 		return (ft_exclamation3("-1", proc->histo2));

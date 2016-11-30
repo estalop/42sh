@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select_printlist.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/23 11:24:20 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/11/30 18:45:09 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 		free(dims);
 		return (NULL);
 	}
-	dims->y = (dims->x) ? nbelems / dims->x: 0;
+	dims->y = (dims->x) ? nbelems / dims->x : 0;
 	if (nbelems % dims->x > 0)
 		(dims->y)++;
 	dims->x = nbelems / dims->y;

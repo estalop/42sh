@@ -24,6 +24,7 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 - L historique ne revient pas en valeur 1 apres une commande entrée
 - les "" et '' ne rentrent jamais dans l'historique
+- Les " et ' effectuent les \n au lieu de les ecrire (en multilines)
 
 =====================
 =     Changelog     =

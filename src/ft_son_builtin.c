@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/24 16:09:10 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/11/30 18:44:01 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,4 @@ void		ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 	}
 	else if (ft_strncmp(*bin, "echo", 4) == 0)
 		ft_echo(*buf);
-	// else if (ft_strncmp(*bin, "cd", 2) == 0)
-	// 	ft_cd(*bin, proc->env[2], 1, NULL);
-	// else if (ft_strncmp(*bin, "unsetenv", 8) == 0)
-	// 	ft_unsetenv(*bin, &proc->env[2], proc->env[2]);
-	// else if (ft_strncmp(*bin, "history", 7) == 0)
-	// 	ft_run_history(*bin + 7, ft_get_home(proc->env[2]), proc, 0);
 }
