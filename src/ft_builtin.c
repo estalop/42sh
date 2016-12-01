@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/24 13:47:59 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/01 12:27:45 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	return (0);
 }
 
-int	ft_env(char *buf, char ***env, int i)//, t_prstruct *proc)
+int	ft_env(char *buf, char ***env, int i)
 {
 	char	**argv;
 	char	**tmp;
