@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/01 12:27:45 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/02 18:04:32 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 		return (1);
 	}
 	t.tmp2 = NULL;
-	while (t.argv[i] != NULL)
-	{
-		if (t.tmp2 == NULL)
-			t.tmp2 = ft_strjoin(t.argv[i], "=");
-		while (env[t.k])
-		{
-			if (ft_strncmp(t.tmp2, env[t.k], ft_strlen(t.tmp2)) == 0)
-			{
-				*adenv = ft_subunsetenv(t, &env);
-				t.k = -1;
-			}
-			++t.k;
-		}
-		ft_strdel(&t.tmp2);
-		++i;
-	}
+	ft_unsetenv_anx(i, adenv, &t, env);
 	ft_free_tab(&t.argv);
 	return (0);
 }
@@ -130,22 +115,7 @@ int	ft_exit(char *buf, int i, t_prstruct *proc)
 	else if (buf[4] == ' ' || buf[4] == '\t')
 	{
 		if ((argv = ft_split(buf)) != NULL && argv[2] == NULL)
-		{
-			while (ft_isdigit(argv[1][i]) == 1)
-				i++;
-			if (i == 0)
-			{
-				ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
-				exit(0);
-			}
-			if (argv[1][i] == '\0')
-			{
-				ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
-				exit(ft_atoi(argv[1]));
-			}
-			else
-				ft_putendl_fd("exit: invalid argument", 2);
-		}
+			ft_exit_anx(&i, &argv, proc);
 		else
 			ft_putendl_fd("exit: too many arguments", 2);
 		ft_free_exit(&argv);

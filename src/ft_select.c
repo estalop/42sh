@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbayet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/29 14:16:47 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/02 19:05:44 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "ft_select.h"
 
+//Comment on fait pour ce truc qui est pas a la norme et que on comprend pas ?
+//Voir avec Saint Chris
+//Signe Jesus
 static t_ldim	*dims = NULL;
 
 static t_ldim	*ft_select_print(char **list, t_termcaps *tc, char *line)
@@ -67,11 +70,13 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	i = tc->x - tc->prompt;
 	if ((--i) < 0)
 		i = 0;
-	while (i && (*line)[i] != ' ' && (*line)[i] != '	' && (*line)[i] != '/' && !is_spec_separator((*line)[i]))
+	while (i && (*line)[i] != ' ' && (*line)[i] != '	' &&
+	(*line)[i] != '/' && !is_spec_separator((*line)[i]))
 		i--;
-	i = (i) ? i + 1: 0;
+	i = (i) ? i + 1 : 0;
 	res = list[dims->pos];
-	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - tc->prompt - i) + ft_strlen(res))))
+	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - tc->prompt - i) +\
+	ft_strlen(res))))
 		return (NULL);
 	newwline = ft_strncpy(newwline, *line, i);
 	ptr = newwline + i;
@@ -86,11 +91,12 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	ft_thome(tc, newwline);
 	free(*line);
 	*line = newwline;
-	tc->x = i + ft_strlen(res)  + tc->prompt;
+	tc->x = i + ft_strlen(res) + tc->prompt;
 	return (newwline);
 }
 
-void			ft_select_move(char **list, char dir, t_termcaps *tc, char *line)
+void			ft_select_move(char **list, char dir,
+	t_termcaps *tc, char *line)
 {
 	if (dims)
 	{

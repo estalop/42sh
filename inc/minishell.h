@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/29 18:21:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/02 18:04:15 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,10 @@ typedef struct		s_operators
 	int				err;
 }					t_operators;
 
+void				ft_unsetenv_anx(int i, char ***adenv, t_structenv *t, \
+	char **env);
+void				ft_exit_anx(int *i, char ***argv, t_prstruct *proc);
+char				*ft_check_bin_anx(char **bin, char ***argv);
 int					isinbuiltin(char *line);
 void				ft_echo(char *line);
 void				ft_error_path(int i, char *path);
