@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/10/17 16:50:18 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/03 15:25:07 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,8 @@ char				*ft_cdpath(char *argv, char **env)
 		tmp = ft_strsplit(&env[i][7], ':');
 	else
 		return (argv);
-	i = 0;
-	while (tmp && tmp[i])
-	{
-		if (tmp[i][ft_strlen(tmp[i]) - 1] != '/')
-		{
-			new = ft_strjoin(tmp[i], "/");
-			ft_strdel(&tmp[i]);
-			tmp[i] = new;
-		}
-		new = ft_strjoin(tmp[i], argv);
-		if (access(new, F_OK) == 0)
-		{
-			ft_free_tab(&tmp);
-			ft_strdel(&argv);
-			return (new);
-		}
-		ft_strdel(&new);
-		i++;
-	}
+	if (ft_cdpath_anx(&tmp, &new, &argv))
+		return (new);
 	ft_free_tab(&tmp);
 	return (argv);
 }

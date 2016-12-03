@@ -6,11 +6,26 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:32:41 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/02 18:04:08 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:58:05 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		ft_setenv_anx(char ***adenv, char ***nenv, t_structenv *t, char **env)
+{
+	if (t->argv[1] && (!ft_isalpha(t->argv[1][0]) ||
+	!ft_strisalphadigit(t->argv[1])))
+	{
+		//Balancer ce message sur le FD 2 (via un printf_fd !)
+		ft_printf("setenv: '%s': not a valid identifier\n", t->argv[1]);
+		ft_free_tab(&t->argv);
+		return (1);
+	}
+	*adenv = ft_subsetenv(*t, env);
+	*nenv = ft_subsetenv(*t, *nenv);
+	return (0);
+}
 
 void	ft_unsetenv_anx(int i, char ***adenv, t_structenv *t, char **env)
 {

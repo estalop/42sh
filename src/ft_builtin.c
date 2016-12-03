@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/02 18:04:32 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:52:38 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 	else if (t.argv != NULL && (t.argv[2] == NULL || \
 		(t.argv[2] != NULL && t.argv[3] == NULL)))
 	{
-		*adenv = ft_subsetenv(t, env);
-		*nenv = ft_subsetenv(t, *nenv);
+		if (ft_setenv_anx(adenv, nenv, &t, env))
+			return (1);
 	}
 	else if (t.argv != NULL)
 		ft_putendl_fd("setenv: too many arguments", 2);
