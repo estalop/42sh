@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/03 15:16:17 by tviviand         ###   ########.fr        #
+#    Updated: 2016/12/03 17:52:57 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_preprocessing.c \
 	ft_execute_anx.c \
 	ft_builtin_anx.c \
-	ft_cd_anx.c
+	ft_cd_anx.c \
+	home_and_end_anx.c
 
 SRC_O = $(SRC:.c=.o)
 
