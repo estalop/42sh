@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/24 16:05:17 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/03 13:25:42 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	bin = NULL;
 	if (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "setenv") || \
 		!ft_strcmp(argv[0], "unsetenv") || !ft_strcmp(argv[0], "history") || \
-		!ft_strcmp(argv[0], "echo"))
+		!ft_strcmp(argv[0], "echo") || !ft_strcmp(argv[0], "export") || \
+		!ft_strcmp(argv[0], "unset"))
 	{
 		bin = ft_strdup(argv[0]);
 		ft_free_tab(&argv);
@@ -102,5 +103,9 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 		e = ft_unsetenv(&buf[i], &proc->env[2], proc->env[2]);
 	else if (ft_strncmp(&buf[i], "history", 7) == 0)
 		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
+	else if (ft_strncmp(&buf[i], "export", 6) == 0)
+		e = ft_export(&buf[i]);
+	else if (ft_strncmp(&buf[i], "unset", 5) == 0)
+		e = ft_unset(&buf[i]);
 	return (e);
 }

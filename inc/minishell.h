@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/29 18:21:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/03 15:15:08 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,14 @@ typedef struct		s_operators
 	int				err;
 }					t_operators;
 
+typedef struct		s_lvar
+{
+	char			*name;
+	char			*value;
+	char			**envar;
+	struct s_lvar	*next;
+}					t_localvar;
+
 int					isinbuiltin(char *line);
 void				ft_echo(char *line);
 void				ft_error_path(int i, char *path);
@@ -284,4 +292,11 @@ void				ft_son_builtin(char **buf, char **bin, char **env, \
 									t_prstruct *proc);
 void				ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 							t_hered *heredoc);
+int					local_var_set(char *name, char *value);
+t_localvar			*local_var_get(char *name);
+void				local_var_destroy(char *name);
+char				*parse_local_var(char *s);
+void				free_local_var(void);
+int					ft_export(char *s);
+int					ft_unset(char *s);
 #endif

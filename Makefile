@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
+#    By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/11/28 13:05:02 by jbobin           ###   ########.fr        #
+#    Updated: 2016/12/03 13:37:05 by chdenis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_autocompletion.c \
 	ft_return.c \
 	ft_son_builtin.c \
-	ft_preprocessing.c
+	ft_preprocessing.c \
+	local_var.c ft_export.c ft_unset.c
 
 SRC_O = $(SRC:.c=.o)
 

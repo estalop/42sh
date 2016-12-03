@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/29 16:34:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/03 12:51:34 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int			main(void)
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);
 	ft_free_tab(&process.env[2]);
 	ft_free_tab(&process.env[0]);
+	free_local_var();
 	texec_del(&cap->bin);
 	return (0);
 }

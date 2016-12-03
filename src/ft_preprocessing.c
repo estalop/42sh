@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_preprocessing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/30 15:10:05 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/03 12:53:05 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,14 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 	}
 	while (t.com != NULL && t.com[t.j] != NULL && !t.err)
 	{
+		t.com[t.j] = parse_local_var(t.com[t.j]);
 		if ((t.com[t.j][0] == '&' && proc->stat_lock == 0) || \
 	(t.com[t.j][0] == '|' && proc->stat_lock != 0 && proc->stat_lock < 128) || \
 			(t.com[t.j][0] != '&' && t.com[t.j][0] != '|'))
 		{
 			if ((t.com[t.j][0] == '&' && proc->stat_lock == 0) || \
 		(t.com[t.j][0] == '|' && proc->stat_lock != 0 && proc->stat_lock < 128))
-				ft_process(&t.com[t.j][1], proc, path, heredoc);
+				ft_process(t.com[t.j] + 1, proc, path, heredoc);
 			else if (t.com[t.j][0] != '&' && t.com[t.j][0] != '|')
 				ft_process(t.com[t.j], proc, path, heredoc);
 		}
