@@ -14,6 +14,9 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ====================================================================
 
 - Leak avec les Quote
+- Apres une commande parfois le builtin OU ses arguments (genre cd ..) sont bugé
+- Voir la valeur de retour de setenv en cas de truc invalide (1er char digital ...)
+- Valeurs de retour valides avec le POSIX ? (erreurs = -1 ?)
 
 ====================================================================
 
@@ -25,10 +28,16 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 - L historique ne revient pas en valeur 1 apres une commande entrée
 - les "" et '' ne rentrent jamais dans l'historique
 - Les " et ' effectuent les \n au lieu de les ecrire (en multilines)
+- Decouverte de quelques bugs
 
 =====================
 =     Changelog     =
 ====================================================================
+3 decembre 16h41 - ThomasV
+
+- Check du nom dans le setenv
+- Mise a la norme depuis un moment
+
 28 novembre 21h14 - ThomasV
 
 - Ajout du systeme d OPERATEURS

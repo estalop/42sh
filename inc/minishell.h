@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/02 18:04:15 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/03 16:52:54 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,9 @@ typedef struct		s_operators
 	int				err;
 }					t_operators;
 
+int					ft_setenv_anx(char ***adenv, char ***nenv, t_structenv *t, \
+	char **env);
+int					ft_cdpath_anx(char ***tmp, char **new, char **argv);
 void				ft_unsetenv_anx(int i, char ***adenv, t_structenv *t, \
 	char **env);
 void				ft_exit_anx(int *i, char ***argv, t_prstruct *proc);
