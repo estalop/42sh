@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/06 15:09:34 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/03 13:25:42 by chdenis          ###   ########.fr       */
+/*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
+/*   Updated: 2016/12/03 16:53:35 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,7 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 			if (bin != NULL && access(bin, F_OK) == -1)
 				ft_strdel(&bin);
 		}
-	if (access(bin, F_OK) == -1)
-		ft_error_path(0, argv[0]);
-	else if (access(bin, X_OK) == -1)
-		ft_error_path(-1, argv[0]);
-	if (access(bin, F_OK) == -1 || access(bin, X_OK) == -1)
-		ft_strdel(&bin);
-	ft_free_tab(&argv);
-	return (bin);
+	return (ft_check_bin_anx(&bin, &argv));
 }
 
 void		ft_execute(char *buf, char **env, char *bin, t_prstruct *proc)

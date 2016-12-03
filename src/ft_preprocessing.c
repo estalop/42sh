@@ -5,12 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 12:52:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/03 12:53:05 by chdenis          ###   ########.fr       */
+/*   Created: 2016/12/03 16:53:08 by chdenis           #+#    #+#             */
+/*   Updated: 2016/12/03 16:53:10 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_pipeanx(t_prstruct *proc)
+{
+	while (proc->father && proc->father != proc->id)
+	{
+		proc->id = wait(&proc->stat_lock);
+		ft_kill_process(&proc->list, proc->id);
+	}
+}
 
 static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 {
@@ -37,11 +46,7 @@ static void	ft_pipe(t_prstruct *proc, char **buf, char **path)
 		ft_strdel(&proc->bin);
 		proc->i++;
 	}
-	while (proc->father && proc->father != proc->id)
-	{
-		proc->id = wait(&proc->stat_lock);
-		ft_kill_process(&proc->list, proc->id);
-	}
+	ft_pipeanx(proc);
 }
 
 static void	ft_process(char *buf, t_prstruct *process, char **path, \

@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:07:29 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 16:51:17 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/03 16:59:30 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ static char			*parse_export(char *s)
 		name = ft_strsub(s, 0, equal - s - 1);
 		value = ft_strdup(equal + 1);
 	}
-	
+	if (!ft_strisalphadigit(name))
+	{
+		ft_pri
+		return ;
+	} 
 	// check que name est valide (alpha, num, ou underscore) (not a valid identifier)
 }
 

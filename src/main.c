@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/16 11:08:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/03 12:51:34 by chdenis          ###   ########.fr       */
+/*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
+/*   Updated: 2016/12/03 16:52:52 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ char		**ft_get_path(char **environ)
 	return (path);
 }
 
+static char	*ft_loopanx(char *tmp, t_prstruct *proc)
+{
+	if (tmp != NULL)
+	{
+		tmp = ft_replace_excla(tmp, proc, 0, 0);
+		if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
+			ft_add_data(proc->histo2, tmp, 0);
+	}
+	return (tmp);
+}
+
 static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 {
 	char	**path;
@@ -57,16 +68,10 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 			break ;
 		ft_reset_term(0);
 		tmp = cap->cmd ? cap->cmd : cap->str;
-		if (tmp != NULL)
-		{
-			tmp = ft_replace_excla(tmp, proc, 0, 0);
-			if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
-				ft_add_data(proc->histo2, tmp, 0);
-		}
+		tmp = ft_loopanx(tmp, proc);
 		ft_preprocess(&tmp, proc, path, cap->heredoc);
 		ft_main_free(&proc->env[1], cap, &path);
-		if (proc->env[0] != NULL &&
-			proc->env[1] != NULL && proc->env[2] != NULL)
+		if (proc->env[0] != NULL && proc->env[1] && proc->env[2])
 			ft_sync_env(proc->env, 0, 0, 0);
 		cap->histo2 = proc->histo2;
 	}
