@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/30 18:54:49 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:41:57 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,31 @@ char		*ft_print_char(t_termcaps *cap, char *str, char buf)
 	return (tmp);
 }
 
+static int	ft_tselect_anx(t_termcaps *cap, char **str, char *buf)
+{
+	if (buf[0] == 10)
+		return (1);
+	else if (buf[0] == 127)
+		*str = ft_del_char(cap, *str, 0);
+	else if (buf[0] == 12)
+	{
+		tputs(cap->cl, 1, ft_output);
+		ft_strdel(str);
+	}
+	else if (buf[0] != 27 && buf[1] != 0)
+		*str = ft_multiple_char(cap, *str, buf);
+	else if (*str == NULL && buf[0] != 27)
+	{
+		*str = ft_strnew(1);
+		*str[0] = buf[0];
+		ft_putstr(*str);
+		cap->x++;
+	}
+	else if (buf[0] != 27)
+		*str = ft_print_char(cap, *str, buf[0]);
+	return (0);
+}
+
 static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 {
 	if (buf[0] == 27 && buf[1] == 91)
@@ -81,26 +106,8 @@ static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 			ft_select_cancel(cap->autotab, cap, str);
 			cap->exec = 0;
 		}
-		if (buf[0] == 10)
+		if (ft_tselect_anx(cap, &str, buf))
 			return (str);
-		else if (buf[0] == 127)
-			str = ft_del_char(cap, str, 0);
-		else if (buf[0] == 12)
-		{
-			tputs(cap->cl, 1, ft_output);
-			ft_strdel(&str);
-		}
-		else if (buf[0] != 27 && buf[1] != 0)
-			str = ft_multiple_char(cap, str, buf);
-		else if (str == NULL && buf[0] != 27)
-		{
-			str = ft_strnew(1);
-			str[0] = buf[0];
-			ft_putstr(str);
-			cap->x++;
-		}
-		else if (buf[0] != 27)
-			str = ft_print_char(cap, str, buf[0]);
 	}
 	return (str);
 }

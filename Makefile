@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/12/03 17:01:56 by chdenis           #+#    #+#              #
-#    Updated: 2016/12/03 17:02:01 by chdenis          ###   ########.fr        #
+#    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
+#    Updated: 2016/12/04 14:48:45 by chdenis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	local_var.c ft_export.c ft_unset.c \
 	ft_execute_anx.c \
 	ft_builtin_anx.c \
-	ft_cd_anx.c
+	ft_cd_anx.c \
+	home_and_end_anx.c
 
 SRC_O = $(SRC:.c=.o)
 

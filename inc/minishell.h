@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 17:02:23 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 17:47:03 by chdenis          ###   ########.fr       */
+/*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
+/*   Updated: 2016/12/04 14:49:29 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ typedef struct		s_lvar
 	struct s_lvar	*next;
 }					t_localvar;
 
+void				ft_out_anx_b(char *buf, char **tmp, t_termcaps *cap);
+int					ft_out_anx(char **tmp, t_termcaps *cap);
 int					ft_setenv_anx(char ***adenv, char ***nenv, t_structenv *t, \
 	char **env);
 int					ft_cdpath_anx(char ***tmp, char **new, char **argv);
