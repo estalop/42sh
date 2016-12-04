@@ -6,49 +6,63 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:07:29 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 16:59:30 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/04 14:23:16 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char			*parse_export(char *s)
+static void			export_add_var(char *name, char *value, int p)
 {
-	char	*name;
-	char	*value;
-	char	*equal;
+	t_localvar	*var;
 
-	if (!(equal = ft_strchr(s, '=')))
+	if (!local_var_set(ft_strdup(name), ft_strdup(value)))
+		return ;
+	var = local_var_get(name);
+	// TODO: ajouter la variable (name, value) a l'environnement
+	var->exported = 1;
+	if (!p)
+		return ;
+	if (ft_strlen(value))
+		ft_printf("export: %s=%s\n", name, value);
+	else
+		ft_printf("export: %s\n", name);
+}
+
+static void			parse_export_arg(char *s, int p)
+{
+	char		*name;
+	char		*value;
+	char		*equal;
+
+	equal = ft_strchr(s, '=');
+	name = equal ? ft_strsub(s, 0, equal - s) : ft_strdup(s);
+	value = equal ? ft_strdup(equal + 1) : ft_strnew(0);
+	if (ft_strisalphadigit(name))
 	{
-		name = ft_strdup(s);
-		value = ft_strnew(0);
+		if (equal || !local_var_get(name))
+			export_add_var(name, value, p);
 	}
 	else
-	{
-		name = ft_strsub(s, 0, equal - s - 1);
-		value = ft_strdup(equal + 1);
-	}
-	if (!ft_strisalphadigit(name))
-	{
-		ft_pri
-		return ;
-	} 
-	// check que name est valide (alpha, num, ou underscore) (not a valid identifier)
+		ft_printf("export: '%s' not a valid identifier\n", name);
+	free(name);
+	free(value);
 }
 
 static int			parse_export_option(char *s)
 {
-	while (*s)
-	{
-		if (*s == 'p')
-			return (1);
-	}
-	return (0);
+	while (*s && *s != 'p')
+		s++;
+	return (*s == 'p');
 }
+
+/*
+**	export builtin: exporte les variables données en affectants si besoin
+**	si -p est spécifié, affiche les variables exportées sur la sortie standard
+*/
 
 int					ft_export(char *s)
 {
-	char	*e;
 	int		options;
 	int		p;
 	char	**args;
@@ -56,31 +70,16 @@ int					ft_export(char *s)
 
 	options = 0;
 	args = ft_strsplit(s, ' ');
-	a = args;
+	a = args + 1;
+	p = 0;
 	while (*a)
 	{
-		if (*s == '-' && !options)
-			p = parse_option(*a + 1) || p;
+		if (**a == '-' && !options)
+			p = parse_export_option(*a + 1) || p;
 		else if ((options = 1))
-			parse_export(*a);
+			parse_export_arg(*a, p);
 		a++;
 	}
-	ft_free_tab(args);
-	// while (*s)
-	// {
-	// 	if (*s == ' ')
-	// 		s++;
-	// 	e = ft_strchr(s, ' ');
-	// 	if (!e)
-	// 		e = s + ft_strlen(e);
-	// 	if (*s == '-' && !options)
-	// 		p = parse_option(s + 1) || p;
-	// 	else if ((options = 1))
-	// 		parse_export(ft_strsub(s, 0, e - s));
-	// 	s = e;
-	// }
-	// pour chaque args, exporter local var, la creer si pas fait puis
-	// attacher la envar a la local, pour les futures modifs
-	// option -p pour afficher output
+	ft_free_tab(&args);
 	return (0);
 }

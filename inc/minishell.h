@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:02:23 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 17:02:24 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/03 17:47:03 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ typedef struct		s_lvar
 {
 	char			*name;
 	char			*value;
-	char			**envar;
+	int				exported;
 	struct s_lvar	*next;
 }					t_localvar;
 

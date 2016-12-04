@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:07:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/28 13:02:29 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/04 13:33:10 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_localvar	*g_localvars;
 
 void	ft_free_exit(char ***argv)
 {
@@ -64,5 +66,17 @@ void	ft_free_list(t_idlist **list)
 			free(tmp2);
 		}
 		*list = NULL;
+	}
+}
+
+void				free_local_var(void)
+{
+	t_localvar	*next;
+
+	while (g_localvars)
+	{
+		next = g_localvars->next;
+		free(g_localvars);
+		g_localvars = next;
 	}
 }

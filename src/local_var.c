@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:43:10 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 15:18:48 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/04 14:25:56 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 
 t_localvar	*g_localvars = NULL;
 
+static void			local_var_update_export(char *name)
+{
+	t_localvar	*var;
+
+	if (!(var = local_var_get(name)) || !var->exported)
+		return ;
+	// TODO: set la variable dans l'env
+}
 
 /*
 **	Set une variable et la creer si besoin
@@ -29,24 +37,27 @@ int					local_var_set(char *name, char *value)
 	t_localvar		*var;
 	int				result;
 
-	if (!name)
+	if (!name || !ft_strlen(name))
 		return (0);
 	result = 1;
 	if (!(var = local_var_get(name)))
 		result = 2;
-	if (!var &&
-		!(var = (t_localvar *)ft_memalloc(sizeof(t_localvar))))
-		return (0);
-	if (var->name)
+	if (var || (var = (t_localvar *)ft_memalloc(sizeof(t_localvar))))
+	{
 		free(var->name);
-	if (var->value)
 		free(var->value);
-	var->name = name;
-	var->value = value;
-	if (result == 1)
-		return (result);
-	var->next = g_localvars;
-	g_localvars = var;
+		var->name = ft_strdup(name);
+		var->value = ft_strdup(value);
+		if (result == 1)
+			return (result);
+		var->next = g_localvars;
+		g_localvars = var;
+		local_var_update_export(name);
+	}
+	else
+		result = 0;
+	free(name);
+	free(value);
 	return (result);
 }
 
@@ -88,7 +99,7 @@ void				local_var_destroy(char *name)
 
 /*
 **	Parse la commande pour voir s'il y a une affectation
-**	(var=value; ls; echo $var)
+**	(var=value var2=value; ls; echo $var)
 */
 
 char				*parse_local_var(char *s)
@@ -102,7 +113,7 @@ char				*parse_local_var(char *s)
 	if (!end)
 		end = s + ft_strlen(s);
 	equal = ft_strchr(s, '=');
-	if (!equal || equal > end || equal - 1 == ' '))
+	if (!equal || equal > end || equal[-1] == ' ' || equal == s)
 		return (s);
 	local_var_set(ft_strsub(s, 0, equal - s),
 		ft_strsub(equal, 1, end - (equal + 1)));
@@ -116,6 +127,7 @@ char				*parse_local_var(char *s)
 		return (s);
 	free(s);
 
+	// debug
 	// t_localvar *t = g_localvars;
 	// while (t)
 	// {
@@ -124,16 +136,4 @@ char				*parse_local_var(char *s)
 	// }
 
 	return (new);
-}
-
-void				free_local_var(void)
-{
-	t_localvar	*next;
-
-	while (g_localvars)
-	{
-		next = g_localvars->next;
-		free(g_localvars);
-		g_localvars = next;
-	}
 }
