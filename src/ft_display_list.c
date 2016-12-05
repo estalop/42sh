@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 15:13:06 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/20 15:20:49 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/05 09:57:04 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_display_list(t_dlist *p_list, int i)
 			p_temp = p_temp->p_next;
 		}
 	}
-	return (0);
+	return (1);
 }
 
 int		ft_display_list3(t_dlist *p_list)
@@ -55,7 +55,7 @@ int		ft_display_list3(t_dlist *p_list)
 			p_temp = p_temp->p_next;
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int		ft_display_list4(t_dlist *p_list, int limit)
@@ -83,5 +83,5 @@ int		ft_display_list4(t_dlist *p_list, int limit)
 			p_temp = p_temp->p_next;
 		}
 	}
-	return (0);
+	return (1);
 }
