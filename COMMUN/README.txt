@@ -26,7 +26,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- L historique ne revient pas en valeur 1 apres une commande entrée
 - les "" et '' ne rentrent jamais dans l'historique
 - Les " et ' effectuent les \n au lieu de les ecrire (en multilines)
 - Les options de env (genre env -i) ne fonctionne pas du tout
@@ -34,6 +33,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =====================
 =     Changelog     =
 ====================================================================
+5 decembre 9h59 - jean-yves
+
+- gestion d'erreur de l'historique
+
 3 decembre 16h41 - ThomasV
 
 - Check du nom dans le setenv

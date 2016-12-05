@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 20:22:38 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/17 16:45:02 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/05 09:46:39 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_run_history2(char *arg, t_dlist *histo, int index)
 
 	number = ft_atoi(arg + index);
 	ft_display_list4(histo, number);
-	return (1);
+	return (0);
 }
 
 int		ft_run_history3(char *arg, t_dlist *histo, int index)
@@ -31,7 +31,7 @@ int		ft_run_history3(char *arg, t_dlist *histo, int index)
 		ft_del_ele_list(histo, number, histo->p_head, 0);
 	else
 		ft_putstr(" You can't delete this historic entry\n");
-	return (1);
+	return (0);
 }
 
 int		ft_run_history4(char *home, t_dlist *histo)
@@ -42,7 +42,7 @@ int		ft_run_history4(char *home, t_dlist *histo)
 	ft_write_history_file(histo, 0, open(str, O_RDWR | O_CREAT | O_APPEND,
 	S_IRUSR | S_IWUSR), 1);
 	ft_strdel(&str);
-	return (1);
+	return (0);
 }
 
 int		ft_run_history5(char *arg, char *home, t_dlist *histo, int index)
@@ -57,5 +57,5 @@ int		ft_run_history5(char *arg, char *home, t_dlist *histo, int index)
 	if (arg[index] == '-')
 		index++;
 	ft_strdel(&str);
-	return (1);
+	return (0);
 }

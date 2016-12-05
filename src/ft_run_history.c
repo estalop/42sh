@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/11/01 11:24:51 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/05 09:51:04 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 	ft_write_history_file2(proc->histo2, open(str, O_RDWR | O_TRUNC
 	| O_CREAT, S_IRUSR | S_IWUSR), 1, exit);
 	ft_strdel(&str);
-	return (1);
+	return (0);
 }
 
 int			ft_run_history_beta(t_prstruct *proc)
@@ -31,7 +31,7 @@ int			ft_run_history_beta(t_prstruct *proc)
 	histo2 = NULL;
 	histo2 = dlist_new(proc->histo2);
 	proc->histo2 = histo2;
-	return (1);
+	return (0);
 }
 
 int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
@@ -49,7 +49,7 @@ int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 		return (ft_run_history5(arg, home, proc->histo2, index));
 	if (ft_check_options_history(arg, 's', index) == 1)
 		ft_add_data(proc->histo2, arg + index + 2, 0);
-	return (1);
+	return (0);
 }
 
 int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
