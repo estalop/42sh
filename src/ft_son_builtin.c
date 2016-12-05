@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_son_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/03 18:16:53 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/05 13:37:13 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void		ft_son_builtin(char **buf, char **bin, char **env, t_prstruct *proc)
 	}
 	else if (ft_strncmp(*bin, "echo", 4) == 0)
 		ft_echo(*buf);
+	else if (ft_strncmp(*bin, "export", 6) == 0)
+		ft_export(*buf, 1);
 }

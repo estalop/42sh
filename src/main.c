@@ -6,11 +6,13 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 16:52:52 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/05 13:25:41 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_prstruct	*g_process;
 
 char		**ft_get_path(char **environ)
 {
@@ -84,6 +86,7 @@ int			main(void)
 	t_termcaps		*cap;
 	t_prstruct		process;
 
+	g_process = &process;
 	cap = ft_struct_innit(0);
 	ft_bzero(&process, sizeof(t_prstruct));
 	process.herepipe = -1;

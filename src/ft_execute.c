@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/03 16:53:35 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/05 13:47:36 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 	else if (ft_strncmp(&buf[i], "history", 7) == 0)
 		e = ft_run_history(&buf[i] + 7, ft_get_home(proc->env[2]), proc, 0);
 	else if (ft_strncmp(&buf[i], "export", 6) == 0)
-		e = ft_export(&buf[i]);
+		e = ft_export(&buf[i], 0);
 	else if (ft_strncmp(&buf[i], "unset", 5) == 0)
 		e = ft_unset(&buf[i]);
 	return (e);

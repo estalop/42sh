@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:43:10 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/04 14:25:56 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/05 17:20:07 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void			local_var_update_export(char *name)
 
 	if (!(var = local_var_get(name)) || !var->exported)
 		return ;
-	// TODO: set la variable dans l'env
+	env_setter(var->name, var->value);
 }
 
 /*
@@ -37,7 +37,7 @@ int					local_var_set(char *name, char *value)
 	t_localvar		*var;
 	int				result;
 
-	if (!name || !ft_strlen(name))
+	if (!name || !ft_strlen(name) || !ft_strisalphadigit(name))
 		return (0);
 	result = 1;
 	if (!(var = local_var_get(name)))
@@ -48,14 +48,12 @@ int					local_var_set(char *name, char *value)
 		free(var->value);
 		var->name = ft_strdup(name);
 		var->value = ft_strdup(value);
-		if (result == 1)
-			return (result);
-		var->next = g_localvars;
-		g_localvars = var;
-		local_var_update_export(name);
+		if (result == 2 && ((var->next = g_localvars) || 1))
+			g_localvars = var;
 	}
 	else
 		result = 0;
+	local_var_update_export(name);
 	free(name);
 	free(value);
 	return (result);
@@ -115,8 +113,9 @@ char				*parse_local_var(char *s)
 	equal = ft_strchr(s, '=');
 	if (!equal || equal > end || equal[-1] == ' ' || equal == s)
 		return (s);
-	local_var_set(ft_strsub(s, 0, equal - s),
-		ft_strsub(equal, 1, end - (equal + 1)));
+	if (!local_var_set(ft_strsub(s, 0, equal - s),
+		ft_strsub(equal, 1, end - (equal + 1))))
+		return (s);
 	while (*end && *end == ' ')
 		end++;
 	rec = parse_local_var(ft_strdup(end));
@@ -126,14 +125,5 @@ char				*parse_local_var(char *s)
 	if (!new)
 		return (s);
 	free(s);
-
-	// debug
-	// t_localvar *t = g_localvars;
-	// while (t)
-	// {
-	// 	ft_printf("var %s = %s\n", t->name, t->value);
-	// 	t = t->next;
-	// }
-
 	return (new);
 }

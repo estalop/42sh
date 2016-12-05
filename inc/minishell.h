@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/04 14:49:29 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/05 17:12:23 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,9 @@ t_localvar			*local_var_get(char *name);
 void				local_var_destroy(char *name);
 char				*parse_local_var(char *s);
 void				free_local_var(void);
-int					ft_export(char *s);
+int					ft_export(char *s, int son);
 int					ft_unset(char *s);
+void				env_setter(char *name, char *value);
+void				env_destroyer(char *name);
+
 #endif

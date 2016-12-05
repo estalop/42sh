@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:07:31 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/04 14:24:09 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/05 17:10:39 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int			ft_unset(char *s)
 	name = args + 1;
 	while (*name)
 	{
-		// TODO: supprimer *a des variables locales et de l'environnement si existe
+		local_var_destroy(*name);
+		env_destroyer(*name);
 		name++;
 	}
 	ft_free_tab(&args);
