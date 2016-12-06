@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:08 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/05 09:57:39 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/06 20:56:49 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,9 @@ void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 	t.com = ft_preprocesssplit(*tmp, &t);
 	ft_strdel(tmp);
 	if (t.err == -1)
-	{
 		ft_free_tab(&t.com);
+	if (t.err == -1)
 		return ;
-	}
 	while (t.com != NULL && t.com[t.j] != NULL && !t.err)
 	{
 		t.com[t.j] = parse_local_var(t.com[t.j]);

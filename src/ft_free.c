@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:07:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/04 13:33:10 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/06 19:46:22 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_free_list(t_idlist **list)
 	}
 }
 
-void				free_local_var(void)
+void	free_local_var(void)
 {
 	t_localvar	*next;
 

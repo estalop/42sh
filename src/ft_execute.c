@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/05 13:47:36 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/06 20:58:31 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	char	**argv;
 
 	argv = ft_split(buf);
-	bin = NULL;
-	if (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "setenv") || \
-		!ft_strcmp(argv[0], "unsetenv") || !ft_strcmp(argv[0], "history") || \
-		!ft_strcmp(argv[0], "echo") || !ft_strcmp(argv[0], "export") || \
-		!ft_strcmp(argv[0], "unset"))
+	if ((bin = NULL) || !ft_strcmp(argv[0], "env") ||
+		!ft_strcmp(argv[0], "setenv") || !ft_strcmp(argv[0], "unsetenv") ||
+		!ft_strcmp(argv[0], "history") || !ft_strcmp(argv[0], "echo") ||
+		!ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "unset"))
 	{
 		bin = ft_strdup(argv[0]);
 		ft_free_tab(&argv);
@@ -77,8 +76,7 @@ int			ft_exe_builtin(int i, char *buf, t_prstruct *proc)
 {
 	int		e;
 
-	e = -1;
-	if (buf[i] == '\0')
+	if ((e = -1) && buf[i] == '\0')
 		return (e);
 	if (ft_strncmp(buf, "exit", 4) == 0)
 	{

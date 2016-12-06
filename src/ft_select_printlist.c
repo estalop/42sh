@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/12/02 17:01:56 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/06 20:43:05 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,42 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 	return (dims);
 }
 
+static void		ft_select_printlist_anx(t_selprintlist *t)
+{
+	while (t->y < t->dims->y && t->y < MAX_SELECT_LINES)
+	{
+		t->x = 0;
+		ft_putstr_fd(t->tc->sf, 1);
+		while (t->x < t->dims->x &&
+			(t->y + t->dims->scroll + (t->x * t->dims->y)) < t->dims->size)
+		{
+			ft_putstr_fd(tgoto(t->tc->cv, 0, t->x * (t->dims->maxlen + 2)), 1);
+			if (t->dims->pos == t->y + t->dims->scroll + (t->x * t->dims->y))
+				ft_putstr_fd(t->tc->mr, 1);
+			ft_putspc(t->list[t->y + t->dims->scroll + \
+				(t->x * t->dims->y)], t->dims->maxlen, 1);
+			if (t->dims->pos == t->y + t->dims->scroll + (t->x * t->dims->y))
+				ft_putstr_fd(t->tc->me, 1);
+			t->x++;
+		}
+		t->y++;
+	}
+	while ((t->y + t->save))
+	{
+		ft_putstr_fd(t->tc->sr, 1);
+		t->y--;
+	}
+	t->save = ft_calculate_whidth(t->line, t->tc->x, t->tc);
+	ft_putstr_fd(tgoto(t->tc->cv, 0, t->save), 1);
+}
+
 t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims,
 	char *line)
 {
-	int	x;
-	int	y;
-	int	save;
+	t_selprintlist	t;
+	int				x;
+	int				y;
+	int				save;
 
 	if (!dims && !(dims = getdims(list, ft_tablen(list), tc->whidth)))
 		return (NULL);
@@ -79,28 +109,14 @@ t_ldim			*ft_select_printlist(char **list, t_termcaps *tc, t_ldim *dims,
 	ft_putstr_fd(tc->sf, 1);
 	ft_putstr_fd(tc->cd, 1);
 	ft_putstr_fd(tc->sr, 1);
-	while (y < dims->y && y < MAX_SELECT_LINES)
-	{
-		x = 0;
-		ft_putstr_fd(tc->sf, 1);
-		while (x < dims->x && (y + dims->scroll + (x * dims->y)) < dims->size)
-		{
-			ft_putstr_fd(tgoto(tc->cv, 0, x * (dims->maxlen + 2)), 1);
-			if (dims->pos == y + dims->scroll + (x * dims->y))
-				ft_putstr_fd(tc->mr, 1);
-			ft_putspc(list[y + dims->scroll + (x * dims->y)], dims->maxlen, 1);
-			if (dims->pos == y + dims->scroll + (x * dims->y))
-				ft_putstr_fd(tc->me, 1);
-			x++;
-		}
-		y++;
-	}
-	while ((y + save))
-	{
-		ft_putstr_fd(tc->sr, 1);
-		y--;
-	}
-	save = ft_calculate_whidth(line, tc->x, tc);
-	ft_putstr_fd(tgoto(tc->cv, 0, save), 1);
+	x = 0;
+	t.x = x;
+	t.y = y;
+	t.save = save;
+	t.list = list;
+	t.tc = tc;
+	t.dims = dims;
+	t.line = line;
+	ft_select_printlist_anx(&t);
 	return (dims);
 }

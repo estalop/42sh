@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:09:58 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/30 17:36:20 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/06 20:41:49 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ typedef struct	s_ldim
 	int			scroll;
 	int			maxlen;
 }				t_ldim;
+
+typedef struct		s_selprintlist
+{
+	int				x;
+	int				y;
+	int				save;
+	char			**list;
+	t_termcaps		*tc;
+	t_ldim			*dims;
+	char			*line;
+}					t_selprintlist;
 
 int				is_spec_separator(char c);
 char			*ft_select(char **list, t_termcaps *tc, char *line);
