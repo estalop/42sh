@@ -6,23 +6,35 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/05 13:37:13 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/06 14:34:06 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_son_env_anx(int *i, char ***argv, char ***buf)
+static void	ft_son_env_anx(int *i, char ***tmp, char *buf)
 {
-	*i = 1;
-	if ((*argv = ft_split(**buf)) == NULL)
+	int		j;
+	char	**argv;
+
+	j = 1;
+	if ((argv = ft_split(buf)) == NULL)
 		exit(1);
-	while (*argv[*i] != NULL && *argv[*i][0] == '-' && *argv[*i][1] != '\0' && \
-			ft_strcmp(*argv[*i], "--") != 0)
-		(*i)++;
-	while (*argv[*i] && (!ft_strcmp(*argv[*i], "--") ||
-	ft_strchr(*argv[*i], '=')))
-		(*i)++;
+	while (argv[j] != NULL && argv[j][0] == '-' && argv[j][1] != '\0' && \
+			ft_strcmp(argv[j], "--") != 0)
+	{
+		ft_putendl("first while");
+		j++;
+	}
+	ft_putendl(argv[j]);
+	while (argv[j] && (!ft_strcmp(argv[j], "--") ||
+	ft_strchr(argv[j], '=')))
+	{
+		ft_putendl("second");
+		(j)++;
+	}
+	*i = j;
+	*tmp = argv;
 }
 
 static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
@@ -31,7 +43,7 @@ static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 	char	*tmp;
 	int		i;
 
-	ft_son_env_anx(&i, &argv, &buf);
+	ft_son_env_anx(&i, &argv, *buf);
 	if (argv[i] == NULL)
 	{
 		ft_free_tab(&argv);
@@ -47,6 +59,7 @@ static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 		i = 0;
 		while (ft_strncmp(&tmp[i], *bin, ft_strlen(*bin) != 0))
 			i++;
+		ft_free_tab(&argv);
 		*buf = ft_strdup(&tmp[i]);
 		ft_strdel(&tmp);
 	}
