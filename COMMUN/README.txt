@@ -13,7 +13,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Leak avec les Quote
 - Apres une commande parfois le builtin OU ses arguments (genre cd ..) sont bugé
 
 ====================================================================
@@ -23,8 +22,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- les "" et '' ne rentrent jamais dans l'historique
-- Les " et ' effectuent les \n au lieu de les ecrire (en multilines)
 
 =====================
 =     Changelog     =
