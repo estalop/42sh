@@ -22,6 +22,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
+- lors d'un redimentionnement, si l'on utilise l'autocompletion, le
+terminal passe en couleur inverser.
+
+- l'autocompletion ne remet pas le curseur au bon endroit.
 
 =====================
 =     Changelog     =
