@@ -14,6 +14,11 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 ====================================================================
 
 - Apres une commande parfois le builtin OU ses arguments (genre cd ..) sont bugé
+- Env affichage pas bon (retour ligne au debut)
+- Sans Path il trouve genre ls
+- Unsetenv HOME puis cd ~    SEGFAULT
+- Unsetenv OLDPWD puis cd -   SEGFAULT
+- Unsetenv PWD   puis cd tamere  SEGFAULT
 
 ====================================================================
 
