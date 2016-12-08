@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/30 18:49:25 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:28:21 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,22 @@ void		ft_signal_stop(int sig)
 void		ft_signal_size(int sig)
 {
 	t_termcaps	*cap;
+	char		*tmp;
+	int			whidth;
 
 	if (sig == 28)
 	{
 		cap = ft_struct_innit(1);
+		tmp = cap->cmd ? cap->cmd : cap->str;
+		whidth = cap->whidth;
 		if (tgetent(cap->buf, "xterm-256color") < 0)
 			tgetent(cap->buf, getenv("TERM"));
 		cap->height = tgetnum("li");
+		ft_reset(cap, tmp);
 		cap->whidth = tgetnum("co");
+		ft_putstr(cap->prom);
+		if (tmp)
+			ft_newputstr(&tmp[cap->prompt - cap->neg], cap);
 	}
 }
 
