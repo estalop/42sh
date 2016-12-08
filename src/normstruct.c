@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fuck_the_norm.c                                    :+:      :+:    :+:   */
+/*   normstruct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 15:25:05 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/09/30 14:41:22 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:49:46 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_dlist		*nik_the_norm2(t_dlist *p_list, t_node *p_new, int i)
+t_dlist		*msga2(t_dlist *p_list, t_node *p_new, int i)
 {
 	if (i == 0)
 	{
@@ -29,7 +29,7 @@ t_dlist		*nik_the_norm2(t_dlist *p_list, t_node *p_new, int i)
 	return (p_list);
 }
 
-t_dlist		*nik_the_norm3(t_dlist *p_list, t_node *p_new, int i)
+t_dlist		*msga3(t_dlist *p_list, t_node *p_new, int i)
 {
 	if (i == 0)
 	{

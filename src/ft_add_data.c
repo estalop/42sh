@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 18:46:12 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/14 16:28:19 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:50:40 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_dlist		*dlist_prepend(t_dlist *p_list, char *data)
 			p_new->data = ft_strdup(data);
 			p_new->p_prev = NULL;
 			if (p_list->p_tail == NULL)
-				p_list = nik_the_norm2(p_list, p_new, 0);
+				p_list = msga2(p_list, p_new, 0);
 			else
-				p_list = nik_the_norm2(p_list, p_new, 1);
+				p_list = msga2(p_list, p_new, 1);
 		}
 	}
 	return (p_list);
@@ -62,9 +62,9 @@ t_dlist		*dlist_append(t_dlist *p_list, char *data, int wrote)
 			p_new->p_next = NULL;
 			p_new->wrote = wrote;
 			if (p_list->p_tail == NULL)
-				p_list = nik_the_norm3(p_list, p_new, 0);
+				p_list = msga3(p_list, p_new, 0);
 			else
-				p_list = nik_the_norm3(p_list, p_new, 1);
+				p_list = msga3(p_list, p_new, 1);
 		}
 	}
 	return (p_list);

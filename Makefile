@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/08 17:37:37 by tviviand         ###   ########.fr        #
+#    Updated: 2016/12/08 17:49:59 by tviviand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_add_data.c \
 	ft_del_ele_list.c \
 	ft_get_history_from_file.c \
-	fuck_the_norm.c \
+	normstruct.c \
 	ft_get_home.c \
 	ft_delete_list.c \
 	ft_run_history2.c \
