@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/06 20:40:35 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:36:18 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,36 @@ typedef struct		s_lvar
 	struct s_lvar	*next;
 }					t_localvar;
 
+typedef struct		s_truncbuf
+{
+	char			*tmp;
+	char			*tmp2;
+	char			*tmp3;
+	int				j;
+	int				start;
+}					t_truncbuf;
+
+typedef struct		s_preprocesssplit
+{
+	char			**com;
+	int				i;
+	int				j;
+	int				c;
+}					t_preprocesssplit;
+
+typedef struct		s_selectget
+{
+	char			*res;
+	char			*newwline;
+	char			*ptr;
+	char			*escape;
+	int				i;
+}					t_selectget;
+
+int					ft_select_get_anx(t_selectget *s, char **line,
+	char **list, t_termcaps *tc);
+int					ft_preprocesssplit_anx(char *l, t_operators *t, \
+	t_preprocesssplit *p);
 void				ft_out_anx_b(char *buf, char **tmp, t_termcaps *cap);
 int					ft_out_anx(char **tmp, t_termcaps *cap);
 int					ft_setenv_anx(char ***adenv, char ***nenv, t_structenv *t, \

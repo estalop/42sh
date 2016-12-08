@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/08 15:28:21 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/08 16:52:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,24 @@ void		ft_signal_stop(int sig)
 	}
 }
 
+static void	ft_signal_size_anx(t_termcaps *cap, char **tmp)
+{
+	if ((cap->height = tgetnum("li")) == 0 \
+		|| (cap->whidth = tgetnum("co")) == 0 \
+		|| !(cap->im = tgetstr("im", NULL)) \
+		|| !(cap->bl = tgetstr("bl", NULL)) \
+		|| !(cap->sf = tgetstr("sf", NULL)) \
+		|| !(cap->sr = tgetstr("sr", NULL)) \
+		|| !(cap->cr = tgetstr("cr", NULL)) \
+		|| !(cap->cv = tgetstr("ch", NULL)) \
+		|| !(cap->dc = tgetstr("dl", NULL)) \
+		|| !(cap->cd = tgetstr("cd", NULL)) \
+		|| !(cap->mr = tgetstr("mr", NULL)) \
+		|| !(cap->me = tgetstr("me", NULL)) \
+		|| !(cap->cl = tgetstr("cl", NULL)))
+		ft_reset(cap, *tmp);
+}
+
 void		ft_signal_size(int sig)
 {
 	t_termcaps	*cap;
@@ -82,9 +100,7 @@ void		ft_signal_size(int sig)
 		whidth = cap->whidth;
 		if (tgetent(cap->buf, "xterm-256color") < 0)
 			tgetent(cap->buf, getenv("TERM"));
-		cap->height = tgetnum("li");
-		ft_reset(cap, tmp);
-		cap->whidth = tgetnum("co");
+		ft_signal_size_anx(cap, &tmp);
 		ft_putstr(cap->prom);
 		if (tmp)
 			ft_newputstr(&tmp[cap->prompt - cap->neg], cap);

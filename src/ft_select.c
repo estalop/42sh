@@ -6,17 +6,14 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/12/02 19:05:44 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:43:12 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "ft_select.h"
 
-//Comment on fait pour ce truc qui est pas a la norme et que on comprend pas ?
-//Voir avec Saint Chris
-//Signe Jesus
-static t_ldim	*dims = NULL;
+t_ldim			*g_dims = NULL;
 
 static t_ldim	*ft_select_print(char **list, t_termcaps *tc, char *line)
 {
@@ -32,9 +29,9 @@ void			ft_select_cancel(char **list, t_termcaps *tc, char *line)
 {
 	int	save;
 
-	if (dims)
-		free(dims);
-	dims = NULL;
+	if (g_dims)
+		free(g_dims);
+	g_dims = NULL;
 	if (list)
 		ft_free_tab(&list);
 	list = NULL;
@@ -53,70 +50,55 @@ void			ft_select_cancel(char **list, t_termcaps *tc, char *line)
 
 char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 {
-	char	*res;
-	char	*newwline;
-	char	*ptr;
-	char	*escape;
-	int		i;
+	t_selectget	s;
 
-	if (!dims || !list)
+	s.res = NULL;
+	s.newwline = NULL;
+	s.ptr = NULL;
+	if (!(s.i = 0) && (!g_dims || !list))
 		return (NULL);
-	if (!(line))
+	if (!(s.escape = NULL) && !(line))
 	{
-		if (!(escape = ft_strdup("")))
+		if (!(s.escape = ft_strdup("")))
 			return (NULL);
-		line = &escape;
+		line = &s.escape;
 	}
-	i = tc->x - tc->prompt;
-	if ((--i) < 0)
-		i = 0;
-	while (i && (*line)[i] != ' ' && (*line)[i] != '	' &&
-	(*line)[i] != '/' && !is_spec_separator((*line)[i]))
-		i--;
-	i = (i) ? i + 1 : 0;
-	res = list[dims->pos];
-	if (!(newwline = ft_strnew(ft_strlen(*line) - (tc->x - tc->prompt - i) +\
-	ft_strlen(res))))
+	s.i = tc->x - tc->prompt;
+	if ((--s.i) < 0)
+		s.i = 0;
+	while (s.i && (*line)[s.i] != ' ' && (*line)[s.i] != '	' &&
+	(*line)[s.i] != '/' && !is_spec_separator((*line)[s.i]))
+		s.i--;
+	s.i = (s.i) ? s.i + 1 : 0;
+	s.res = list[g_dims->pos];
+	if (ft_select_get_anx(&s, line, list, tc))
 		return (NULL);
-	newwline = ft_strncpy(newwline, *line, i);
-	ptr = newwline + i;
-	ptr = ft_strcpy(ptr, res);
-	ptr = newwline + i + ft_strlen(res);
-	ptr = ft_strcpy(ptr, (*line) + (tc->x - tc->prompt));
-	ft_select_cancel(list, tc, *line);
-	ft_thome(tc, *line);
-	tputs(tc->cd, 1, ft_output);
-	ft_newputstr(newwline, tc);
-	tc->x = tc->prompt + ft_strlen(newwline);
-	ft_thome(tc, newwline);
-	free(*line);
-	*line = newwline;
-	tc->x = i + ft_strlen(res) + tc->prompt;
-	return (newwline);
+	else
+		return (s.newwline);
 }
 
 void			ft_select_move(char **list, char dir,
 	t_termcaps *tc, char *line)
 {
-	if (dims)
+	if (g_dims)
 	{
 		if (dir == 'A')
-			ft_select_move_up(dims);
+			ft_select_move_up(g_dims);
 		else if (dir == 'B')
-			ft_select_move_down(dims);
+			ft_select_move_down(g_dims);
 		else if (dir == 'D')
-			ft_select_move_left(dims);
+			ft_select_move_left(g_dims);
 		else if (dir == 'C')
-			ft_select_move_right(dims);
-		ft_select_printlist(list, tc, dims, line);
+			ft_select_move_right(g_dims);
+		ft_select_printlist(list, tc, g_dims, line);
 	}
 }
 
 char			*ft_select(char **list, t_termcaps *tc, char *line)
 {
-	if (!dims)
-		dims = ft_select_print(list, tc, line);
+	if (!g_dims)
+		g_dims = ft_select_print(list, tc, line);
 	else
-		dims = ft_select_printlist(list, tc, dims, line);
+		g_dims = ft_select_printlist(list, tc, g_dims, line);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 01:13:21 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/22 14:49:22 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/08 16:57:50 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	ft_read(t_prstruct *proc, char **buf, int new, int i)
 	}
 	else
 	{
-		if (proc->herepipe == -1)
+		if (proc->herepipe == -1 && (pipe(pipes) || 1))
 		{
-			pipe(pipes);
 			dup2(pipes[0], STDIN_FILENO);
 			proc->herepipe = pipes[1];
 		}
-		write(proc->herepipe, proc->heredoc->str, ft_strlen(proc->heredoc->str));
+		write(proc->herepipe, proc->heredoc->str,
+			ft_strlen(proc->heredoc->str));
 		tmp = proc->heredoc;
 		proc->heredoc = proc->heredoc->next;
 		ft_strdel(&tmp->str);
@@ -58,53 +58,60 @@ static void	ft_read(t_prstruct *proc, char **buf, int new, int i)
 	}
 }
 
+static void	ft_trunc_buf_anx(t_prstruct *proc, char **buf, int *i,
+	t_truncbuf *t)
+{
+	if (buf[proc->i][*i] == '<' || buf[proc->i][*i] == '>')
+	{
+		t->j = (*i) - 1;
+		while (ft_isdigit(buf[proc->i][t->j]) && t->j > 0)
+			t->j--;
+		if (t->tmp == NULL)
+			t->tmp = ft_strsub(buf[proc->i], t->start, t->j - t->start);
+		else
+		{
+			t->tmp2 = ft_strsub(buf[proc->i], t->start, t->j - t->start);
+			t->tmp3 = ft_strjoin(t->tmp, t->tmp2);
+			ft_strdel(&t->tmp);
+			ft_strdel(&t->tmp2);
+			t->tmp = t->tmp3;
+		}
+		while (buf[proc->i][*i] == '<' || buf[proc->i][*i] == '>' || \
+				buf[proc->i][*i] == '&')
+			(*i)++;
+		while (buf[proc->i][*i] == ' ')
+			(*i)++;
+		while (buf[proc->i][*i] != '\0' && buf[proc->i][*i] != ' ')
+			(*i)++;
+		t->start = *i;
+	}
+}
+
 static char	*ft_trunc_buf(t_prstruct *proc, char **buf, int i)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
-	int		j;
-	int		start;
+	t_truncbuf	t;
 
-	start = 0;
-	tmp = NULL;
+	t.start = 0;
+	t.tmp = NULL;
+	t.tmp = NULL;
+	t.tmp2 = NULL;
+	t.tmp3 = NULL;
+	t.j = 0;
+	t.start = 0;
 	while (buf[proc->i][i] != '\0')
 	{
-		if (buf[proc->i][i] == '<' || buf[proc->i][i] == '>')
-		{
-			j = i - 1;
-			while (ft_isdigit(buf[proc->i][j]) && j > 0)
-				j--;
-			if (tmp == NULL)
-				tmp = ft_strsub(buf[proc->i], start, j - start);
-			else
-			{
-				tmp2 = ft_strsub(buf[proc->i], start, j - start);
-				tmp3 = ft_strjoin(tmp, tmp2);
-				ft_strdel(&tmp);
-				ft_strdel(&tmp2);
-				tmp = tmp3;
-			}
-			while (buf[proc->i][i] == '<' || buf[proc->i][i] == '>' || \
-					buf[proc->i][i] == '&')
-				i++;
-			while (buf[proc->i][i] == ' ')
-				i++;
-			while (buf[proc->i][i] != '\0' && buf[proc->i][i] != ' ')
-				i++;
-			start = i;
-		}
+		ft_trunc_buf_anx(proc, buf, &i, &t);
 		i++;
-		if (buf[proc->i][i] == '\0' && tmp != NULL)
+		if (buf[proc->i][i] == '\0' && t.tmp != NULL)
 		{
-			tmp2 = ft_strsub(buf[proc->i], start, i);
-			tmp3 = ft_strjoin(tmp, tmp2);
-			ft_strdel(&tmp);
-			ft_strdel(&tmp2);
-			tmp = tmp3;
+			t.tmp2 = ft_strsub(buf[proc->i], t.start, i);
+			t.tmp3 = ft_strjoin(t.tmp, t.tmp2);
+			ft_strdel(&t.tmp);
+			ft_strdel(&t.tmp2);
+			t.tmp = t.tmp3;
 		}
 	}
-	return (tmp);
+	return (t.tmp);
 }
 
 void		ft_redirect(t_prstruct *proc, char **buf)

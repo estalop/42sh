@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:15:44 by tbayet            #+#    #+#             */
-/*   Updated: 2016/12/06 20:43:05 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:34:43 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ static void		ft_putspc(char *str, int min, int fd)
 			len++;
 		}
 	}
+}
+
+static void		getdims_anx(t_ldim *dims, int nbelems)
+{
+	dims->y = (dims->x) ? nbelems / dims->x : 0;
+	if (nbelems % dims->x > 0)
+		(dims->y)++;
+	dims->x = nbelems / dims->y;
+	if (nbelems % dims->y)
+		(dims->x)++;
+	dims->pos = -1;
+	dims->size = nbelems;
+	dims->scroll = 0;
 }
 
 static t_ldim	*getdims(char **list, int nbelems, int width)
@@ -53,15 +66,7 @@ static t_ldim	*getdims(char **list, int nbelems, int width)
 		free(dims);
 		return (NULL);
 	}
-	dims->y = (dims->x) ? nbelems / dims->x : 0;
-	if (nbelems % dims->x > 0)
-		(dims->y)++;
-	dims->x = nbelems / dims->y;
-	if (nbelems % dims->y)
-		(dims->x)++;
-	dims->pos = -1;
-	dims->size = nbelems;
-	dims->scroll = 0;
+	getdims_anx(dims, nbelems);
 	return (dims);
 }
 

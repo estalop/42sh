@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:08 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/06 20:56:49 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:18:59 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,56 +81,31 @@ static void	ft_process(char *buf, t_prstruct *process, char **path, \
 
 static char	**ft_preprocesssplit(char *l, t_operators *t)
 {
-	char	**com;
-	int		i;
-	int		j;
-	int		c;
+	t_preprocesssplit	p;
 
-	j = 0;
-	com = NULL;
-	i = 1;
-	c = 0;
+	p.j = 0;
+	p.com = NULL;
+	p.i = 1;
+	p.c = 0;
 	if (!l)
 		return (NULL);
-	i += ft_strcnts(l, "&&");
-	i += ft_strcnts(l, "||");
-	i += ft_strcnt(l, ';');
-	if (!(com = ft_memalloc((sizeof(char **) * i) + 1)))
+	p.i += ft_strcnts(l, "&&");
+	p.i += ft_strcnts(l, "||");
+	p.i += ft_strcnt(l, ';');
+	if (!(p.com = ft_memalloc((sizeof(char **) * p.i) + 1)))
 		return (NULL);
-	i = 0;
-	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
-		i++;
-	if (l[i] == '|' || l[i] == '&')
+	p.i = 0;
+	while (l[p.i] && (l[p.i] == ' ' || l[p.i] == '\t'))
+		p.i++;
+	if (l[p.i] == '|' || l[p.i] == '&')
 	{
-		ft_printf("42sh: parse error near '%c'\n", l[i]);
-		free(com);
+		ft_printf("42sh: parse error near '%c'\n", l[p.i]);
+		free(p.com);
 		return (NULL);
 	}
-	while (l[i])
-	{
-		if ((!ft_strncmp(&l[i], "&&", 2) && ft_strncmp(&l[i], "&&&", 3)) || \
-			(!ft_strncmp(&l[i], "||", 2) && ft_strncmp(&l[i], "|||", 3)) || \
-			(!ft_strncmp(&l[i], ";", 1) && ft_strncmp(&l[i], ";;", 2)))
-		{
-			com[c] = ft_strsub(l, j, i - j);
-			c++;
-			j = i + 1;
-			i += 2;
-		}
-		else if (!ft_strncmp(&l[i], "&&&", 3) || \
-		!ft_strncmp(&l[i], "|||", 3) || !ft_strncmp(&l[i], ";;", 2))
-		{
-			ft_printf("42sh: parse error near '%c'\n", l[i]);
-			t->err = -1;
-			com[c + 1] = NULL;
-			ft_free_tab(&com);
-			return (NULL);
-		}
-		i++;
-	}
-	com[c] = ft_strsub(l, j, i - j);
-	com[c + 1] = NULL;
-	return (com);
+	if (ft_preprocesssplit_anx(l, t, &p))
+		return (NULL);
+	return (p.com);
 }
 
 void		ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
