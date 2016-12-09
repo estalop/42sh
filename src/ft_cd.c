@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/03 15:25:07 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/09 13:51:46 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char				*ft_opt_home(char *argv, char **env, int i)
 	while (env[i] && k == 1 && ft_strncmp(env[i], "OLDPWD=", 7))
 		i++;
 	k = 0;
-	while (env[i][k] != '=')
+	while (env[i] && env[i][k] != '=')
 		k++;
 	if (env != NULL && env[i] != NULL && argv != NULL)
 		tmp = ft_strjoin(&env[i][k + 1], &argv[1]);

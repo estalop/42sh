@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/06 14:34:06 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/09 11:30:44 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,10 @@ static void	ft_son_env_anx(int *i, char ***tmp, char *buf)
 		exit(1);
 	while (argv[j] != NULL && argv[j][0] == '-' && argv[j][1] != '\0' && \
 			ft_strcmp(argv[j], "--") != 0)
-	{
-		ft_putendl("first while");
 		j++;
-	}
-	ft_putendl(argv[j]);
 	while (argv[j] && (!ft_strcmp(argv[j], "--") ||
 	ft_strchr(argv[j], '=')))
-	{
-		ft_putendl("second");
 		(j)++;
-	}
 	*i = j;
 	*tmp = argv;
 }
