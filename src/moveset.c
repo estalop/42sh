@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 10:48:54 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/25 18:32:41 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:56:49 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ void		ft_put_cursor(t_termcaps *cap, char *str)
 			ft_output);
 }
 
-static void	ft_put_info(t_termcaps *cap, char *str, char **del)
+static void	ft_put_info(t_termcaps *cap, char **str, char **del)
 {
+	char	*tmp;
+
+	tmp = *str;
 	ft_strdel(del);
 	ft_printf(cap->prom);
-	ft_newputstr(&str[cap->prompt - cap->neg], cap);
-	ft_put_cursor(cap, str);
+	if (tmp[0])
+		ft_newputstr(&tmp[cap->prompt - cap->neg], cap);
+	else
+		ft_strdel(str);
+	ft_put_cursor(cap, *str);
 }
 
 char		*ft_del_char(t_termcaps *cap, char *str, int i)
@@ -81,7 +87,7 @@ char		*ft_del_char(t_termcaps *cap, char *str, int i)
 			tmp[i - 1] = str[i];
 			i++;
 		}
-		ft_put_info(cap, tmp, &str);
+		ft_put_info(cap, &tmp, &str);
 		return (tmp);
 	}
 	else

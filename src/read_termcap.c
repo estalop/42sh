@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/09 14:01:38 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/09 14:52:47 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static int	ft_tselect_anx(t_termcaps *cap, char **str, char *buf)
 
 static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 {
+	if (buf[0] == 4)
+		return (str);
 	if (buf[0] == 27 && buf[1] == 91)
 		str = ft_arrow(cap, (ft_strlen(str) + cap->neg), buf, str);
 	else if (buf[0] == '\t' && buf[1] == 0)
@@ -118,11 +120,10 @@ int			ft_read_termcap(t_termcaps *cap)
 	char	*tmp;
 
 	ft_set_prompt(cap);
-	tmp = NULL;
 	while (42)
 	{
 		ft_bzero(buf, 4);
-		if (read(0, buf, 3) <= 0 || buf[0] == 4)
+		if (read(0, buf, 3) <= 0 || (buf[0] == 4 && !cap->str && !cap->cmd))
 			return (1);
 		cap->str = ft_tselect(cap, cap->str, buf);
 		tmp = cap->cmd ? cap->cmd : cap->str;
@@ -130,6 +131,8 @@ int			ft_read_termcap(t_termcaps *cap)
 			tmp = ft_out(cap, buf, tmp);
 		if (buf[0] == 10)
 			break ;
+		else if (buf[0] == 4)
+			tputs(cap->bl, 0, ft_output);
 	}
 	if ((cap->i = ft_quote_not_finished(tmp, 0, cap)) != 0)
 	{
