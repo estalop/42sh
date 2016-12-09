@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/06 20:58:31 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/09 17:04:10 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	if ((bin = NULL) || !ft_strcmp(argv[0], "env") ||
 		!ft_strcmp(argv[0], "setenv") || !ft_strcmp(argv[0], "unsetenv") ||
 		!ft_strcmp(argv[0], "history") || !ft_strcmp(argv[0], "echo") ||
-		!ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "unset"))
+		!ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "unset") ||
+		!ft_strcmp(argv[0], "cd"))
 	{
 		bin = ft_strdup(argv[0]);
 		ft_free_tab(&argv);
