@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/08 17:49:59 by tviviand         ###   ########.fr        #
+#    Updated: 2016/12/09 14:56:33 by tbayet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ DSRC = $(addprefix $(SRC_DIR)/,$(SRC))
 
 DOBJ = $(addprefix $(OBJ_DIR)/,$(SRC_O))
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 HEADERS = -I ./$(INC_DIR) -I libft/includes/ -I completion
 

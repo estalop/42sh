@@ -6,15 +6,14 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 13:43:07 by jbobin            #+#    #+#             */
-/*   Updated: 2016/01/07 14:26:44 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/09 15:03:49 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_get_line(int const fd, char **ptr)
+static int	ft_get_line(int const fd, char **ptr, int i)
 {
-	int		i;
 	char	*c;
 	char	*tmp;
 	char	buff[BUFF_SIZE + 1];
@@ -49,7 +48,7 @@ int			get_next_line(int const fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	i = ft_get_line(fd, &str);
+	i = ft_get_line(fd, &str, 0);
 	if (i == -1)
 		return (-1);
 	if (i == 0)
