@@ -13,9 +13,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Echo ne gere pas l option -n (en cours)
-
 - Ne pas re-ecrire le prompt a chaque fois (met la merde dans certains cas)
+(Voir ligne 104-106 dans ft_signal_size  , une fois desactive ca va mieux (sauf multilignes))
+
+- Le $ ... faut l implemente (voir correction - Voir avec chris pour utilisation)
 
 ====================================================================
 
@@ -24,10 +25,9 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =     ERROR404     =
 ===================================================================
 
-- lors d'un redimentionnement, si l'on utilise l'autocompletion, le
-terminal passe en couleur inverser.
-
 - l'autocompletion ne remet pas le curseur au bon endroit.
+
+- L autocompletion fait de la merde en cas de mouvement de la fenetre si il est ouvert
 
 =====================
 =     Changelog     =
