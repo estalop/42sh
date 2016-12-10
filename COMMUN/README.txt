@@ -13,7 +13,9 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Echo ne gere pas l option -n
+- Echo ne gere pas l option -n (en cours)
+
+- Ne pas re-ecrire le prompt a chaque fois (met la merde dans certains cas)
 
 ====================================================================
 
@@ -30,6 +32,12 @@ terminal passe en couleur inverser.
 =====================
 =     Changelog     =
 ====================================================================
+10 decembre 20h14 - ThomasV
+
+- Norme
+- Message d'erreur niveau acces rectifie (sinon pas valide dans certains cas)
+- option -n dans Echo
+
 5 decembre 9h59 - jean-yves
 
 - gestion d'erreur de l'historique

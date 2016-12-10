@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:08:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/04 13:51:40 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/10 20:13:56 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,27 @@ void	ft_echo(char *line)
 {
 	int		i;
 	char	**txt;
+	int		n;
 
 	i = 1;
 	txt = NULL;
 	txt = ft_strsplit(line, ' ');
-	if (!txt)
+	if (!(n = 0) && !txt)
 		exit(1);
 	while (txt[i])
 	{
-		ft_printf("%s", txt[i]);
-		if (txt[i + 1])
-			ft_putchar(' ');
+		if (ft_strequ(txt[i], "-n"))
+			n = 1;
 		else
+			ft_printf("%s", txt[i]);
+		if (txt[i + 1] && !ft_strequ(txt[i], "-n"))
+			ft_putchar(' ');
+		else if (!txt[i + 1])
 			break ;
 		i++;
 	}
-	ft_putchar('\n');
+	if (!n)
+		ft_putchar('\n');
 	ft_free_tab(&txt);
 	exit(0);
 }
