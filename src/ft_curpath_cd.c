@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_curpath_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/09 14:08:06 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/10 17:46:37 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,18 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 	int		i;
 	char	*tmp;
 
-	i = 0;
+	i = -1;
 	if (!new || !new->curpath)
 		return (NULL);
-	while (new->curpath[i] != '\0' && !(tmp = NULL))
+	while (new->curpath[++i] != '\0' && !(tmp = NULL))
 	{
-		if (new->curpath[i] == '.')
+		if (new->curpath[i] == '.' &&
+			(tmp = ft_new_curpath(new->curpath, NULL, NULL, i)))
 		{
-			tmp = ft_new_curpath(new->curpath, NULL, NULL, i);
-			if (tmp && !(i = 0))
-			{
-				ft_strdel(&new->curpath);
-				new->curpath = tmp;
-			}
+			i = -1;
+			ft_strdel(&new->curpath);
+			new->curpath = tmp;
 		}
-		i++;
 	}
 	if (ft_strlen(new->curpath) > 1 && \
 		new->curpath[ft_strlen(new->curpath) - 1] == '/')

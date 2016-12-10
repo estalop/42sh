@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:08 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/09 14:55:15 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/10 17:49:01 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ static char	**ft_preprocesssplit(char *l, t_operators *t)
 	p.i += ft_strcnts(l, "&&");
 	p.i += ft_strcnts(l, "||");
 	p.i += ft_strcnt(l, ';');
-//	if (!(p.com = ft_memalloc((sizeof(char **) * p.i) + 1)))
-//		return (NULL);
 	if (!(p.com = ft_memalloc((sizeof(char **) * (p.i + 1)))))
 		return (NULL);
 	p.i = 0;
