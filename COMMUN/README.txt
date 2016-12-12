@@ -32,6 +32,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =====================
 =     Changelog     =
 ====================================================================
+12 decembre 15h34 - jean-yves
+
+-le resize est finit niveau termcaps mais encore a voir avec l'autocompletion
+
 10 decembre 20h14 - ThomasV
 
 - Norme

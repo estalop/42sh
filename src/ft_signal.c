@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/12 14:47:03 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/12 15:36:54 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		ft_signal_size(int sig)
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		if (tgetent(cap->buf, "xterm-256color") < 0)
 			tgetent(cap->buf, getenv("TERM"));
-		ft_signal_size_anx(cap);		
+		ft_signal_size_anx(cap);
 	}
 }
 
