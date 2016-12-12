@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/08 17:48:39 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:59:19 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct		s_termcaps
 	int				i;
 	int				neg;
 	int				oldlen;
+	int				quot;
 }					t_termcaps;
 
 typedef struct		s_operators

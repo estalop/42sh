@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/05 13:25:41 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/12 13:56:07 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 	{
 		cap->str = NULL;
 		cap->cmd = NULL;
+		cap->quot = 0;
 		path = ft_get_path(proc->env[0]);
 		proc->path = path;
 		proc->env[1] = ft_tabdup(proc->env[2]);
