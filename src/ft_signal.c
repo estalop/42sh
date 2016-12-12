@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/10 18:42:16 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:47:03 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@ void		ft_signal_stop(int sig)
 	}
 }
 
-static void	ft_signal_size_anx(t_termcaps *cap, char **tmp)
+static int	ft_signal_size_anx(t_termcaps *cap)
 {
 	if ((cap->height = tgetnum("li")) == 0 \
 		|| (cap->whidth = tgetnum("co")) == 0 \
-		|| !(cap->im = tgetstr("im", NULL)) \
 		|| !(cap->bl = tgetstr("bl", NULL)) \
 		|| !(cap->sf = tgetstr("sf", NULL)) \
 		|| !(cap->sr = tgetstr("sr", NULL)) \
@@ -84,26 +83,22 @@ static void	ft_signal_size_anx(t_termcaps *cap, char **tmp)
 		|| !(cap->mr = tgetstr("mr", NULL)) \
 		|| !(cap->me = tgetstr("me", NULL)) \
 		|| !(cap->cl = tgetstr("cl", NULL)))
-		ft_reset(cap, *tmp);
+		return (0);
+	return (1);
 }
 
 void		ft_signal_size(int sig)
 {
 	t_termcaps	*cap;
 	char		*tmp;
-	int			whidth;
 
 	if (sig == 28)
 	{
 		cap = ft_struct_innit(1);
 		tmp = cap->cmd ? cap->cmd : cap->str;
-		whidth = cap->whidth;
 		if (tgetent(cap->buf, "xterm-256color") < 0)
 			tgetent(cap->buf, getenv("TERM"));
-		ft_signal_size_anx(cap, &tmp);
-		ft_putstr(cap->prom);
-		if (tmp)
-			ft_newputstr(&tmp[cap->prompt - cap->neg], cap);
+		ft_signal_size_anx(cap);		
 	}
 }
 

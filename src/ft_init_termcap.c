@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 13:20:35 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/15 15:28:52 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/12 14:46:29 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_init_termcap(t_termcaps *cap)
 			ft_putendl_fd("42sh: data not found", 2);
 	if ((cap->height = tgetnum("li")) == 0 \
 		|| (cap->whidth = tgetnum("co")) == 0 \
-		|| !(cap->im = tgetstr("im", NULL)) \
 		|| !(cap->bl = tgetstr("bl", NULL)) \
 		|| !(cap->sf = tgetstr("sf", NULL)) \
 		|| !(cap->sr = tgetstr("sr", NULL)) \

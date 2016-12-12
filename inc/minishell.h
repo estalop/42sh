@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/08 17:48:39 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:46:07 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ typedef struct		s_termcaps
 	int				x;
 	int				y;
 	char			pc;
-	char			*im;
 	int				mi;
 	char			*bl;
 	char			*sf;
