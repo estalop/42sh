@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 10:18:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/07 15:05:05 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/12 13:59:14 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,17 @@ int			ft_quote_not_finished(char *str, int i, t_termcaps *cap)
 		return (0);
 	while (str[i] != '\0')
 	{
-		if (ft_heredoc(str, i, 0, cap) == 1)
+		if (ft_heredoc(str, i, 0, cap) == 1 && (cap->quot = 1))
 			return (6);
-		else if (ft_dquote(str, &k, i) == 1)
+		else if (ft_dquote(str, &k, i) == 1 && (cap->quot = 1))
 			return (1);
-		else if (ft_quote(str, &l, i) == 2)
+		else if (ft_quote(str, &l, i) == 2 && (cap->quot = 1))
 			return (2);
-		else if (ft_cursh(str, 0, i) == 3)
+		else if (ft_cursh(str, 0, i) == 3 && (cap->quot = 1))
 			return (3);
-		else if (ft_subsh(str, 0, i) == 4)
+		else if (ft_subsh(str, 0, i) == 4 && (cap->quot = 1))
 			return (4);
-		else if (str[i] == '\\' && str[i + 1] == '\0')
+		else if (str[i] == '\\' && str[i + 1] == '\0' && (cap->quot = 1))
 			return (5);
 		i++;
 	}
