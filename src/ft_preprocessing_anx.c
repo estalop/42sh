@@ -6,13 +6,51 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 17:00:06 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/08 17:24:15 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:56:00 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_preprocesssplit_anx(char *l, t_operators *t, t_preprocesssplit *p)
+static int	islast(char *l, int cur)
+{
+	int i;
+
+	i = cur + 1;
+	while (l[i])
+	{
+		ft_putstr("DEBUG - ");
+		ft_putchar(l[i]);
+		ft_putstr("\n");
+		//Eventuellement voir d'autres trucs de separation
+		if (l[i] != ' ' && l[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	ft_preprocesssplit_anx_anx(t_preprocesssplit *p, char *l)
+{
+	if (!islast(l, p->i))
+	{
+		p->com[p->c] = ft_strsub(l, p->j, p->i - p->j);
+		p->c++;
+		p->j = p->i + 1;
+		p->i += 2;
+	}
+	else
+	{
+		p->com[p->c] = NULL;
+		p->j = p->i + 1;
+		p->i++;
+		return (1);
+	}
+	return (0);
+}
+
+int			ft_preprocesssplit_anx(char *l, t_operators *t,
+	t_preprocesssplit *p)
 {
 	while (l[p->i])
 	{
@@ -20,10 +58,8 @@ int	ft_preprocesssplit_anx(char *l, t_operators *t, t_preprocesssplit *p)
 		(!ft_strncmp(&l[p->i], "&&", 2) && ft_strncmp(&l[p->i], "&&&", 3)) ||
 		(!ft_strncmp(&l[p->i], "||", 2) && ft_strncmp(&l[p->i], "|||", 3)))
 		{
-			p->com[p->c] = ft_strsub(l, p->j, p->i - p->j);
-			p->c++;
-			p->j = p->i + 1;
-			p->i += 2;
+			if (ft_preprocesssplit_anx_anx(p, l))
+				break ;
 		}
 		else if (!ft_strncmp(&l[p->i], "&&&", 3) || \
 		!ft_strncmp(&l[p->i], "|||", 3) || !ft_strncmp(&l[p->i], ";;", 2))

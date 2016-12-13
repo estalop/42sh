@@ -16,7 +16,13 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 - Ne pas re-ecrire le prompt a chaque fois (met la merde dans certains cas)
 (Voir ligne 104-106 dans ft_signal_size  , une fois desactive ca va mieux (sauf multilignes))
 
-- Le $ ... faut l implemente (voir correction - Voir avec chris pour utilisation)
+- L'historique ne reviens toujours pas a la derniere valeur
+
+- La touche DEL ne fonctionne pas
+
+- Ce qu'on ecrit avec des ; && ect n'est pas mis dans l'historique toujours
+
+- Voir si avec ECHO et la suppression des espaces et tab ca passe ou pas
 
 ====================================================================
 
@@ -32,6 +38,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =====================
 =     Changelog     =
 ====================================================================
+13 Decembre 20h02 - ThomasV
+
+- Segfault si operateur en dernier argument FIX
+
 12 decembre 15h34 - jean-yves
 
 -le resize est finit niveau termcaps mais encore a voir avec l'autocompletion
