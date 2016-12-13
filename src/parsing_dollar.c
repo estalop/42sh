@@ -6,11 +6,13 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 12:58:51 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/13 14:04:01 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/13 14:34:59 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_prstruct	*g_process;
 
 /*
 **	Parse $? pour le retour du dernier status code
@@ -18,7 +20,23 @@
 
 char			*parse_dollar_pipeline_exit_status(char *s)
 {
-	//TODO
+	char	*c;
+	int		cl;
+	char	*status;
+
+	if (!(status = ft_itoa(g_process->stat_lock)))
+		return (s);
+	c = s;
+	while ((c = ft_strchr(c, '$')))
+	{
+		c++;
+		cl = c - s;
+		if (*c != '?')
+			continue ;
+		ft_strsplice(&s, c - 1, 2, status);
+		c = s + cl;
+	}
+	free(status);
 	return (s);
 }
 
@@ -45,7 +63,8 @@ char			*parse_dollar_variable(char *s)
 			e++;
 		if (e - c < 1)
 			continue ;
-		key = ft_strsub(c, 0, e - c);
+		if (!(key = ft_strsub(c, 0, e - c)))
+			return (s);
 		if (!(value = env_getter(key)) && local_var_get(key))
 			value = local_var_get(key)->value;
 		ft_strsplice(&s, c - 1, e - c + 1, value);
