@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 13:02:26 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/13 13:51:48 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/13 14:55:17 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,17 @@ void		env_setter(char *name, char *value)
 
 char		*env_getter(char *name)
 {
-	//TODO: trouver un moyen d'obtenir une variable d'environnement
-	(void)name;
-	// ne pas allouer de memoire, le retour ne sera pas free
+	char	**env;
+	char	*c;
+
+	env = g_process->env[1];
+	while (*env)
+	{
+		c = ft_strchr(*env, '=');
+		if (!ft_strncmp(*env, name, c - *env))
+			return (c + 1);
+		env++;
+	}
 	return (NULL);
 }
 
