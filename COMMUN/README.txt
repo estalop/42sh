@@ -22,8 +22,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 - Ce qu'on ecrit avec des ; && ect n'est pas mis dans l'historique toujours
 
-- Voir si avec ECHO et la suppression des espaces et tab ca passe ou pas
-
 ====================================================================
 
 
