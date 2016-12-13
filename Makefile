@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
+#    By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/09 16:56:59 by tbayet           ###   ########.fr        #
+#    Updated: 2016/12/13 13:56:01 by chdenis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	home_and_end_anx.c \
 	ft_env.c \
 	ft_preprocessing_anx.c \
-	ft_select_anx.c
+	ft_select_anx.c \
+	parsing.c \
+	parsing_dollar.c
 
 SRC_O = $(SRC:.c=.o)
 

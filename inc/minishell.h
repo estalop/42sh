@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/12 15:40:24 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/13 14:12:02 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,11 +334,16 @@ void				ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 int					local_var_set(char *name, char *value);
 t_localvar			*local_var_get(char *name);
 void				local_var_destroy(char *name);
-char				*parse_local_var(char *s);
 void				free_local_var(void);
 int					ft_export(char *s, int son);
 int					ft_unset(char *s);
 void				env_setter(char *name, char *value);
+char				*env_getter(char *name);
 void				env_destroyer(char *name);
+char				*parse_local_var(char *s);
+char				*parse_process(char *s);
+char				*parse_dollar_variable(char *s);
+char				*parse_dollar_pipeline_exit_status(char *s);
+
 
 #endif

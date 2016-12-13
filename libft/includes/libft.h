@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/03 16:08:50 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/13 13:29:34 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define FALSE				0
 # define MAXV(a, b)			((a) > (b) ? (a) : (b))
 # define MINV(a, b)			((a) < (b) ? (a) : (b))
+# define IS_ALPHA_DIGIT(c)	(c == '_' || ft_isalpha(c) || ft_isdigit(c))
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include <string.h>
@@ -111,5 +112,7 @@ int					ft_tablen(char **buf);
 void				ft_free_tab(char ***argv);
 void				ft_print_tab(char **tab);
 int					ft_strcnts(char const *str, char const *s);
+char				*ft_strsplice(char **str, char *begin,
+								size_t len, char *rep);
 
 #endif

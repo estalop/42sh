@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 13:02:26 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/05 17:11:56 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/13 13:51:48 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void		env_setter(char *name, char *value)
 	ft_strcpy(s, " ");
 	ft_strcpy(s + 1, value);
 	ft_setenv(cmd, &g_process->env[0], g_process->env[0], &g_process->env[2]);
+}
+
+char		*env_getter(char *name)
+{
+	//TODO: trouver un moyen d'obtenir une variable d'environnement
+	(void)name;
+	// ne pas allouer de memoire, le retour ne sera pas free
+	return (NULL);
 }
 
 void		env_destroyer(char *name)
