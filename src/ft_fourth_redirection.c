@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 08:33:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/22 15:08:58 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/14 14:04:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,41 @@ static t_hered	*ft_newheredoc(t_termcaps *cap, char *str)
 	return (start);
 }
 
-static int		ft_check_end(t_termcaps *cap)
+static void		ft_if_hyphen(t_termcaps *cap, int i, int j, char *tmp)
+{
+	char	*tmp3;
+	char	*tmp2;
+	t_hered	*tmpstruct;
+
+	tmp2 = NULL;
+	tmp3 = NULL;
+	tmpstruct = cap->heredoc;
+	while (tmpstruct->next != NULL)
+		tmpstruct = tmpstruct->next;
+	while (tmpstruct->str[i] != '\0')
+	{
+		if (tmpstruct->str[i] == '\t')
+		{
+			tmp = ft_strsub(tmpstruct->str, j, i - j);
+			tmp3 = tmp2 ? ft_strjoin(tmp2, tmp) : tmp;
+			ft_strdel(&tmp2);
+			tmp3 != tmp ? ft_strdel(&tmp) : 0;
+			tmp2 = tmp3;
+			while (tmpstruct->str[i] == '\t')
+				i++;
+			j = i;
+		}
+		i++;
+	}
+	tmp = ft_strsub(tmpstruct->str, j, i - j);
+	tmp3 = tmp2 ? ft_strjoin(tmp2, tmp) : tmp;
+	ft_strdel(&tmp2);
+	tmp3 != tmp ? ft_strdel(&tmp) : 0;
+	ft_strdel(&tmpstruct->str);
+	tmpstruct->str = tmp3;
+}
+
+static int		ft_check_end(t_termcaps *cap, int *c)
 {
 	int		i;
 	char	*new;
@@ -55,12 +89,14 @@ static int		ft_check_end(t_termcaps *cap)
 		ft_strdel(&cap->str);
 		ft_strdel(&cap->stop);
 		cap->heredoc = ft_newheredoc(cap, new);
+		if (*c == 1 && !(*c = 0))
+			ft_if_hyphen(cap, 0, 0, NULL);
 		return (0);
 	}
 	return (1);
 }
 
-static int		ft_checkheredoc(char *str, t_termcaps *cap, int i)
+static int		ft_checkheredoc(char *str, t_termcaps *cap, int i, int *c)
 {
 	t_hered	*tmp;
 
@@ -72,7 +108,11 @@ static int		ft_checkheredoc(char *str, t_termcaps *cap, int i)
 			if (tmp != NULL)
 				tmp = tmp->next;
 			else
+			{
+				if (str[i + 2] == '-')
+					*c = 1;
 				return (i);
+			}
 		}
 		i++;
 	}
@@ -81,15 +121,17 @@ static int		ft_checkheredoc(char *str, t_termcaps *cap, int i)
 
 int				ft_heredoc(char *str, int i, int j, t_termcaps *cap)
 {
-	if (i != 0)
+	static int	c = 0;
+
+	if (i != 0 || str[0] == '<')
 		return (0);
 	if (cap->stop != NULL)
-		if (ft_check_end(cap) == 1)
+		if (ft_check_end(cap, &c) == 1)
 			return (1);
-	if ((i = ft_checkheredoc(str, cap, i)) != -1)
+	if ((i = ft_checkheredoc(str, cap, i, &c)) != -1)
 	{
 		i = i + 2;
-		while (str[i] == ' ')
+		while (str[i] == ' ' || str[i] == '-')
 			i++;
 		j = i;
 		while (ft_isprint(str[i]) && str[i] != ' ')

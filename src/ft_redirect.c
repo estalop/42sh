@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 01:13:21 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/08 16:57:50 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:08:24 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	ft_trunc_buf_anx(t_prstruct *proc, char **buf, int *i,
 			t->tmp = t->tmp3;
 		}
 		while (buf[proc->i][*i] == '<' || buf[proc->i][*i] == '>' || \
-				buf[proc->i][*i] == '&')
+				buf[proc->i][*i] == '&' || buf[proc->i][*i] == '-')
 			(*i)++;
 		while (buf[proc->i][*i] == ' ')
 			(*i)++;
