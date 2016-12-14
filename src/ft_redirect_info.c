@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 04:34:02 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/12 15:59:53 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:49:00 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ static int	ft_output_num(t_prstruct *proc, char **buf, int i, int info)
 		return (ft_file_descriptor(proc, buf, i, j));
 	while (buf[proc->i][j] == ' ')
 		j++;
-	i = j;
-	if (buf[proc->i][j] == '\0')
+	if ((i = j) && buf[proc->i][j] == '\0')
 	{
 		ft_putendl_fd("42sh: parse error near `\\n'", 2);
 		exit(1);
 	}
-	while (buf[proc->i][j] != '\0' && buf[proc->i][j] != ' ')
+	while (buf[proc->i][j] != '\0' && buf[proc->i][j] != ' ' && \
+		buf[proc->i][j] != '<' && buf[proc->i][j] != '>')
 		j++;
 	num = ft_strsub(buf[proc->i], i, j - i);
 	if ((j = ft_open_file(num, info >> 16)) == -1)

@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/14 13:31:47 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/14 15:15:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,6 +344,5 @@ char				*parse_local_var(char *s);
 char				*parse_process(char *s);
 char				*parse_dollar_variable(char *s);
 char				*parse_dollar_pipeline_exit_status(char *s);
-
 
 #endif

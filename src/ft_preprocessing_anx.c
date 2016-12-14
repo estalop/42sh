@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 17:00:06 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/13 19:56:00 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:28:38 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ static int	islast(char *l, int cur)
 	i = cur + 1;
 	while (l[i])
 	{
-		ft_putstr("DEBUG - ");
-		ft_putchar(l[i]);
-		ft_putstr("\n");
-		//Eventuellement voir d'autres trucs de separation
 		if (l[i] != ' ' && l[i] != '\t')
 			return (0);
 		i++;

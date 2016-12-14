@@ -6,13 +6,13 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/10 17:47:34 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:36:50 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_fork_ex(char *bin, char ***argv, char **env, t_prstruct *proc)
+static void	ft_fork_ex(char *bin, char ***argv, char **env)
 {
 	char	**av;
 
@@ -20,7 +20,7 @@ static void	ft_fork_ex(char *bin, char ***argv, char **env, t_prstruct *proc)
 	if (access(bin, X_OK) != -1)
 		if (execve(bin, av, env) == -1)
 			ft_error_path(1, av[0]);
-	ft_exit("exit 1", 0, proc);
+	exit(1);
 }
 
 char		*ft_check_bin(char *buf, char **env, char **path, int i)
@@ -61,7 +61,7 @@ void		ft_execute(char *buf, char **env, char *bin, t_prstruct *proc)
 	ft_son_builtin(&buf, &bin, env, proc);
 	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
-	ft_fork_ex(bin, &argv, env, proc);
+	ft_fork_ex(bin, &argv, env);
 }
 
 void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)

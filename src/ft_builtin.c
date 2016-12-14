@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/12 14:16:21 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/14 15:56:42 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,30 @@ int	ft_cd(char *buf, char **env, int j, t_cdstruct *argv)
 int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 {
 	t_structenv		t;
+	int				i;
 
 	t.k = 0;
-	if (env == NULL)
+	if (!(i = 0) && env == NULL)
 	{
 		ft_putendl_fd("42sh: no env set", 2);
-		return (1);
+		i = 1;
 	}
-	if (buf[6] != ' ' && buf[6] != '\t' && buf[6] != '\0')
-		return (-1);
-	if ((t.argv = ft_split(buf)) != NULL && t.argv[1] == NULL)
+	else if (buf[6] != ' ' && buf[6] != '\t' && buf[6] != '\0')
+		i = -1;
+	else if ((t.argv = ft_split(buf)) != NULL && t.argv[1] == NULL)
 	{
 		ft_free_tab(&t.argv);
-		return (-1);
+		i = -1;
 	}
-	else if (t.argv != NULL && (t.argv[2] == NULL || \
-		(t.argv[2] != NULL && t.argv[3] == NULL)))
-	{
-		if (ft_setenv_anx(adenv, nenv, &t, env))
-			return (1);
-	}
+	else if (t.argv && (!t.argv[2] || (t.argv[2] && t.argv[3])))
+		i = ft_setenv_anx(adenv, nenv, &t, env);
 	else if (t.argv != NULL)
+	{
 		ft_putendl_fd("setenv: too many arguments", 2);
+		i = 1;
+	}
 	ft_free_tab(&t.argv);
-	return (0);
+	return (i);
 }
 
 int	ft_unsetenv(char *buf, char ***adenv, char **env)
