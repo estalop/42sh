@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 01:13:21 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/14 18:05:16 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/14 18:13:16 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static char	*ft_trunc_buf(t_prstruct *proc, char **buf, int i)
 	t.j = i - 1;
 	while (ft_isdigit(buf[proc->i][t.j]) && t.j > 0)
 		t.j--;
+	t.j++;
 	t.tmp = ft_strsub(buf[proc->i], 0, t.j);
-	ft_putendl(t.tmp);
 	t.tmp3 = t.tmp;
 	while (buf[proc->i][i] == ' ' || buf[proc->i][i] == '>' || \
 		buf[proc->i][i] == '<')
@@ -79,7 +79,6 @@ static char	*ft_trunc_buf(t_prstruct *proc, char **buf, int i)
 		   buf[proc->i][i] != '<' && buf[proc->i][i] != '\0')
 		i++;
 	t.tmp2 = ft_strdup(&buf[proc->i][i]);
-	ft_putendl(t.tmp2);
 	t.tmp3 = ft_strjoin(t.tmp, t.tmp2);
 	ft_strdel(&t.tmp);
 	ft_strdel(&t.tmp2);
