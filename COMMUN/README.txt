@@ -13,14 +13,22 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- Ne pas re-ecrire le prompt a chaque fois (met la merde dans certains cas)
-(Voir ligne 104-106 dans ft_signal_size  , une fois desactive ca va mieux (sauf multilignes))
-
 - L'historique ne reviens toujours pas a la derniere valeur
 
-- La touche DEL ne fonctionne pas
+EDITION SPECIAL : HISTORIQUE DE MERDE
 
 - Ce qu'on ecrit avec des ; && ect n'est pas mis dans l'historique toujours
+- !ec   --> Premiere valeur de l'historique avec ec
+- History dois faire le changement quand on appuis sur TAB (Si pas trouvé fait rien)
+- Dois faire "zsh: event not found: commande" si pas trouvé et appuis sur entrée
+- Empecher le lancement automatique ! (Changer la string et empêcher le lancement)
+- !x --> (x etant un truc)
+- Un espace remplace la valeur directement
+- Le remplacement des valeurs est pas toujours fait
+- Le rendu fait nimp (genre echo text && !?), lancement dans le mauvais sens ect c'est nimp
+- Mettre des couleurs avec le prompt ? (genre histoire de couleur quoi)
+- Voir ce que c'est cette histoire de # (codé mais pourquoi ?...)
+- Affichage par le seigneur de la commande lancée..
 
 ====================================================================
 
