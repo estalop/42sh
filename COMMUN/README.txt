@@ -30,6 +30,16 @@ EDITION SPECIAL : HISTORIQUE DE MERDE
 - Voir ce que c'est cette histoire de # (codé mais pourquoi ?...)
 - Affichage par le seigneur de la commande lancée..
 
+Comment lutter contre la liste ci-dessus ?
+
+	Il faut d'abord arrêter de lancer automatiquement la ligne en cas de présence d'un
+	élément qui a besoin d'un changement ( genre !commande ), puis changer TOUT les éléments
+	et permettre l'affichage de la ligne avec les changements (remplacement de la ligne actuelle).
+	Ainsi avec un historique 8795 = ls et une commande précédente echo TEST FINI:
+		echo TEST ; !8795 ; !?     deviendra     echo TEST ; ls ; echo TEST FINI
+	Prendre en compte aussi le fait que le ! est un élément qui devrait être géré suivan les cas
+	donc bien bien essayer des test de fou après
+
 ====================================================================
 
 
