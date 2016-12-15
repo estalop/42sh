@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 09:08:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/09/17 13:05:56 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/15 13:26:08 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ static void	ft_shift_arrow_down(t_termcaps *cap, int strlen, char *tmp)
 		tputs(cap->sf, 1, ft_output);
 		while (ft_calculate_height(tmp, cap->x, cap) < j)
 			cap->x++;
-		while (tmp[cap->x - cap->neg] != '\n' && \
-				ft_calculate_whidth(tmp, cap->x, cap) < i)
+		while (((size_t)(cap->x - cap->neg) < ft_strlen(tmp)) && \
+	tmp[cap->x - cap->neg] != '\n' && ft_calculate_whidth(tmp, cap->x, cap) < i)
 			cap->x++;
 		tputs(tgoto(cap->cv, 0, ft_calculate_whidth(tmp, cap->x, cap)), 1, \
 					ft_output);
