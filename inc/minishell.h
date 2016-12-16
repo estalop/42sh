@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/16 15:14:29 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/16 19:08:36 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct		s_prstruct
 	int				herepipe;
 	char			**env[3];
 	t_exec			*exec;
+	int				stop;
 }					t_prstruct;
 
 typedef struct		s_termcaps
@@ -344,5 +345,6 @@ char				*parse_local_var(char *s);
 char				*parse_process(char *s);
 char				*parse_dollar_variable(char *s);
 char				*parse_dollar_pipeline_exit_status(char *s);
+char				*history_designator(char *s);
 
 #endif

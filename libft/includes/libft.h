@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/13 13:29:34 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/16 17:57:07 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MAXV(a, b)			((a) > (b) ? (a) : (b))
 # define MINV(a, b)			((a) < (b) ? (a) : (b))
 # define IS_ALPHA_DIGIT(c)	(c == '_' || ft_isalpha(c) || ft_isdigit(c))
+# define IS_SPACE(a)		(a == ' ' || a == '\t')
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include <string.h>
