@@ -19,27 +19,12 @@ EDITION SPECIAL : HISTORIQUE DE MERDE
 
 - Ce qu'on ecrit avec des ; && ect n'est pas mis dans l'historique toujours
 - !ec   --> Premiere valeur de l'historique avec ec
-- History dois faire le changement quand on appuis sur TAB (Si pas trouvé fait rien)
-- Dois faire "zsh: event not found: commande" si pas trouvé et appuis sur entrée
-- Empecher le lancement automatique ! (Changer la string et empêcher le lancement)
-- !x --> (x etant un truc)
-- Un espace remplace la valeur directement
 - Le remplacement des valeurs est pas toujours fait
 - Le rendu fait nimp (genre echo text && !?), lancement dans le mauvais sens ect c'est nimp
+- Affichage par le seigneur de la commande lancée.. (parfois)
+
+
 - Mettre des couleurs avec le prompt ? (genre histoire de couleur quoi)
-- Voir ce que c'est cette histoire de # (codé mais pourquoi ?...)
-- Affichage par le seigneur de la commande lancée..
-
-Comment lutter contre la liste ci-dessus ?
-
-	Il faut d'abord arrêter de lancer automatiquement la ligne en cas de présence d'un
-	élément qui a besoin d'un changement ( genre !commande ), puis changer TOUT les éléments
-	et permettre l'affichage de la ligne avec les changements (remplacement de la ligne actuelle).
-	Ainsi avec un historique 8795 = ls et une commande précédente echo TEST FINI:
-		echo TEST ; !8795 ; !?     deviendra     echo TEST ; ls ; echo TEST FINI
-	Prendre en compte aussi le fait que le ! est un élément qui devrait être géré suivan les cas
-	donc bien bien essayer des test de fou après
-
 ====================================================================
 
 

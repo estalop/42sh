@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:07:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/06 19:46:22 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/16 15:41:10 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_main_free(char ***env, t_termcaps *cap, char ***path)
 		free(tmp);
 	}
 	ft_free_tab(env);
-	ft_strdel(&cap->str);
-	ft_strdel(&cap->cmd);
+	// ft_strdel(&cap->str);
+	// ft_strdel(&cap->cmd);
 	ft_strdel(&cap->stop);
 	ft_free_tab(path);
 }
