@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 13:02:26 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/13 14:55:17 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/16 21:15:28 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		env_setter(char *name, char *value)
 	s += ft_strlen(name);
 	ft_strcpy(s, " ");
 	ft_strcpy(s + 1, value);
+	// WTF, ça marche plus maintenant, il me sort "setenv: too many arguments" (faire printf de cmd pour voir)
 	ft_setenv(cmd, &g_process->env[0], g_process->env[0], &g_process->env[2]);
 }
 

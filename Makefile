@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
+#    By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/16 15:56:19 by tviviand         ###   ########.fr        #
+#    Updated: 2016/12/16 21:10:46 by chdenis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,6 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_get_home.c \
 	ft_delete_list.c \
 	ft_run_history2.c \
-	ft_deal_exclamation.c \
-	ft_replace_excla.c \
 	ft_check_tmp.c \
 	ft_print_cd.c \
 	ft_curpath_cd.c \
@@ -63,7 +61,7 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	ft_select_anx.c \
 	parsing.c \
 	parsing_dollar.c \
-	history_designator.c
+	history_designator.c history_designators.c
 
 SRC_O = $(SRC:.c=.o)
 

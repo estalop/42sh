@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/16 19:08:36 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/16 20:35:43 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,5 +346,9 @@ char				*parse_process(char *s);
 char				*parse_dollar_variable(char *s);
 char				*parse_dollar_pipeline_exit_status(char *s);
 char				*history_designator(char *s);
+char				*history_designator_n(char *c, char **replace);
+char				*history_designator_beginsby(char *c, char **replace);
+char				*history_designator_contains(char *c, char **replace);
+char				*history_designator_typed(char *s, char *c, char **replace);
 
 #endif

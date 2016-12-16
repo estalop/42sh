@@ -6,11 +6,13 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:07:29 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/05 16:59:11 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/16 21:07:47 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_prstruct	*g_process;
 
 static void			export_add_var(char *name, char *value, int p, int son)
 {
@@ -50,11 +52,27 @@ static void			parse_export_arg(char *s, int p, int son)
 	free(value);
 }
 
-static int			parse_export_option(char *s)
+static int			parse_export_option(char *s, int son)
 {
-	while (*s && *s != 'p')
-		s++;
-	return (*s == 'p');
+	if (*s == 'p')
+		return (1);
+	if (son)
+		ft_printf("export: -%c: invalid option\n", *s);
+	return (-1);
+}
+
+/*
+**	Si aucun argument, return 1 et imprime l'environnement
+*/
+
+static int			export_no_args(char **args, int son)
+{
+	if (args[1])
+		return (0);
+	ft_free_tab(&args);
+	if (son)
+		; // TODO: afficher l'env, moi ça veut pas avec ft_env("env", &(g_process->env[1]), 1);
+	return (1);
 }
 
 /*
@@ -71,12 +89,14 @@ int					ft_export(char *s, int son)
 
 	options = 0;
 	args = ft_strsplit(s, ' ');
+	if (export_no_args(args, son))
+		return (-1);
 	a = args + 1;
 	p = 0;
-	while (*a)
+	while (*a && p >= 0)
 	{
 		if (**a == '-' && !options)
-			p = parse_export_option(*a + 1) || p;
+			p = parse_export_option(*a + 1, son);
 		else if ((options = 1))
 			parse_export_arg(*a, p, son);
 		a++;
