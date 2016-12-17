@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:07:29 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/16 21:07:47 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/17 20:09:01 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,20 @@ static int			parse_export_option(char *s, int son)
 
 static int			export_no_args(char **args, int son)
 {
+	char	**e;
+
 	if (args[1])
 		return (0);
 	ft_free_tab(&args);
-	if (son)
-		; // TODO: afficher l'env, moi ça veut pas avec ft_env("env", &(g_process->env[1]), 1);
-	return (1);
+	if (!son)
+		return (1);
+	e = g_process->env[1];
+	while (*e)
+	{
+		ft_printf("%s\n", *e);
+		e++;
+	}
+	exit(0);
 }
 
 /*
