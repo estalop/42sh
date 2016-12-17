@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/14 16:36:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/17 16:51:04 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	return (ft_check_bin_anx(&bin, &argv));
 }
 
-void		ft_execute(char *buf, char **env, char *bin, t_prstruct *proc)
+void		ft_execute(char *buf, char **env, int e, t_prstruct *proc)
 {
 	char	**argv;
 	int		i;
 
 	i = 0;
-	ft_son_builtin(&buf, &bin, env, proc);
+	ft_son_builtin(&buf, e, env, proc);
 	argv = ft_split(buf);
 	ft_set_home_in_argv(argv, env);
-	ft_fork_ex(bin, &argv, env);
+	ft_fork_ex(proc->bin, &argv, env);
 }
 
 void		ft_close_pipe(t_plist *tmp, t_prstruct *proc)

@@ -6,13 +6,13 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/05 09:51:04 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/17 19:46:06 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
+int			ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 {
 	char	*str;
 
@@ -52,24 +52,44 @@ int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 	return (0);
 }
 
+static int	ft_parsing_history(char *arg, int index)
+{
+	while (index != -1 && arg[index] != '\0')
+	{
+		while (arg[index] == ' ' || arg[index] == '\t' \
+			|| arg[index] == '\r' || arg[index] == '\n')
+			index++;
+		if (ft_isdigit(arg[index]))
+			return (index);
+		else if (arg[index] == '<' || arg[index] == '>')
+		{
+			while (arg[index] == '<' || arg[index] == '>' || arg[index] == ' ' \
+			|| arg[index] == '\t' || arg[index] == '\r' || arg[index] == '\n')
+				index++;
+			while (arg[index] != '\0' && arg[index] != ' ' && \
+			arg[index] != '\t' && arg[index] != '\r' && arg[index] != '\n')
+				index++;
+		}
+		else if (arg[index] != '\0')
+			return (-1);
+		index++;
+	}
+	return (index);
+}
+
 int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 {
 	int			index;
 
 	if (home == NULL)
-	{
-		ft_putendl(" Please set the home variable of \
-env to execute history command");
-		return (1);
-	}
+		return (-1);
 	index = 0;
-	while (arg[index] == ' ' || arg[index] == '\t' || arg[index] == '\r' ||
-			arg[index] == '\n')
-		index++;
+	if ((index = ft_parsing_history(arg, index)) == -1)
+		return (-6);
 	if (arg[index] >= '0' && arg[index] <= '9')
-		return (ft_run_history2(arg, proc->histo2, index));
+		return (-4);
 	else if (arg[index] == '\0')
-		return (ft_display_list3(proc->histo2));
+		return (-5);
 	if (arg[index] == '-')
 		index++;
 	if (ft_check_options_history(arg, 'w', index) == 1)

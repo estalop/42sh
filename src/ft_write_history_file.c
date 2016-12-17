@@ -6,7 +6,7 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 15:57:57 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/04 16:04:30 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/12/17 18:10:46 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_write_history_file(t_dlist *histo, int index, int fd, int pos)
 
 	courant = histo->p_head;
 	if (fd <= 0)
-		return (ft_error_fd());
+		return (-3);
 	while (pos <= histo->length)
 	{
 		if (courant->wrote == 0)
@@ -44,7 +44,7 @@ int		ft_write_history_file(t_dlist *histo, int index, int fd, int pos)
 	else
 		ft_putstr_fd("exit\n", fd);
 	close(fd);
-	return (1);
+	return (0);
 }
 
 int		ft_write_history_file2(t_dlist *histo, int fd, int pos, int exit)

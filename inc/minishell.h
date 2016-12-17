@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/16 20:35:43 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/17 18:12:01 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ char				*ft_check_bin_anx(char **bin, char ***argv);
 int					isinbuiltin(char *line);
 void				ft_echo(char *line);
 void				ft_error_path(int i, char *path);
+int					ft_error_fd(void);
 int					ft_exit(char *buf, int i, t_prstruct *proc);
 void				ft_free_exit(char ***argv);
 int					ft_cd(char *buf, char **env, int j, t_cdstruct *argv);
@@ -222,8 +223,7 @@ void				ft_error_cd(char *buf);
 int					ft_env(char *buf, char ***env, int i);
 void				ft_print_env(char **env);
 char				**ft_get_path(char **environ);
-void				ft_execute(char *buf, char **env, char *bin,\
-	t_prstruct *proc);
+void				ft_execute(char *buf, char **env, int e, t_prstruct *proc);
 int					ft_setenv(char *buf, char ***adenv, char **env,\
 	char ***nenv);
 char				**ft_subsetenv(t_structenv t, char **env);
@@ -328,7 +328,7 @@ int					ft_print_cd(char *argv, char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
 char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
-void				ft_son_builtin(char **buf, char **bin, char **env, \
+void				ft_son_builtin(char **buf, int e, char **env, \
 									t_prstruct *proc);
 void				ft_preprocess(char **tmp, t_prstruct *proc, char **path, \
 							t_hered *heredoc);
@@ -350,5 +350,7 @@ char				*history_designator_n(char *c, char **replace);
 char				*history_designator_beginsby(char *c, char **replace);
 char				*history_designator_contains(char *c, char **replace);
 char				*history_designator_typed(char *s, char *c, char **replace);
+int					ft_run_history_beta2(char *home, t_prstruct *proc, \
+										int exit);
 
 #endif
