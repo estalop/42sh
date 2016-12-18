@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 13:17:00 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/18 14:06:10 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static int	ft_parsing_history(char *arg, int index)
 			index++;
 		if (ft_isdigit(arg[index]))
 			return (index);
-		else if (arg[index] == '<' || arg[index] == '>')
+		if (arg[index] == '-')
+			return (index);
+		if (arg[index] == '<' || arg[index] == '>')
 		{
 			while (arg[index] == '<' || arg[index] == '>' || arg[index] == ' ' \
 			|| arg[index] == '\t' || arg[index] == '\r' || arg[index] == '\n')
