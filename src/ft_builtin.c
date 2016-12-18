@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 12:34:44 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/18 13:22:43 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	ft_setenv(char *buf, char ***adenv, char **env, char ***nenv)
 		ft_free_tab(&t.argv);
 		i = -1;
 	}
-	// ICI ça va pqs (argv[3] devrait etre NULL pour que ce soit vrai (voir avec Malloc (voir commit "redirection au chnaps")))
-	else if (t.argv && (!t.argv[2] || (t.argv[2] && t.argv[3])))
+	else if (t.argv && (!t.argv[2] || (t.argv[2] && !t.argv[3])))
 		i = ft_setenv_anx(adenv, nenv, &t, env);
 	else if (t.argv != NULL)
 	{
