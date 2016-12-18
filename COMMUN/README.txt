@@ -13,9 +13,28 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
+
+
+
+Juste envoyer "env" leaks "env" (la string)
+
+
+Leaks avec cd
+
+echo virer les \
+
+Historique arrive toujours pas au premier element
+
 History -p
 
 https://forum.intra.42.fr/topics/15200/messages/1#52865
+
+'imbatable :
+Complétion dynamique
+Testez la presence et le bon fonctionnement de la complétion dynamique.
+Au minimum, la complétion doit être fonctionnelle avec des fichiers et des dossiers, dans des sous-dossiers du répertoire courant.'
+
+Position dans la correction : Manipulation de fichiers [age2]
 
 ====================================================================
 
