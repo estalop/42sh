@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 17:51:30 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:57:44 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,17 @@ env to execute history command", 2);
 	}
 	else if (e == -2)
 	{
-		ft_putstr(" You can't delete this historic entry\n");
+		ft_putendl_fd(" You can't delete this historic entry", 2);
 		exit(1);
 	}
 	else if (e == -3)
 		exit(ft_error_fd());
 	else if (e == -7)
 		writehistoryp(&buf[7]);
+	else if (e == -8)
+		ft_putendl_fd("42sh: history: invalid option\nhistory: usage: \
+history [-c] [-d offset] [n] or history -awrn [filename] or \
+history -ps arg [arg...]", 2);
 }
 
 void		ft_son_builtin(char **buf, int e, char **env, t_prstruct *proc)

@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 17:49:51 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:56:54 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 		return (-4);
 	else if (arg[index] == '\0')
 		return (-5);
-	opt = ft_check_options_history(arg, 0, 0, NULL);
+	if (!(opt = ft_check_options_history(arg, 0, 0, NULL)))
+		return (-8);
 	if (arg[index] == '-')
 		index++;
 	if (ft_strchr(arg, 'w'))
