@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 16:17:03 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:51:30 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ env to execute history command", 2);
 	}
 	else if (e == -3)
 		exit(ft_error_fd());
+	else if (e == -7)
+		writehistoryp(&buf[7]);
 }
 
 void		ft_son_builtin(char **buf, int e, char **env, t_prstruct *proc)

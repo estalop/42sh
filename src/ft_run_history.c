@@ -6,19 +6,11 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 17:04:19 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/18 17:49:51 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// if (!(tabe[i][j] == 'r' || tabe[i][j] == 'a' ||
-// tabe[i][j] == 'n' || tabe[i][j] == 'd' || tabe[i][j] == 'c' ||
-// tabe[i][j] == 'w' || tabe[i][j] == 'p' || tabe[i][j] == 's'))
-// {
-// 	break ;
-// }
-
 
 static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 {
@@ -42,24 +34,27 @@ static int	ft_run_history_beta(t_prstruct *proc)
 	return (0);
 }
 
-static int	ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
+static int	ft_run_history_part2(char *arg, char *opt, t_prstruct *proc,
 	int index)
 {
-	if (ft_check_options_history(arg, 'c', index) == 1)
-		return (ft_run_history_beta(proc));
-	if (ft_check_options_history(arg, 'd', index) == 1)
-		return (ft_run_history3(arg, proc->histo2, index));
-	if (ft_check_options_history(arg, 'a', index) == 1)
-		return (ft_run_history4(home, proc->histo2));
-	if (ft_check_options_history(arg, 'n', index) == 1)
-		return (ft_run_history5(arg, home, proc->histo2, index));
-	if (ft_check_options_history(arg, 'r', index) == 1)
-		return (ft_run_history5(arg, home, proc->histo2, index));
-	if (ft_check_options_history(arg, 's', index) == 1)
+	int	e;
+
+	if (ft_strchr(opt, 'c'))
+		e = ft_run_history_beta(proc);
+	if (ft_strchr(opt, 'd'))
+		e = ft_run_history3(arg, proc->histo2, index);
+	if (ft_strchr(opt, 'a'))
+		e = ft_run_history4(ft_get_home(proc->env[2]), proc->histo2);
+	if (ft_strchr(arg, 'n'))
+		ft_run_history5(arg, ft_get_home(proc->env[2]), proc->histo2, index);
+	if (ft_strchr(arg, 'r'))
+		e = ft_run_history5(arg, ft_get_home(proc->env[2]), proc->histo2, index);
+	if (ft_strchr(arg, 's'))
 		ft_add_data(proc->histo2, arg + index + 2, 0);
-	if (ft_check_options_history(arg, 'p', index) == 1)
-		writehistoryp(arg);
-	return (0);
+	if (ft_strchr(arg, 'p'))
+		return (-7);
+	ft_strdel(&opt);
+	return (e);
 }
 
 static int	ft_parsing_history(char *arg, int index)
@@ -92,6 +87,7 @@ static int	ft_parsing_history(char *arg, int index)
 int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 {
 	int			index;
+	char		*opt;
 
 	if (home == NULL)
 		return (-1);
@@ -102,9 +98,13 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 		return (-4);
 	else if (arg[index] == '\0')
 		return (-5);
+	opt = ft_check_options_history(arg, 0, 0, NULL);
 	if (arg[index] == '-')
 		index++;
-	if (ft_check_options_history(arg, 'w', index) == 1)
+	if (ft_strchr(arg, 'w'))
+	{
+		ft_strdel(&opt);
 		return (ft_run_history_beta2(home, proc, exit));
-	return (ft_run_history_part2(arg, home, proc, index));
+	}
+	return (ft_run_history_part2(arg, opt, proc, index));
 }

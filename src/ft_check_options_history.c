@@ -6,58 +6,42 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:30:59 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 16:26:00 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:36:19 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_check_options_history2(char *arg, char c, int index)
+char		*ft_check_options_history(char *arg, int i, int j, char *str)
 {
-	if (c == 'r')
-		if (arg[index] == 'r' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'c'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 'w')
-		if (arg[index] == 'w' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'c' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 'p')
-		if (arg[index] == 'p' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'c' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 's')
-		if (arg[index] == 's' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 'c'))
-			return (1);
-	return (0);
-}
+	char	**tabu;
+	char	*tmp;
 
-int			ft_check_options_history(char *arg, char c, int index)
-{
-	if (c == 'c')
-		if (arg[index] == 'c' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 'a')
-		if (arg[index] == 'a' && (arg[index - 1] == '-' || arg[index - 1] == 'c'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 'd')
-		if (arg[index] == 'd' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'c' || arg[index - 1] == 'n' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	if (c == 'n')
-		if (arg[index] == 'n' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
-	|| arg[index - 1] == 'd' || arg[index - 1] == 'c' || arg[index - 1] == 'r'
-	|| arg[index - 1] == 'w' || arg[index - 1] == 'p' || arg[index - 1] == 's'))
-			return (1);
-	return (ft_check_options_history2(arg, c, index));
+	if (!(tabu = ft_split(arg)))
+		return (NULL);
+	while (tabu[i] && tabu[i][0] == '-')
+	{
+		j = 1;
+		while (tabu[i][j] == 'r' || tabu[i][j] == 'a' ||
+			tabu[i][j] == 'n' || tabu[i][j] == 'd' || tabu[i][j] == 'c' ||
+			tabu[i][j] == 'w' || tabu[i][j] == 'p' || tabu[i][j] == 's')
+			j++;
+		if (tabu[i][j])
+		{
+			ft_free_tab(&tabu);
+			ft_strdel(&str);
+			return (NULL);
+		}
+		if (str)
+		{
+			tmp = ft_strjoin(str, tabu[i]);
+			ft_strdel(&str);
+			str = tmp;
+		}
+		else
+			str = ft_strdup(tabu[i]);
+		i++;
+	}
+	ft_free_tab(&tabu);
+	return (str);
 }

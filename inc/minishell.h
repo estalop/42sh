@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/18 16:39:52 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/18 17:36:50 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,7 +312,8 @@ char				*ft_get_element_from_list(t_dlist *liste, int pos);
 t_dlist				*ins_avant(t_dlist *list, char *data, t_node *courant,\
 	int pos);
 int					ft_display_list3(t_dlist *p_list);
-int					ft_check_options_history(char *arg, char c, int index);
+char				*ft_check_options_history(char *arg, int i, int j, \
+											char *str);
 char				*ft_get_home(char **env);
 void				ft_delete_list(t_dlist *p_list);
 int					ft_check_wrote_from_list(t_dlist *list, int pos);
