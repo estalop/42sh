@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_preprocessing_anx.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 17:00:06 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/14 17:28:38 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 13:51:24 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,16 @@ static int	islast(char *l, int cur)
 
 static int	ft_preprocesssplit_anx_anx(t_preprocesssplit *p, char *l)
 {
+	p->com[p->c] = ft_strsub(l, p->j, p->i - p->j);
+	p->c++;
+	p->j = p->i + 1;
 	if (!islast(l, p->i))
 	{
-		p->com[p->c] = ft_strsub(l, p->j, p->i - p->j);
-		p->c++;
-		p->j = p->i + 1;
 		p->i += 2;
+		return (0);
 	}
-	else
-	{
-		p->com[p->c] = NULL;
-		p->j = p->i + 1;
-		p->i++;
-		return (1);
-	}
-	return (0);
+	p->i++;
+	return (1);
 }
 
 int			ft_preprocesssplit_anx(char *l, t_operators *t,
