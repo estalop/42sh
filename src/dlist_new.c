@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dlist_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 15:35:22 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:41:17 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/18 13:15:02 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_dlist		*dlist_new(t_dlist *p_new)
 	if (p_new != NULL)
 	{
 		p_new->length = 0;
-		p_new->pos = 1;
+		p_new->pos = 0;
 		p_new->index2 = 0;
 		p_new->p_head = NULL;
 		p_new->p_tail = NULL;

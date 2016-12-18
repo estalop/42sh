@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/17 20:09:36 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/18 12:35:24 by chdenis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static char	*ft_loopanx(char *tmp, t_prstruct *proc)
 		if (ft_strlen(tmp) > 0)
 			ft_add_data(proc->histo2, tmp, 0);
 	}
+	proc->histo2->pos = proc->histo2->length;
 	return (tmp);
 }
 
