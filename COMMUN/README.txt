@@ -13,21 +13,10 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- history -s EST KO
+History -p
 
-(moins importants)
-- Mettre des couleurs avec le prompt ? (genre histoire de couleur quoi)
-- Espacements et tab ne permettent pas de lancer une SALOPE de commande (parfois)
+https://forum.intra.42.fr/topics/15200/messages/1#52865
 
-Possiblement réparé :
-
-- Historique aucune fonction fonctionne (parsing de merde ft_parsing_history)
-- Get et Set dans le fichier historique de commande KO
-
-Fix + testé :
-
-- setenv
-- commande ; RIEN (commande non exec et non check)
 ====================================================================
 
 
