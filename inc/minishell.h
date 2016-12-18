@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/18 17:36:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 18:30:52 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,5 +352,7 @@ char				*history_designator_n(char *c, char **replace);
 char				*history_designator_beginsby(char *c, char **replace);
 char				*history_designator_contains(char *c, char **replace);
 char				*history_designator_typed(char *s, char *c, char **replace);
+void				ft_if_hyphen_anx(char **tmp, char **tmp2, char **tmp3,
+	t_hered *tmpstruct);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fourth_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/17 08:33:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/14 14:04:30 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 18:29:33 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ static void		ft_if_hyphen(t_termcaps *cap, int i, int j, char *tmp)
 	t_hered	*tmpstruct;
 
 	tmp2 = NULL;
-	tmp3 = NULL;
 	tmpstruct = cap->heredoc;
-	while (tmpstruct->next != NULL)
+	while (!(tmp3 = NULL) && tmpstruct->next != NULL)
 		tmpstruct = tmpstruct->next;
 	while (tmpstruct->str[i] != '\0')
 	{
@@ -66,11 +65,7 @@ static void		ft_if_hyphen(t_termcaps *cap, int i, int j, char *tmp)
 		i++;
 	}
 	tmp = ft_strsub(tmpstruct->str, j, i - j);
-	tmp3 = tmp2 ? ft_strjoin(tmp2, tmp) : tmp;
-	ft_strdel(&tmp2);
-	tmp3 != tmp ? ft_strdel(&tmp) : 0;
-	ft_strdel(&tmpstruct->str);
-	tmpstruct->str = tmp3;
+	ft_if_hyphen_anx(&tmp, &tmp2, &tmp3, tmpstruct);
 }
 
 static int		ft_check_end(t_termcaps *cap, int *c)

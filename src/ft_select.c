@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/12/14 13:31:54 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:58:53 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 			return (NULL);
 		line = &s.escape;
 	}
-	//is.i = tc->x - tc->prompt;
 	s.i = tc->x - tc->neg;
 	if ((--s.i) < 0)
 		s.i = 0;

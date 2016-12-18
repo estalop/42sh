@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/18 12:35:24 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/18 18:13:26 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ char		**ft_get_path(char **environ)
 
 static char	*ft_loopanx(char *tmp, t_prstruct *proc)
 {
-	proc->stop = 0;
 	if (tmp != NULL)
 	{
 		tmp = history_designator(tmp);
-		if (ft_strlen(tmp) > 0)
+		if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
 			ft_add_data(proc->histo2, tmp, 0);
 	}
-	proc->histo2->pos = proc->histo2->length;
 	return (tmp);
 }
 
@@ -61,11 +59,10 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 	char	*tmp;
 
 	ft_init_histo(proc, cap);
-	while (42)
+	while (42 && !(cap->quot = 0))
 	{
 		cap->str = NULL;
 		cap->cmd = NULL;
-		cap->quot = 0;
 		path = ft_get_path(proc->env[0]);
 		proc->path = path;
 		proc->env[1] = ft_tabdup(proc->env[2]);
@@ -74,8 +71,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		ft_reset_term(0);
 		tmp = cap->cmd ? cap->cmd : cap->str;
 		tmp = ft_loopanx(tmp, proc);
-		if (!proc->stop)
-			ft_preprocess(&tmp, proc, path, cap->heredoc);
+		ft_preprocess(&tmp, proc, path, cap->heredoc);
 		ft_main_free(&proc->env[1], cap, &path);
 		if (proc->env[0] != NULL && proc->env[1] && proc->env[2])
 			ft_sync_env(proc->env, 0, 0, 0);

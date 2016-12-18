@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 17:56:54 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 18:19:16 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ static int	ft_run_history_beta(t_prstruct *proc)
 	return (0);
 }
 
-static int	ft_run_history_part2(char *arg, char *opt, t_prstruct *proc,
+static int	ft_run_history_part2(char *arg, char *opt, t_prstruct *pro,
 	int index)
 {
 	int	e;
 
 	if (ft_strchr(opt, 'c'))
-		e = ft_run_history_beta(proc);
+		e = ft_run_history_beta(pro);
 	if (ft_strchr(opt, 'd'))
-		e = ft_run_history3(arg, proc->histo2, index);
+		e = ft_run_history3(arg, pro->histo2, index);
 	if (ft_strchr(opt, 'a'))
-		e = ft_run_history4(ft_get_home(proc->env[2]), proc->histo2);
+		e = ft_run_history4(ft_get_home(pro->env[2]), pro->histo2);
 	if (ft_strchr(arg, 'n'))
-		ft_run_history5(arg, ft_get_home(proc->env[2]), proc->histo2, index);
+		ft_run_history5(arg, ft_get_home(pro->env[2]), pro->histo2, index);
 	if (ft_strchr(arg, 'r'))
-		e = ft_run_history5(arg, ft_get_home(proc->env[2]), proc->histo2, index);
+		e = ft_run_history5(arg, ft_get_home(pro->env[2]), pro->histo2, index);
 	if (ft_strchr(arg, 's'))
-		ft_add_data(proc->histo2, arg + index + 2, 0);
+		ft_add_data(pro->histo2, arg + index + 2, 0);
 	if (ft_strchr(arg, 'p'))
 		return (-7);
 	ft_strdel(&opt);
