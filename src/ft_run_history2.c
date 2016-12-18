@@ -6,11 +6,28 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/01 20:22:38 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/17 17:53:56 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:03:02 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	writehistoryp(char *s)
+{
+	char	**tabe;
+	int		i;
+
+	tabe = ft_split(s);
+	i = 0;
+	while (tabe && tabe[i])
+	{
+		if (tabe[i][0] != '-')
+			ft_printf("%s\n", tabe[i]);
+		i++;
+	}
+	if (tabe)
+		ft_free_tab(&tabe);
+}
 
 int		ft_run_history2(char *arg, t_dlist *histo, int index)
 {

@@ -13,18 +13,21 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
-- L'historique ne reviens toujours pas a la derniere valeur
+- history -s EST KO
 
-EDITION SPECIAL : HISTORIQUE DE MERDE
-
-- Ce qu'on ecrit avec des ; && ect n'est pas mis dans l'historique toujours
-- !ec   --> Premiere valeur de l'historique avec ec
-- Le remplacement des valeurs est pas toujours fait
-- Le rendu fait nimp (genre echo text && !?), lancement dans le mauvais sens ect c'est nimp
-- Affichage par le seigneur de la commande lancée.. (parfois)
-
-
+(moins importants)
 - Mettre des couleurs avec le prompt ? (genre histoire de couleur quoi)
+- Espacements et tab ne permettent pas de lancer une SALOPE de commande (parfois)
+
+Possiblement réparé :
+
+- Historique aucune fonction fonctionne (parsing de merde ft_parsing_history)
+- Get et Set dans le fichier historique de commande KO
+
+Fix + testé :
+
+- setenv
+- commande ; RIEN (commande non exec et non check)
 ====================================================================
 
 

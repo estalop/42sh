@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_run_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 16:32:41 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 17:04:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// if (!(tabe[i][j] == 'r' || tabe[i][j] == 'a' ||
+// tabe[i][j] == 'n' || tabe[i][j] == 'd' || tabe[i][j] == 'c' ||
+// tabe[i][j] == 'w' || tabe[i][j] == 'p' || tabe[i][j] == 's'))
+// {
+// 	break ;
+// }
+
 
 static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 {
@@ -50,7 +58,7 @@ static int	ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 	if (ft_check_options_history(arg, 's', index) == 1)
 		ft_add_data(proc->histo2, arg + index + 2, 0);
 	if (ft_check_options_history(arg, 'p', index) == 1)
-		ft_putendl(&arg[index + 2]);
+		writehistoryp(arg);
 	return (0);
 }
 

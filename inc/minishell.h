@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/18 16:21:25 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 16:39:52 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct		s_selectget
 	int				i;
 }					t_selectget;
 
+void				writehistoryp(char *s);
 int					ft_select_get_anx(t_selectget *s, char **line,
 	char **list, t_termcaps *tc);
 int					ft_preprocesssplit_anx(char *l, t_operators *t, \
