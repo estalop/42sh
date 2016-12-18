@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/17 18:12:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 16:21:25 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,7 +350,5 @@ char				*history_designator_n(char *c, char **replace);
 char				*history_designator_beginsby(char *c, char **replace);
 char				*history_designator_contains(char *c, char **replace);
 char				*history_designator_typed(char *s, char *c, char **replace);
-int					ft_run_history_beta2(char *home, t_prstruct *proc, \
-										int exit);
 
 #endif

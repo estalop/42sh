@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/17 19:48:01 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/18 16:17:03 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static void	ft_son_history(char *buf, int e, t_prstruct *proc)
 		exit(ft_display_list3(proc->histo2));
 	else if (e == -6)
 	{
-		ft_putendl_fd("42sh: history: hjgdfdsfg: numeric argument required", 2);
+		ft_putstr_fd("42sh: history: ", 2);
+		ft_putstr_fd(&buf[7], 2);
+		ft_putendl_fd(": numeric argument required", 2);
 		exit(1);
 	}
 	else if (e == -1)

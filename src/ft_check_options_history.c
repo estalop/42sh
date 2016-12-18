@@ -6,13 +6,13 @@
 /*   By: pbourdon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:30:59 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/10/01 20:41:14 by pbourdon         ###   ########.fr       */
+/*   Updated: 2016/12/18 16:26:00 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_check_options_history2(char *arg, char c, int index)
+static int	ft_check_options_history2(char *arg, char c, int index)
 {
 	if (c == 'r')
 		if (arg[index] == 'r' && (arg[index - 1] == '-' || arg[index - 1] == 'a'
@@ -37,7 +37,7 @@ int		ft_check_options_history2(char *arg, char c, int index)
 	return (0);
 }
 
-int		ft_check_options_history(char *arg, char c, int index)
+int			ft_check_options_history(char *arg, char c, int index)
 {
 	if (c == 'c')
 		if (arg[index] == 'c' && (arg[index - 1] == '-' || arg[index - 1] == 'a'

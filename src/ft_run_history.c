@@ -6,13 +6,13 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 14:06:10 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/18 16:32:41 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
+static int	ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 {
 	char	*str;
 
@@ -23,7 +23,7 @@ int			ft_run_history_beta2(char *home, t_prstruct *proc, int exit)
 	return (0);
 }
 
-int			ft_run_history_beta(t_prstruct *proc)
+static int	ft_run_history_beta(t_prstruct *proc)
 {
 	t_dlist		*histo2;
 
@@ -34,7 +34,7 @@ int			ft_run_history_beta(t_prstruct *proc)
 	return (0);
 }
 
-int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
+static int	ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 	int index)
 {
 	if (ft_check_options_history(arg, 'c', index) == 1)
@@ -49,6 +49,8 @@ int			ft_run_history_part2(char *arg, char *home, t_prstruct *proc,
 		return (ft_run_history5(arg, home, proc->histo2, index));
 	if (ft_check_options_history(arg, 's', index) == 1)
 		ft_add_data(proc->histo2, arg + index + 2, 0);
+	if (ft_check_options_history(arg, 'p', index) == 1)
+		ft_putendl(&arg[index + 2]);
 	return (0);
 }
 
