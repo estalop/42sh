@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 18:11:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/08 20:03:20 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 11:32:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,28 @@ void		ft_set_home_in_argv(char **argv, char **env)
 		}
 		i++;
 	}
+}
+
+static char	**ft_checkenv(char **env)
+{
+	int		i;
+
+	i = 0;
+	while (env[i] != NULL && ft_strncmp(env[i], "SHLVL=", 6) != 0)
+		i++;
+	if (!env[i])
+		env = ft_tabdup_plusone_del(env, "SHLVL=1");
+	i = 0;
+	while (env[i] != NULL && ft_strncmp(env[i], "_=", 2) != 0)
+		i++;
+	if (!env[i])
+		env = ft_tabdup_plusone_del(env, "_=usr/bin/env");
+	i = 0;
+	while (env[i] != NULL && ft_strncmp(env[i], "TERM=", 5) != 0)
+		i++;
+	if (!env[i])
+		env = ft_tabdup_plusone_del(env, "TERM=xterm-256color");
+	return (env);
 }
 
 static char	**ft_create_environbis(char **env)
@@ -58,6 +80,7 @@ char		**ft_create_environ(int i)
 			}
 		}
 		ft_strdel(&tmp);
+		env = ft_checkenv(env);
 		return (env);
 	}
 	if (!getcwd(buf, 256) || !(env = (char**)malloc(sizeof(char*) * 5)))

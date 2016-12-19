@@ -13,15 +13,14 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 =      A faire      =
 ====================================================================
 
+!! REFAIRE LA NORME   !!
 
+Juste envoyer "env" leaks "env" (la string) si env vide (et peut etre autre)
+cd leaks si env tout vide (accepte tout les lieux meme si existe pas)
 
+autocompletion ne parse pas les dossiers ni les sous dossiers
 
-Juste envoyer "env" leaks "env" (la string)
-
-
-Leaks avec cd
-
-echo virer les \
+Leaks avec cd (dans le cas ou il va nimporte ou aussi)
 
 Historique arrive toujours pas au premier element
 
@@ -36,8 +35,24 @@ Au minimum, la complétion doit être fonctionnelle avec des fichiers et des d
 
 Position dans la correction : Manipulation de fichiers [age2]
 
-====================================================================
+Deplacement dans le progex
 
+====================================================================
+NORMALEMENT OK
+
+Un truc pas mis a NULL correctement (pas certain)
+
+Leak de unsetenv
+
+env n'est pas mis en place si env -i truc=bidul ./42sh (faut le mettre au lancement d office)
+
+====================================================================
+Procedure de rendu 21sh :
+
+fichier auteur
+nom d executable
+
+====================================================================
 
 ====================
 =     ERROR404     =

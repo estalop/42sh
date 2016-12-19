@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 13:23:14 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/19 09:44:28 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_unsetenv(char *buf, char ***adenv, char **env)
 	if (t.argv[1] == NULL)
 	{
 		ft_putendl_fd("unsetenv: too fiew arguments", 2);
+		ft_free_tab(&t.argv);
 		return (1);
 	}
 	t.tmp2 = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/16 20:29:03 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/19 11:31:06 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				**ft_tabdup_plusone_del(char **buft, char *buf);
 int					ft_strisalphadigit(char *str);
 char				*ft_strjoind(char *s1, char *s2, int dela, int delb);
 int					ft_wcscbytes(int binsize);
