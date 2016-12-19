@@ -6,11 +6,12 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 15:42:17 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 16:02:40 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "ft_select.h"
 
 t_termcaps	*ft_struct_innit(int mode)
 {
@@ -100,6 +101,8 @@ void		ft_signal_size(int sig)
 		if (tgetent(cap->buf, "xterm-256color") < 0)
 			tgetent(cap->buf, getenv("TERM"));
 		ft_signal_size_anx(cap);
+		ft_select_cancel(cap->autotab, cap, tmp);
+		cap->exec = 0;
 	}
 }
 
