@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/19 14:00:51 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 15:13:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,7 @@ char				*parse_local_var(char *s);
 char				*parse_process(char *s);
 char				*parse_dollar_variable(char *s);
 char				*parse_dollar_pipeline_exit_status(char *s);
-char				*history_designator(char *s);
+char				*history_designator(char *s, char *end, char *err);
 char				*history_designator_n(char *c, char **replace);
 char				*history_designator_beginsby(char *c, char **replace);
 char				*history_designator_contains(char *c, char **replace);

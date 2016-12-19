@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 15:56:36 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/19 14:50:07 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 15:13:53 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,12 @@ static char		*history_designator_parse(char *s, char *c, char **replace)
 	return (NULL);
 }
 
-char			*history_designator(char *s)
+char			*history_designator(char *s, char *end, char *err)
 {
 	char	*c;
-	char	*end;
 	char	*replace;
-	char	*err;
 	int		l;
 
-	end = NULL;
-	err = NULL;
 	c = s;
 	while ((c = ft_strchr(c, '!')) && c++ && !err)
 	{

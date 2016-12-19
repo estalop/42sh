@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/19 14:18:25 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 15:13:39 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*ft_loopanx(char *tmp, t_prstruct *proc)
 {
 	if (tmp != NULL)
 	{
-		tmp = history_designator(tmp);
+		tmp = history_designator(tmp, NULL, NULL);
 		if (ft_strlen(tmp) > 0 && ft_check_tmp(tmp) == 1)
 			ft_add_data(proc->histo2, tmp, 0);
 	}
