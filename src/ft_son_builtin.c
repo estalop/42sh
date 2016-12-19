@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 13:05:36 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:46:22 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ history -ps arg [arg...]", 2);
 
 static void	ft_son_history(char *buf, int e, t_prstruct *proc)
 {
+	ft_putstr("DEBUG\n");
 	if (e == -4)
 		exit(ft_run_history2(&buf[7], proc->histo2, 0));
 	else if (e == -5)

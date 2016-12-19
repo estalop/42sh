@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_designator.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 15:56:36 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/16 20:43:47 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/19 14:50:07 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char			*history_designator(char *s)
 			while (*err && !IS_SPACE(*err))
 				err++;
 			ft_printf("42sh: %.*s: event not found\n", (int)(err - c), c);
+			ft_strdel(&s);
+			return (NULL);
 		}
 		c = s + l;
 	}

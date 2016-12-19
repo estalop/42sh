@@ -15,6 +15,8 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 !! REFAIRE LA NORME   !!
 
+autocompletion kassé si redimention
+
 Historique arrive toujours pas au premier element
 
 History -p (voir le soucis de repetitions)
