@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/19 14:34:18 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:43:28 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,30 @@ static void	ft_fork_ex(char *bin, char ***argv, char **env)
 char		*ft_check_bin(char *buf, char **env, char **path, int i)
 {
 	char	*bin;
-	char	**argv;
+	char	**a;
 
-	argv = ft_split(buf);
-	if (!(bin = NULL) && (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "cd") ||
-	!ft_strcmp(argv[0], "setenv") || !ft_strcmp(argv[0], "unsetenv") ||
-		!ft_strcmp(argv[0], "history") || !ft_strcmp(argv[0], "echo") ||
-		!ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "unset")))
+	a = ft_split(buf);
+	if (!(bin = NULL) && (!ft_strcmp(a[0], "env") || !ft_strcmp(a[0], "cd") || \
+	!ft_strcmp(a[0], "setenv") || !ft_strcmp(a[0], "unsetenv") || \
+	!ft_strcmp(a[0], "history") || !ft_strcmp(a[0], "echo") || \
+	!ft_strcmp(a[0], "export") || !ft_strcmp(a[0], "unset")))
 	{
-		bin = ft_strdup(argv[0]);
-		ft_free_tab(&argv);
+		bin = ft_strdup(a[0]);
+		ft_free_tab(&a);
 		return (bin);
 	}
-	if (argv[0][0] == '~' || argv[0][0] == '-')
-		bin = ft_strjoin(ft_home(env, argv[0][0]), &argv[0][1]);
-	else if (ft_strchr(argv[0], '/') != NULL)
-		bin = ft_strdup(argv[0]);
+	if (a[0][0] == '~' || a[0][0] == '-')
+		bin = ft_strjoin(ft_home(env, a[0][0]), &a[0][1]);
+	else if (ft_strchr(a[0], '/') != NULL)
+		bin = ft_strdup(a[0]);
 	else
 		while (path != NULL && path[i] != NULL && bin == NULL)
 		{
-			bin = ft_strjoin(path[i++], argv[0]);
+			bin = ft_strjoin(path[i++], a[0]);
 			if (bin != NULL && access(bin, F_OK) == -1)
 				ft_strdel(&bin);
 		}
-	return (ft_check_bin_anx(&bin, &argv));
+	return (ft_check_bin_anx(&bin, &a));
 }
 
 void		ft_execute(char *buf, char **env, int e, t_prstruct *proc)

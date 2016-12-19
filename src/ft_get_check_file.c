@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 19:27:14 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 14:02:56 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 13:24:54 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		ft_get_check_file(t_dlist *histo, int fd, int index, int index2)
 				histo = ft_check_and_add_data(histo, total, &pos, &index);
 			else
 				index++;
-			ft_printf("%s\n", histo->p_tail->data);
 			index2++;
 		}
 		index2 = 0;
