@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 16:53:47 by tbayet            #+#    #+#             */
-/*   Updated: 2016/11/23 13:22:15 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/16 17:54:05 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,22 @@ static t_exec	**dirtotexec(DIR *dir, t_exec **tree)
 	return (tree);
 }
 
-t_exec			*files_sort(char **files)
+t_exec			*files_sort(char **files, t_exec *tree)
 {
-	t_exec	**res;
-	t_exec	*tree;
 	char	**ptr;
 	DIR		*dir;
 
-	if (!(tree = texec_new('\0', NULL)))
-		return (NULL);
-	if (!addbuiltins(res = &tree))
-		return (NULL);
+	if (!tree)
+	{
+		if (!(tree = texec_new('\0', NULL)) || !addbuiltins(&tree))
+			return (NULL);
+	}
 	ptr = files;
 	while (*ptr)
 	{
 		if ((dir = opendir(*ptr)))
 		{
-			if (!(res = dirtotexec(dir, res)))
+			if (!(dirtotexec(dir, &tree)))
 				return (NULL);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/12 14:45:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 12:19:54 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static char	*ft_tselect(t_termcaps *cap, char *str, char buf[4])
 		return (str);
 	if (buf[0] == 27 && buf[1] == 91)
 		str = ft_arrow(cap, (ft_strlen(str) + cap->neg), buf, str);
-	else if (buf[0] == '\t' && buf[1] == 0)
+	else if (buf[0] == '\t' && buf[1] == 0 && !(cap->quot))
 		str = ft_autocomp(cap, str);
 	else
 	{

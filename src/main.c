@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/18 18:13:26 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 12:09:48 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		if (proc->env[0] != NULL && proc->env[1] && proc->env[2])
 			ft_sync_env(proc->env, 0, 0, 0);
 		cap->histo2 = proc->histo2;
+		cap->bin = create_tree(proc->env[0], cap->bin);
 	}
 	ft_free_tab(&path);
 	ft_free_tab(&proc->env[1]);
@@ -95,8 +96,9 @@ int			main(void)
 	signal(28, &ft_signal_size);
 	process.env[0] = ft_create_environ(0);
 	process.env[2] = ft_tabdup(process.env[0]);
-	cap->bin = create_tree(process.env[0]);
-	process.exec = cap->bin;
+	cap->bin = NULL;
+	cap->bin = create_tree(process.env[0], cap->bin);
+//	process.exec = cap->bin;
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);

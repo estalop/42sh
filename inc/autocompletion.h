@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 16:24:12 by tviviand          #+#    #+#             */
-/*   Updated: 2016/11/23 13:31:21 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/19 12:12:26 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char				**autocompletion(char *line, int i, t_exec *tree,
 					char *pwd);
 int					texec_check(char *name, t_exec *tree);
 t_exec				*texec_add(char *file, t_exec **tree);
-t_exec				*files_sort(char **files);
+t_exec				*files_sort(char **files, t_exec *tree);
 t_exec				*texec_del(t_exec **tree);
-t_exec				*create_tree(char **env);
+t_exec				*create_tree(char **env, t_exec *tree);
 char				**ft_get_path(char **environ);
 
 #endif
