@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/19 09:32:04 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:34:18 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	char	**argv;
 
 	argv = ft_split(buf);
-	if (!(bin = NULL) && (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "cd")
-		|| !ft_strcmp(argv[0], "setenv") || !ft_strcmp(argv[0], "unsetenv") ||
+	if (!(bin = NULL) && (!ft_strcmp(argv[0], "env") || !ft_strcmp(argv[0], "cd") ||
+	!ft_strcmp(argv[0], "setenv") || !ft_strcmp(argv[0], "unsetenv") ||
 		!ft_strcmp(argv[0], "history") || !ft_strcmp(argv[0], "echo") ||
 		!ft_strcmp(argv[0], "export") || !ft_strcmp(argv[0], "unset")))
 	{

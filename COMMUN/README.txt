@@ -15,10 +15,6 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 !! REFAIRE LA NORME   !!
 
-cd leaks si env tout vide (accepte tout les lieux meme si existe pas)
-
-Leaks avec cd (dans le cas ou il va nimporte ou aussi avec env vide)
-
 Historique arrive toujours pas au premier element
 
 History -p (voir le soucis de repetitions)
@@ -38,6 +34,10 @@ Tab ok au final
 autocompletion ne parse pas les dossiers ni les sous dossiers (manque juste le / au debut)
 
 Juste envoyer "env" leaks "env" (la string) si env vide (et peut etre autre)
+
+cd leaks si env tout vide (accepte tout les lieux meme si existe pas)
+
+Leaks avec cd (dans le cas ou il va nimporte ou aussi avec env vide)
 
 ====================================================================
 Procedure de rendu 21sh :

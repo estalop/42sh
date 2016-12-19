@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 14:12:07 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:29:19 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 	int		i;
 	char	*tmp;
 
-	i = -1;
-	if (!new || !new->curpath)
+	if ((i = -1) && (!new || !new->curpath))
 	{
 		ft_free_cdstruct(&new);
 		return (NULL);
 	}
 	while (new->curpath[++i] != '\0' && !(tmp = NULL))
-	{
 		if (new->curpath[i] == '.' &&
 			(tmp = ft_new_curpath(new->curpath, NULL, NULL, i)))
 		{
@@ -58,7 +56,6 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 			ft_strdel(&new->curpath);
 			new->curpath = tmp;
 		}
-	}
 	if (ft_strlen(new->curpath) > 1 && \
 		new->curpath[ft_strlen(new->curpath) - 1] == '/')
 	{
