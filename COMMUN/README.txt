@@ -15,28 +15,15 @@ Il faudrait aussi mettre la liste des trucs a faire ici :
 
 !! REFAIRE LA NORME   !!
 
-Juste envoyer "env" leaks "env" (la string) si env vide (et peut etre autre)
 cd leaks si env tout vide (accepte tout les lieux meme si existe pas)
 
-autocompletion ne parse pas les dossiers ni les sous dossiers
-
-Leaks avec cd (dans le cas ou il va nimporte ou aussi)
+Leaks avec cd (dans le cas ou il va nimporte ou aussi avec env vide)
 
 Historique arrive toujours pas au premier element
 
-History -p
+History -p (voir le soucis de repetitions)
 
 https://forum.intra.42.fr/topics/15200/messages/1#52865
-
-'imbatable :
-Complétion dynamique
-Testez la presence et le bon fonctionnement de la complétion dynamique.
-Au minimum, la complétion doit être fonctionnelle avec des fichiers et des dossiers, dans des sous-dossiers du répertoire courant.'
-
-Position dans la correction : Manipulation de fichiers [age2]
-
-Deplacement dans le progex
-
 ====================================================================
 NORMALEMENT OK
 
@@ -45,6 +32,12 @@ Un truc pas mis a NULL correctement (pas certain)
 Leak de unsetenv
 
 env n'est pas mis en place si env -i truc=bidul ./42sh (faut le mettre au lancement d office)
+
+Tab ok au final
+
+autocompletion ne parse pas les dossiers ni les sous dossiers (manque juste le / au debut)
+
+Juste envoyer "env" leaks "env" (la string) si env vide (et peut etre autre)
 
 ====================================================================
 Procedure de rendu 21sh :

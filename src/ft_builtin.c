@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 09:44:28 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 13:40:26 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ int	ft_env(char *buf, char ***env, int i)
 		return (-1);
 	argv = ft_split(buf);
 	if ((tmp = ft_opt_env(argv, *env)) == NULL)
+	{
+		ft_free_tab(&argv);
 		return (1);
+	}
 	while (argv[i] != NULL && argv[i][0] == '-' && argv[i][1] != '\0' && \
 			ft_strcmp(argv[i], "--") != 0)
 		i++;
