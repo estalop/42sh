@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/30 13:36:26 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/09 13:50:33 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 15:36:57 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void	ft_set_prompt(t_termcaps *cap)
 	cap->x = cap->prompt;
 	ft_putstr(cap->prom);
 	ft_set_term();
+	cap->histo2->pos = cap->histo2->length;
 }
