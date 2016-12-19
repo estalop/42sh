@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 12:26:58 by chdenis          ###   ########.fr       */
+/*   Updated: 2016/12/19 13:05:19 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void		ft_newputstr(char const *str, t_termcaps *cap)
 			write(1, &str[i], 1);
 			x = str[i] == '\n' ? 0 : x + 1;
 		}
-		if (x >= cap->whidth && str[i + 1] == 0)
+		if (x >= cap->whidth && (str[i + 1] == 0 || str[i] == '\t'))
 			tputs(cap->sf, 0, ft_output);
-		else if (x >= cap->whidth)
+		if (x >= cap->whidth)
 			x = 0;
 		i++;
 	}
