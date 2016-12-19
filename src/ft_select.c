@@ -6,7 +6,7 @@
 /*   By: tbayet <tbayet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 18:07:02 by tbayet            #+#    #+#             */
-/*   Updated: 2016/12/18 17:58:53 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 13:23:43 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char			*ft_select_get(char **list, t_termcaps *tc, char **line)
 	while (s.i && (*line)[s.i] != ' ' && (*line)[s.i] != '	' &&
 	(*line)[s.i] != '/' && !is_spec_separator((*line)[s.i]))
 		s.i--;
-	s.i = (s.i) ? s.i + 1 : 0;
+	s.i = (s.i || (*line)[s.i] == '/') ? s.i + 1 : 0;
 	s.res = list[g_dims->pos];
 	if (ft_select_get_anx(&s, line, list, tc))
 		return (NULL);
