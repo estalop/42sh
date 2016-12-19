@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/19 12:09:48 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/19 14:18:25 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int			main(void)
 	process.env[2] = ft_tabdup(process.env[0]);
 	cap->bin = NULL;
 	cap->bin = create_tree(process.env[0], cap->bin);
-//	process.exec = cap->bin;
 	ft_init_termcap(cap);
 	ft_loop(cap, &process);
 	ft_run_history(" -w", ft_get_home(process.env[2]), &process, 1);

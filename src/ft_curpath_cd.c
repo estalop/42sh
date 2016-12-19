@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/10 17:46:37 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:12:07 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ static t_cdstruct	*ft_clean_curpath(t_cdstruct *new)
 
 	i = -1;
 	if (!new || !new->curpath)
+	{
+		ft_free_cdstruct(&new);
 		return (NULL);
+	}
 	while (new->curpath[++i] != '\0' && !(tmp = NULL))
 	{
 		if (new->curpath[i] == '.' &&
@@ -80,7 +83,8 @@ static char			*ft_complete_curpath(char *argv, char **env, int opt)
 	{
 		while (env[i] && ft_strncmp(env[i], "PWD=", 4))
 			i++;
-		if (opt == 1 || (env && env[i] && env[i][ft_strlen(env[i]) - 1] != '/'))
+		if (opt == 1 || (env && env[i] && env[i][ft_strlen(env[i]) - 1] != '/')\
+		|| (env && !env[i]))
 			tmp = ft_strjoin((env[i] && opt != 1) ? &env[i][4] \
 				: getcwd(buf, 255), "/");
 		else if (env && env[i])

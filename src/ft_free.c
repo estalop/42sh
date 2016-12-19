@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 17:07:18 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/18 18:00:16 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 14:01:23 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,15 @@ void	free_local_var(void)
 		free(g_localvars);
 		g_localvars = next;
 	}
+}
+
+void	ft_free_cdstruct(t_cdstruct **struc)
+{
+	if (struc && *struc)
+	{
+		ft_strdel(&(*struc)->curpath);
+		ft_strdel(&(*struc)->argv);
+		free(*struc);
+	}
+	*struc = NULL;
 }
