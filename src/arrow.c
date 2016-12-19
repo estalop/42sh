@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 13:05:19 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 15:47:36 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_arrow_down(t_termcaps *cp, char *tmp)
 	char	*new;
 	char	*str;
 
-	if (cp->histo2->pos < cp->histo2->length)
+	if (cp->histo2->pos < cp->histo2->length - 1)
 	{
 		ft_reset(cp, tmp);
 		ft_strdel(&tmp);

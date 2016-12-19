@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 12:34:56 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/12 15:36:54 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 15:42:17 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		ft_signal_stop(int sig)
 		ft_strdel(&cap->stop);
 		ft_strdel(&cap->cmd);
 		ft_putchar('\n');
+		cap->histo2->pos = cap->histo2->length;
 		while (i < cap->height)
 		{
 			tputs(cap->dc, 0, ft_output);
