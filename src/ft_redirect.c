@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 01:13:21 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/17 19:48:43 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:56:09 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,12 @@ static char	*ft_trunc_buf(t_prstruct *proc, char **buf, int i)
 	return (t.tmp3);
 }
 
-void		ft_redirect(t_prstruct *proc, char **buf)
+void		ft_redirect(t_prstruct *proc, char **buf, int i, char *tmp)
 {
 	void	(*functionlist[3])(t_prstruct*, char**, int, int);
-	int		i;
 	int		j;
 	int		new;
-	char	*tmp;
 
-	i = proc->s;
 	functionlist[0] = &ft_write;
 	functionlist[1] = &ft_read;
 	while (buf[proc->i][i] != '\0')
@@ -101,6 +98,8 @@ void		ft_redirect(t_prstruct *proc, char **buf)
 		if ((j = i) && (buf[proc->i][i] == '>' || buf[proc->i][i] == '<'))
 		{
 			new = ft_findr(proc, buf, i);
+			if (new >> 16 == 4)
+				close((new >> 8) & 255);
 			if (new >> 16 == 3)
 				new -= 3 << 16;
 			if (new >> 16 < 2)

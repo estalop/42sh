@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 10:32:28 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/17 16:50:19 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:55:20 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			ft_son(t_prstruct *pr, char **b, char **env[3], int e)
 		close(pr->pipe->pipe[0]);
 	}
 	if (ft_strchr(b[pr->i], '>') || ft_strchr(b[pr->i], '<'))
-		ft_redirect(pr, b);
+		ft_redirect(pr, b, pr->s, NULL);
 	if (pr->herepipe != -1)
 		close(pr->herepipe);
 	pr->herepipe = pr->herepipe != -1 ? -1 : pr->herepipe;

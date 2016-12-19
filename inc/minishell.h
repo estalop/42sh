@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/19 15:13:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:55:55 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ t_plist				*ft_create_pipe(int num);
 void				ft_newputstr(char const *str, t_termcaps *cap);
 int					*ft_calculate_length(char *str, int i, t_termcaps *cap, \
 									int xy[4]);
-void				ft_redirect(t_prstruct *proc, char **buf);
+void				ft_redirect(t_prstruct *proc, char **buf, int i, char *tmp);
 int					ft_findr(t_prstruct *proc, char **buf, int i);
 void				ft_close_pipe(t_plist *tmp, t_prstruct *proc);
 int					ft_exe_builtin(int i, char *buf, t_prstruct *proc);
