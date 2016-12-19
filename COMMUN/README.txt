@@ -19,9 +19,8 @@ autocompletion kassé si redimention
 
 Historique arrive toujours pas au premier element
 
-History -p (voir le soucis de repetitions)
+history -p (et rien) leak
 
-https://forum.intra.42.fr/topics/15200/messages/1#52865
 ====================================================================
 NORMALEMENT OK
 
@@ -40,6 +39,8 @@ Juste envoyer "env" leaks "env" (la string) si env vide (et peut etre autre)
 cd leaks si env tout vide (accepte tout les lieux meme si existe pas)
 
 Leaks avec cd (dans le cas ou il va nimporte ou aussi avec env vide)
+
+History -p (voir le soucis de repetitions)
 
 ====================================================================
 Procedure de rendu 21sh :

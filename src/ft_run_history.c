@@ -6,7 +6,7 @@
 /*   By: pbourdon <pbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/12 18:00:35 by pbourdon          #+#    #+#             */
-/*   Updated: 2016/12/18 18:19:16 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/19 15:25:57 by tviviand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ft_run_history_part2(char *arg, char *opt, t_prstruct *pro,
 	if (ft_strchr(arg, 's'))
 		ft_add_data(pro->histo2, arg + index + 2, 0);
 	if (ft_strchr(arg, 'p'))
-		return (-7);
+		e = -7;
 	ft_strdel(&opt);
 	return (e);
 }
@@ -99,7 +99,10 @@ int			ft_run_history(char *arg, char *home, t_prstruct *proc, int exit)
 	else if (arg[index] == '\0')
 		return (-5);
 	if (!(opt = ft_check_options_history(arg, 0, 0, NULL)))
+	{
+		ft_strdel(&opt);
 		return (-8);
+	}
 	if (arg[index] == '-')
 		index++;
 	if (ft_strchr(arg, 'w'))
