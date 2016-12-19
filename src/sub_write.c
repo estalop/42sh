@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/12 10:59:45 by jbobin            #+#    #+#             */
-/*   Updated: 2016/11/14 14:49:20 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/19 18:09:43 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	*ft_calculate_length(char *str, int i, t_termcaps *cap, int val[4])
 {
-	while (str != NULL && str[val[2] - cap->neg] != '\0' && val[2] < i)
+	while (str != NULL && val[2] < i
+		&& ft_strlen(str) > (size_t)(val[2] - cap->neg))
 	{
 		val[3] = str[val[2] - cap->neg] == '\t' ? 8 - (val[0] % 8) : 1;
 		while (val[3]-- > 0)
