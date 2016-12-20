@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/20 19:46:05 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 20:04:00 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int			main(void)
 	signal(2, &ft_signal_stop);
 	signal(SIGQUIT, &ft_signal_stop);
 	signal(18, SIG_IGN);
-	signal(17, SIG_IGN);
 	signal(28, &ft_signal_size);
 	process.env[0] = ft_create_environ(0);
 	process.env[2] = ft_tabdup(process.env[0]);
