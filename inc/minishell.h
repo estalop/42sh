@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/19 17:55:55 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 13:46:56 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,5 +355,6 @@ char				*history_designator_typed(char *s, char *c, char **replace);
 void				ft_if_hyphen_anx(char **tmp, char **tmp2, char **tmp3,
 	t_hered *tmpstruct);
 void				ft_free_cdstruct(t_cdstruct **struc);
+char				*ft_history_multiline(char *tmp, t_termcaps *cap);
 
 #endif

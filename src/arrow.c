@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 15:47:36 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:30:10 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,27 @@ char		*ft_arrow_up(t_termcaps *cap, char *t)
 	char	*new;
 	char	*str;
 
+	new = NULL;
 	if (cap->histo2->pos > 0)
 	{
-		ft_reset(cap, t);
-		ft_strdel(&t);
+		t = ft_history_multiline(t, cap);
 		ft_putstr(cap->prom);
 		cap->histo2->pos--;
 		str = ft_strdup(ft_get_element_from_list(cap->histo2,
 			cap->histo2->pos));
 		ft_newputstr(str, cap);
 		cap->x = ft_strlen(str) + cap->prompt;
-		new = ft_strsub(t, 0, (cap->prompt - cap->neg));
-		ft_strdel(&t);
-		if (new != NULL && str != NULL)
-			t = ft_strjoin(new, str);
+		if (t != NULL)
+			new = ft_strjoin(t, str);
 		else
-			t = str;
-		ft_strdel(&new);
+			new = ft_strdup(str);
+		ft_strdel(&str);
+		ft_strdel(&t);
 		cap->oldlen = ft_calculate_height(t, ft_strlen(str) + cap->prompt, cap);
 	}
 	else
 		tputs(cap->bl, 0, ft_output);
-	return (t);
+	return (new);
 }
 
 char		*ft_arrow_down(t_termcaps *cp, char *tmp)
@@ -58,28 +57,27 @@ char		*ft_arrow_down(t_termcaps *cp, char *tmp)
 	char	*new;
 	char	*str;
 
+	new = NULL;
 	if (cp->histo2->pos < cp->histo2->length - 1)
 	{
-		ft_reset(cp, tmp);
-		ft_strdel(&tmp);
+		tmp = ft_history_multiline(tmp, cp);
 		ft_putstr(cp->prom);
 		cp->histo2->pos++;
 		str = ft_strdup(ft_get_element_from_list(cp->histo2, cp->histo2->pos));
 		if (str)
 			ft_newputstr(str, cp);
 		cp->x = ft_strlen(str) + cp->prompt;
-		new = ft_strsub(tmp, 0, (cp->prompt - cp->neg));
-		ft_strdel(&tmp);
-		if (new != NULL && str != NULL)
-			tmp = ft_strjoin(new, str);
+		if (tmp != NULL)
+			new = ft_strjoin(tmp, str);
 		else
-			tmp = str;
-		ft_strdel(&new);
+			new = ft_strdup(str);
+		ft_strdel(&tmp);
+		ft_strdel(&str);
 		cp->oldlen = ft_calculate_height(tmp, ft_strlen(str) + cp->prompt, cp);
 	}
 	else
 		tputs(cp->bl, 0, ft_output);
-	return (tmp);
+	return (new);
 }
 
 void		ft_newputstr(char const *str, t_termcaps *cap)

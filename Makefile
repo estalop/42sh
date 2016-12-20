@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/02 14:13:18 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/19 17:52:26 by tbayet           ###   ########.fr        #
+#    Updated: 2016/12/20 13:47:19 by jbobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC = main.c error.c ft_builtin.c ft_free.c ft_cd.c ft_print_env.c ft_pwd.c \
 	parsing_dollar.c \
 	history_designator.c \
 	history_designators.c \
-	ft_fourth_redirection_anx.c
+	ft_fourth_redirection_anx.c\
+	history_multiline.c
 
 SRC_O = $(SRC:.c=.o)
 
@@ -71,7 +72,7 @@ DSRC = $(addprefix $(SRC_DIR)/,$(SRC))
 
 DOBJ = $(addprefix $(OBJ_DIR)/,$(SRC_O))
 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g
 
 HEADERS = -I ./$(INC_DIR) -I libft/includes/ -I completion
 
