@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 16:56:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 17:55:36 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:08:26 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_return(char *str)
 		return (str);
 	i = 0;
 	tmp = str;
-	new = ft_strnew(ft_strlen(tmp) + 1);
+	if (!(new = ft_strnew(ft_strlen(tmp) + 1)))
+		return (NULL);
 	while (tmp[i] != '\0')
 	{
 		new[i] = tmp[i];

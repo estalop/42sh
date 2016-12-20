@@ -6,7 +6,7 @@
 #    By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 14:52:20 by jbobin            #+#    #+#              #
-#    Updated: 2016/12/19 11:30:30 by tviviand         ###   ########.fr        #
+#    Updated: 2016/12/20 15:09:22 by tbayet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = ft_isalnum.c ft_itoa.c ft_memcpy.c ft_putchar_fd.c ft_putstr.c\
 	ft_wcslen.c ft_llitoa.c ft_binsize.c ft_ullitoa_base.c ft_ullitoa.c\
 	ft_llitob.c ft_putstr_unless.c ft_putstr_until.c ft_wcscbytes.c \
 	ft_strjoind.c ft_strcnts.c ft_strisalphadigit.c ft_strsplice.c \
-	ft_tabdup_plusone_del.c
+	ft_tabdup_plusone_del.c ft_strctrim.c
 
 SRCPRINTF = printf/args_par.c printf/cast.c printf/colors.c \
 			printf/ft_printf.c printf/notype.c printf/print_types.c \

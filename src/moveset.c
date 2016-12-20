@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/25 10:48:54 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/12 14:40:12 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:24:55 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ char		*ft_del_char(t_termcaps *cap, char *str, int i)
 	{
 		ft_reset(cap, str);
 		cap->x--;
-		tmp = ft_strnew(ft_strlen(str) - 1);
+		if (!(tmp = ft_strnew(ft_strlen(str) - 1)))
+			return (NULL);
 		while (str[i] != '\0' && i < (cap->x - cap->neg))
 		{
 			tmp[i] = str[i];
 			i++;
 		}
-		if (str[i] != '\0')
-			i++;
+		i = (str[i] != '\0') ? i + 1 : i;
 		while (str[i] != '\0')
 		{
 			tmp[i - 1] = str[i];
@@ -104,7 +104,8 @@ char		*ft_multiple_char(t_termcaps *cap, char *str, char buf[4])
 		i++;
 	if (str == NULL)
 	{
-		str = ft_strnew(1);
+		if (!(str = ft_strnew(1)))
+			return (NULL);
 		str[0] = buf[0];
 		ft_putstr(&str[cap->prompt - cap->neg]);
 		cap->x = cap->prompt + 1;

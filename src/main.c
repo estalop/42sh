@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:52:50 by chdenis           #+#    #+#             */
-/*   Updated: 2016/12/19 15:13:39 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 15:11:07 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_loop(t_termcaps *cap, t_prstruct *proc)
 		if (ft_read_termcap(cap) == 1)
 			break ;
 		ft_reset_term(0);
-		tmp = cap->cmd ? cap->cmd : cap->str;
+		tmp = cap->cmd ? ft_strctrim(cap->cmd) : ft_strctrim(cap->str);
 		tmp = ft_loopanx(tmp, proc);
 		ft_preprocess(&tmp, proc, path, cap->heredoc);
 		ft_main_free(&proc->env[1], cap, &path);

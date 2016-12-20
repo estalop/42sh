@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:41:31 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 11:31:06 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:27:24 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ void				ft_print_tab(char **tab);
 int					ft_strcnts(char const *str, char const *s);
 char				*ft_strsplice(char **str, char *begin,
 								size_t len, char *rep);
+char				*ft_strctrim(char *s);
 
 #endif

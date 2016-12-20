@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 12:19:54 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/20 14:10:51 by tbayet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char		*ft_print_char(t_termcaps *cap, char *str, char buf)
 	int		i;
 
 	i = 0;
-	tmp = ft_strnew(ft_strlen(str) + 1);
+	if (!(tmp = ft_strnew(ft_strlen(str) + 1)))
+		return (NULL);
 	while (i < (cap->x - cap->neg) && str[i] != '\0')
 	{
 		tmp[i] = str[i];
@@ -83,7 +84,8 @@ static int	ft_tselect_anx(t_termcaps *cap, char **str, char *buf)
 		*str = ft_multiple_char(cap, *str, buf);
 	else if (*str == NULL && buf[0] != 27)
 	{
-		*str = ft_strnew(1);
+		if (!(*str = ft_strnew(1)))
+			return (-1);
 		*str[0] = buf[0];
 		ft_putstr(*str);
 		cap->x++;
