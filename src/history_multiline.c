@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:31:30 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/20 14:26:57 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/20 16:51:17 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,23 @@ char	*ft_history_multiline(char *tmp, t_termcaps *cap)
 	}
 	ft_strdel(&tmp);
 	return (new);
+}
+
+int		ft_end_of_file(char *buf, t_termcaps *cap)
+{
+	char	*new;
+
+	if (*buf == 4 && !cap->str && !cap->cmd)
+		return (1);
+	else if (*buf == 4 && cap->stop && \
+	(!cap->str || cap->str[ft_strlen(cap->str) - 1] == '\n'))
+	{
+		new = ft_strjoin(cap->str, cap->stop);
+		ft_strdel(&cap->str);
+		cap->str = new;
+		*buf = 10;
+	}
+	else if (*buf == 4)
+		tputs(cap->bl, 0, ft_output);
+	return (0);
 }

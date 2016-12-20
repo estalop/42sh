@@ -6,7 +6,11 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/12/20 14:10:51 by tbayet           ###   ########.fr       */
+=======
+/*   Updated: 2016/12/20 16:41:46 by jbobin           ###   ########.fr       */
+>>>>>>> 1d0e211df52b287027d1e8c7934f965500179f3f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +129,7 @@ int			ft_read_termcap(t_termcaps *cap)
 	while (42)
 	{
 		ft_bzero(buf, 4);
-		if (read(0, buf, 3) <= 0 || (buf[0] == 4 && !cap->str && !cap->cmd))
+		if (read(0, buf, 3) <= 0 || ft_end_of_file(&(buf[0]), cap) == 1)
 			return (1);
 		cap->str = ft_tselect(cap, cap->str, buf);
 		tmp = cap->cmd ? cap->cmd : cap->str;
@@ -133,8 +137,6 @@ int			ft_read_termcap(t_termcaps *cap)
 			tmp = ft_out(cap, buf, tmp);
 		if (buf[0] == 10)
 			break ;
-		else if (buf[0] == 4)
-			tputs(cap->bl, 0, ft_output);
 	}
 	if ((cap->i = ft_quote_not_finished(tmp, 0, cap)) != 0)
 	{
