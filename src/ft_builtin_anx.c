@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:32:41 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/03 17:05:32 by tviviand         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:26:36 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_unsetenv_anx(int i, char ***adenv, t_structenv *t, char **env)
 
 void	ft_exit_anx(int *i, char ***argv, t_prstruct *proc)
 {
-	while (ft_isdigit(*argv[1][*i]) == 1)
+	while (ft_isdigit((*argv)[1][*i]) == 1)
 		*i = *i + 1;
 	if ((int *)i == 0)
 	{
