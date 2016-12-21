@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 09:17:20 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/20 14:30:10 by jbobin           ###   ########.fr       */
+/*   Updated: 2016/12/21 15:59:58 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		*ft_arrow_up(t_termcaps *cap, char *t)
 	char	*new;
 	char	*str;
 
-	new = NULL;
+	new = t;
 	if (cap->histo2->pos > 0)
 	{
 		t = ft_history_multiline(t, cap);
@@ -57,7 +57,7 @@ char		*ft_arrow_down(t_termcaps *cp, char *tmp)
 	char	*new;
 	char	*str;
 
-	new = NULL;
+	new = tmp;
 	if (cp->histo2->pos < cp->histo2->length - 1)
 	{
 		tmp = ft_history_multiline(tmp, cp);
