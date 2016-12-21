@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 12:48:10 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/20 17:11:00 by tbayet           ###   ########.fr       */
+/*   Updated: 2016/12/21 09:47:10 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ static int	ft_tselect_anx(t_termcaps *cap, char **str, char *buf)
 		tputs(cap->cl, 1, ft_output);
 		ft_strdel(str);
 	}
-	else if (buf[0] != 27 && buf[1] != 0)
+	else if (ft_isprint(buf[0]) && buf[1] != 0)
 		*str = ft_multiple_char(cap, *str, buf);
-	else if (*str == NULL && buf[0] != 27)
+	else if (*str == NULL && ft_isprint(buf[0]))
 	{
 		if (!(*str = ft_strnew(1)))
 			return (-1);
@@ -90,8 +90,10 @@ static int	ft_tselect_anx(t_termcaps *cap, char **str, char *buf)
 		ft_putstr(*str);
 		cap->x++;
 	}
-	else if (buf[0] != 27)
+	else if (ft_isprint(buf[0]))
 		*str = ft_print_char(cap, *str, buf[0]);
+	else
+		tputs(cap->bl, 0, ft_output);
 	return (0);
 }
 
@@ -124,8 +126,8 @@ int			ft_read_termcap(t_termcaps *cap)
 	ft_set_prompt(cap);
 	while (42)
 	{
-		ft_bzero(buf, 4);
-		if (read(0, buf, 3) <= 0 || ft_end_of_file(&(buf[0]), cap) == 1)
+		ft_bzero(&buf, 3);
+		if (read(0, buf, 3) < -1 || ft_end_of_file(&(buf[0]), cap) == 1)
 			return (1);
 		cap->str = ft_tselect(cap, cap->str, buf);
 		tmp = cap->cmd ? cap->cmd : cap->str;
