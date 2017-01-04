@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 14:56:04 by tviviand         ###   ########.fr       */
+/*   Updated: 2017/01/04 10:39:05 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,28 @@ static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 	}
 }
 
-static void	ft_son_history_anx(char *buf, int e)
+static void	ft_son_cd(char *buf, int e)
 {
-	if (e == -1)
+	if (e == -2)
 	{
-		ft_putendl_fd(" Please set the home variable of \
-env to execute history command", 2);
-		exit(1);
-	}
-	else if (e == -2)
-	{
-		ft_putendl_fd(" You can't delete this historic entry", 2);
-		exit(1);
+		ft_putstr_fd("cd: file name too long: ", 2);
+		ft_putendl_fd(buf, 2);
 	}
 	else if (e == -3)
-		exit(ft_error_fd());
-	else if (e == -7)
-		writehistoryp(&buf[7]);
-	else if (e == -8)
-		ft_putendl_fd("42sh: history: invalid option\nhistory: usage: \
-history [-c] [-d offset] [n] or history -awrn [filename] or \
-history -ps arg [arg...]", 2);
+	{
+		ft_putstr_fd("cd: not a directory: ", 2);
+		ft_putendl_fd(buf, 2);
+	}
+	else if (e == -4)
+	{
+		ft_putstr_fd("cd: permission denied: ", 2);
+		ft_putendl_fd(buf, 2);
+	}
+	else if (e == -5)
+	{
+		ft_putstr_fd("cd: no such file or directory: ", 2);
+		ft_putendl_fd(buf, 2);
+	}
 }
 
 static void	ft_son_history(char *buf, int e, t_prstruct *proc)
@@ -113,4 +114,6 @@ void		ft_son_builtin(char **buf, int e, char **env, t_prstruct *proc)
 		ft_export(*buf, 1);
 	else if (ft_strncmp(proc->bin, "history", 7) == 0)
 		ft_son_history(*buf, e, proc);
+	else if (ft_strncmp(proc->bin, "cd", 2) == 0)
+		ft_son_cd(*buf, e);
 }

@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/20 16:29:39 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/04 10:38:46 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,7 +326,7 @@ char				*ft_check_excla(char *arg, t_prstruct *proc);
 char				*ft_replace_excla(char *arg, t_prstruct *proc, \
 	int id, int id2);
 int					ft_check_tmp(char *arg);
-int					ft_print_cd(char *argv, char *buf);
+int					ft_print_cd(char *buf);
 t_cdstruct			*ft_get_cdinfo(char *buf, char **env);
 char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
@@ -357,5 +357,6 @@ void				ft_if_hyphen_anx(char **tmp, char **tmp2, char **tmp3,
 void				ft_free_cdstruct(t_cdstruct **struc);
 char				*ft_history_multiline(char *tmp, t_termcaps *cap);
 int					ft_end_of_file(char *buf, t_termcaps *cap);
+void				ft_son_history_anx(char *buf, int e);
 
 #endif
