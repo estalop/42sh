@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/04 10:39:05 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/05 10:54:12 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,19 @@ static void	ft_son_env(char **buf, char **bin, char **env, t_prstruct *proc)
 
 static void	ft_son_cd(char *buf, int e)
 {
+	char	**argv;
+
+	argv = ft_split(buf);
 	if (e == -2)
-	{
 		ft_putstr_fd("cd: file name too long: ", 2);
-		ft_putendl_fd(buf, 2);
-	}
 	else if (e == -3)
-	{
 		ft_putstr_fd("cd: not a directory: ", 2);
-		ft_putendl_fd(buf, 2);
-	}
 	else if (e == -4)
-	{
 		ft_putstr_fd("cd: permission denied: ", 2);
-		ft_putendl_fd(buf, 2);
-	}
 	else if (e == -5)
-	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(buf, 2);
-	}
+	ft_putendl_fd(argv[1], 2);
+	ft_free_tab(&argv);
 }
 
 static void	ft_son_history(char *buf, int e, t_prstruct *proc)
