@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/19 14:29:19 by tviviand         ###   ########.fr       */
+/*   Updated: 2017/01/06 14:41:26 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
 	return (ft_clean_curpath(new));
 }
 
-t_cdstruct			*ft_get_cdinfo(char *buf, char **env)
+t_cdstruct			*ft_get_cdinfo(char *buf, char **env, int *j)
 {
 	char	**tmp;
 	char	*new;
@@ -134,6 +134,6 @@ t_cdstruct			*ft_get_cdinfo(char *buf, char **env)
 	ft_free_tab(&tmp);
 	if (new)
 		return (ft_set_curpath(new, opt, env));
-	else
-		return (NULL);
+	*j = -6;
+	return (NULL);
 }

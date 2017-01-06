@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/05 10:54:12 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/06 14:16:39 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static void	ft_son_cd(char *buf, int e)
 		ft_putstr_fd("cd: permission denied: ", 2);
 	else if (e == -5)
 		ft_putstr_fd("cd: no such file or directory: ", 2);
+	else if (e == -6)
+		ft_putstr_fd("cd: current path not found: ", 2);
 	ft_putendl_fd(argv[1], 2);
 	ft_free_tab(&argv);
 }
