@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2017/01/08 16:31:59 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 18:24:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void				ft_error_path(int i, char *path);
 int					ft_error_fd(void);
 int					ft_exit(char *buf, int i, t_prstruct *proc);
 void				ft_free_exit(char ***argv);
-int					ft_cd(char *buf, char **env, int j, t_cdstruct *argv);
+int					ft_cd(char *buf, char ***env, int j, t_cdstruct *argv);
 char				*ft_opt_home(char *argv, char **env, int i);
 char				*ft_cdpath(char *argv, char **env);
 void				ft_error_cd(char *buf);
@@ -231,14 +231,13 @@ char				**ft_subsetenv(t_structenv t, char **env);
 int					ft_unsetenv(char *buf, char ***adenv, char **env);
 char				**ft_subunsetenv(t_structenv t, char ***env);
 char				*ft_home(char **env, char argv);
-int					ft_pwd_up(char **env, char *argv, int opt);
+int					ft_pwd_up(char ***env, char *argv, int opt);
 char				*ft_cd_buf(char *argv);
 void				ft_sync_env(char **env[3], int pwd, int pwd1, int old);
 char				**ft_sub_env(char ***env, char **argv, int k, int i);
 char				**ft_opt_env(char **argv, char **env);
 void				ft_split_env(char ***env, char **argv, int i, char ***tmp);
 char				**ft_create_environ(int i);
-t_structpwd			ft_init_struct(char **env);
 void				ft_set_home_in_argv(char **argv, char **env);
 char				**ft_new_env(t_structenv t, char **env);
 void				ft_main_free(char ***env, t_termcaps *cap, char ***path);
@@ -359,5 +358,6 @@ char				*ft_history_multiline(char *tmp, t_termcaps *cap);
 int					ft_end_of_file(char *buf, t_termcaps *cap);
 void				ft_son_history_anx(char *buf, int e);
 int					ft_print_error_cd(char *argv);
+char				**ft_check_pwd(char **env, t_structpwd *up);
 
 #endif

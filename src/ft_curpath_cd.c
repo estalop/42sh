@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/08 16:36:50 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 19:15:44 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static char			*ft_new_curpath(char *curpath, char *tmp, char *tmp2, int i)
 		while (j > 0 && curpath[j] != '/')
 			j--;
 		if (curpath[j] == '/')
-			tmp2 = ft_strsub(curpath, 0, j + 1);
+			tmp2 = ft_strsub(curpath, 0, j);
 		if (tmp2)
-			tmp = ft_strjoin(tmp2, &curpath[i + 3]);
+			tmp = ft_strjoin(tmp2, &curpath[i + 2]);
 	}
 	else if (curpath[i + 1] == '/' || curpath[i + 1] == '\0')
 	{
-		tmp2 = ft_strsub(curpath, 0, i);
-		tmp = ft_strjoin(tmp2, &curpath[i + 2]);
+		tmp2 = ft_strsub(curpath, 0, i - 1);
+		tmp = ft_strjoin(tmp2, &curpath[i + 1]);
 	}
 	ft_strdel(&tmp2);
 	if (tmp)
@@ -75,7 +75,7 @@ static char			*ft_complete_curpath(char *argv, char **env, int opt)
 
 	i = 0;
 	tmp = NULL;
-	ft_bzero(&buf, 255);
+	ft_bzero(&buf, 254);
 	if (argv[0] != '/')
 	{
 		while (env[i] && ft_strncmp(env[i], "PWD=", 4))

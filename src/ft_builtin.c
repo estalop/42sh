@@ -6,24 +6,22 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/06 14:14:26 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 18:55:09 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(char *buf, char **env, int j, t_cdstruct *argv)
+int	ft_cd(char *buf, char ***env, int j, t_cdstruct *argv)
 {
 	if (buf[2] != '\0' && buf[2] != ' ' && buf[2] != '\t')
 		return (-1);
-	if ((argv = ft_get_cdinfo(buf, env, &j)) != NULL)
+	if ((argv = ft_get_cdinfo(buf, *env, &j)) != NULL)
 	{
 		if (ft_strlen(argv->argv) > 255)
 			return (-2);
 		if ((j = ft_print_cd(argv->curpath)) == 0)
 			ft_pwd_up(env, argv->curpath, argv->opt);
-		else
-			return (j);
 		ft_strdel(&argv->argv);
 		ft_strdel(&argv->curpath);
 		free(argv);

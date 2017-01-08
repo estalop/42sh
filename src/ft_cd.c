@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2016/12/09 13:51:46 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 18:59:04 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char				*ft_cdpath(char *argv, char **env)
 	return (argv);
 }
 
-t_structpwd			ft_init_struct(char **env)
+static t_structpwd	ft_init_struct(char **env)
 {
 	t_structpwd up;
 
@@ -81,12 +81,16 @@ t_structpwd			ft_init_struct(char **env)
 	return (up);
 }
 
-int					ft_pwd_up(char **env, char *argv, int opt)
+int					ft_pwd_up(char ***oenv, char *argv, int opt)
 {
 	t_structpwd	up;
 	char		buf[255];
+	char		**env;
 
+	env = *oenv;
 	up = ft_init_struct(env);
+	env = ft_check_pwd(env, &up);
+	*oenv = env;
 	if (up.tmpold == NULL || env == NULL || !argv)
 		return (1);
 	if (env[up.pwd] != NULL)
