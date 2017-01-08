@@ -6,7 +6,7 @@
 /*   By: jbobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 10:07:37 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/08 18:27:26 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 19:31:46 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_print_error_cd(char *argv)
 	return (-8);
 }
 
-char	**ft_check_pwd(char **env, t_structpwd *up)
+char	**ft_check_pwd(char **env, t_structpwd *up, char *argv)
 {
 	char	**new;
 	char	cwd[255];
@@ -51,7 +51,7 @@ char	**ft_check_pwd(char **env, t_structpwd *up)
 		if (up->pwd == up->old)
 			up->old++;
 	}
-	if (env[up->old] == NULL)
+	if (env[up->old] == NULL && ft_strcmp(up->tmpold, argv) != 0)
 	{
 		new = ft_tabdup_plusone(env, "OLDPWD=");
 		ft_free_tab(&env);

@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2017/01/08 18:24:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 19:32:13 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,6 +358,6 @@ char				*ft_history_multiline(char *tmp, t_termcaps *cap);
 int					ft_end_of_file(char *buf, t_termcaps *cap);
 void				ft_son_history_anx(char *buf, int e);
 int					ft_print_error_cd(char *argv);
-char				**ft_check_pwd(char **env, t_structpwd *up);
+char				**ft_check_pwd(char **env, t_structpwd *up, char *argv);
 
 #endif

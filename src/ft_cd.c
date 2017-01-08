@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 08:15:37 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/08 18:59:04 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 19:31:18 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int					ft_pwd_up(char ***oenv, char *argv, int opt)
 
 	env = *oenv;
 	up = ft_init_struct(env);
-	env = ft_check_pwd(env, &up);
+	env = ft_check_pwd(env, &up, argv);
 	*oenv = env;
 	if (up.tmpold == NULL || env == NULL || !argv)
 		return (1);
