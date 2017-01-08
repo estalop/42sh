@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 12:54:11 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/06 14:41:26 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/08 16:36:50 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,15 @@ static char			*ft_complete_curpath(char *argv, char **env, int opt)
 	return (curpath);
 }
 
-static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env)
+static t_cdstruct	*ft_set_curpath(char *argv, int opt, char **env, int *j)
 {
 	t_cdstruct	*new;
 
 	if (!(new = (t_cdstruct*)malloc(sizeof(t_cdstruct))))
+	{
+		*j = -6;
 		return (NULL);
+	}
 	new->argv = argv;
 	new->opt = opt;
 	if (new->argv[0] != '/' && ft_strncmp(new->argv, "./", 2) && \
@@ -119,10 +122,12 @@ t_cdstruct			*ft_get_cdinfo(char *buf, char **env, int *j)
 	int		i;
 
 	if ((tmp = ft_split(buf)) == NULL)
+	{
+		*j = -6;
 		return (NULL);
+	}
 	i = 1;
-	opt = 0;
-	while (tmp[i] && tmp[i][0] == '-')
+	while (!(opt = 0) && tmp[i] && tmp[i][0] == '-')
 	{
 		if (tmp[i][1] == 'P')
 			opt = 1;
@@ -130,10 +135,10 @@ t_cdstruct			*ft_get_cdinfo(char *buf, char **env, int *j)
 			break ;
 		i++;
 	}
-	new = ft_opt_home(tmp[i], env, 0);
+	if (!(new = ft_opt_home(tmp[i], env, 0)))
+		*j = ft_print_error_cd(tmp[i]);
 	ft_free_tab(&tmp);
 	if (new)
-		return (ft_set_curpath(new, opt, env));
-	*j = -6;
+		return (ft_set_curpath(new, opt, env, j));
 	return (NULL);
 }
