@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 13:55:06 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/08 16:32:12 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/10 16:40:07 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,6 @@ void		ft_son_builtin(char **buf, int e, char **env, t_prstruct *proc)
 		ft_son_history(*buf, e, proc);
 	else if (ft_strncmp(proc->bin, "cd", 2) == 0)
 		ft_son_cd(*buf, e);
+	else if (ft_strncmp(proc->bin, "exit", 4) == 0)
+		ft_putendl_fd("exit: too many arguments", 2);
 }

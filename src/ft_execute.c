@@ -6,7 +6,7 @@
 /*   By: chdenis <chdenis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 16:53:34 by chdenis           #+#    #+#             */
-/*   Updated: 2017/01/08 18:24:52 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/10 16:45:25 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 	if (!(bin = NULL) && (!ft_strcmp(a[0], "env") || !ft_strcmp(a[0], "cd") || \
 	!ft_strcmp(a[0], "setenv") || !ft_strcmp(a[0], "unsetenv") || \
 	!ft_strcmp(a[0], "history") || !ft_strcmp(a[0], "echo") || \
-	!ft_strcmp(a[0], "export") || !ft_strcmp(a[0], "unset")))
+	!ft_strcmp(a[0], "exit") || !ft_strcmp(a[0], "export") || \
+	!ft_strcmp(a[0], "unset")))
 	{
 		bin = ft_strdup(a[0]);
 		ft_free_tab(&a);
@@ -44,11 +45,8 @@ char		*ft_check_bin(char *buf, char **env, char **path, int i)
 		bin = ft_strdup(a[0]);
 	else
 		while (path != NULL && path[i] != NULL && bin == NULL)
-		{
-			bin = ft_strjoin(path[i++], a[0]);
-			if (bin != NULL && access(bin, F_OK) == -1)
+			if ((bin = ft_strjoin(path[i++], a[0])) && access(bin, F_OK) == -1)
 				ft_strdel(&bin);
-		}
 	return (ft_check_bin_anx(&bin, &a));
 }
 

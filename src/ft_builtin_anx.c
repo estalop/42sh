@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:32:41 by tviviand          #+#    #+#             */
-/*   Updated: 2016/12/20 15:26:36 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/10 16:34:23 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_exit_anx(int *i, char ***argv, t_prstruct *proc)
 	if (argv[1][*i] == '\0')
 	{
 		ft_run_history(" -w", ft_get_home(proc->env[2]), proc, 1);
-		exit(ft_atoi(*argv[1]));
+		exit(ft_atoi((*argv)[1]));
 	}
 	else
 		ft_putendl_fd("exit: invalid argument", 2);
