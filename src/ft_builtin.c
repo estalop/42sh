@@ -6,7 +6,7 @@
 /*   By: jbobin <jbobin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 12:38:42 by jbobin            #+#    #+#             */
-/*   Updated: 2017/01/08 18:55:09 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/10 19:09:01 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_cd(char *buf, char ***env, int j, t_cdstruct *argv)
 {
 	if (buf[2] != '\0' && buf[2] != ' ' && buf[2] != '\t')
 		return (-1);
-	if ((argv = ft_get_cdinfo(buf, *env, &j)) != NULL)
+	if ((argv = ft_get_cdinfo(buf, *env, &j, 0)) != NULL)
 	{
 		if (ft_strlen(argv->argv) > 255)
 			return (-2);

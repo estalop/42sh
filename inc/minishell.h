@@ -6,7 +6,7 @@
 /*   By: tviviand <tviviand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:55:16 by tviviand          #+#    #+#             */
-/*   Updated: 2017/01/08 19:32:13 by jbobin           ###   ########.fr       */
+/*   Updated: 2017/01/10 19:08:56 by jbobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,7 +326,7 @@ char				*ft_replace_excla(char *arg, t_prstruct *proc, \
 	int id, int id2);
 int					ft_check_tmp(char *arg);
 int					ft_print_cd(char *buf);
-t_cdstruct			*ft_get_cdinfo(char *buf, char **env, int *j);
+t_cdstruct			*ft_get_cdinfo(char *buf, char **env, int *j, int opt);
 char				*ft_autocomp(t_termcaps *cap, char *str);
 int					ft_returnofprocess(int stat_lock);
 void				ft_son_builtin(char **buf, int e, char **env, \
